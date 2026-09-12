@@ -545,3 +545,34 @@
     }
 
 }
+
+.toast-container {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    display: grid;
+    gap: 8px;
+    width: min(360px, calc(100% - 32px));
+    z-index: 6000;
+}
+
+.toast {
+    padding: 12px 14px;
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 8px;
+    background: rgba(7, 25, 62, .96);
+    box-shadow: 0 16px 32px rgba(0, 24, 75, .28);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.toast.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-success { border-color: #34d399; }
+.toast-error { border-color: #f87171; }
+.toast-warning { border-color: #fbbf24; }

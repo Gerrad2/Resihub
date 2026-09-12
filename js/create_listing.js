@@ -471,7 +471,7 @@ async function uploadListingImages(listingId) {
             error: uploadError
         } = await supabase
             .storage
-            .from("listing-images")
+            .from("property-media")
             .upload(
                 filePath,
                 file,
@@ -492,7 +492,7 @@ async function uploadListingImages(listingId) {
             data: publicUrlData
         } = supabase
             .storage
-            .from("listing-images")
+            .from("property-media")
             .getPublicUrl(filePath);
 
         imageRecords.push({
@@ -530,7 +530,7 @@ async function cleanupUploadedImages() {
     try {
         await supabase
             .storage
-            .from("listing-images")
+            .from("property-media")
             .remove(uploadedStoragePaths);
     } catch (error) {
         console.error(

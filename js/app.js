@@ -41,27 +41,27 @@ import {
 
 import {
     initAccessibility,
-} from "../ui/accessibility.js";
+} from "./ui/accessibility.js";
 
 
 import {
     initAnimations,
-} from "../ui/animations.js";
+} from "./ui/animations.js";
 
 
 import {
     initModal,
-} from "../ui/modal.js";
+} from "./ui/modal.js";
 
 
 import {
     initNavigation,
-} from "../ui/navigation.js";
+} from "./ui/navigation.js";
 
 
 import {
     initTheme,
-} from "../ui/theme.js";
+} from "./ui/theme.js";
 
 
 /*
@@ -149,13 +149,13 @@ function getPageArea() {
 
 const LAYOUT_LOADERS = Object.freeze({
 
-    admin: "./loadAdmin.js",
+    admin: "./core/loadAdmin.js",
 
-    general: "./loadGeneral.js",
+    general: "./core/loadGeneral.js",
 
-    landlord: "./loadLandlord.js",
+    landlord: "./core/loadLandlord.js",
 
-    student: "./loadStudent.js",
+    student: "./core/loadStudent.js",
 
 });
 

@@ -443,3 +443,18 @@
     animation-delay: .5s;
 
 }
+
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html[data-reduced-motion="true"] .reveal {
+    opacity: 1;
+    transform: none;
+}

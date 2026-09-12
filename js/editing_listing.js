@@ -99,7 +99,7 @@ let isDeleting = false;
 |--------------------------------------------------------------------------
 */
 
-const STORAGE_BUCKET = "listing-images";
+const STORAGE_BUCKET = "property-media";
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
@@ -2536,7 +2536,7 @@ async function uploadNewImages(listingId) {
 
         const { error: uploadError } =
             await supabase.storage
-                .from("listing-images")
+                .from("property-media")
                 .upload(filePath, file, {
                     cacheControl: "3600",
                     upsert: false
@@ -2550,7 +2550,7 @@ async function uploadNewImages(listingId) {
         const {
             data: publicUrlData
         } = supabase.storage
-            .from("listing-images")
+            .from("property-media")
             .getPublicUrl(filePath);
 
         const imageUrl =

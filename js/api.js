@@ -37,10 +37,10 @@ import {
 */
 
 const SUPABASE_URL =
-    "https://gesbeavhazlydxriojkk.supabase.co";
+    "https://clyksbctnzyreiujzinr.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_YzRc-2clLnwttApINTzPNQ_yl2_XW8g";
+    "sb_publishable_69yZEC9GZNEoN3qjFEU6Ng_LHmWT1e-";
 
 
 export const supabase = createClient(
@@ -631,6 +631,8 @@ export async function createListing(
 ) {
 
     try {
+
+        const listing = listingData;
 
         if (
             !listing ||

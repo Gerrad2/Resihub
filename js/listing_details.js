@@ -10,7 +10,7 @@ import {
 } from "./core/api.js";
 
 import { showToast } from "./ui/toast.js";
-import { openModal, closeModal } from ".modal.js";
+import { openModal, closeModal } from "./ui/modal.js";
 
 
 /* =========================================================
