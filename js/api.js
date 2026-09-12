@@ -1968,7 +1968,7 @@ export async function getReviews(
             data,
             error
         } = await supabase
-            .from("reviews")
+            .from("listing_reviews")
             .select(`
                 *,
                 profiles (
@@ -2068,7 +2068,7 @@ export async function createReview({
             data,
             error
         } = await supabase
-            .from("reviews")
+            .from("listing_reviews")
             .insert({
 
                 student_id:
@@ -2149,7 +2149,7 @@ export async function updateReview(
             data,
             error
         } = await supabase
-            .from("reviews")
+            .from("listing_reviews")
             .update({
 
                 rating:
@@ -2205,7 +2205,7 @@ export async function deleteReview(
         const {
             error
         } = await supabase
-            .from("reviews")
+            .from("listing_reviews")
             .delete()
             .eq(
                 "id",
