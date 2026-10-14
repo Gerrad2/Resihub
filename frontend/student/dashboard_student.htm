@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | ResiHub</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <meta name="description"
+        content="Manage your saved properties, inspections, messages, notifications and accommodation recommendations from your ResiHub student dashboard.">
+
+    <meta name="keywords"
+        content="ResiHub student dashboard, student accommodation Nigeria, saved properties, inspections, hostel portal">
+
+    <meta name="author" content="ResiHub">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION-->
+
+    <div id="header"></div>
+
+    <main>
+        <section class="dashboard-hero reveal fade-up">
+            <div class="container">
+
+                <div class="dashboard-welcome">
+
+                    <div>
+
+                        <span class="page-badge floating-badge">
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+                            Student Dashboard
+
+                        </span>
+
+                        <h1>
+
+                            Welcome back,
+
+                            <span id="studentName"></span>
+
+                        </h1>
+
+                        <p>
+
+                            Discover verified accommodation near your campus.
+
+                        </p>
+
+                        <img id="studentAvatar" src="../assets/images/default-avatar.png" alt="Student Profile">
+
+                    </div>
+
+                </div>
+        </section>
+        <section class="dashboard-search">
+
+            <div class="container">
+
+                <div class="dashboard-search-card">
+
+                    <input type="search" id="quickSearch" placeholder="Search hostels, apartments or universities">
+
+                    <button class="btn-primary">
+
+                        <i class="fa-solid fa-search"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-stats reveal fade-up">
+
+            <div class="container">
+
+                <div class="stats-grid">
+
+                    <div class="dashboard-stat-card">
+                        <i class="fa-solid fa-heart"></i>
+                        <h2 id="savedCount">0</h2>
+                        <p>Saved Properties</p>
+                    </div>
+
+                    <div class="dashboard-stat-card">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <h2 id="inspectionCount">0</h2>
+                        <p>Inspections</p>
+                    </div>
+
+                    <div class="dashboard-stat-card">
+                        <i class="fa-solid fa-comments"></i>
+                        <h2 id="messageCount">0</h2>
+                        <p>Unread Messages</p>
+                    </div>
+
+                    <div class="dashboard-stat-card">
+                        <i class="fa-solid fa-bell"></i>
+                        <h2 id="notificationCount">0</h2>
+                        <p>Notifications</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="quick-actions reveal fade-up">
+
+            <div class="container">
+
+                <h2>Quick Actions</h2>
+
+                <div class="actions-grid">
+
+                    <a href="../general/browse_rooms.htm" class="action-card">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Browse Rooms</span>
+                    </a>
+
+                    <a href="../student/saved_properties.htm" class="action-card">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>Saved</span>
+                    </a>
+
+                    <a href="../student/messages.htm" class="action-card">
+                        <i class="fa-solid fa-comments"></i>
+                        <span>Messages</span>
+                    </a>
+
+                    <a href="../student/profile.htm" class="action-card">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Recommended For You</h2>
+
+                    <a href="../general/browse_rooms.htm">
+                        View All
+                    </a>
+
+                </div>
+
+                <div id="recommendedListings" class="listing-grid">
+
+                </div>
+
+            </div>
+
+        </section>
+        <div id="noRecommendations" class="empty-state hidden">
+
+            <i class="fa-solid fa-house-circle-xmark" aria-hidden="true"></i>
+
+            <h3>No Recommendations Yet</h3>
+
+            <p>
+                Browse properties to receive personalized recommendations.
+            </p>
+
+        </div>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Upcoming Inspections</h2>
+
+                </div>
+
+                <div id="inspectionList" class="inspection-list">
+
+                </div>
+
+            </div>
+            <div id="noInspections" class="empty-state hidden">
+
+                <i class="fa-solid fa-calendar-xmark"></i>
+
+                <h3>No Upcoming Inspections</h3>
+
+                <p>
+
+                    Inspection bookings will appear here.
+
+                </p>
+
+            </div>
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+                    <h2>Saved Properties</h2>
+                    <a href="../student/saved_properties.htm">View All</a>
+                </div>
+
+                <div id="savedPreview" class="listing-grid">
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+                    <h2>Recent Messages</h2>
+                    <a href="../student/messages.htm">Open Inbox</a>
+                </div>
+
+                <div id="recentMessages" class="messages-preview">
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+                    <h2>Notifications</h2>
+                    <a href="../student/notification.htm">View All</a>
+                </div>
+
+                <div id="notificationList" class="notification-list">
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="profile-summary">
+
+                    <img id="profilePhoto" src="../assets/images/default-avatar.png" alt="Student">
+
+                    <div>
+
+                        <h3 id="profileName">Student Name</h3>
+
+                        <p id="profileUniversity">
+                            University
+                        </p>
+
+                        <p id="profileLevel">
+                            Level
+                        </p>
+
+                    </div>
+
+                    <a href="../student/edit_profile.htm" class="btn-primary magnetic-btn ripple-btn shine-btn">
+
+                        Edit Profile
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-cta">
+
+            <div class="container">
+
+                <div class="cta-card">
+
+                    <h2>Looking for a Better Place?</h2>
+
+                    <p>
+                        Thousands of verified student accommodations are waiting for you.
+                    </p>
+
+                    <a href="../general/browse_rooms.htm" class="btn-primary">
+
+                        Browse Accommodation
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

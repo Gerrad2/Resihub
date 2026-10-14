@@ -1,0 +1,167 @@
+/*==================================================
+  WHY CHOOSE RESIHUB
+==================================================*/
+
+.why-us {
+
+    position: relative;
+
+    padding: 7rem 0;
+
+}
+
+.features-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 2rem;
+
+    margin-top: 4rem;
+
+}
+
+.feature-card {
+
+    position: relative;
+
+    padding: 2.5rem;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(30px);
+
+    -webkit-backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255, 255, 255, .14);
+
+    overflow: hidden;
+
+    transition:
+
+        transform .4s ease,
+
+        box-shadow .4s ease,
+
+        border-color .4s ease;
+
+}
+
+.feature-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(135deg,
+
+            rgba(255, 255, 255, .18),
+
+            transparent 40%);
+
+    opacity: .6;
+
+    pointer-events: none;
+
+}
+
+.feature-card:hover {
+
+    transform:
+
+        translateY(-12px);
+
+    border-color:
+
+        rgba(47, 212, 255, .35);
+
+    box-shadow:
+
+        0 25px 60px rgba(0, 88, 234, .22);
+
+}
+
+.feature-icon {
+
+    width: 82px;
+
+    height: 82px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin-bottom: 2rem;
+
+    border-radius: 24px;
+
+    background:
+
+        linear-gradient(135deg,
+
+            rgba(47, 212, 255, .28),
+
+            rgba(0, 88, 234, .18));
+
+    color: #8AEAFF;
+
+    font-size: 2rem;
+
+    transition: .4s;
+
+}
+
+.feature-card:hover .feature-icon {
+
+    transform:
+
+        rotate(-8deg) scale(1.08);
+
+}
+
+.feature-card h3 {
+
+    font-size: 1.45rem;
+
+    color: #fff;
+
+    margin-bottom: 1rem;
+
+}
+
+.feature-card p {
+
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, .72);
+
+}
+
+@media (max-width:1200px) {
+
+    .features-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+@media (max-width:768px) {
+
+    .features-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

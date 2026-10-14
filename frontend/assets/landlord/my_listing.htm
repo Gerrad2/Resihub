@@ -1,0 +1,306 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Listings | ResiHub Nigeria</title>
+
+    <meta name="description"
+        content="Manage all your student accommodation listings on ResiHub. Create, edit, publish, monitor enquiries, bookings and property performance across universities in Nigeria.">
+
+    <meta name="keywords"
+        content="my listings, landlord dashboard, property listings, ResiHub landlord, student accommodation Nigeria, hostel listings, apartment management, rental properties">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#0B6E4F">
+
+    <meta name="application-name" content="ResiHub">
+
+    <meta name="apple-mobile-web-app-title" content="ResiHub">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="format-detection" content="telephone=no">
+
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph -->
+
+    <meta property="og:site_name" content="ResiHub">
+
+    <meta property="og:title" content="My Listings | ResiHub Nigeria">
+
+    <meta property="og:description" content="Manage, edit and monitor your student accommodation listings on ResiHub.">
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:url" content="https://www.resihub.com/my_listings.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.png">
+
+    <meta property="og:image:alt" content="My Listings on ResiHub">
+
+    <meta property="og:locale" content="en_NG">
+
+    <!-- Twitter -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="My Listings | ResiHub Nigeria">
+
+    <meta name="twitter:description" content="Manage your property listings, bookings and enquiries on ResiHub.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.png">
+
+    <!-- Canonical -->
+
+    <link rel="canonical" href="https://www.resihub.com/my_listings.htm">
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+    <!-- Structured Data -->
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"WebPage",
+      "name":"My Listings",
+      "url":"https://www.resihub.com/my_listings.htm",
+      "description":"Manage student accommodation listings, enquiries and bookings on ResiHub.",
+      "publisher":{
+        "@type":"Organization",
+        "name":"ResiHub",
+        "logo":{
+          "@type":"ImageObject",
+          "url":"https://www.resihub.com/assets/images/logo.png"
+        }
+      }
+    }
+    </script>
+
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION-->
+
+    <div id="header"></div>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+
+            <div class="container">
+
+                <header id="my-listings-hero" class="auth-hero reveal fade-up">
+
+                    <span class="page-badge floating-badge">
+
+                        <i class="fa-solid fa-building" aria-hidden="true"></i>
+
+                        My Listings
+
+                    </span>
+
+                    <h2>Manage Your Properties</h2>
+
+                    <p>
+
+                        Create, edit and monitor all your student accommodation listings from one dashboard.
+
+                    </p>
+
+                </header>
+
+            </div>
+
+        </section>
+
+        <!-- Listing Actions -->
+        <section class="listing-actions">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>Your Properties</h2>
+
+                        <p>
+                            View and manage every property you have listed on ResiHub.
+                        </p>
+
+                    </div>
+
+                    <a href="../landlord/create_listing.htm" class="btn-primary">
+
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+
+                        New Listing
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Filters -->
+        <section class="listing-filters">
+
+            <div class="container">
+
+                <form id="listingFilterForm" autocomplete="off">
+
+                    <div class="filters-grid">
+
+                        <label for="listingSearch" class="visually-hidden">
+
+                            Search Listings
+
+                        </label>
+
+                        <input type="search" id="listingSearch" name="listingSearch" placeholder="Search property..."
+                            autocomplete="off">
+
+                        <label for="listingStatus" class="visually-hidden">
+
+                            Listing Status
+
+                        </label>
+
+                        <select id="listingStatus" name="listingStatus">
+
+                            <option value="">All Status</option>
+
+                            <option value="active">Active</option>
+
+                            <option value="pending">Pending</option>
+
+                            <option value="booked">Booked</option>
+
+                            <option value="draft">Draft</option>
+
+                        </select>
+
+                        <label for="listingSort" class="visually-hidden">
+
+                            Sort Listings
+
+                        </label>
+
+                        <select id="listingSort" name="listingSort">
+
+                            <option value="newest">Newest</option>
+
+                            <option value="oldest">Oldest</option>
+
+                            <option value="price">Price</option>
+
+                            <option value="views">Views</option>
+
+                        </select>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Listings -->
+        <section class="my-listings">
+
+            <div class="container">
+
+                <div id="myListingsGrid" class="listing-grid" aria-live="polite">
+
+                </div>
+
+                <!-- Empty State -->
+
+                <div id="emptyListings" class="empty-state hidden">
+
+                    <i class="fa-solid fa-house-circle-xmark" aria-hidden="true"></i>
+
+                    <h3>No Listings Yet</h3>
+
+                    <p>
+
+                        Create your first property listing to start receiving enquiries from students.
+
+                    </p>
+
+                    <a href="../landlord/create_listing.htm" class="btn-primary">
+
+                        Create Listing
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Load More -->
+        <section class="load-more">
+
+            <div class="container">
+
+                <button id="loadMoreListings" class="btn-primary magnetic-btn ripple-btn shine-btn" type="button">
+
+                    Load More
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

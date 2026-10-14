@@ -1,0 +1,139 @@
+/*==================================================
+  PLATFORM STATISTICS
+==================================================*/
+
+.stats {
+
+    position: relative;
+
+    padding: 4rem 0 6rem;
+
+}
+
+.stats .container {
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 1.5rem;
+
+}
+
+.stat-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1.2rem;
+
+    padding: 1.8rem;
+
+    border-radius: 28px;
+
+    background: rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(28px);
+
+    -webkit-backdrop-filter: blur(28px);
+
+    border: 1px solid rgba(255, 255, 255, .14);
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease;
+
+}
+
+.stat-card:hover {
+
+    transform:
+
+        translateY(-8px);
+
+    box-shadow:
+
+        0 25px 60px rgba(0, 88, 234, .18);
+
+}
+
+.stat-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+
+        linear-gradient(135deg,
+            rgba(47, 212, 255, .25),
+            rgba(0, 88, 234, .18));
+
+    color: #7EE7FF;
+
+    font-size: 1.6rem;
+
+    flex-shrink: 0;
+
+}
+
+.stat-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: .35rem;
+
+}
+
+.stat-content h2 {
+
+    font-size: 2rem;
+
+    font-weight: 700;
+
+    color: #fff;
+
+}
+
+.stat-content p {
+
+    color: rgba(255, 255, 255, .72);
+
+    font-size: .95rem;
+
+}
+
+@media (max-width:1200px) {
+
+    .stats .container {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+}
+
+@media (max-width:768px) {
+
+    .stats .container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}

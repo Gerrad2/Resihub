@@ -1,0 +1,500 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Basic Meta Information
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Analytics | ResiHub</title>
+
+    <meta name="description"
+        content="View platform analytics, user statistics, listings performance, bookings, revenue insights and reports on the ResiHub Administration Portal.">
+
+    <meta name="keywords"
+        content="ResiHub, Admin Analytics, Dashboard Analytics, Statistics, Reports, Student Accommodation">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_analytics.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin Analytics | ResiHub">
+
+    <meta property="og:description"
+        content="Monitor platform performance and analytics on the ResiHub Administration Portal.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_analytics.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter
+    =========================================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin Analytics | ResiHub">
+
+    <meta name="twitter:description" content="View platform statistics, user growth and listing performance.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Font Awesome
+    =========================================== -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         ResiHub Master Stylesheet
+    =========================================== -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Scroll Progress
+    =========================================== -->
+
+    <div id="scrollProgress"></div>
+
+    <!-- ==========================================
+         Floating Background
+    =========================================== -->
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <!-- ==========================================
+         Main Content
+    =========================================== -->
+
+    <main id="mainContent" class="page-transition">
+
+        <section id="analyticsContent" class="page-section">
+
+            <div class="container page-container">
+
+                <!-- ==========================================
+                     Page Header
+                =========================================== -->
+
+                <header class="section-header">
+
+                    <div class="container">
+
+                        <header class="auth-hero reveal fade-up">
+
+                            <div id="hero-text">
+
+                                <span class="page-badge floating-badge glass-card">
+
+                                    <i class="fa-solid fa-chart-line"></i>
+
+                                    Platform Analytics
+
+                                </span>
+
+                                <h1>Analytics Dashboard</h1>
+
+                                <p>
+
+                                    Monitor the overall performance of the ResiHub platform,
+                                    including users, listings, bookings and growth metrics.
+
+                                </p>
+
+                        </header>
+
+                        <!-- ==========================================
+                     Analytics Filters
+                =========================================== -->
+
+                        <form id="analyticsFilterForm" class="filter-form liquid-form" role="search"
+                            aria-label="Analytics Filter">
+
+                            <div class="liquid-group">
+
+                                <label class="visually-hidden" for="analyticsPeriod">
+
+                                    Select Time Period
+
+                                </label>
+
+                                <select id="analyticsPeriod" name="analyticsPeriod" class="liquid-input">
+
+                                    <option value="today">Today</option>
+
+                                    <option value="week">Last 7 Days</option>
+
+                                    <option value="month" selected>Last 30 Days</option>
+
+                                    <option value="year">This Year</option>
+
+                                    <option value="all">All Time</option>
+
+                                </select>
+
+                            </div>
+
+                            <button type="button" id="exportAnalyticsBtn" class="btn btn-primary ripple">
+
+                                <i class="fa-solid fa-download"></i>
+
+                                <span>Export Report</span>
+
+                            </button>
+
+                        </form>
+
+                        <!-- ==========================================
+                     Statistics
+                =========================================== -->
+
+                        <section class="dashboard-section statistics-section">
+
+                            <div class="dashboard-grid statistics-grid">
+
+                                <article class="dashboard-card statistics-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-users"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="analyticsUsers">0</h3>
+
+                                        <p>Total Users</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-user-graduate"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="analyticsStudents">0</h3>
+
+                                        <p>Students</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-building-user"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="analyticsLandlords">0</h3>
+
+                                        <p>Landlords</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-house"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="analyticsListings">0</h3>
+
+                                        <p>Listings</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-calendar-check"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="analyticsBookings">0</h3>
+
+                                        <p>Bookings</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="analyticsRevenue">â‚¦0</h3>
+
+                                        <p>Revenue</p>
+
+                                    </div>
+
+                                </article>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Loading State
+                =========================================== -->
+
+                        <section id="analyticsLoading" class="loading-state hidden">
+
+                            <div class="loader"></div>
+
+                            <p>Loading analytics...</p>
+
+                        </section>
+                        <!-- ==========================================
+                     Charts
+                =========================================== -->
+
+                        <section class="analytics-grid">
+
+                            <article class="analytics-card glass-card">
+
+                                <header class="card-header">
+
+                                    <h2>User Growth</h2>
+
+                                </header>
+
+                                <canvas id="userGrowthChart"></canvas>
+
+                            </article>
+
+                            <article class="analytics-card glass-card">
+
+                                <header class="card-header">
+
+                                    <h2>Listing Growth</h2>
+
+                                </header>
+
+                                <canvas id="listingGrowthChart"></canvas>
+
+                            </article>
+
+                        </section>
+
+                        <section class="analytics-grid">
+
+                            <article class="analytics-card glass-card">
+
+                                <header class="card-header">
+
+                                    <h2>Booking Analytics</h2>
+
+                                </header>
+
+                                <canvas id="bookingChart"></canvas>
+
+                            </article>
+
+                            <article class="analytics-card glass-card">
+
+                                <header class="card-header">
+
+                                    <h2>Revenue Analytics</h2>
+
+                                </header>
+
+                                <canvas id="revenueChart"></canvas>
+
+                            </article>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Top Universities
+                =========================================== -->
+
+                        <section class="analytics-section glass-reveal">
+
+                            <header class="section-header">
+
+                                <h2>Top Performing Universities</h2>
+
+                            </header>
+
+                            <div id="topUniversities" class="analytics-table">
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Top Locations
+                =========================================== -->
+
+                        <section class="analytics-section glass-reveal">
+
+                            <header class="section-header">
+
+                                <h2>Top Student Locations</h2>
+
+                            </header>
+
+                            <div id="topLocations" class="analytics-table">
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Popular Listings
+                =========================================== -->
+
+                        <section class="analytics-section glass-reveal">
+
+                            <header class="section-header">
+
+                                <h2>Most Viewed Listings</h2>
+
+                            </header>
+
+                            <div id="popularListings" class="listing-grid">
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Recent Platform Activity
+                =========================================== -->
+
+                        <section class="analytics-section glass-reveal">
+
+                            <header class="section-header">
+
+                                <h2>Recent Platform Activity</h2>
+
+                            </header>
+
+                            <div id="analyticsActivity" class="activity-list">
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Empty State
+                =========================================== -->
+
+                        <section id="analyticsEmpty" class="empty-state hidden">
+
+                            <i class="fa-solid fa-chart-column"></i>
+
+                            <h3>No Analytics Available</h3>
+
+                            <p>
+
+                                Analytics will appear here once platform data becomes available.
+
+                            </p>
+
+                        </section>
+
+                    </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         Back To Top
+    =========================================== -->
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to Top">
+
+        <i class="fa-solid fa-arrow-up"></i>
+
+    </button>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

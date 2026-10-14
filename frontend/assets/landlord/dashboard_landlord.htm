@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Landlord Dashboard | ResiHub Property Management</title>
+
+    <meta name="description"
+        content="Manage your ResiHub landlord account, property listings, inspection requests, student messages and accommodation bookings from one dashboard.">
+
+    <meta name="keywords"
+        content="ResiHub landlord dashboard, landlord portal, property management, student accommodation Nigeria, rental dashboard">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/dashboard_landlord.htm">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/style.css">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ResiHub Landlord Dashboard">
+    <meta property="og:description"
+        content="Manage your property listings, bookings and student enquiries from the ResiHub landlord dashboard.">
+    <meta property="og:image" content="../assets/images/og-image.jpg">
+    <meta property="og:url" content="https://www.resihub.com/dashboard_landlord.htm">
+    <meta property="og:site_name" content="ResiHub">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ResiHub Landlord Dashboard">
+    <meta name="twitter:description" content="Manage your accommodation listings and bookings on ResiHub.">
+    <meta name="twitter:image" content="../assets/images/og-image.jpg">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION-->
+
+    <div id="header"></div>
+
+    <main>
+        <section class="dashboard-hero reveal fade-up">
+
+            <div class="container">
+
+                <div class="dashboard-welcome-card">
+
+                    <div class="dashboard-user">
+
+                        <div class="dashboard-text">
+
+                            <span class="dashboard-badge">
+
+                                <i class="fa-solid fa-sparkles"></i>
+
+                                Landlord Dashboard
+
+                            </span>
+
+                            <h1>
+
+                                Welcome back,
+                                <span id="landlordName">Landlord</span>
+
+                            </h1>
+
+                            <p>
+
+                                Here's what's happening with your properties today.
+
+                            </p>
+
+                        </div>
+
+                        <div class="dashboard-avatar">
+
+                            <img id="landlordAvatar" src="../assets/images/default-avatar.png" alt="Profile">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="quick-actions">
+
+            <div class="container">
+
+                <div class="quick-actions-grid">
+
+                    <a href="../landlord/create_listing.htm" class="quick-action">
+
+                        <i class="fa-solid fa-plus"></i>
+
+                        <span>Create Listing</span>
+
+                    </a>
+
+                    <a href="../landlord/my_listing.htm" class="quick-action">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <span>My Listings</span>
+
+                    </a>
+
+                    <a href="../landlord/landlord_messages.htm" class="quick-action">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                        <span>Messages</span>
+
+                    </a>
+
+                    <a href="../landlord/landlord_settings.htm" class="quick-action">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        <span>Settings</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+        <div class="stats-grid">
+
+            <article class="dashboard-stat-card">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
+                <h2 id="listingCount">0</h2>
+                <p>Active Listings</p>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                <h2 id="bookingCount">0</h2>
+                <p>Inspection Requests</p>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                <h2 id="messageCount">0</h2>
+                <p>Messages</p>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <h2 id="reviewCount">0.0</h2>
+                <p>Average Rating</p>
+            </article>
+
+        </div>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>My Listings</h2>
+
+                    <a href="../landlord/my_listing.htm">
+
+                        View All
+
+                    </a>
+
+                </div>
+
+                <div id="landlordListings" class="listing-grid">
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Recent Inspection Requests</h2>
+
+                </div>
+
+                <div id="bookingPreview" class="inspection-list">
+
+                </div>
+
+            </div>
+
+        </section>
+        <section class="dashboard-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Recent Messages</h2>
+
+                    <a href="../landlord/landlord_messages.htm">
+
+                        Open Inbox
+
+                    </a>
+
+                </div>
+
+                <div id="recentMessages" class="messages-preview">
+
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

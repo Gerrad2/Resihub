@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Browse Student Accommodation Near Nigerian Universities | ResiHub</title>
+
+    <meta name="description"
+        content="Browse verified student accommodation near universities across Nigeria. Find hostels, apartments, self-contained rooms and shared accommodation with filters for location, budget, amenities and property type.">
+
+    <meta name="keywords"
+        content="student accommodation Nigeria, hostel near university, university accommodation, browse rooms, student hostel, apartments, ResiHub">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://www.resihub.com/browse_rooms.htm">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ResiHub">
+    <meta property="og:title" content="Browse Student Accommodation | ResiHub">
+    <meta property="og:description"
+        content="Browse verified student accommodation near universities across Nigeria. Filter rooms by location, budget, amenities and property type.">
+    <meta property="og:url" content="https://www.resihub.com/browse_rooms.htm">
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Browse Student Accommodation | ResiHub">
+    <meta name="twitter:description" content="Browse verified student accommodation near universities across Nigeria.">
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION-->
+
+    <div id="header"></div>
+
+    <main>
+        <!-- PAGE HERO -->
+        <section id="browse-hero" class="page-hero reveal fade-up">
+
+            <div class="container">
+
+                <div class="page-hero-content">
+                    <div class="hero-text">
+
+                        <span class="page-badge floating-badge"><i class="fa-solid fa-house"
+                                aria-hidden="true"></i>Browse
+                            Student
+                            Accommodation</span>
+                        <h1 class="hero-title">Find Your Perfect Student Home</h1>
+
+                        <p class="hero-description">
+                            Explore verified hostels, apartments, self-contained rooms and shared accommodation near
+                            universities across Nigeria.
+                        </p>
+                    </div>
+                    <!-- Search Bar -->
+                    <div class="browse-search-card">
+                        <form id="browseSearchForm" autocomplete="off">
+                            <div class="browse-search-grid">
+                                <div class="form-group">
+                                    <label for="browseUniversity">University</label>
+                                    <select id="browseUniversity" name="university">
+                                        <option value="">All Universities</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="browseArea">Area</label>
+                                    <input type="text" id="browseArea" name="area" placeholder="e.g. Akoka">
+                                </div>
+                                <div class="form-group">
+                                    <label for="browseType">Property Type</label>
+                                    <select id="browseType" name="propertyType">
+                                        <option value="">All Types</option>
+                                        <option value="hostel">Hostel</option>
+                                        <option value="self-contain">Self Contain</option>
+                                        <option value="single-room">Single Room</option>
+                                        <option value="shared-room">Shared Room</option>
+                                        <option value="1-bedroom">1 Bedroom</option>
+                                        <option value="2-bedroom">2 Bedroom</option>
+                                        <option value="3-bedroom">3 Bedroom</option>
+                                        <option value="apartment">Apartment</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="browseBudget">Maximum Budget (â‚¦)</label>
+                                    <input type="number" id="browseBudget" name="maxBudget" placeholder="300000">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary browse-search-btn"><i
+                                    class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Search
+                                Accommodation</button>
+                        </form>
+                    </div>
+                </div>
+        </section>
+
+        <!-- ADVANCED FILTERS -->
+        <section class="browse-filters">
+            <div class="container">
+                <div class="filters-top">
+                    <h2><i class="fa-solid fa-sliders" aria-hidden="true"></i>Filter Properties</h2>
+                    <div class="filter-actions">
+                        <button type="button" id="toggleFilters"
+                            class="btn-primary magnetic-btn ripple-btn shine-btn"><i class="fa-solid fa-filter"
+                                aria-hidden="true"></i>Filters</button>
+                        <button type="button" id="resetFilters" class="btn-primary magnetic-btn ripple-btn shine-btn"><i
+                                class="fa-solid fa-rotate-left" aria-hidden="true"></i>Reset</button>
+                    </div>
+                </div>
+                <div id="filtersPanel" class="filters-panel">
+                    <form id="filterForm">
+                        <div class="filters-grid">
+
+                            <!-- Minimum Price -->
+                            <div class="form-group">
+                                <label for="minPrice">Minimum Price</label>
+                                <input type="number" id="minPrice" name="minPrice" placeholder="â‚¦0">
+                            </div>
+                            <!-- Maximum Price -->
+                            <div class="form-group">
+                                <label for="maxPrice">Maximum Price</label>
+                                <input type="number" id="maxPrice" name="maxPrice" placeholder="â‚¦500000">
+                            </div>
+
+                            <!-- Availability -->
+                            <div class="form-group">
+                                <label for="availability">Availability</label>
+                                <select id="availability" name="availability">
+                                    <option value="">Any</option>
+                                    <option value="available">Available Now</option>
+                                    <option value="booked">Already Booked</option>
+                                </select>
+                            </div>
+
+                            <!-- Sort -->
+                            <div class="form-group">
+                                <label for="sortBy">Sort By</label>
+                                <select id="sortBy" name="sortBy">
+                                    <option value="newest">Newest</option>
+                                    <option value="lowest">Lowest Price</option>
+                                    <option value="highest">Highest Price</option>
+                                    <option value="popular">Most Popular</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Amenities -->
+                        <fieldset class="amenities-section">
+                            <legend>Amenities</legend>
+
+                            <div class="amenities-grid">
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="wifi" name="amenities" value="wifi">
+                                    Wi-Fi
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="water" name="amenities" value="water">
+                                    Running Water
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="electricity" name="amenities" value="electricity">
+                                    Stable Electricity
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="security" name="amenities" value="security">
+                                    Security
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="parking" name="amenities" value="parking">
+                                    Parking
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="furnished" name="amenities" value="furnished">
+                                    Furnished
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="kitchen" name="amenities" value="kitchen">
+                                    Kitchen
+                                </label>
+
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="bathroom" name="amenities" value="bathroom">
+                                    Private Bathroom
+                                </label>
+
+                            </div>
+                        </fieldset>
+        </section>
+
+        <!-- PROPERTY LISTINGS -->
+        <section class="browse-listings">
+            <div class="container">
+
+                <!-- Top Bar -->
+                <div class="listings-header">
+                    <div>
+                        <h2>Available Accommodation</h2>
+                        <p id="listingResults">Loading available rooms...</p>
+                    </div>
+                    <div class="view-options">
+                        <button type="button" id="gridView" class="view-btn active" aria-label="Grid View"><i
+                                class="fa-solid fa-table-cells-large" aria-hidden="true"></i></button>
+                        <button type="button" id="listView" class="view-btn" aria-label="List View"><i
+                                class="fa-solid fa-list" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <!-- Listings Grid -->
+                <div id="listingsContainer" class="listings-grid" aria-live="polite">
+                </div>
+                <!-- JavaScript will insert property cards here -->
+            </div>
+            <!-- Empty State -->
+            <div id="noListings" class="empty-state hidden">
+                <i class="fa-solid fa-magnifying-glass-location"></i>
+                <h3>No Properties Found</h3>
+                <p>Try changing your filters or searching another university.</p>
+                <button type="button" id="clearSearch" class="btn-primary">Clear Filters</button>
+            </div>
+        </section>
+
+        <!-- LOAD MORE -->
+        <section class="load-more">
+            <div class="container">
+                <button type="button" id="loadMoreBtn" class="btn-primary"><i class="fa-solid fa-plus"
+                        aria-hidden="true"></i>Load
+                    More
+                    Listings</button>
+            </div>
+        </section>
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

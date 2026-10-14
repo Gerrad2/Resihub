@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Accommodation Reviews | ResiHub Nigeria</title>
+
+    <meta name="description"
+        content="Read verified student accommodation reviews on ResiHub. Discover ratings, experiences, landlord feedback and trusted reviews before renting student housing in Nigeria.">
+
+    <meta name="keywords"
+        content="student accommodation reviews Nigeria, hostel reviews, student housing ratings, university hostel feedback, ResiHub reviews, landlord reviews, hostel experience">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#0B6E4F">
+
+    <meta name="application-name" content="ResiHub">
+
+    <meta name="apple-mobile-web-app-title" content="ResiHub">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Open Graph -->
+
+    <meta property="og:site_name" content="ResiHub">
+
+    <meta property="og:title" content="Student Accommodation Reviews | ResiHub Nigeria">
+
+    <meta property="og:description"
+        content="Explore verified student reviews, ratings and experiences before choosing your next accommodation.">
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:url" content="https://www.resihub.com/reviews.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.png">
+
+    <meta property="og:image:alt" content="Student Reviews on ResiHub">
+
+    <meta property="og:locale" content="en_NG">
+
+    <!-- Twitter -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Student Accommodation Reviews | ResiHub Nigeria">
+
+    <meta name="twitter:description"
+        content="Browse genuine student accommodation reviews, ratings and landlord responses across Nigeria.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.png">
+
+    <!-- Canonical -->
+
+    <link rel="canonical" href="https://www.resihub.com/reviews.htm">
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <!-- Structured Data -->
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"WebPage",
+      "name":"Student Accommodation Reviews",
+      "url":"https://www.resihub.com/reviews.htm",
+      "description":"Browse verified student accommodation reviews and ratings on ResiHub.",
+      "publisher":{
+        "@type":"Organization",
+        "name":"ResiHub",
+        "logo":{
+          "@type":"ImageObject",
+          "url":"https://www.resihub.com/assets/images/logo.png"
+        }
+      }
+    }
+    </script>
+
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION-->
+
+    <div id="header"></div>
+
+    <main>
+
+        <!-- Hero -->
+
+        <section class="page-hero">
+
+            <div class="container">
+
+                <section class="auth-hero reveal fade-up">
+
+                    <span class="page-badge floating-badge">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        Student Reviews
+
+                    </span>
+
+                    <h1>Trusted Reviews from Real Students</h1>
+
+                    <p>
+                        Read verified experiences, discover highly rated accommodation,
+                        and make confident housing decisions before booking.
+                    </p>
+
+                </section>
+
+            </div>
+
+        </section>
+
+        <!-- Statistics -->
+
+        <section class="review-statistics">
+
+            <div class="container">
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-star"></i>
+
+                        <h2 id="averageRating">4.8</h2>
+
+                        <p>Average Rating</p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-comments"></i>
+
+                        <h2 id="totalReviews">0</h2>
+
+                        <p>Total Reviews</p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <h2 id="reviewedListings">0</h2>
+
+                        <p>Properties Reviewed</p>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <h2>100%</h2>
+
+                        <p>Verified Reviews</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Search & Filters -->
+
+        <section class="review-filters">
+
+            <div class="container">
+
+                <form id="reviewFilterForm">
+
+                    <div class="filters-grid">
+
+                        <input type="search" id="reviewSearch" placeholder="Search reviews...">
+
+                        <select id="reviewUniversity">
+
+                            <option value="">All Universities</option>
+
+                        </select>
+
+                        <select id="reviewState">
+
+                            <option value="">All States</option>
+
+                        </select>
+
+                        <select id="reviewRating">
+
+                            <option value="">All Ratings</option>
+
+                            <option value="5">â˜…â˜…â˜…â˜…â˜…</option>
+
+                            <option value="4">â˜…â˜…â˜…â˜…â˜† & Up</option>
+
+                            <option value="3">â˜…â˜…â˜…â˜†â˜† & Up</option>
+
+                        </select>
+
+                        <select id="reviewSort">
+
+                            <option value="recent">Most Recent</option>
+
+                            <option value="highest">Highest Rated</option>
+
+                            <option value="lowest">Lowest Rated</option>
+
+                            <option value="helpful">Most Helpful</option>
+
+                        </select>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Reviews -->
+
+        <section class="reviews-section">
+
+            <div class="container">
+
+                <div id="reviewGrid" class="review-grid">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Empty State -->
+
+        <section id="emptyReviews" class="empty-state hidden">
+
+            <i class="fa-solid fa-star-half-stroke"></i>
+
+            <h2>No Reviews Found</h2>
+
+            <p>
+
+                No reviews match your current search.
+
+            </p>
+
+        </section>
+
+        <!-- Write Review -->
+
+        <section class="review-cta">
+
+            <div class="container">
+
+                <div class="cta-card">
+
+                    <h2>
+
+                        Stayed in a ResiHub Property?
+
+                    </h2>
+
+                    <p>
+
+                        Share your experience and help thousands of students
+                        find safe, affordable accommodation.
+
+                    </p>
+
+                    <a href="../system/coming_soon.htm" id="writeReviewBtn"
+                        class="btn-primary magnetic-btn ripple-btn shine-btn">
+
+                        <i class="fa-solid fa-pen-to-square"></i>
+
+                        Write a Review
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Load More -->
+
+        <section class="load-more">
+
+            <div class="container">
+
+                <button id="loadMoreReviews" class="btn-primary magnetic-btn ripple-btn shine-btn">
+
+                    Load More Reviews
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+    <!-- FOOTER -->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

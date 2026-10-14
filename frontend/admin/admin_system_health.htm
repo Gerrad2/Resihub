@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin System Health | ResiHub</title>
+
+    <meta name="description"
+        content="Monitor server performance, database health, storage usage and platform uptime on ResiHub.">
+
+    <meta name="keywords" content="ResiHub, System Health, Server Monitoring, Performance">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_system_health.htm">
+
+    <!-- Open Graph -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin System Health | ResiHub">
+
+    <meta property="og:description" content="Monitor platform health and performance.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_system_health.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin System Health | ResiHub">
+
+    <meta name="twitter:description" content="Monitor ResiHub platform health.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Admin Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <main id="mainContent" class="page-transition">
+
+        <!-- ==========================================
+             System Health Dashboard
+        =========================================== -->
+
+        <section id="systemHealthContent" class="auth-section reveal fade-up">
+
+            <!-- Page Header -->
+
+            <div class="section-header">
+
+                <div class="container">
+
+                    <header class="auth-hero reveal fade-up">
+
+                        <div id="hero-text">
+
+                            <span class="page-badge floating-badge">
+
+                                <i class="fa-solid fa-heart-pulse"></i>
+
+                                Platform Monitoring
+
+                            </span>
+
+                            <h1>System Health</h1>
+
+                            <p>
+
+                                Monitor the overall performance, uptime and health of the ResiHub platform.
+
+                            </p>
+
+                        </div>
+                </div>
+                </header>
+            </div>
+            </header>
+        </section>
+
+        <!-- Health Statistics -->
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-server"></i>
+
+                <h3 id="serverStatus">Online</h3>
+
+                <p>Server Status</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-database"></i>
+
+                <h3 id="databaseHealth">Healthy</h3>
+
+                <p>Database</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-hard-drive"></i>
+
+                <h3 id="storageUsage">0%</h3>
+
+                <p>Storage Usage</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-wifi"></i>
+
+                <h3 id="systemUptime">99.99%</h3>
+
+                <p>Platform Uptime</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-memory"></i>
+
+                <h3 id="memoryUsage">0%</h3>
+
+                <p>Memory Usage</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-microchip"></i>
+
+                <h3 id="cpuUsage">0%</h3>
+
+                <p>CPU Usage</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-network-wired"></i>
+
+                <h3 id="networkTraffic">0 Mbps</h3>
+
+                <p>Network Traffic</p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3 id="activeUsers">0</h3>
+
+                <p>Online Users</p>
+
+            </div>
+
+        </div>
+
+        <!-- Live Monitoring -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>Live Monitoring</h2>
+
+            </div>
+
+            <div id="systemHealthChart" class="analytics-chart">
+
+                <!-- Live chart rendered by JavaScript -->
+
+            </div>
+
+        </section>
+
+        <!-- Recent Alerts -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>Recent Alerts</h2>
+
+            </div>
+
+            <div id="systemAlerts" class="notification-list">
+
+                <!-- Alerts loaded dynamically by JavaScript -->
+
+            </div>
+
+        </section>
+
+        </div>
+
+        </section>
+
+    </main>
+    <!-- ==========================================
+     Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

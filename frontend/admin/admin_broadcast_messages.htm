@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Basic Meta Information
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Broadcast Messages | ResiHub</title>
+
+    <meta name="description"
+        content="Create and manage platform-wide announcements and notifications for students and landlords on the ResiHub Administration Panel.">
+
+    <meta name="keywords" content="ResiHub, Broadcast Messages, Notifications, Announcements, Admin Dashboard">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_broadcast_messages.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin Broadcast Messages | ResiHub">
+
+    <meta property="og:description" content="Create, schedule and manage platform announcements and notifications.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_broadcast_messages.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter
+    =========================================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin Broadcast Messages | ResiHub">
+
+    <meta name="twitter:description" content="Administrator broadcast and notification management.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Master Stylesheet
+    =========================================== -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Scroll Progress
+    =========================================== -->
+
+    <div id="scrollProgress"></div>
+
+    <!-- ==========================================
+         Floating Background Shapes
+    =========================================== -->
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <!-- ==========================================
+         Main Content
+    =========================================== -->
+
+    <main id="mainContent" class="page-transition">
+
+        <section id="broadcastMessagesContent" class="page-section glass-reveal floating-section">
+
+            <div class="container page-container">
+
+                <!-- ==========================================
+                     Page Header
+                =========================================== -->
+
+                <section class="auth-hero reveal fade-up">
+
+                    <div class="page-hero-content hero-content">
+
+                        <span class="page-badge floating-badge glass-card">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            Broadcast Center
+                        </span>
+
+                        <h1>Broadcast Messages</h1>
+
+                        <p>
+                            Create announcements and send important information to students,
+                            landlords or every user on the ResiHub platform.
+                        </p>
+
+                    </div>
+
+                </section>
+
+                <!-- ==========================================
+                     Broadcast Composer
+                =========================================== -->
+
+                <section class="dashboard-section glass-card">
+
+                    <form id="broadcastForm" class="filter-form liquid-form">
+
+                        <div class="liquid-group">
+
+                            <input type="text" id="broadcastTitle" class="liquid-input"
+                                placeholder="Announcement Title">
+
+                        </div>
+
+                        <div class="liquid-group">
+
+                            <select id="broadcastAudience" class="liquid-input">
+
+                                <option value="all">All Users</option>
+                                <option value="students">Students</option>
+                                <option value="landlords">Landlords</option>
+                                <option value="administrators">Administrators</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="liquid-group">
+
+                            <select id="broadcastPriority" class="liquid-input">
+
+                                <option value="normal">Normal</option>
+                                <option value="important">Important</option>
+                                <option value="critical">Critical</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="liquid-group">
+
+                            <textarea id="broadcastMessage" class="liquid-input" rows="8"
+                                placeholder="Write your announcement here..."></textarea>
+
+                        </div>
+
+                        <div class="form-actions">
+
+                            <button type="button" id="previewBroadcastBtn" class="btn btn-outline">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                                <span>Preview</span>
+
+                            </button>
+
+                            <button type="button" id="scheduleBroadcastBtn" class="btn btn-outline">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                                <span>Schedule</span>
+
+                            </button>
+
+                            <button type="submit" id="sendBroadcastBtn" class="btn btn-primary azure-sweep ripple">
+
+                                <i class="fa-solid fa-paper-plane"></i>
+
+                                <span>Send Broadcast</span>
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </section>
+
+                <!-- ==========================================
+                     Statistics
+                =========================================== -->
+
+                <section class="dashboard-section statistics-section glass-reveal">
+
+                    <div class="dashboard-grid statistics-grid">
+
+                        <article class="dashboard-card statistics-card floating-card glass-card">
+
+                            <div class="card-icon">
+
+                                <i class="fa-solid fa-envelope-circle-check"></i>
+
+                            </div>
+
+                            <div class="card-content">
+
+                                <h3 id="messagesSent" class="count-up">0</h3>
+
+                                <p>Broadcasts Sent</p>
+
+                            </div>
+
+                        </article>
+
+                        <article class="dashboard-card statistics-card floating-card glass-card">
+
+                            <div class="card-icon">
+
+                                <i class="fa-solid fa-users"></i>
+
+                            </div>
+
+                            <div class="card-content">
+
+                                <h3 id="totalRecipients" class="count-up">0</h3>
+
+                                <p>Recipients</p>
+
+                            </div>
+
+                        </article>
+
+                        <article class="dashboard-card statistics-card floating-card glass-card">
+
+                            <div class="card-icon">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+                            <div class="card-content">
+
+                                <h3 id="scheduledMessages" class="count-up">0</h3>
+
+                                <p>Scheduled</p>
+
+                            </div>
+
+                        </article>
+
+                        <article class="dashboard-card statistics-card floating-card glass-card">
+
+                            <div class="card-icon">
+
+                                <i class="fa-solid fa-bell"></i>
+
+                            </div>
+
+                            <div class="card-content">
+
+                                <h3 id="activeAnnouncements" class="count-up">0</h3>
+
+                                <p>Active Notices</p>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+                <!-- ==========================================
+                     Broadcast History
+                =========================================== -->
+
+                <section class="table-section glass-reveal">
+
+                    <div class="table-responsive">
+
+                        <table class="admin-table data-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Title</th>
+                                    <th>Audience</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="broadcastHistory">
+
+                                <!-- Loaded dynamically -->
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+    <!-- ==========================================
+         Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

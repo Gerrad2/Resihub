@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Basic Meta Information
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Settings | ResiHub</title>
+
+    <meta name="description"
+        content="Configure platform settings, security, branding, email notifications and system preferences for the ResiHub Administration Portal.">
+
+    <meta name="keywords" content="ResiHub, Admin Settings, Platform Settings, Security, Configuration">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_settings.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin Settings | ResiHub">
+
+    <meta property="og:description" content="Manage platform configuration and administrator preferences.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_settings.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter
+    =========================================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin Settings | ResiHub">
+
+    <meta name="twitter:description" content="Configure system settings and security preferences.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Fonts & Icons
+    =========================================== -->
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         Master Stylesheet
+    =========================================== -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Scroll Progress
+    =========================================== -->
+
+    <div id="scrollProgress"></div>
+
+    <!-- ==========================================
+         Floating Background Shapes
+    =========================================== -->
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Admin Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <!-- ==========================================
+         Main Content
+    =========================================== -->
+
+    <main id="mainContent" class="page-transition">
+
+        <section id="admin-student-content" class="page-section">
+
+            <div class="container page-container">
+
+                <!-- ==========================
+                     Page Header
+                =========================== -->
+
+                <header class="section-header">
+
+                    <div class="container">
+
+                        <header class="auth-hero reveal fade-up">
+
+                            <div id="hero-text">
+
+                                <span class="page-badge floating-badge glass-card">
+
+                                    <i class="fa-solid fa-gears"></i>
+
+                                    System Settings
+
+                                </span>
+
+                                <h1>Platform Settings</h1>
+
+                                <p>
+
+                                    Configure platform preferences,
+                                    administrator options, security,
+                                    branding and system-wide settings.
+
+                                </p>
+
+                        </header>
+
+                        <form id="adminSettingsForm">
+                            <!-- ==========================
+                         General Settings
+                    =========================== -->
+
+                            <section class="dashboard-section glass-card">
+
+                                <header class="section-header">
+
+                                    <h2>General Settings</h2>
+
+                                </header>
+
+                                <div class="settings-grid">
+
+                                    <div class="form-group">
+
+                                        <label for="siteName">
+
+                                            Platform Name
+
+                                        </label>
+
+                                        <input type="text" id="siteName" name="siteName" value="ResiHub">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="supportEmail">
+
+                                            Support Email
+
+                                        </label>
+
+                                        <input type="email" id="supportEmail" name="supportEmail">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="supportPhone">
+
+                                            Support Phone
+
+                                        </label>
+
+                                        <input type="tel" id="supportPhone" name="supportPhone">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="platformStatus">
+
+                                            Platform Status
+
+                                        </label>
+
+                                        <select id="platformStatus" name="platformStatus">
+
+                                            <option value="online">
+
+                                                Online
+
+                                            </option>
+
+                                            <option value="maintenance">
+
+                                                Maintenance
+
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                            <!-- ==========================
+                         Security Settings
+                    =========================== -->
+
+                            <section class="dashboard-section glass-card">
+
+                                <header class="section-header">
+
+                                    <h2>Security Settings</h2>
+
+                                </header>
+
+                                <div class="settings-grid">
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="twoFactor">
+
+                                        Enable Two-Factor Authentication
+
+                                    </label>
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="loginAlerts">
+
+                                        Email Login Alerts
+
+                                    </label>
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="sessionTimeout">
+
+                                        Automatic Session Timeout
+
+                                    </label>
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="forceStrongPasswords">
+
+                                        Require Strong Passwords
+
+                                    </label>
+
+                                </div>
+
+                            </section>
+
+                            <!-- ==========================
+                         Notification Settings
+                    =========================== -->
+
+                            <section class="dashboard-section glass-card">
+
+                                <header class="section-header">
+
+                                    <h2>Notification Settings</h2>
+
+                                </header>
+
+                                <div class="settings-grid">
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="emailNotifications">
+
+                                        Email Notifications
+
+                                    </label>
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="smsNotifications">
+
+                                        SMS Notifications
+
+                                    </label>
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="pushNotifications">
+
+                                        Push Notifications
+
+                                    </label>
+
+                                    <label class="checkbox-group">
+
+                                        <input type="checkbox" id="systemAnnouncements">
+
+                                        Platform Announcements
+
+                                    </label>
+
+                                </div>
+
+                            </section>
+
+                            <!-- ==========================
+                         Branding
+                    =========================== -->
+
+                            <section class="dashboard-section glass-card">
+
+                                <header class="section-header">
+
+                                    <h2>Branding</h2>
+
+                                </header>
+
+                                <div class="settings-grid">
+
+                                    <div class="form-group">
+
+                                        <label for="siteLogo">
+
+                                            Platform Logo
+
+                                        </label>
+
+                                        <input type="file" id="siteLogo" accept="image/*">
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="favicon">
+
+                                            Favicon
+
+                                        </label>
+
+                                        <input type="file" id="favicon" accept="image/*">
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                            <!-- ==========================
+                         Maintenance
+                    =========================== -->
+
+                            <section class="dashboard-section glass-card">
+
+                                <header class="section-header">
+
+                                    <h2>Maintenance</h2>
+
+                                </header>
+
+                                <div class="settings-grid">
+
+                                    <button type="button" id="backupDatabaseBtn" class="btn btn-outline">
+
+                                        <i class="fa-solid fa-database"></i>
+
+                                        Backup Database
+
+                                    </button>
+
+                                    <button type="button" id="restoreDatabaseBtn" class="btn btn-outline">
+
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                                        Restore Backup
+
+                                    </button>
+
+                                    <button type="button" id="clearCacheBtn" class="btn btn-outline">
+
+                                        <i class="fa-solid fa-broom"></i>
+
+                                        Clear Cache
+
+                                    </button>
+
+                                </div>
+
+                            </section>
+
+                            <!-- ==========================
+                         Action Buttons
+                    =========================== -->
+
+                            <div class="action-buttons">
+
+                                <button type="submit" id="saveSettingsBtn" class="btn btn-primary azure-sweep ripple">
+
+                                    <i class="fa-solid fa-floppy-disk"></i>
+
+                                    <span>Save Settings</span>
+
+                                </button>
+
+                                <button type="reset" class="btn btn-outline">
+
+                                    <i class="fa-solid fa-rotate-left"></i>
+
+                                    <span>Reset</span>
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+        </section>
+
+    </main>
+    <!-- ==========================================
+         Dynamic Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

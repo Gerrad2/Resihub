@@ -1,0 +1,428 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Character Encoding
+    =========================================== -->
+    <meta charset="UTF-8">
+
+    <!-- ==========================================
+         Responsive Viewport
+    =========================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ==========================================
+         Basic SEO
+    =========================================== -->
+    <title>Admin System Configuration | ResiHub</title>
+
+    <meta name="description"
+        content="Configure global platform settings, security, maps, payments, notifications and integrations for ResiHub.">
+
+    <meta name="keywords" content="ResiHub, System Configuration, Admin Settings">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_system_configuration.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin System Configuration | ResiHub">
+
+    <meta property="og:description" content="Manage global platform settings.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_system_configuration.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter Card
+    =========================================== -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin System Configuration | ResiHub">
+
+    <meta name="twitter:description" content="Administrator configuration panel.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Font Awesome Icons
+    =========================================== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         Global Stylesheet
+    =========================================== -->
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Admin Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <main>
+
+        <!-- ==========================================
+             System Configuration Section
+        =========================================== -->
+
+        <section id="systemConfigurationContent" class="page-section glass-reveal floating-section">
+
+            <div class="container page-container">
+
+                <div class="container">
+
+                    <!-- Page Header -->
+
+                    <div class="section-header">
+
+                        <div class="container">
+
+                            <header class="auth-hero reveal fade-up">
+
+                                <div id="hero-text">
+
+                                    <span class="page-badge floating-badge">
+
+                                        <i class="fa-solid fa-sliders"></i>
+
+                                        Platform Configuration
+
+                                    </span>
+
+                                    <h1>System Configuration</h1>
+
+                                    <p>
+
+                                        Manage every major setting that powers the ResiHub platform.
+
+                                    </p>
+
+                                </div>
+
+                                <!-- ==========================================
+                     Configuration Form
+                =========================================== -->
+
+                                <form id="systemSettingsForm">
+
+                                    <!-- General Settings -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <header class="section-header">
+
+                                            <h2>General Settings</h2>
+
+                                        </header>
+
+                                        <div class="settings-grid">
+
+                                            <div class="form-group">
+
+                                                <label for="platformName">
+
+                                                    Platform Name
+
+                                                </label>
+
+                                                <input type="text" id="platformName" class="liquid-input">
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label for="supportEmail">
+
+                                                    Support Email
+
+                                                </label>
+
+                                                <input type="email" id="supportEmail" class="liquid-input">
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label for="supportPhone">
+
+                                                    Support Phone
+
+                                                </label>
+
+                                                <input type="tel" id="supportPhone" class="liquid-input">
+
+                                            </div>
+
+                                        </div>
+
+                                    </section>
+
+                                    <!-- Branding -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <h2>Branding</h2>
+
+                                        <input type="file" id="logoUpload">
+
+                                        <input type="file" id="faviconUpload">
+
+                                        <input type="color" id="primaryColor">
+
+                                        <hr>
+
+                                    </section>
+                                    <!-- Maintenance -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <h2>Maintenance</h2>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="maintenanceMode">
+
+                                            Enable Maintenance Mode
+
+                                        </label>
+
+                                        <textarea id="maintenanceMessage" rows="4" placeholder="Maintenance message..."
+                                            class="liquid-input"></textarea>
+
+                                        <hr>
+
+                                    </section>
+
+                                    <!-- Google Maps -->
+
+                                    <section class="dashboard-section glass-card">
+
+
+                                        <h2>Google Maps & Live Location</h2>
+
+                                        <input type="text" id="googleMapsApiKey" placeholder="Google Maps API Key"
+                                            class="liquid-input">
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="enableLiveLocation">
+
+                                            Enable Live Location
+
+                                        </label>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="allowStudentNavigation">
+
+                                            Allow Students to Navigate to Listings
+
+                                        </label>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="landLordApproval">
+
+                                            Require Landlord Location Verification
+
+                                        </label>
+
+                                        <hr>
+
+                                    </section>
+                                    <!-- Payment Gateway -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <h2>Payment Gateway</h2>
+
+                                        <input type="text" id="paystackKey" placeholder="Paystack Public Key"
+                                            class="liquid-input">
+
+                                        <input type="text" id="flutterwaveKey" placeholder="Flutterwave Key"
+                                            class="liquid-input">
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="enablePayment">="enablePayments">
+
+                                            Enable Payments
+
+                                        </label>
+
+                                        <hr>
+
+                                    </section>
+                                    <!-- Email Configuration -->
+
+                                    <section class="dashboard-section glass-card">
+                                        <h2>Email Configuration</h2>
+
+                                        <input type="text" id="smtpHost" placeholder="SMTP Host">
+
+                                        <input type="text" id="smtpPort" placeholder="SMTP Port">
+
+                                        <input type="email" id="smtpEmail" placeholder="SMTP Email">
+
+                                        <hr>
+
+                                    </section>
+                                    <!-- Security -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <h2>Security</h2>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="enable2FA">
+
+                                            Enable Two-Factor Authentication
+
+                                        </label>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="forceStrongPasswords">
+
+                                            Require Strong Passwords
+
+                                        </label>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox" id="enableLoginAlerts">
+
+                                            Login Alerts
+
+                                        </label>
+
+                                        <hr>
+
+                                    </section>
+                                    <!-- Notifications -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <h2>Notifications</h2>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox">
+
+                                            Email Notifications
+
+                                        </label>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox">
+
+                                            SMS Notifications
+
+                                        </label>
+
+                                        <label class="checkbox-group">
+
+                                            <input type="checkbox">
+
+                                            Push Notifications
+
+                                        </label>
+
+                                        <hr>
+                                    </section>
+                                    <!-- Social Media -->
+
+                                    <section class="dashboard-section glass-card">
+
+                                        <h2>Social Media</h2>
+
+                                        <input type="url" placeholder="Facebook URL">
+
+                                        <input type="url" placeholder="Instagram URL">
+
+                                        <input type="url" placeholder="LinkedIn URL">
+
+                                        <input type="url" placeholder="X (Twitter) URL">
+
+                                        <hr>
+
+                                    </section>
+                                    <!-- Form Actions -->
+
+                                    <div class="action-buttons">
+
+                                        <button type="submit" class="btn btn-primary azure-sweep ripple">
+
+                                            <i class="fa-solid fa-floppy-disk"></i>
+
+                                            Save Configuration
+
+                                        </button>
+
+                                        <button type="reset" class="btn btn-outline">
+
+                                            Reset
+
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                        </div>
+
+        </section>
+
+    </main>
+    <!-- ==========================================
+         Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

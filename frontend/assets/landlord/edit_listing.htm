@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Property Listing | ResiHub</title>
+
+    <meta name="description"
+        content="Edit your student accommodation listing on ResiHub. Update property details, amenities, pricing, location and images for students across Nigerian universities.">
+
+    <meta name="keywords"
+        content="Edit Property, Student Accommodation Nigeria, Hostel Listing, Apartment Listing, ResiHub, University Housing">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Edit Property Listing | ResiHub">
+    <meta property="og:description"
+        content="Update your accommodation listing including price, location, amenities and images on ResiHub.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../assets/images/logo.png">
+    <meta property="og:url" content="https://www.resihub.com/edit_listing.htm">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Edit Property Listing | ResiHub">
+    <meta name="twitter:description" content="Manage and update your accommodation listing on ResiHub.">
+    <meta name="twitter:image" content="../assets/images/logo.png">
+
+    <link rel="canonical" href="https://www.resihub.com/edit_listing.htm">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <div id="header"></div>
+
+    <main>
+        <section id="edit-listing-hero" class="auth-hero reveal fade-up">
+            <div class="container">
+
+                <div class="page-hero-content hero-content">
+
+                    <span class="page-badge floating-badge">
+                        <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                        Edit Listing
+                    </span>
+
+                    <h1 class="hero-title">
+                        Edit Listing
+                    </h1>
+
+                    <p class="hero-description">
+                        Update your property information and keep your listing accurate.
+                    </p>
+
+                </div>
+
+            </div>
+        </section>
+        <section class="listing-form-section">
+
+            <div class="container">
+
+                <form id="editListingForm" autocomplete="off">
+
+                    <input type="hidden" id="listingId">
+
+                    <div class="form-card">
+
+                        <h2>Basic Information</h2>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="propertyTitle">Property Title</label>
+                                <input type="text" id="propertyTitle" name="title" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyType">Property Type</label>
+
+                                <select id="propertyType" name="propertyType" required>
+
+                                    <option value="">Select</option>
+                                    <option>Hostel</option>
+                                    <option>Self Contain</option>
+                                    <option>Single Room</option>
+                                    <option>Shared Room</option>
+                                    <option>Apartment</option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyPrice">Annual Rent (â‚¦)</label>
+                                <input type="number" id="propertyPrice" name="price" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="availableRooms">Available Rooms</label>
+                                <input type="number" id="availableRooms" name="rooms" required>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-card">
+
+                        <h2>Location</h2>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label for="propertyUniversity">Nearest University</label>
+                                <input type="text" id="propertyUniversity" name="university" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyArea">Area</label>
+                                <input type="text" id="propertyArea" name="area" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="propertyAddress">Full Address</label>
+                                <input type="text" id="propertyAddress" name="address" required>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-card">
+
+                        <h2>Description</h2>
+
+                        <label for="propertyDescription">
+
+                            Property Description
+
+                        </label>
+
+                        <textarea id="propertyDescription" name="description" rows="6"
+                            placeholder="Describe your property..." required></textarea>
+
+                    </div>
+
+                    <div class="form-card">
+
+                        <h2>Amenities</h2>
+
+                        <div class="amenities-grid">
+
+                            <label><input type="checkbox" id="wifiAmenity"> Wi-Fi</label>
+
+                            <label><input type="checkbox" id="waterAmenity"> Running Water</label>
+
+                            <label><input type="checkbox" id="electricityAmenity"> Stable Electricity</label>
+
+                            <label><input type="checkbox" id="securityAmenity"> Security</label>
+
+                            <label><input type="checkbox" id="parkingAmenity"> Parking</label>
+
+                            <label><input type="checkbox" id="kitchenAmenity"> Kitchen</label>
+
+                            <label><input type="checkbox" id="bathroomAmenity"> Private Bathroom</label>
+
+                            <label><input type="checkbox" id="furnishedAmenity"> Furnished</label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-card">
+
+                        <h2>Property Images</h2>
+
+                        <div id="imageUploadZone" class="upload-zone">
+
+                            <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+
+                            <p>Drag &amp; Drop images here</p>
+
+                            <label for="propertyImages" class="btn-primary magnetic-btn ripple-btn shine-btn">
+
+                                Choose Images
+
+                            </label>
+
+                            <input type="file" id="propertyImages" accept="image/*" multiple hidden>
+
+                        </div>
+
+                        <div id="imagePreview" class="image-preview-grid"></div>
+
+                    </div>
+
+                    <div class="form-card">
+
+                        <div class="publish-actions">
+
+                            <button type="submit" id="updateListingBtn"
+                                class="btn-primary magnetic-btn ripple-btn shine-btn">
+
+                                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>
+
+                                Save Changes
+
+                            </button>
+
+                            <button type="button" id="deleteListingBtn"
+                                class="btn-danger magnetic-btn ripple-btn shine-btn">
+
+                                <i class="fa-solid fa-trash" aria-hidden="true"></i>
+
+                                Delete Listing
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

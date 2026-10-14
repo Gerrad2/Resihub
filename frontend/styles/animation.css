@@ -1,0 +1,460 @@
+/*==========================================
+    GLOBAL TRANSITIONS
+==========================================*/
+
+* {
+
+    transition:
+
+        background-color var(--transition),
+
+        color var(--transition),
+
+        border-color var(--transition),
+
+        box-shadow var(--transition),
+
+        transform var(--transition),
+
+        opacity var(--transition);
+
+}
+
+/*==========================================
+    FADE
+==========================================*/
+
+.fade-in {
+
+    animation: fadeIn .7s ease forwards;
+
+}
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+    }
+
+}
+
+.fade-up {
+
+    animation: fadeUp .8s ease forwards;
+
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(35px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.fade-down {
+
+    animation: fadeDown .8s ease forwards;
+
+}
+
+@keyframes fadeDown {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-35px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.slide-left {
+
+    animation: slideLeft .8s ease forwards;
+
+}
+
+@keyframes slideLeft {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+.slide-right {
+
+    animation: slideRight .8s ease forwards;
+
+}
+
+@keyframes slideRight {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(-40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+.scale-in {
+
+    animation: scaleIn .5s ease forwards;
+
+}
+
+@keyframes scaleIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(.92);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1);
+
+    }
+
+}
+
+.float {
+
+    animation: float 6s ease-in-out infinite;
+
+}
+
+@keyframes float {
+
+    0% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-10px);
+
+    }
+
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+}
+
+.glow {
+
+    animation: glow 3s ease-in-out infinite;
+
+}
+
+@keyframes glow {
+
+    0% {
+
+        box-shadow: 0 0 0 rgba(47, 212, 255, 0);
+
+    }
+
+    50% {
+
+        box-shadow: 0 0 30px rgba(47, 212, 255, .35);
+
+    }
+
+    100% {
+
+        box-shadow: 0 0 0 rgba(47, 212, 255, 0);
+
+    }
+
+}
+
+.shimmer {
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+.shimmer::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(120deg,
+
+            transparent,
+
+            rgba(255, 255, 255, .22),
+
+            transparent);
+
+    transform: translateX(-150%);
+
+    animation: shimmer 3s infinite;
+
+}
+
+@keyframes shimmer {
+
+    to {
+
+        transform: translateX(150%);
+
+    }
+
+}
+
+.pulse {
+
+    animation: pulse 2.5s infinite;
+
+}
+
+@keyframes pulse {
+
+    0% {
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.05);
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+    }
+
+}
+
+.rotate {
+
+    animation: rotate 8s linear infinite;
+
+}
+
+@keyframes rotate {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+.spinner {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 50%;
+
+    border: 4px solid rgba(255, 255, 255, .15);
+
+    border-top-color: var(--color-accent);
+
+    animation: spin .9s linear infinite;
+
+}
+
+@keyframes spin {
+
+    to {
+
+        transform: rotate(360deg);
+
+    }
+
+}
+
+.skeleton {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, .08);
+
+}
+
+.skeleton::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(90deg,
+
+            transparent,
+
+            rgba(255, 255, 255, .18),
+
+            transparent);
+
+    animation: skeleton 1.5s infinite;
+
+}
+
+@keyframes skeleton {
+
+    from {
+
+        transform: translateX(-100%);
+
+    }
+
+    to {
+
+        transform: translateX(100%);
+
+    }
+
+}
+
+.hover-lift {
+
+    transition: var(--transition);
+
+}
+
+.hover-lift:hover {
+
+    transform:
+
+        translateY(-8px) scale(1.02);
+
+}
+
+.hover-glow:hover {
+
+    box-shadow:
+
+        0 20px 60px rgba(47, 212, 255, .25);
+
+}
+
+.delay-1 {
+
+    animation-delay: .1s;
+
+}
+
+.delay-2 {
+
+    animation-delay: .2s;
+
+}
+
+.delay-3 {
+
+    animation-delay: .3s;
+
+}
+
+.delay-4 {
+
+    animation-delay: .4s;
+
+}
+
+.delay-5 {
+
+    animation-delay: .5s;
+
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html[data-reduced-motion="true"] .reveal {
+    opacity: 1;
+    transform: none;
+}

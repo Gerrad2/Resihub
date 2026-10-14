@@ -1,0 +1,174 @@
+/*==================================================
+    UNIVERSITIES
+==================================================*/
+
+.universities {
+
+    position: relative;
+
+    padding: 7rem 0;
+
+}
+
+.universities-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,
+            minmax(320px, 1fr));
+
+    gap: 2rem;
+
+    margin-top: 3rem;
+
+}
+
+.university-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255, 255, 255, .12);
+
+    transition:
+        .4s ease;
+
+}
+
+.university-card:hover {
+
+    transform:
+        translateY(-10px);
+
+    border-color:
+        rgba(47, 212, 255, .30);
+
+    box-shadow:
+
+        0 30px 70px rgba(0, 88, 234, .18);
+
+}
+
+.university-card img {
+
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+.university-body {
+
+    padding: 2rem;
+
+}
+
+.university-body h3 {
+
+    color: white;
+
+    font-size: 1.4rem;
+
+    margin-bottom: .7rem;
+
+}
+
+.university-body p {
+
+    color:
+
+        rgba(255, 255, 255, .72);
+
+    line-height: 1.7;
+
+}
+
+.university-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 1.8rem;
+
+}
+
+.listing-count {
+
+    padding:
+
+        .55rem 1rem;
+
+    border-radius: 999px;
+
+    background:
+
+        rgba(47, 212, 255, .12);
+
+    color: #7EE7FF;
+
+    font-weight: 600;
+
+    font-size: .9rem;
+
+}
+
+.view-university {
+
+    color: white;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: .5rem;
+
+    transition: .3s;
+
+}
+
+.view-university:hover {
+
+    color: #7EE7FF;
+
+    gap: .8rem;
+
+}
+
+.university-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(135deg,
+
+            rgba(255, 255, 255, .16),
+
+            transparent 35%);
+
+    pointer-events: none;
+
+}

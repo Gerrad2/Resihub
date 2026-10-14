@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResiHub | Student Accommodation in Nigeria | Verified Hostels & Apartments</title>
+
+    <meta name="description"
+        content="Find verified student accommodation near universities across Nigeria. Browse hostels, self contain apartments, shared rooms and affordable rentals on ResiHub.">
+
+    <meta name="keywords"
+        content="student accommodation Nigeria, university hostel Nigeria, off campus housing, hostel near university, ResiHub, student apartments, Nigerian universities, affordable hostel">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://www.resihub.com/index.htm">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ResiHub | Student Accommodation in Nigeria">
+    <meta property="og:description" content="Browse verified student accommodation near Nigerian universities.">
+    <meta property="og:url" content="https://www.resihub.com/index.htm">
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+    <meta property="og:site_name" content="ResiHub">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ResiHub | Student Accommodation in Nigeria">
+    <meta name="twitter:description"
+        content="Find verified hostels, apartments and student accommodation across Nigeria.">
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION-->
+
+    <div id="header"></div>
+
+    <main>
+        <!-- HERO SECTION-->
+        <section class="hero">
+            <div class="hero-overlay">
+                <div class="container">
+                    <div class="hero-content">
+                        <!--left Side -->
+                        <div class="hero-text">
+
+                            <span class="hero-badge">ðŸ‡³ðŸ‡¬ Nigeria's Student Housing Platform</span>
+                            <h1>Find Safe & Affordable Student Accommodation Across Nigeria</h1>
+                            <p>Search verified hostels, apartments, self-contain rooms, shared apartments,
+                                and off-campus housing near your university.</p>
+                            <div class="hero-buttons">
+
+                                <a href="../general/browse_rooms.htm" class="btn-primary"><i
+                                        class="fa-solid fa-magnifying-glass"></i>Browse
+                                    Rooms</a>
+                                <a href="../landlord/create_listing.htm"
+                                    class="btn-primary magnetic-btn ripple-btn shine-btn"><i
+                                        class="fa-solid fa-house-circle-plus"></i>List
+                                    Your Property</a>
+                            </div>
+                        </div>
+
+                        <!--right Side -->
+                        <!-- Search Card -->
+                        <div class="search-card">
+                            <h2>Search Accommodation</h2>
+
+                            <p>
+                                Find verified student housing near your campus.
+                            </p>
+                            <form id="searchForm" autocomplete="off">
+                                <div class="search-grid">
+                                    <div class="form-group">
+                                        <label for="searchUniversity">University</label>
+                                        <select id="searchUniversity" name="university">
+                                            <option value="">Select University</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="searchArea">Area</label>
+                                        <input type="text" id="searchArea" name="area" placeholder="e.g. Akoka">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="searchType">Property Type</label>
+                                        <select id="searchType" name="type">
+                                            <option value="">Any</option>
+                                            <option>Self Contain</option>
+                                            <option>Single Room</option>
+                                            <option>Shared Room</option>
+                                            <option>1 Bedroom</option>
+                                            <option>2 Bedroom</option>
+                                            <option>3 Bedroom</option>
+                                            <option>Apartment</option>
+                                            <option>Hostel</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="searchPrice">Maximum Budget (â‚¦)</label>
+                                        <input type="number" id="searchPrice" name="maxPrice" placeholder="250000">
+                                    </div>
+                                </div>
+                                <button class="btn-primary search-btn" type="submit"><i
+                                        class="fa-solid fa-magnifying-glass"></i>Search Rooms</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLATFORM STATISTICS -->
+        <section class="stats">
+
+            <div class="container">
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <h2 id="listingCount">...</h2>
+                        <p>Available Listings</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <h2 id="studentCount">...</h2>
+                        <p>Registered Students</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-user-tie" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <h2 id="landlordCount">...</h2>
+                        <p>Active Landlords</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <h2 id="universityCount">...</h2>
+                        <p>Universities</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-star" aria-hidden="true"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <h2 id="reviewCount">...</h2>
+                        <p>Student Reviews</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- WHY CHOOSE RESIHUB -->
+        <section class="why-us">
+            <div class="section-title">
+                <h2> Why Choose ResiHub?</h2>
+                <p> Everything you need to find safe, affordable and verified student accommodation in one place.</p>
+            </div>
+            <div class="container">
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>Verified Listings</h3>
+                        <p>Every property goes through verification to reduce scams and improve trust.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-magnifying-glass-location"></i>
+                        </div>
+                        <h3> Smart Search</h3>
+                        <p> Filter accommodation by university, area, property type and budget.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h3> Direct Chat</h3>
+                        <p>Chat with landlords inside ResiHub before making any decision.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <h3>Easy Booking</h3>
+                        <p>Schedule inspections and send rental requests without leaving the platform.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- USER JOURNEYS-->
+        <section class="journeys">
+            <div class="section-title">
+                <span class="section-badge">Your Journey Starts Here</span>
+                <h2>Every Great Stay Begins With One Step</h2>
+                <p>Whether you're searching for a room or renting one out,
+                    ResiHub guides you every step of the way.</p>
+            </div>
+            <div class="container">
+                <div class="journey-wrapper">
+                    Student Card
+                    Landlord Card
+                </div>
+                <div class="journey-finish">
+                    <div class="container">
+                        <div class="finish-card">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <h3>Students Find Safe Housing</h3>
+                        </div>
+                        <div class="finish-card">
+                            <i class="fa-solid fa-handshake"></i>
+                            <h3>Landlords Reach More Students</h3>
+                        </div>
+                        <div class="finish-card">
+                            <i class="fa-solid fa-face-smile"></i>
+                            <h3>Everyone Wins</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Explore Accommodation by University -->
+        <section class="universities">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2>Explore Accommodation by University</h2>
+                        <p>Browse accommodation around Nigerian universities.</p>
+                    </div>
+                    <a href="../general/universities.htm" class="btn-primary magnetic-btn ripple-btn shine-btn">View
+                        All<i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div id="universitiesGrid" class="universities-grid">
+                    <!-- Universities will be loaded from Supabase -->
+                </div>
+            </div>
+        </section>
+        <!-- TESTIMONIALS -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <span class="section-badge">Student Experiences</span>
+                    <h2> Trusted by Students Across Nigeria</h2>
+                    <p> Here's what students are saying about their experience with ResiHub.</p>
+                </div>
+                <div class="testimonials-grid" id="testimonialsGrid">
+                    <!-- Testimonials will be loaded here -->
+                </div>
+            </div>
+        </section>
+        <!-- FAQ -->
+        <section class="faq">
+            <div class="container">
+                <div class="section-title">
+                    <span class="section-badge">Need Help?</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Quick answers to common questions.</p>
+                </div>
+                <div id="faqContainer">
+                    <!-- FAQ Items -->
+                </div>
+            </div>
+        </section>
+        <!-- CALL TO ACTION-->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Find Your Next Home?</h2>
+                    <p>Join thousands of students already using ResiHub to discover safe and affordable accommodation.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="../auth/student_signup.htm" class="btn-primary"><i
+                                class="fa-solid fa-user-plus"></i>Join as
+                            Student</a>
+                        <a href="../auth/landlord_signup.htm" class="btn-primary magnetic-btn ripple-btn shine-btn"><i
+                                class="fa-solid fa-house-circle-plus"></i>Become a
+                            Landlord</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- NEWSLETTER-->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated</h2>
+                    <p> Get notified about new listings, platform updates and student housing tips.</p>
+                    <form id="newsletterForm">
+                        <input type="email" id="newsletterEmail" name="email" placeholder="Enter your email address"
+                            required>
+                        <button type="submit" class="btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

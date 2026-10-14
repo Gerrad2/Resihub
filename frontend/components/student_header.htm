@@ -1,0 +1,45 @@
+<header class="main-header">
+    <div class="container">
+        <a href="../student/dashboard_student.htm" class="logo" aria-label="ResiHub student dashboard">
+            <div class="logo-icon"><i class="fa-solid fa-house"></i></div>
+            <div class="logo-text"><h2>ResiHub</h2><span>Student Portal</span></div>
+        </a>
+        <a href="../general/browse_rooms.htm" class="header-cta"><i class="fa-solid fa-magnifying-glass"></i><span>Find a room</span></a>
+
+        <button class="menu-toggle" id="studentMenuToggle" type="button" aria-label="Open menu" aria-expanded="false"
+            aria-controls="mainNavigation"><i class="fa-solid fa-bars"></i></button>
+
+        <nav class="main-nav" id="mainNavigation" aria-label="Student menu">
+            <ul>
+                <li><a href="../student/dashboard_student.htm"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+                <li><a href="../general/browse_rooms.htm"><i class="fa-solid fa-building"></i> Campus</a></li>
+                <li><a href="../student/saved_properties.htm"><i class="fa-solid fa-heart"></i> Saved</a></li>
+                <li><a href="../student/messages.htm"><i class="fa-solid fa-comments"></i> Messages</a></li>
+                <li><a href="../student/booking_requests.htm"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="icon-btn" type="button" aria-label="Search rooms"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a class="icon-btn notification-btn" href="../student/notification.htm" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="notification-badge">0</span></a>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <button class="profile-btn" type="button" aria-label="Student account menu" aria-expanded="false" aria-controls="profileMenu">
+                        <img src="../assets/images/default-avatar.png" alt="Student profile"><span>Student</span><i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="profileMenu">
+                        <a href="../student/profile.htm"><i class="fa-solid fa-user"></i> My Profile</a>
+                        <a href="../student/notification.htm"><i class="fa-solid fa-bell"></i> Notifications</a>
+                        <a href="../student/reviews.htm"><i class="fa-solid fa-star"></i> My Reviews</a>
+                        <a href="../student/student_settings.htm"><i class="fa-solid fa-gear"></i> Settings</a>
+                        <hr><a href="../auth/student_login.htm"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+                <label for="themeSelect">Theme</label>
+                <select id="themeSelect" data-theme-select>
+                    <option value="azure">Azure</option><option value="midnight">Midnight</option>
+                    <option value="emerald">Emerald</option><option value="sunset">Sunset</option>
+                    <option value="lavender">Lavender</option>
+                </select>
+            </div>
+        </nav>
+    </div>
+</header>

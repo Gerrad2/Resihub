@@ -1,0 +1,203 @@
+/*==========================================
+    LARGE DESKTOP
+==========================================*/
+
+@media (min-width:1600px) {
+
+    .container {
+
+        max-width: 1500px;
+
+    }
+
+}
+
+/*==========================================
+    LAPTOP
+==========================================*/
+
+@media (max-width:1400px) {
+
+    .container {
+
+        width: min(95%, 1320px);
+
+    }
+
+}
+
+/*==========================================
+    SMALL LAPTOP
+==========================================*/
+
+@media (max-width:1200px) {
+
+    html {
+
+        font-size: 15px;
+
+    }
+
+    .container {
+
+        width: min(94%, 1140px);
+
+    }
+
+}
+
+/*==========================================
+    TABLET
+==========================================*/
+
+@media (max-width:992px) {
+
+    html {
+
+        font-size: 15px;
+
+    }
+
+    .container {
+
+        width: 92%;
+
+    }
+
+    .main-nav {
+
+        display: none;
+
+    }
+
+    .menu-toggle {
+
+        display: flex;
+
+    }
+
+    .header-actions {
+
+        gap: .75rem;
+
+    }
+
+}
+
+/*==========================================
+    TABLET PORTRAIT
+==========================================*/
+
+@media (max-width:768px) {
+
+    html {
+
+        font-size: 14px;
+
+    }
+
+    .container {
+
+        width: 94%;
+
+    }
+
+    .section {
+
+        padding: 4rem 0;
+
+    }
+
+    .section-lg {
+
+        padding: 5rem 0;
+
+    }
+
+}
+
+/*==========================================
+    MOBILE
+==========================================*/
+
+@media (max-width:576px) {
+
+    html {
+
+        font-size: 14px;
+
+    }
+
+    .container {
+
+        width: 95%;
+
+    }
+
+    .header-actions {
+
+        gap: .5rem;
+
+    }
+
+    .icon-btn {
+
+        width: 44px;
+
+        height: 44px;
+
+    }
+
+}
+
+/*==========================================
+    SMALL MOBILE
+==========================================*/
+
+@media (max-width:420px) {
+
+    html {
+
+        font-size: 13px;
+
+    }
+
+    .container {
+
+        width: 96%;
+
+    }
+
+}
+
+/*==========================================
+    REDUCED MOTION
+==========================================*/
+
+@media (prefers-reduced-motion:reduce) {
+
+    * {
+
+        animation: none !important;
+
+        transition: none !important;
+
+        scroll-behavior: auto !important;
+
+    }
+
+}
+
+/*==========================================
+    DARK MODE
+==========================================*/
+
+@media (prefers-color-scheme:dark) {
+
+    body {
+
+        color-scheme: dark;
+
+    }
+
+}

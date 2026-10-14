@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Character Encoding
+    =========================================== -->
+    <meta charset="UTF-8">
+
+    <!-- ==========================================
+         Responsive Viewport
+    =========================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ==========================================
+         Basic SEO
+    =========================================== -->
+    <title>Admin Support Tickets | ResiHub</title>
+
+    <meta name="description"
+        content="Manage support tickets submitted by students and landlords across the ResiHub platform.">
+
+    <meta name="keywords" content="ResiHub, Support Tickets, Help Desk, Administrator">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_support_tickets.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin Support Tickets | ResiHub">
+
+    <meta property="og:description" content="Manage platform support requests.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_support_tickets.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter Card
+    =========================================== -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin Support Tickets | ResiHub">
+
+    <meta name="twitter:description" content="Administrator support center.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Font Awesome Icons
+    =========================================== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         Global Stylesheet
+    =========================================== -->
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Admin Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <main>
+
+        <!-- ==========================================
+             Support Tickets Section
+        =========================================== -->
+
+        <section id="supportTicketsContent" class="page-section glass-reveal floating-section">
+
+            <div class="container page-container">
+
+                <!-- Page Header -->
+
+                <div class="section-header">
+
+                    <div class="container">
+
+                        <header class="auth-hero reveal fade-up">
+
+                            <div id="hero-text">
+
+                                <span class="page-badge floating-badge">
+
+                                    <i class="fa-solid fa-headset"></i>
+
+                                    Support Center
+
+                                </span>
+
+                                <h1>Support Tickets</h1>
+
+                                <p>
+
+                                    Review, assign and resolve support requests from students and landlords.
+
+                                </p>
+
+                            </div>
+
+                            <!-- ==========================================
+                     Ticket Filters
+                =========================================== -->
+
+                            <form id="ticketFilterForm">
+
+                                <input type="search" id="ticketSearch" placeholder="Search tickets...">
+
+                                <select id="ticketStatus">
+
+                                    <option value="">All Status</option>
+
+                                    <option>Open</option>
+
+                                    <option>Pending</option>
+
+                                    <option>Resolved</option>
+
+                                    <option>Closed</option>
+
+                                </select>
+
+                                <select id="ticketPriority">
+
+                                    <option value="">All Priority</option>
+
+                                    <option>Critical</option>
+
+                                    <option>High</option>
+
+                                    <option>Medium</option>
+
+                                    <option>Low</option>
+
+                                </select>
+
+                                <select id="ticketCategory">
+
+                                    <option value="">All Categories</option>
+
+                                    <option>Account</option>
+
+                                    <option>Payments</option>
+
+                                    <option>Listings</option>
+
+                                    <option>Technical</option>
+
+                                    <option>Reports</option>
+
+                                </select>
+
+                            </form>
+
+                            <!-- ==========================================
+                     Statistics
+                =========================================== -->
+
+                            <section class="dashboard-section statistics-section glass-reveal">
+
+                                <div class="dashboard-grid statistics-grid">
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+
+                                            <i class="fa-solid fa-ticket"></i>
+
+                                        </div>
+
+                                        <div class="card-content">
+
+                                            <h3 id="totalTickets" class="count-up">0</h3>
+
+                                            <p>Total Tickets</p>
+
+                                        </div>
+
+                                    </article>
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+
+                                            <i class="fa-solid fa-folder-open"></i>
+
+                                        </div>
+
+                                        <div class="card-content">
+
+                                            <h3 id="openTickets" class="count-up">0</h3>
+
+                                            <p>Open Tickets</p>
+
+                                        </div>
+
+                                    </article>
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+
+                                            <i class="fa-solid fa-spinner"></i>
+
+                                        </div>
+
+                                        <div class="card-content">
+
+                                            <h3 id="pendingTickets" class="count-up">0</h3>
+
+                                            <p>Pending</p>
+
+                                        </div>
+
+                                    </article>
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+
+                                            <i class="fa-solid fa-circle-check"></i>
+
+                                        </div>
+
+                                        <div class="card-content">
+
+                                            <h3 id="resolvedTickets" class="count-up">0</h3>
+
+                                            <p>Resolved</p>
+
+                                        </div>
+
+                                    </article>
+
+                                </div>
+
+                                <!-- ==========================================
+                     Support Tickets Table
+                =========================================== -->
+
+                                <section class="table-section glass-reveal">
+
+                                    <div class="table-responsive">
+                                        <table class="admin-table">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>ID</th>
+
+                                                    <th>User</th>
+
+                                                    <th>Category</th>
+
+                                                    <th>Priority</th>
+
+                                                    <th>Status</th>
+
+                                                    <th>Date</th>
+
+                                                    <th>Actions</th>
+
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody id="supportTicketsTable">
+
+                                                <!-- Loaded dynamically by JavaScript -->
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                    </div>
+
+        </section>
+
+    </main>
+    <!-- ==========================================
+         Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

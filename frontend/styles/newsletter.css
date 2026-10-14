@@ -1,0 +1,61 @@
+/*==================================================
+    NEWSLETTER
+==================================================*/
+
+.newsletter {
+
+    padding: 7rem 0;
+
+}
+
+.newsletter-content {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    text-align: center;
+
+    padding: 4rem;
+
+    border-radius: 32px;
+
+    background: rgba(255, 255, 255, .08);
+
+    backdrop-filter: blur(30px);
+
+    border: 1px solid rgba(255, 255, 255, .12);
+
+}
+
+.newsletter-content form {
+
+    display: flex;
+
+    gap: 1rem;
+
+    margin-top: 2rem;
+
+}
+
+.newsletter-content input {
+
+    flex: 1;
+
+}
+
+@media(max-width:768px) {
+
+    .newsletter-content form {
+
+        flex-direction: column;
+
+    }
+
+    .newsletter-content button {
+
+        width: 100%;
+
+    }
+
+}

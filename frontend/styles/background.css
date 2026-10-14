@@ -1,0 +1,85 @@
+/* Premium Azure SaaS Background — Image Matched Edition */
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+
+    /* Base Canvas: Vivid, punchy mid-tone blues */
+    background:
+        /* Top-Left: Intense White Light Source */
+        radial-gradient(circle at 15% 15%,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(255, 255, 255, 0.40) 15%,
+            transparent 45%),
+
+        /* Mid-Left: Semi-sharp Lens Flare / Bokeh Edge */
+        radial-gradient(circle at -5% 55%,
+            rgba(0, 210, 255, 0.45) 0%,
+            rgba(0, 110, 255, 0.20) 25%,
+            transparent 40%),
+
+        /* Top-Right: Soft Cyan Atmospheric Bloom */
+        radial-gradient(circle at 88% 5%,
+            rgba(107, 226, 255, 0.50) 0%,
+            rgba(0, 188, 255, 0.15) 25%,
+            transparent 50%),
+
+        /* Bottom-Right: Wide Soft White Glow Corner */
+        radial-gradient(circle at 92% 90%,
+            rgba(255, 255, 255, 0.85) 0%,
+            rgba(255, 255, 255, 0.20) 30%,
+            transparent 60%),
+
+        /* Linear Base Backdrop */
+        linear-gradient(135deg,
+            #0044cc 0%,
+            #0052d4 35%,
+            #1e69ff 70%,
+            #4364f7 100%);
+
+    background-attachment: fixed;
+
+}
+
+/* Atmospheric Layer for Soft Volumetric Depth */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.10), transparent 50%);
+
+    filter: blur(60px);
+    /* Reduced slightly from 80px to keep orb definitions visible */
+    opacity: 0.9;
+
+}
+
+/* Full-Screen Glass Blur Overlay */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -3;
+    /* Sits completely over the background layers */
+
+    /* Generates the soft uniform diffusion */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    /* Safari support */
+
+    /* Optional fine-tuning layer: keeps colors vibrant under heavy blur */
+    background-color: rgba(0, 82, 212, 0.02);
+}
+
+section {
+
+    padding: 100px 7%;
+
+}

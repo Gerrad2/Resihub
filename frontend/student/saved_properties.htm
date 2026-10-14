@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="View and manage your saved student accommodation listings on ResiHub. Access your favourite hostels, apartments and rental properties near universities across Nigeria.">
+
+    <meta name="keywords"
+        content="saved properties, favourite hostels, student accommodation, apartments, Nigeria, ResiHub">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="theme-color" content="#0F766E">
+
+    <title>Saved Properties | ResiHub</title>
+
+    <!-- Favicon -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Main Stylesheet -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+    <!-- HEADER / NAVIGATION -->
+
+    <div id="header"></div>
+
+    <main>
+
+        <!-- Hero Section -->
+
+        <section class="page-hero">
+
+            <div class="container">
+
+                <section class="auth-hero reveal fade-up" aria-labelledby="savedPropertiesTitle">
+
+                    <span class="page-badge floating-badge">
+
+                        <i class="fa-solid fa-heart" aria-hidden="true"></i>
+
+                        Saved Properties
+
+                    </span>
+
+                    <h1 id="savedPropertiesTitle">
+
+                        Your Saved Accommodation
+
+                    </h1>
+
+                    <p>
+
+                        View and manage all the properties you've saved for future reference.
+
+                    </p>
+
+                </section>
+
+            </div>
+
+        </section>
+
+        <!-- Saved Listings -->
+
+        <section class="saved-properties-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>Saved Listings</h2>
+
+                        <p>
+
+                            Quickly access your favourite student accommodation.
+
+                        </p>
+
+                    </div>
+
+                    <button id="clearSavedBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
+
+                        <i class="fa-solid fa-trash" aria-hidden="true"></i>
+
+                        Clear All
+
+                    </button>
+
+                </div>
+
+                <div id="savedListings" class="listing-grid">
+
+                </div>
+
+                <div id="emptySaved" class="empty-state hidden">
+
+                    <i class="fa-solid fa-heart-crack" aria-hidden="true"></i>
+
+                    <h3>
+
+                        No Saved Properties
+
+                    </h3>
+
+                    <p>
+
+                        You haven't saved any accommodation yet.
+
+                    </p>
+
+                    <a href="../general/browse_rooms.htm" class="btn-primary">
+
+                        Browse Rooms
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    <!-- FOOTER -->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

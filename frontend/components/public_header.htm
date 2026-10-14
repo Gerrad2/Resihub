@@ -1,0 +1,35 @@
+<header class="main-header">
+    <div class="container">
+        <a href="../general/index.htm" class="logo" aria-label="ResiHub home">
+            <div class="logo-icon"><i class="fa-solid fa-house"></i></div>
+            <div class="logo-text"><h2>ResiHub</h2><span>Student Accommodation</span></div>
+        </a>
+        <a href="../general/browse_rooms.htm" class="header-cta"><i class="fa-solid fa-magnifying-glass"></i><span>Find a room</span></a>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
+            aria-controls="mainNavigation"><i class="fa-solid fa-bars"></i></button>
+
+        <nav class="main-nav" id="mainNavigation" aria-label="Primary navigation">
+            <ul>
+                <li><a href="../general/index.htm" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="../general/browse_rooms.htm"><i class="fa-solid fa-building"></i> Rooms</a></li>
+                <li><a href="../general/universities.htm"><i class="fa-solid fa-graduation-cap"></i> Campus</a></li>
+                <li><a href="../general/about.htm"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <li><a href="../general/contact.htm"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="icon-btn theme-toggle" type="button" aria-label="Theme settings"><i class="fa-solid fa-palette"></i></button>
+                <button class="icon-btn search-toggle" type="button" aria-label="Search rooms"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="../auth/student_login.htm" class="profile-btn"><i class="fa-solid fa-user"></i><span>Account</span></a>
+                <a href="../landlord/create_listing.htm" class="btn-primary"><i class="fa-solid fa-house-circle-plus"></i><span>List Your Property</span></a>
+                <label for="themeSelect">Theme</label>
+                <select id="themeSelect" data-theme-select>
+                    <option value="azure">Azure</option><option value="midnight">Midnight</option>
+                    <option value="emerald">Emerald</option><option value="sunset">Sunset</option>
+                    <option value="lavender">Lavender</option>
+                </select>
+            </div>
+        </nav>
+    </div>
+</header>

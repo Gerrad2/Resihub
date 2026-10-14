@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Character Encoding
+    =========================================== -->
+    <meta charset="UTF-8">
+
+    <!-- ==========================================
+         Responsive Design
+    =========================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ==========================================
+         Basic SEO
+    =========================================== -->
+    <title>Manage Students | ResiHub Admin</title>
+
+    <meta name="description"
+        content="Manage registered students, verify accounts, suspend users, and monitor student activity from the ResiHub Administrator Panel.">
+
+    <meta name="keywords" content="ResiHub, Admin, Students, Student Management, University Accommodation, Dashboard">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_students.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Manage Students | ResiHub Admin">
+
+    <meta property="og:description"
+        content="Manage student accounts, approvals, suspensions and activities from the ResiHub Administration Panel.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_students.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter Card
+    =========================================== -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Manage Students | ResiHub Admin">
+
+    <meta name="twitter:description" content="Manage student accounts and activities on ResiHub.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Font Awesome Icons
+    =========================================== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         Global Stylesheet
+    =========================================== -->
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+
+    <div id="header"></div>
+
+    <main>
+
+        <!-- Student Management -->
+
+        <section id="admin-student-content" class="auth-section reveal fade-up">
+
+            <div class="container">
+
+                <!-- Page Header -->
+
+                <div class="section-header">
+                    <div class="container">
+
+                        <header class="auth-hero reveal fade-up">
+
+                            <div id="hero-text">
+
+                                <span class="page-badge floating-badge">
+
+                                    <i class="fa-solid fa-user-graduate"></i>
+
+                                    Student Management
+
+                                </span>
+
+                                <h1>Manage Registered Students</h1>
+
+                                <p>
+
+                                    Search, review, suspend, activate and manage student accounts across the ResiHub
+                                    platform.
+
+                                </p>
+
+                            </div>
+
+                            <!-- Statistics -->
+
+                            <section class="dashboard-section statistics-section glass-reveal">
+
+                                <div class="dashboard-grid statistics-grid">
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+                                            <i class="fa-solid fa-users"></i>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <h3 id="totalStudents" class="count-up">0</h3>
+                                            <p>Total Students</p>
+                                        </div>
+
+                                    </article>
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <h3 id="activeStudents" class="count-up">0</h3>
+                                            <p>Active Accounts</p>
+                                        </div>
+
+                                    </article>
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+                                            <i class="fa-solid fa-user-slash"></i>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <h3 id="suspendedStudents" class="count-up">0</h3>
+                                            <p>Suspended</p>
+                                        </div>
+
+                                    </article>
+
+                                    <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                        <div class="card-icon">
+                                            <i class="fa-solid fa-user-clock"></i>
+                                        </div>
+
+                                        <div class="card-content">
+                                            <h3 id="newStudents" class="count-up">0</h3>
+                                            <p>New This Month</p>
+                                        </div>
+
+                                    </article>
+
+                                </div>
+
+                            </section>
+
+
+                            <!-- Search & Filters -->
+
+                            <section class="filter-section glass-card">
+
+                                <form id="studentFilterForm" class="filter-form liquid-form" role="search"
+                                    aria-label="Filter Students">
+                                    <label class="visually-hidden" for="studentSearch">
+
+                                        Search Students
+
+                                    </label>
+
+                                    <input type="search" id="studentSearch" name="studentSearch"
+                                        placeholder="Search by name, email or university..." autocomplete="off">
+
+                                    <label class="visually-hidden" for="studentStatus">
+
+                                        Student Status
+
+                                    </label>
+
+                                    <select id="studentStatus" name="studentStatus">
+
+                                        <option value="">All Status</option>
+
+                                        <option value="Active">Active</option>
+
+                                        <option value="Suspended">Suspended</option>
+
+                                        <option value="Pending">Pending Verification</option>
+
+                                    </select>
+
+                                    <label class="visually-hidden" for="studentUniversity">
+
+                                        University
+
+                                    </label>
+
+                                    <select id="studentUniversity" name="studentUniversity">
+
+                                        <option value="">All Universities</option>
+
+                                    </select>
+
+                                </form>
+
+                                <!-- Students Table -->
+
+                                <section class="table-section glass-reveal">
+
+                                    <div class="table-responsive">
+
+                                        <table class="admin-table">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>Student</th>
+
+                                                    <th>University</th>
+
+                                                    <th>Email</th>
+
+                                                    <th>Status</th>
+
+                                                    <th>Joined</th>
+
+                                                    <th>Actions</th>
+
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody id="studentTableBody">
+
+                                                <!-- Loaded dynamically -->
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                    <!-- Empty State -->
+
+                                    <div id="noStudentsFound" class="empty-state hidden">
+
+                                        <i class="fa-solid fa-users-slash"></i>
+
+                                        <h3>No Students Found</h3>
+
+                                        <p>
+
+                                            No student matches your current search or filter.
+
+                                        </p>
+
+                                    </div>
+
+                    </div>
+
+        </section>
+
+    </main>
+    <!-- FOOTER -->
+
+    <div id="footer"></div>
+
+    <!-- JavaScript -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

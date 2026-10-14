@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>University Details | ResiHub</title>
+
+    <meta name="description"
+        content="Discover verified student accommodation, nearby hostels, popular student areas, and useful information about universities across Nigeria.">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+
+    <!-- Scroll Progress -->
+    <div id="scrollProgress"></div>
+
+    <!-- Floating Shapes -->
+    <div class="floating-shapes" aria-hidden="true">
+        <span class="shape shape-1"></span>
+        <span class="shape shape-2"></span>
+        <span class="shape shape-3"></span>
+        <span class="shape shape-4"></span>
+    </div>
+
+    <!-- HEADER -->
+
+    <div id="header"></div>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- Hero -->
+        <section class="page-hero">
+
+            <div class="container">
+
+                <div class="page-hero-content">
+
+                    <span class="page-badge floating-badge">
+                        <i class="fa-solid fa-building-columns"></i>
+                        University
+                    </span>
+
+                    <h1 id="universityName">University Name</h1>
+
+                    <p id="universityLocation">
+                        State, Nigeria
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Banner -->
+        <section class="university-banner">
+
+            <div class="container">
+
+                <img id="universityImage" src="../assets/images/university-placeholder.jpg" alt="University">
+
+            </div>
+
+        </section>
+        <section class="university-highlights">
+
+            <div class="container">
+
+                <div class="highlights-grid">
+
+                    <div class="highlight-card">
+
+                        <i class="fa-solid fa-house"></i>
+
+                        <h3 id="highlightListings">0</h3>
+
+                        <p>Available Listings</p>
+
+                    </div>
+
+                    <div class="highlight-card">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <h3 id="highlightAreas">0</h3>
+
+                        <p>Student Areas</p>
+
+                    </div>
+
+                    <div class="highlight-card">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <h3 id="highlightVerified">0%</h3>
+
+                        <p>Verified Properties</p>
+
+                    </div>
+
+                    <div class="highlight-card">
+
+                        <i class="fa-solid fa-person-walking"></i>
+
+                        <h3 id="highlightDistance">5-20 min</h3>
+
+                        <p>Walk to Campus</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Overview -->
+        <section class="university-overview">
+
+            <div class="container">
+
+                <div class="overview-grid">
+
+                    <div>
+
+                        <h2>About the University</h2>
+
+                        <p id="universityDescription">
+                            Loading...
+                        </p>
+
+                    </div>
+
+                    <aside class="overview-card">
+
+                        <h3>Quick Facts</h3>
+
+                        <p><strong>State:</strong> <span id="universityState"></span></p>
+
+                        <p><strong>City:</strong> <span id="universityCity"></span></p>
+
+                        <p><strong>Students:</strong> <span id="studentPopulation"></span></p>
+
+                        <p><strong>Nearby Listings:</strong> <span id="listingCount"></span></p>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Nearby Accommodation -->
+        <section class="nearby-listings">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+                        <h2>Accommodation Near Campus</h2>
+                        <p>Verified rooms around this university.</p>
+                    </div>
+
+                    <a href="../general/browse_rooms.htm" class="btn-primary">
+                        View All
+                    </a>
+
+                </div>
+
+                <div id="nearbyListings" class="listing-grid">
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Popular Areas -->
+        <section class="popular-areas">
+
+            <div class="container">
+
+                <h2>Popular Student Areas</h2>
+
+                <div id="areasGrid" class="areas-grid">
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Facilities -->
+        <section class="campus-facilities">
+
+            <div class="container">
+
+                <h2>Campus Facilities</h2>
+
+                <div id="facilitiesGrid" class="features-grid">
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Campus Map -->
+        <section class="campus-map">
+
+            <div class="container">
+
+                <h2>Campus Location</h2>
+
+                <div id="campusMap"></div>
+
+            </div>
+
+        </section>
+
+        <!-- Student Tips -->
+        <section class="student-tips">
+
+            <div class="container">
+
+                <h2>Living Around This University</h2>
+
+                <div id="studentTips" class="tips-grid">
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FAQ -->
+        <section class="university-faq">
+
+            <div class="container">
+
+                <h2>Frequently Asked Questions</h2>
+
+                <div id="faqContainer">
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Contact -->
+        <section class="contact-university">
+
+            <div class="container">
+
+                <div class="contact-card">
+
+                    <h2>Need More Information?</h2>
+
+                    <p>
+                        Contact the university or browse more accommodation options around campus.
+                    </p>
+
+                    <div class="contact-buttons">
+
+                        <a href="../general/contact.htm" class="btn-primary">
+                            Contact Us
+                        </a>
+
+                        <a href="../general/browse_rooms.htm" class="btn-outline">
+                            Browse Rooms
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

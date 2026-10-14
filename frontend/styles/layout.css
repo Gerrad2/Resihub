@@ -1,0 +1,263 @@
+/*==========================================
+    PAGE LAYOUT
+==========================================*/
+
+.page {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.page-content {
+
+    flex: 1;
+
+    width: 100%;
+
+}
+
+/*==========================================
+    CONTAINER
+==========================================*/
+
+.container {
+
+    width: min(1400px, 92%);
+
+    margin-inline: auto;
+
+}
+
+/*==========================================
+    SECTIONS
+==========================================*/
+
+.section {
+
+    padding: 6rem 0;
+
+}
+
+.section-sm {
+
+    padding: 4rem 0;
+
+}
+
+.section-lg {
+
+    padding: 8rem 0;
+
+}
+
+/*==========================================
+    GRID
+==========================================*/
+
+.grid {
+
+    display: grid;
+
+    gap: 2rem;
+
+}
+
+.grid-2 {
+
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+.grid-3 {
+
+    grid-template-columns: repeat(3, 1fr);
+
+}
+
+.grid-4 {
+
+    grid-template-columns: repeat(4, 1fr);
+
+}
+
+.grid-auto {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 2rem;
+
+}
+
+/*==========================================
+    FLEX
+==========================================*/
+
+.flex {
+
+    display: flex;
+
+}
+
+.flex-center {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.flex-between {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+.flex-column {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.stack {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+}
+
+.cluster {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 1rem;
+
+    align-items: center;
+
+}
+
+/*==========================================
+    DASHBOARD
+==========================================*/
+
+.dashboard-layout {
+
+    display: grid;
+
+    grid-template-columns: 280px 1fr;
+
+    gap: 2rem;
+
+    min-height: calc(100vh - 110px);
+
+}
+
+.sidebar {
+
+    position: sticky;
+
+    top: 120px;
+
+    align-self: start;
+
+}
+
+.main-content {
+
+    min-width: 0;
+
+}
+
+.content-wrapper {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+
+}
+
+/*==========================================
+    RESPONSIVE
+==========================================*/
+
+@media(max-width:1200px) {
+
+    .grid-4 {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+@media(max-width:992px) {
+
+    .dashboard-layout {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .sidebar {
+
+        position: static;
+
+    }
+
+    .grid-3,
+
+    .grid-4 {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+@media(max-width:768px) {
+
+    .grid-2,
+
+    .grid-3,
+
+    .grid-4 {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .section {
+
+        padding: 4rem 0;
+
+    }
+
+    .section-lg {
+
+        padding: 6rem 0;
+
+    }
+
+}

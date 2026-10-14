@@ -1,0 +1,245 @@
+/*==========================================
+    RESIHUB DESIGN TOKENS
+==========================================*/
+
+:root {
+
+    /*======================================
+        BRAND COLORS
+    ======================================*/
+
+    --color-primary: #0058EA;
+
+    --color-primary-dark: #002C85;
+
+    --color-primary-light: #0098FF;
+
+    --color-accent: #2FD4FF;
+
+    --color-white: #FFFFFF;
+
+    --color-ice: #DFF5FF;
+
+}
+
+:root {
+
+    /*======================================
+        BACKGROUNDS
+    ======================================*/
+
+    --bg-glass: rgba(255, 255, 255, .08);
+
+    --bg-glass-hover: rgba(255, 255, 255, .12);
+
+    --bg-glass-light: rgba(255, 255, 255, .05);
+
+    --bg-overlay: rgba(3, 18, 52, .45);
+
+}
+
+:root {
+
+    /*======================================
+        TEXT
+    ======================================*/
+
+    --text-primary: #FFFFFF;
+
+    --text-secondary: rgba(255, 255, 255, .78);
+
+    --text-muted: rgba(255, 255, 255, .58);
+
+    --text-disabled: rgba(255, 255, 255, .35);
+
+}
+
+:root {
+
+    /*======================================
+        BORDERS
+    ======================================*/
+
+    --border-glass: 1px solid rgba(255, 255, 255, .14);
+
+    --border-light: 1px solid rgba(255, 255, 255, .08);
+
+    --border-focus: rgba(47, 212, 255, .55);
+
+}
+
+:root {
+
+    /*======================================
+        SHADOWS
+    ======================================*/
+
+    --shadow-sm:
+
+        0 8px 24px rgba(0, 88, 234, .10);
+
+    --shadow-md:
+
+        0 18px 50px rgba(0, 88, 234, .15);
+
+    --shadow-lg:
+
+        0 30px 80px rgba(0, 88, 234, .22);
+
+    --shadow-xl:
+
+        0 40px 100px rgba(0, 88, 234, .28);
+
+}
+
+:root {
+
+    /*======================================
+        GLASS
+    ======================================*/
+
+    --glass-blur: 26px;
+
+    --glass-blur-lg: 34px;
+
+    --glass-blur-sm: 18px;
+
+    --glass-reflection:
+
+        inset 0 1px rgba(255, 255, 255, .16);
+
+}
+
+:root {
+
+    /*======================================
+        RADIUS
+    ======================================*/
+
+    --radius-xs: 10px;
+
+    --radius-sm: 16px;
+
+    --radius-md: 20px;
+
+    --radius-lg: 24px;
+
+    --radius-xl: 28px;
+
+    --radius-2xl: 32px;
+
+    --radius-full: 999px;
+
+}
+
+:root {
+
+    /*======================================
+        SPACING
+    ======================================*/
+
+    --space-xs: .5rem;
+
+    --space-sm: 1rem;
+
+    --space-md: 1.5rem;
+
+    --space-lg: 2rem;
+
+    --space-xl: 3rem;
+
+    --space-2xl: 4rem;
+
+    --space-3xl: 6rem;
+
+}
+
+:root {
+
+    /*======================================
+        TYPOGRAPHY
+    ======================================*/
+
+    --font-heading: "Poppins", sans-serif;
+
+    --font-body: "Inter", sans-serif;
+
+}
+
+:root {
+
+    --text-xs: .75rem;
+
+    --text-sm: .875rem;
+
+    --text-md: 1rem;
+
+    --text-lg: 1.125rem;
+
+    --text-xl: 1.5rem;
+
+    --text-2xl: 2rem;
+
+    --text-3xl: 3rem;
+
+}
+
+:root {
+
+    --font-normal: 400;
+
+    --font-medium: 500;
+
+    --font-semibold: 600;
+
+    --font-bold: 700;
+
+}
+
+:root {
+
+    /*======================================
+        LAYERS
+    ======================================*/
+
+    --z-dropdown: 1000;
+
+    --z-sticky: 1100;
+
+    --z-overlay: 5000;
+
+    --z-modal: 6000;
+
+    --z-toast: 7000;
+
+}
+
+:root {
+
+    /*======================================
+        TRANSITIONS
+    ======================================*/
+
+    --transition-fast: .2s ease;
+
+    --transition: .35s ease;
+
+    --transition-slow: .5s ease;
+
+}
+
+:root {
+
+    /*======================================
+        STATUS
+    ======================================*/
+
+    --success: #00E676;
+
+    --warning: #FFC107;
+
+    --danger: #FF5252;
+
+    --info: #2FD4FF;
+
+}

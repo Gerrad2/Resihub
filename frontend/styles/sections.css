@@ -1,0 +1,179 @@
+/*==================================================
+  SECTION LAYOUT
+==================================================*/
+
+section {
+
+    position: relative;
+
+    padding: 7rem 0;
+
+}
+
+.container {
+
+    width: min(1400px, 92%);
+
+    margin-inline: auto;
+
+}
+
+/*==================================================
+  SECTION TITLE
+==================================================*/
+
+.section-title {
+
+    max-width: 760px;
+
+    margin: 0 auto 4rem;
+
+    text-align: center;
+
+}
+
+.section-title h2 {
+
+    font-size: clamp(2.3rem, 4vw, 3.6rem);
+
+    font-weight: 800;
+
+    line-height: 1.15;
+
+    color: #fff;
+
+    margin-bottom: 1rem;
+
+}
+
+.section-title p {
+
+    font-size: 1.08rem;
+
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, .72);
+
+}
+
+/*==================================================
+  SECTION BADGE
+==================================================*/
+
+.section-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+
+        .8rem 1.5rem;
+
+    margin-bottom: 1.5rem;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, .08);
+
+    border: 1px solid rgba(255, 255, 255, .15);
+
+    backdrop-filter: blur(24px);
+
+    color: #7EE7FF;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    letter-spacing: .5px;
+
+    text-transform: uppercase;
+
+}
+
+/*==================================================
+  SECTION HEADER
+==================================================*/
+
+.section-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 2rem;
+
+    margin-bottom: 3rem;
+
+}
+
+.section-header h2 {
+
+    color: #fff;
+
+    font-size: 2.5rem;
+
+    margin-bottom: .8rem;
+
+}
+
+.section-header p {
+
+    color: rgba(255, 255, 255, .72);
+
+    max-width: 550px;
+
+}
+
+section:nth-child(even) {
+
+    background:
+
+        linear-gradient(180deg,
+
+            transparent,
+
+            rgba(255, 255, 255, .02),
+
+            transparent);
+
+}
+
+@media (max-width:992px) {
+
+    .section-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .section-title {
+
+        margin-bottom: 3rem;
+
+    }
+
+}
+
+@media (max-width:768px) {
+
+    section {
+
+        padding: 5rem 0;
+
+    }
+
+    .section-title h2 {
+
+        font-size: 2rem;
+
+    }
+
+}

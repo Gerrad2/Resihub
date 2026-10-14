@@ -1,0 +1,387 @@
+/*==========================================
+    DISPLAY
+==========================================*/
+
+.d-none {
+
+    display: none !important;
+
+}
+
+.d-block {
+
+    display: block !important;
+
+}
+
+.d-inline {
+
+    display: inline !important;
+
+}
+
+.d-inline-block {
+
+    display: inline-block !important;
+
+}
+
+.d-flex {
+
+    display: flex !important;
+
+}
+
+.d-grid {
+
+    display: grid !important;
+
+}
+
+/*==========================================
+    FLEX
+==========================================*/
+
+.justify-start {
+
+    justify-content: flex-start;
+
+}
+
+.justify-center {
+
+    justify-content: center;
+
+}
+
+.justify-end {
+
+    justify-content: flex-end;
+
+}
+
+.justify-between {
+
+    justify-content: space-between;
+
+}
+
+.align-start {
+
+    align-items: flex-start;
+
+}
+
+.align-center {
+
+    align-items: center;
+
+}
+
+.align-end {
+
+    align-items: flex-end;
+
+}
+
+.flex-wrap {
+
+    flex-wrap: wrap;
+
+}
+
+/*==========================================
+    SIZE
+==========================================*/
+
+.w-100 {
+
+    width: 100%;
+
+}
+
+.h-100 {
+
+    height: 100%;
+
+}
+
+.min-vh-100 {
+
+    min-height: 100vh;
+
+}
+
+/*==========================================
+    MARGIN
+==========================================*/
+
+.m-0 {
+
+    margin: 0 !important;
+
+}
+
+.mt-1 {
+
+    margin-top: var(--space-sm);
+
+}
+
+.mt-2 {
+
+    margin-top: var(--space-md);
+
+}
+
+.mt-3 {
+
+    margin-top: var(--space-lg);
+
+}
+
+.mt-4 {
+
+    margin-top: var(--space-xl);
+
+}
+
+.mb-1 {
+
+    margin-bottom: var(--space-sm);
+
+}
+
+.mb-2 {
+
+    margin-bottom: var(--space-md);
+
+}
+
+.mb-3 {
+
+    margin-bottom: var(--space-lg);
+
+}
+
+.mb-4 {
+
+    margin-bottom: var(--space-xl);
+
+}
+
+/*==========================================
+    PADDING
+==========================================*/
+
+.p-1 {
+
+    padding: var(--space-sm);
+
+}
+
+.p-2 {
+
+    padding: var(--space-md);
+
+}
+
+.p-3 {
+
+    padding: var(--space-lg);
+
+}
+
+.p-4 {
+
+    padding: var(--space-xl);
+
+}
+
+/*==========================================
+    GAP
+==========================================*/
+
+.gap-1 {
+
+    gap: var(--space-sm);
+
+}
+
+.gap-2 {
+
+    gap: var(--space-md);
+
+}
+
+.gap-3 {
+
+    gap: var(--space-lg);
+
+}
+
+.gap-4 {
+
+    gap: var(--space-xl);
+
+}
+
+/*==========================================
+    POSITION
+==========================================*/
+
+.relative {
+
+    position: relative;
+
+}
+
+.absolute {
+
+    position: absolute;
+
+}
+
+.fixed {
+
+    position: fixed;
+
+}
+
+.sticky {
+
+    position: sticky;
+
+}
+
+/*==========================================
+    RADIUS
+==========================================*/
+
+.rounded-sm {
+
+    border-radius: var(--radius-sm);
+
+}
+
+.rounded-md {
+
+    border-radius: var(--radius-md);
+
+}
+
+.rounded-lg {
+
+    border-radius: var(--radius-lg);
+
+}
+
+.rounded-xl {
+
+    border-radius: var(--radius-xl);
+
+}
+
+.rounded-full {
+
+    border-radius: var(--radius-full);
+
+}
+
+/*==========================================
+    GLASS
+==========================================*/
+
+.glass {
+
+    background: var(--bg-glass);
+
+    backdrop-filter: blur(var(--glass-blur));
+
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+
+    border: var(--border-glass);
+
+    box-shadow:
+
+        var(--shadow-md),
+
+        var(--glass-reflection);
+
+}
+
+/*==========================================
+    SHADOWS
+==========================================*/
+
+.shadow-sm {
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+.shadow-md {
+
+    box-shadow: var(--shadow-md);
+
+}
+
+.shadow-lg {
+
+    box-shadow: var(--shadow-lg);
+
+}
+
+/*==========================================
+    CURSOR
+==========================================*/
+
+.pointer {
+
+    cursor: pointer;
+
+}
+
+.no-select {
+
+    user-select: none;
+
+}
+
+/*==========================================
+    VISIBILITY
+==========================================*/
+
+.hidden {
+
+    display: none !important;
+
+}
+
+.visible {
+
+    display: block !important;
+
+}
+
+/*==========================================
+    Z INDEX
+==========================================*/
+
+.z-dropdown {
+
+    z-index: var(--z-dropdown);
+
+}
+
+.z-modal {
+
+    z-index: var(--z-modal);
+
+}
+
+.z-toast {
+
+    z-index: var(--z-toast);
+
+}

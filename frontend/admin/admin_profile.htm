@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Basic Meta Information
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Profile | ResiHub</title>
+
+    <meta name="description"
+        content="View and manage your administrator profile, account information, security settings and preferences on the ResiHub Administration Portal.">
+
+    <meta name="keywords" content="ResiHub, Admin Profile, Administrator, Settings, Account">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_profile.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Admin Profile | ResiHub">
+
+    <meta property="og:description" content="Manage your administrator account and profile information.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_profile.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter
+    =========================================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Admin Profile | ResiHub">
+
+    <meta name="twitter:description" content="Manage your administrator profile and account preferences.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Fonts & Icons
+    =========================================== -->
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ==========================================
+         Master Stylesheet
+    =========================================== -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Scroll Progress Indicator
+    =========================================== -->
+
+    <div id="scrollProgress"></div>
+
+    <!-- ==========================================
+         Floating Background Shapes
+    =========================================== -->
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <!-- ==========================================
+         Main Content
+    =========================================== -->
+
+    <main>
+
+        <section id="admin-profile-content" class="auth-section">
+
+            <div class="container">
+
+                <!-- Page Header -->
+
+                <section class="auth-hero reveal fade-up">
+
+                    <div class="page-hero-content hero-content">
+
+                        <span class="page-badge floating-badge">
+
+                            <i class="fa-solid fa-user-shield"></i>
+
+                            Administrator Profile
+
+                        </span>
+
+                        <h1>My Profile</h1>
+
+                        <p>
+
+                            Manage your administrator account,
+                            personal information, security
+                            preferences and login credentials.
+
+                        </p>
+
+                    </div>
+
+                    <!-- Profile Form -->
+
+                    <form id="adminProfileForm">
+
+                        <!-- ==========================================
+                         Profile Card
+                    =========================================== -->
+
+                        <section class="dashboard-section">
+
+                            <div class="profile-card">
+
+                                <div class="profile-avatar">
+
+                                    <img id="adminProfileImage" src="../assets/images/admin-avatar.png"
+                                        alt="Administrator Profile">
+
+                                    <label for="profileImageUpload" class="btn-outline">
+
+                                        <i class="fa-solid fa-camera"></i>
+
+                                        Change Photo
+
+                                    </label>
+
+                                    <input type="file" id="profileImageUpload" accept="image/*" hidden>
+
+                                </div>
+
+                                <div class="profile-summary">
+
+                                    <h2 id="adminName">
+
+                                        Administrator
+
+                                    </h2>
+
+                                    <p id="adminRole">
+
+                                        Super Administrator
+
+                                    </p>
+
+                                    <span class="status-badge active">
+
+                                        Active
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                         Personal Information
+                    =========================================== -->
+
+                        <section class="dashboard-section">
+
+                            <div class="section-header">
+
+                                <h2>Personal Information</h2>
+
+                            </div>
+
+                            <div class="settings-grid">
+
+                                <div class="form-group">
+
+                                    <label for="fullName">
+
+                                        Full Name
+
+                                    </label>
+
+                                    <input type="text" id="fullName" name="fullName">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="email">
+
+                                        Email Address
+
+                                    </label>
+
+                                    <input type="email" id="email" name="email">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="phone">
+
+                                        Phone Number
+
+                                    </label>
+
+                                    <input type="tel" id="phone" name="phone">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="position">
+
+                                        Position
+
+                                    </label>
+
+                                    <input type="text" id="position" name="position">
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                         Security
+                    =========================================== -->
+
+                        <section class="dashboard-section">
+
+                            <div class="section-header">
+
+                                <h2>Security</h2>
+
+                            </div>
+
+                            <div class="settings-grid">
+
+                                <div class="form-group">
+
+                                    <label for="currentPassword">
+
+                                        Current Password
+
+                                    </label>
+
+                                    <input type="password" id="currentPassword">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="newPassword">
+
+                                        New Password
+
+                                    </label>
+
+                                    <input type="password" id="newPassword">
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label for="confirmPassword">
+
+                                        Confirm Password
+
+                                    </label>
+
+                                    <input type="password" id="confirmPassword">
+
+                                </div>
+
+                            </div>
+
+                            <div class="settings-grid">
+
+                                <label class="checkbox-group">
+
+                                    <input type="checkbox" id="enable2FA">
+
+                                    Enable Two-Factor Authentication
+
+                                </label>
+
+                                <label class="checkbox-group">
+
+                                    <input type="checkbox" id="loginNotification">
+
+                                    Receive Login Notifications
+
+                                </label>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                         Account Information
+                    =========================================== -->
+
+                        <section class="dashboard-section">
+
+                            <div class="section-header">
+
+                                <h2>Account Information</h2>
+
+                            </div>
+
+                            <div class="dashboard-grid">
+
+                                <div class="dashboard-card">
+
+                                    <i class="fa-solid fa-calendar-days"></i>
+
+                                    <h3 id="joinDate">--</h3>
+
+                                    <p>Joined</p>
+
+                                </div>
+
+                                <div class="dashboard-card">
+
+                                    <i class="fa-solid fa-clock"></i>
+
+                                    <h3 id="lastLogin">--</h3>
+
+                                    <p>Last Login</p>
+
+                                </div>
+
+                                <div class="dashboard-card">
+
+                                    <i class="fa-solid fa-laptop"></i>
+
+                                    <h3 id="activeSessions">1</h3>
+
+                                    <p>Active Sessions</p>
+
+                                </div>
+
+                                <div class="dashboard-card">
+
+                                    <i class="fa-solid fa-shield-halved"></i>
+
+                                    <h3>Verified</h3>
+
+                                    <p>Account Status</p>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                         Action Buttons
+                    =========================================== -->
+
+                        <div class="action-buttons">
+
+                            <button type="submit" id="saveProfileBtn" class="btn-primary">
+
+                                <i class="fa-solid fa-floppy-disk"></i>
+
+                                Save Changes
+
+                            </button>
+
+                            <button type="reset" class="btn-outline">
+
+                                <i class="fa-solid fa-rotate-left"></i>
+
+                                Reset
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         Dynamic Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Basic Meta Information
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Landlords | ResiHub Admin</title>
+
+    <meta name="description"
+        content="Manage landlord accounts, verify property owners, approve listings, and monitor landlord activities on the ResiHub Administration Panel.">
+
+    <meta name="keywords" content="ResiHub, Admin, Landlords, Property Owners, Student Accommodation, Dashboard">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_landlords.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Manage Landlords | ResiHub Admin">
+
+    <meta property="og:description" content="Manage landlord accounts, approvals and property ownership on ResiHub.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_landlords.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter
+    =========================================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Manage Landlords | ResiHub Admin">
+
+    <meta name="twitter:description" content="Manage landlords and their property listings on ResiHub.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Master Stylesheet
+    =========================================== -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Scroll Progress
+    =========================================== -->
+
+    <div id="scrollProgress"></div>
+
+    <!-- ==========================================
+         Floating Background Shapes
+    =========================================== -->
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <!-- ==========================================
+         Main Content
+    =========================================== -->
+
+    <main id="mainContent" class="page-transition">
+
+        <section id="adminLandlordsContent" class="page-section">
+
+            <div class="container page-container">
+
+                <!-- ==========================================
+                     Page Header
+                =========================================== -->
+
+                <header class="section-header">
+
+                    <div class="container">
+
+                        <header class="auth-hero reveal fade-up">
+
+                            <div id="hero-text">
+
+
+
+                                <i class="fa-solid fa-building-user"></i>
+
+                                Landlord Management
+
+                                </span>
+
+                                <h1>Manage Registered Landlords</h1>
+
+                                <p>
+
+                                    Review, verify, suspend and manage landlords together
+                                    with their property listings.
+
+                                </p>
+
+                        </header>
+
+                        <!-- ==========================================
+                     Dashboard Statistics
+                =========================================== -->
+
+                        <section class="dashboard-section statistics-section glass-reveal">
+
+                            <div class="dashboard-grid statistics-grid">
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-building"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="totalLandlords" class="count-up">0</h3>
+
+                                        <p>Total Landlords</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="verifiedLandlords" class="count-up">0</h3>
+
+                                        <p>Verified</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-clock"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="pendingLandlords" class="count-up">0</h3>
+
+                                        <p>Pending Verification</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-house"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="totalProperties" class="count-up">0</h3>
+
+                                        <p>Active Listings</p>
+
+                                    </div>
+
+                                </article>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Filters
+                =========================================== -->
+
+                        <section class="filter-section glass-card">
+
+                            <form id="landlordFilterForm" class="filter-form liquid-form" role="search"
+                                aria-label="Filter Landlords">
+
+                                <div class="liquid-group">
+
+                                    <input type="search" id="landlordSearch" class="liquid-input"
+                                        placeholder="Search by name, email or phone..." autocomplete="off">
+
+                                </div>
+
+                                <div class="liquid-group">
+
+                                    <select id="verificationStatus" class="liquid-input">
+
+                                        <option value="">All Status</option>
+
+                                        <option value="Verified">Verified</option>
+
+                                        <option value="Pending">Pending</option>
+
+                                        <option value="Suspended">Suspended</option>
+
+                                    </select>
+
+                                </div>
+
+                                <button type="reset" id="resetLandlordFilters" class="btn btn-outline">
+
+                                    <i class="fa-solid fa-rotate-left"></i>
+
+                                    <span>Reset</span>
+
+                                </button>
+
+                            </form>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Loading State
+                =========================================== -->
+
+                        <div id="landlordLoading" class="loading-state hidden">
+
+                            <div class="loader"></div>
+
+                            <p>Loading landlords...</p>
+
+                        </div>
+
+                        <!-- ==========================================
+                     Landlords Table
+                =========================================== -->
+
+                        <section class="table-section glass-reveal">
+
+                            <div class="table-responsive">
+
+                                <table class="admin-table data-table">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>Landlord</th>
+
+                                            <th>Email</th>
+
+                                            <th>Phone</th>
+
+                                            <th>Listings</th>
+
+                                            <th>Status</th>
+
+                                            <th>Joined</th>
+
+                                            <th>Actions</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody id="landlordTableBody">
+
+                                        <!-- Loaded dynamically -->
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Pagination
+                =========================================== -->
+
+                        <section class="pagination-section">
+
+                            <div id="landlordPagination" class="pagination"></div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Empty State
+                =========================================== -->
+
+                        <section id="noLandlordsFound" class="empty-state hidden">
+
+                            <i class="fa-solid fa-building-circle-xmark"></i>
+
+                            <h3>No Landlords Found</h3>
+
+                            <p>
+
+                                No landlord matches your current search
+                                or filter.
+
+                            </p>
+
+                        </section>
+
+                    </div>
+
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         Action Modal
+    =========================================== -->
+
+    <div id="landlordActionModal" class="modal hidden">
+
+        <div class="modal-content glass-card">
+
+            <button id="closeLandlordModal" class="modal-close" aria-label="Close">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+            <h2 id="landlordModalTitle">
+
+                Confirm Action
+
+            </h2>
+
+            <p id="landlordModalMessage">
+
+                Are you sure you want to continue?
+
+            </p>
+
+            <div class="modal-actions">
+
+                <button id="confirmLandlordAction" class="btn btn-primary azure-sweep ripple">
+
+                    Confirm
+
+                </button>
+
+                <button id="cancelLandlordAction" class="btn btn-outline">
+
+                    Cancel
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         Toast Notification
+    =========================================== -->
+
+    <div id="landlordToast" class="toast hidden">
+
+        <div class="toast-content">
+
+            <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+
+            <span id="toastMessage">
+
+                Action completed successfully.
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         Dynamic Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

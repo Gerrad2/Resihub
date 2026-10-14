@@ -1,0 +1,69 @@
+<header class="main-header">
+    <div class="container">
+        <a href="../admin/admin_dashboard.htm" class="logo" aria-label="ResiHub administrator dashboard">
+            <div class="logo-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="logo-text">
+                <h2>ResiHub</h2>
+                <span>Administrator</span>
+            </div>
+        </a>
+        <a href="../admin/admin_dashboard.htm" class="header-cta"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></a>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
+            aria-controls="mainNavigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav class="main-nav" id="mainNavigation" aria-label="Administrator menu">
+            <ul>
+                <li><a href="../admin/admin_dashboard.htm"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="../admin/admin_students.htm"><i class="fa-solid fa-user-graduate"></i> Students</a></li>
+                <li><a href="../admin/admin_landlords.htm"><i class="fa-solid fa-house-user"></i> Landlords</a></li>
+                <li><a href="../admin/admin_listings.htm"><i class="fa-solid fa-building"></i> Listings</a></li>
+                <li><a href="../admin/admin_reports.htm"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+                <li><a href="../admin/admin_platform_settings.htm"><i class="fa-solid fa-sliders"></i> Platform</a></li>
+                <li id="superAdminMenu" class="hidden"><a href="../admin/super_admin.htm"><i class="fa-solid fa-crown"></i> Super Admin</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <button class="icon-btn" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false"
+                    aria-controls="notificationMenu">
+                    <i class="fa-solid fa-bell"></i>
+                    <span class="notification-badge" id="notificationCount">0</span>
+                </button>
+
+                <div class="notification-dropdown" id="notificationMenu">
+                    <p>No new notifications.</p>
+                </div>
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <button class="profile-btn" id="profileButton" type="button" aria-label="Administrator account menu"
+                        aria-expanded="false" aria-controls="profileMenu">
+                        <img src="../assets/images/default-avatar.png" alt="Administrator" loading="lazy">
+                        <span>Admin</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+
+                    <div class="dropdown-menu" id="profileMenu">
+                        <a href="../admin/admin_profile.htm"><i class="fa-solid fa-user"></i> Profile</a>
+                        <a href="../admin/admin_system_configuration.htm"><i class="fa-solid fa-gear"></i> Settings</a>
+                        <a href="../admin/admin_activity_logs.htm"><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</a>
+                        <hr>
+                        <label for="themeSelect">Theme</label>
+                        <select id="themeSelect" data-theme-select>
+                            <option value="azure">Azure</option>
+                            <option value="midnight">Midnight</option>
+                            <option value="emerald">Emerald</option>
+                            <option value="sunset">Sunset</option>
+                            <option value="lavender">Lavender</option>
+                        </select>
+                        <hr>
+                        <a href="../auth/admin_login.htm" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

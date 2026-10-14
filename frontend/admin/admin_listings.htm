@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- ==========================================
+         Basic Meta Information
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Listings | ResiHub Admin</title>
+
+    <meta name="description"
+        content="Manage property listings on the ResiHub Administration Panel. Approve, reject, feature, suspend and monitor accommodation listings across Nigeria.">
+
+    <meta name="keywords" content="ResiHub, Admin, Listings, Student Accommodation, Property Management, Dashboard">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="canonical" href="https://www.resihub.com/admin_listings.htm">
+
+    <!-- ==========================================
+         Open Graph
+    =========================================== -->
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Manage Listings | ResiHub Admin">
+
+    <meta property="og:description" content="Manage and moderate accommodation listings on ResiHub.">
+
+    <meta property="og:url" content="https://www.resihub.com/admin_listings.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Twitter
+    =========================================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Manage Listings | ResiHub Admin">
+
+    <meta name="twitter:description" content="Approve, reject, feature and manage accommodation listings on ResiHub.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <!-- ==========================================
+         Master Stylesheet
+    =========================================== -->
+
+    <link rel="stylesheet" href="../styles/style.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Scroll Progress
+    =========================================== -->
+
+    <div id="scrollProgress"></div>
+
+    <!-- ==========================================
+         Floating Background Shapes
+    =========================================== -->
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <!-- ==========================================
+         Header
+    =========================================== -->
+
+    <div id="header"></div>
+
+    <!-- ==========================================
+         Main Content
+    =========================================== -->
+
+    <main id="mainContent" class="page-transition">
+
+        <section id="adminListingsContent" class="page-section glass-reveal floating-section">
+
+            <div class="container page-container">
+
+                <!-- ==========================================
+                     Page Header
+                =========================================== -->
+
+                <header class="section-header">
+
+                    <div class="container">
+
+                        <header class="auth-hero reveal fade-up">
+
+                            <div id="hero-text">
+
+                                <span class="page-badge floating-badge glass-card">
+
+                                    <i class="fa-solid fa-house"></i>
+
+                                    Listing Management
+
+                                </span>
+
+                                <h1>Manage Property Listings</h1>
+
+                                <p>
+
+                                    Review, approve, suspend, feature and manage accommodation listings across Nigeria.
+
+                                </p>
+
+                        </header>
+
+                        <!-- ==========================================
+                     Statistics
+                =========================================== -->
+
+                        <section class="dashboard-section statistics-section glass-reveal">
+
+                            <div class="dashboard-grid statistics-grid">
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-house"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="totalListings" class="count-up">0</h3>
+
+                                        <p>Total Listings</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="approvedListings" class="count-up">0</h3>
+
+                                        <p>Approved</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-clock"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="pendingListings" class="count-up">0</h3>
+
+                                        <p>Pending Approval</p>
+
+                                    </div>
+
+                                </article>
+
+                                <article class="dashboard-card statistics-card floating-card glass-card">
+
+                                    <div class="card-icon">
+
+                                        <i class="fa-solid fa-star"></i>
+
+                                    </div>
+
+                                    <div class="card-content">
+
+                                        <h3 id="featuredListings" class="count-up">0</h3>
+
+                                        <p>Featured Listings</p>
+
+                                    </div>
+
+                                </article>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Search & Filters
+                =========================================== -->
+
+                        <section class="filter-section glass-card">
+
+                            <form id="listingFilterForm" class="filter-form liquid-form" role="search"
+                                aria-label="Filter Listings">
+
+                                <div class="liquid-group">
+
+                                    <input type="search" id="listingSearch" class="liquid-input"
+                                        placeholder="Search title, landlord or location..." autocomplete="off">
+
+                                </div>
+
+                                <div class="liquid-group">
+
+                                    <select id="listingStatus" class="liquid-input">
+
+                                        <option value="">All Status</option>
+
+                                        <option value="Approved">Approved</option>
+
+                                        <option value="Pending">Pending</option>
+
+                                        <option value="Featured">Featured</option>
+
+                                        <option value="Suspended">Suspended</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="liquid-group">
+
+                                    <select id="propertyType" class="liquid-input">
+
+                                        <option value="">All Types</option>
+
+                                        <option value="Self Contain">Self Contain</option>
+
+                                        <option value="Single Room">Single Room</option>
+
+                                        <option value="Room and Parlour">Room & Parlour</option>
+
+                                        <option value="Flat">Flat</option>
+
+                                        <option value="Hostel">Hostel</option>
+
+                                    </select>
+
+                                </div>
+
+                                <div class="liquid-group">
+
+                                    <select id="listingState" class="liquid-input">
+
+                                        <option value="">All States</option>
+
+                                    </select>
+
+                                </div>
+
+                            </form>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Listings Table
+                =========================================== -->
+
+                        <section class="table-section glass-reveal">
+
+                            <div class="table-responsive">
+
+                                <table class="admin-table data-table">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>Property</th>
+
+                                            <th>Landlord</th>
+
+                                            <th>Location</th>
+
+                                            <th>Price</th>
+
+                                            <th>Status</th>
+
+                                            <th>Listed</th>
+
+                                            <th>Actions</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody id="listingTableBody">
+
+                                        <!-- Loaded Dynamically -->
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </section>
+
+                        <!-- ==========================================
+                     Empty State
+                =========================================== -->
+
+                        <div id="noListingsFound" class="empty-state hidden">
+
+                            <i class="fa-solid fa-house-circle-xmark"></i>
+
+                            <h3>No Listings Found</h3>
+
+                            <p>
+
+                                No property listing matches your current search or filters.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+        </section>
+
+    </main>
+    <!-- ==========================================
+         Footer
+    =========================================== -->
+
+    <div id="footer"></div>
+
+    <!-- ==========================================
+         JavaScript Modules
+    =========================================== -->
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+

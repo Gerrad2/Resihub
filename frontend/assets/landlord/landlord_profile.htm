@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landlord Profile | Manage Your Account | ResiHub Nigeria</title>
+
+    <meta name="title" content="Landlord Profile | Manage Your Account | ResiHub Nigeria">
+
+    <meta name="description"
+        content="Manage your landlord profile, business information, verification status, emergency contacts and account details on ResiHub, Nigeria's trusted student accommodation platform.">
+
+    <meta name="keywords"
+        content="ResiHub, landlord profile, landlord dashboard, student accommodation Nigeria, property owner, hostel management, apartments, off-campus housing, Nigeria hostels">
+
+    <meta name="author" content="ResiHub">
+
+    <meta name="application-name" content="ResiHub">
+
+    <meta name="generator" content="ResiHub">
+
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <meta name="googlebot" content="index, follow">
+
+    <meta name="bingbot" content="index, follow">
+
+    <meta name="rating" content="General">
+
+    <meta name="distribution" content="Global">
+
+    <meta name="revisit-after" content="7 days">
+
+    <meta name="language" content="English">
+
+    <meta name="geo.region" content="NG">
+
+    <meta name="geo.country" content="Nigeria">
+
+    <meta name="theme-color" content="#0A7E3F">
+
+    <meta name="color-scheme" content="light">
+
+    <link rel="canonical" href="https://www.resihub.com/landlord_profile.htm">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+
+    <meta property="og:site_name" content="ResiHub">
+
+    <meta property="og:locale" content="en_NG">
+
+    <meta property="og:title" content="Landlord Profile | ResiHub Nigeria">
+
+    <meta property="og:description"
+        content="Manage your landlord profile, business details and account settings on ResiHub.">
+
+    <meta property="og:url" content="https://www.resihub.com/landlord_profile.htm">
+
+    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.png">
+
+    <meta property="og:image:width" content="1200">
+
+    <meta property="og:image:height" content="630">
+
+    <meta property="og:image:alt" content="ResiHub Landlord Profile">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Landlord Profile | ResiHub Nigeria">
+
+    <meta name="twitter:description" content="Manage your landlord profile and accommodation listings on ResiHub.">
+
+    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.png">
+
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <meta name="apple-mobile-web-app-title" content="ResiHub">
+
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <div class="floating-shapes" aria-hidden="true">
+
+        <span class="shape shape-1"></span>
+
+        <span class="shape shape-2"></span>
+
+        <span class="shape shape-3"></span>
+
+        <span class="shape shape-4"></span>
+
+    </div>
+
+    <div id="header"></div>
+
+    <main>
+        <section class="dashboard-hero">
+            <div class="container">
+                <div class="dashboard-welcome">
+                    <img id="landlordAvatar" src="../assets/images/default-avatar.png" alt="Landlord Profile Picture">
+
+                    <div>
+                        <h1 id="landlordName">
+                            Landlord Name
+
+                            <span class="status-badge verified">
+                                Verified
+                            </span>
+
+                            <span class="status-badge pending">
+                                Pending
+                            </span>
+                        </h1>
+
+                        <p id="businessNameDisplay">
+                            Business Name
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-card">
+
+                    <div class="section-header">
+                        <h2>Personal Information</h2>
+                    </div>
+
+                    <div class="profile-grid">
+
+                        <div class="profile-item">
+                            <label>Full Name</label>
+                            <p id="fullName"></p>
+                        </div>
+
+                        <div class="profile-item">
+                            <label>Email Address</label>
+                            <p id="email"></p>
+                        </div>
+
+                        <div class="profile-item">
+                            <label>Phone Number</label>
+                            <p id="phone"></p>
+                        </div>
+
+                        <div class="profile-item">
+                            <label>Gender</label>
+                            <p id="gender"></p>
+                        </div>
+
+                        <div class="profile-item">
+                            <label>Date of Birth</label>
+                            <p id="dateOfBirth"></p>
+                        </div>
+
+                        <div class="profile-item">
+                            <label>State</label>
+                            <p id="state"></p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section class="profile-section">
+            <div class="container">
+
+                <div class="profile-card">
+
+                    <div class="section-header">
+                        <h2>Business Information</h2>
+                    </div>
+
+                    <div class="profile-grid">
+
+                        <div class="form-group">
+                            <label for="businessName">
+                                Business Name
+                            </label>
+
+                            <textarea type="text" id="businessName" placeholder="Business Name" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="businessDescription">
+                                Business Description
+                            </label>
+
+                            <textarea id="businessDescription" rows="4" readonly></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cacNumber">
+                                CAC Registration Number
+                            </label>
+
+                            <textarea id="cacNumber" placeholder="CAC Number" readonly></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-card">
+                    <h2>Account Status</h2>
+                    <div class="profile-grid">
+                        <div class="profile-item">
+                            <label>Email Verification</label>
+                            <p id="emailStatus"></p>
+                        </div>
+                        <div class="profile-item">
+                            <label>Phone Verification</label>
+                            <p id="phoneStatus"></p>
+                        </div>
+                        <div class="profile-item">
+                            <label>Member Since</label>
+                            <p id="memberSince"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="profile-actions">
+            <div class="container">
+
+                <a href="../landlord/edit_landlord_profile.htm" class="btn-primary">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit Profile
+                </a>
+
+                <a href="../landlord/dashboard_landlord.htm" class="btn-primary magnetic-btn ripple-btn shine-btn">
+                    <i class="fa-solid fa-table-columns"></i>
+                    Back to Dashboard
+                </a>
+
+            </div>
+        </section>
+    </main>
+    <!--FOOTER-->
+
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+</body>
+
+</html>
+
+
+
