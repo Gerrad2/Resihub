@@ -1,7 +1,7 @@
 import { supabase } from "./api.js";
 
 const isLocal = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-const BACKEND_URL = window.RESIHUB_API_URL || (isLocal ? "http://localhost:8080" : "https://resihub-api.onrender.com");
+const BACKEND_URL = window.RESIHUB_API_URL || (isLocal ? "http://localhost:8080" : "https://resihub-api-bi1f.onrender.com");
 
 export async function backendRequest(path, options = {}) {
     const { data: { session } } = await supabase.auth.getSession();
