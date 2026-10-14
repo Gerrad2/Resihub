@@ -49,7 +49,14 @@ async function signUp(form, role) {
         business_name: String(data.get("businessName") || "").trim() || null,
         cac_number: String(data.get("cacNumber") || "").trim() || null,
     };
-    const { data: result, error } = await supabase.auth.signUp({ email, password, options: { data: profile } });
+    const { data: result, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+            data: profile,
+            emailRedirectTo: "https://resihub-web-vnxe.onrender.com/auth/verify_email.htm",
+        },
+    });
     if (error) {
         message(form, error.message, true);
         return;
