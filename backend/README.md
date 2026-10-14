@@ -1,15 +1,13 @@
 # ResiHub API
 
-This Spring Boot service is the security boundary between the ResiHub browser application and Supabase. The frontend supplies a Supabase access token; the API verifies it using the project's published signing keys. Authorization then comes from `public.users.role` and ownership checks in the database.
+The ResiHub backend is a FastAPI service. It verifies Supabase access tokens using the project's published JWKS, checks the user's database role and property ownership, and uses parameterized PostgreSQL queries through a small connection pool.
 
 ## Local setup
 
-1. Copy `.env.example` to a private `.env` file outside source control and fill in the database pooler URL, username, and password from Supabase.
-2. Set the allowed origins to the exact local or deployed site addresses.
-3. Start with `mvn spring-boot:run` after Maven is installed.
+1. Copy `.env.example` to a private `.env` file and enter the Supabase pooler details.
+2. Set `RESIHUB_ALLOWED_ORIGINS` to the exact site URL(s) that may call the API.
+3. Create a virtual environment, install `requirements.txt`, then run `uvicorn app.main:app --reload`.
 
-The service never accepts database credentials or a Supabase secret key from the frontend. Do not put either in JavaScript.
+The public endpoint is `GET /api/v1/public/properties`. Landlord endpoints require `Authorization: Bearer <Supabase access token>` and are available at `/api/v1/landlord/properties`.
 
-## Browser contract
-
-The browser calls `/api/v1/public/properties` for public listings. Signed-in landlord actions call `/api/v1/landlord/properties` with `Authorization: Bearer <Supabase access token>`. The API verifies the token, role, request shape, and property ownership before a database change is permitted.
+Health checks are exposed at `/actuator/health/readiness` for Render compatibility.
