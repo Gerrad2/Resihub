@@ -1,0 +1,18 @@
+# Secrets and local deployment settings
+.env
+.env.*
+!.env.example
+backend/.env
+backend/target/
+
+# Build outputs and local tooling
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+
+# Python artifacts
+__pycache__/
+*.pyc
+.venv/
+venv/

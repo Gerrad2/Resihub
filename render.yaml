@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: resihub-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /actuator/health/readiness
+    envVars:
+      - key: SUPABASE_DB_URL
+        sync: false
+      - key: SUPABASE_DB_USERNAME
+        sync: false
+      - key: SUPABASE_DB_PASSWORD
+        sync: false
+      - key: RESIHUB_ALLOWED_ORIGINS
+        sync: false
+      - key: RESIHUB_RATE_LIMIT
+        value: "120"
+      - key: SUPABASE_JWT_ISSUER
+        value: "https://clyksbctnzyreiujzinr.supabase.co/auth/v1"
+
+  - type: web
+    name: resihub-web
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    routes:
+      - type: rewrite
+        source: /
+        destination: /general/index.htm
