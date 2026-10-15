@@ -147,17 +147,19 @@ function getPageArea() {
 |--------------------------------------------------------------------------
 */
 
-const LAYOUT_LOADERS = Object.freeze({
+const methods = {
+    admin: "loadAdminLayout",
 
-    admin: "./core/loadAdmin.js",
+    general: "loadGeneralLayout",
 
-    general: "./core/loadGeneral.js",
+    landlord: "loadLandlordLayout",
 
-    landlord: "./core/loadLandlord.js",
+    student: "loadStudentLayout",
 
-    student: "./core/loadStudent.js",
+    system: "loadGeneralLayout",
 
-});
+    auth: "loadGeneralLayout"
+};
 
 
 /*
