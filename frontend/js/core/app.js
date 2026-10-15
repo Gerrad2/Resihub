@@ -12,6 +12,14 @@ const loaders = {
     student: "./loadStudent.js",
     system: "./loadGeneral.js",
 };
+const methods = {
+    admin: "loadAdminLayout",
+    general: "loadGeneralLayout",
+    landlord: "loadLandlordLayout",
+    student: "loadStudentLayout",
+    system: "loadGeneralLayout",
+    auth: "loadGeneralLayout"
+};
 
 function area() {
     const folder = location.pathname.replace(/\\/g, "/").split("/").filter(Boolean).at(-2);
@@ -104,7 +112,7 @@ function optimizePageDelivery() {
         });
     });
     if ("serviceWorker" in navigator && location.protocol === "https:") {
-        navigator.serviceWorker.register("../sw.js").catch(() => {});
+        navigator.serviceWorker.register("../sw.js").catch(() => { });
     }
 }
 
