@@ -120,477 +120,151 @@
 
 </head>
 
-<body>
+<body class="auth-page">
 
-  <div id="scrollProgress"></div>
+  <header class="auth-topbar">
+    <a class="auth-brand" href="../general/index.htm">
+      <span class="auth-logo"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+      <span class="auth-brand-name">ResiHub</span>
+      <span class="auth-tagline">Student Accommodation Made Easy</span>
+    </a>
+    <a class="auth-pill" href="student_login.htm"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to
+      Login</a>
+  </header>
 
-  <!-- Floating Background -->
+  <main class="auth-main">
+    <section class="auth-shell">
 
-  <div class="floating-shapes" aria-hidden="true">
-
-    <span class="shape shape-1"></span>
-    <span class="shape shape-2"></span>
-    <span class="shape shape-3"></span>
-    <span class="shape shape-4"></span>
-
-  </div>
-
-  <!-- =========================
-             HEADER
-    ========================== -->
-
-  <div id="header"></div>
-
-  <!-- =========================
-              MAIN
-    ========================== -->
-
-  <main>
-
-    <!-- Hero -->
-
-    <section class="auth-hero">
-
-      <div class="container">
-
-        <div class="auth-header">
-
-          <span class="page-badge floating-badge">
-
-            <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
-
-            Student Registration
-
-          </span>
-
-          <h1>
-
-            Create Your Student Account
-
-          </h1>
-
-          <p>
-
-            Join ResiHub and discover verified student accommodation across Nigeria.
-
-          </p>
-
+      <aside class="auth-aside">
+        <span class="auth-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Student
+          Registration</span>
+        <h1>Create Your<br>Student Account</h1>
+        <p class="auth-lead">Join ResiHub and discover verified student accommodation across Nigeria.</p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></span>
+            <div>
+              <h3>Verified Listings</h3>
+              <p>Access trusted and verified properties.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+            <div>
+              <h3>Save Favourites</h3>
+              <p>Keep track of your preferred accommodation.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+            <div>
+              <h3>Chat with Landlords</h3>
+              <p>Get quick responses and schedule viewings.</p>
+            </div>
+          </div>
         </div>
+      </aside>
 
-      </div>
+      <section class="auth-form-panel">
+        <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
+
+        <form id="studentSignupForm" autocomplete="off">
+          <div class="auth-grid">
+            <div class="auth-field full">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+234 801 234 5678" required>
+            </div>
+
+            <div class="auth-field">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="auth-field">
+              <label for="dateOfBirth">Date of Birth</label>
+              <input type="date" id="dateOfBirth" name="dateOfBirth">
+            </div>
+
+            <div class="auth-field">
+              <label for="password">Password</label>
+              <div class="password-field">
+                <input type="password" id="password" name="password" placeholder="Enter your password"
+                  autocomplete="current-password" required>
+
+                <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Show password"
+                  aria-pressed="false">
+                  <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+
+            <div class="auth-field">
+              <label for="confirmPassword">Confirm Password</label>
+              <div class="auth-password">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
+                  autocomplete="new-password" required>
+                <button type="button" class="auth-eye" data-password-toggle="confirmPassword"
+                  aria-label="Show password"><i class="fa-regular fa-eye" aria-hidden="true"></i></button>
+              </div>
+            </div>
+
+            <div class="auth-field full">
+              <label class="auth-check"><input type="checkbox" id="agreeTerms" name="agreeTerms" required> I agree to
+                the Terms and Privacy Policy</label>
+            </div>
+          </div>
+
+          <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" hidden>
+
+          <p class="form-message" id="signupMessage" role="status"></p>
+
+          <button type="submit" class="auth-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Create
+            Student Account</button>
+
+          <p class="auth-switch">Already have an account? <a href="student_login.htm">Login</a></p>
+        </form>
+      </section>
 
     </section>
-
-    <!-- Registration -->
-
-    <section class="auth-section">
-
-      <div class="container">
-
-        <div class="auth-wrapper">
-
-          <!-- Left Side -->
-
-          <aside class="auth-info">
-
-            <h2>
-
-              Why Join ResiHub?
-
-            </h2>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-shield-halved"></i>
-
-              <div>
-
-                <h4>Verified Listings</h4>
-
-                <p>
-
-                  Find trusted accommodation near your campus.
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-comments"></i>
-
-              <div>
-
-                <h4>Direct Chat</h4>
-
-                <p>
-
-                  Talk directly with landlords before making payments.
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-heart"></i>
-
-              <div>
-
-                <h4>Save Favorites</h4>
-
-                <p>
-
-                  Bookmark rooms you love.
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-calendar-check"></i>
-
-              <div>
-
-                <h4>Easy Booking</h4>
-
-                <p>
-
-                  Schedule inspections with just a few clicks.
-
-                </p>
-
-              </div>
-
-            </div>
-
-          </aside>
-
-          <!-- Signup Card -->
-
-          <section class="auth-card">
-
-            <!-- Social Login -->
-
-            <div class="social-auth">
-
-              <button id="googleSignupBtn" class="social-btn" type="button">
-
-                <i class="fa-brands fa-google"></i>
-
-                <span>
-
-                  Continue with Google
-
-                </span>
-
-              </button>
-
-              <button id="microsoftSignupBtn" class="social-btn" type="button">
-
-                <i class="fa-brands fa-microsoft"></i>
-
-                <span>
-
-                  Continue with Microsoft
-
-                </span>
-
-              </button>
-
-              <button id="appleSignupBtn" class="social-btn" type="button">
-
-                <i class="fa-brands fa-apple"></i>
-
-                <span>
-
-                  Continue with Apple
-
-                </span>
-
-              </button>
-
-            </div>
-
-            <div class="auth-divider">
-
-              <span>OR</span>
-
-            </div>
-
-            <div id="signupMessage" class="form-message"></div>
-
-            <!-- Registration Form -->
-
-            <form id="studentSignupForm" autocomplete="off">
-
-              <!-- Full Name -->
-
-              <div class="form-group">
-
-                <label for="fullName">
-
-                  Full Name
-
-                </label>
-
-                <input type="text" id="fullName" name="fullName" required>
-
-              </div>
-
-              <!-- Email -->
-
-              <div class="form-group">
-
-                <label for="email">
-
-                  Email Address
-
-                </label>
-
-                <input type="email" id="email" name="email" required>
-
-              </div>
-
-              <!-- Phone -->
-
-              <div class="form-group">
-
-                <label for="phone">
-
-                  Phone Number
-
-                </label>
-
-                <input type="tel" id="phone" name="phone" required>
-
-              </div>
-
-              <!-- Password -->
-
-              <div class="form-group">
-
-                <label for="password">
-
-                  Password
-
-                </label>
-
-                <div class="password-box">
-
-                  <input type="password" id="password" name="password" required>
-
-                  <button id="togglePassword" type="button">
-
-                    <i class="fa-solid fa-eye"></i>
-
-                  </button>
-
-                </div>
-
-                <div class="password-strength">
-
-                  <div id="passwordStrengthBar"></div>
-
-                  <p id="passwordStrengthText">
-
-                    Password Strength
-
-                  </p>
-
-                </div>
-
-              </div>
-
-              <!-- Confirm Password -->
-
-              <div class="form-group">
-
-                <label for="confirmPassword">
-
-                  Confirm Password
-
-                </label>
-
-                <div class="password-box">
-
-                  <input type="password" id="confirmPassword" name="confirmPassword" required>
-
-                  <button id="toggleConfirmPassword" type="button">
-
-                    <i class="fa-solid fa-eye"></i>
-
-                  </button>
-
-                </div>
-
-              </div>
-
-              <!-- Gender -->
-
-              <div class="form-group">
-
-                <label for="gender">
-
-                  Gender
-
-                </label>
-
-                <select id="gender" name="gender" required>
-
-                  <option value="">Select Gender</option>
-
-                  <option value="male">Male</option>
-
-                  <option value="female">Female</option>
-
-                  <option value="other">
-
-                    Prefer not to say
-
-                  </option>
-
-                </select>
-
-              </div>
-
-              <!-- DOB -->
-
-              <div class="form-group">
-
-                <label for="dateOfBirth">
-
-                  Date of Birth
-
-                  <small>(Optional)</small>
-
-                </label>
-
-                <input type="date" id="dateOfBirth" name="dateOfBirth">
-
-              </div>
-
-              <!-- Photo Upload -->
-
-              <div class="form-group">
-
-                <label for="profilePhoto">
-
-                  Profile Photo
-
-                  <small>(Optional)</small>
-
-                </label>
-
-                <div id="photoUploadBox" class="photo-upload-box">
-
-                  <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" hidden>
-
-                  <label for="profilePhoto" class="upload-content">
-
-                    <div id="photoPreview">
-
-                      <i class="fa-solid fa-user"></i>
-
-                    </div>
-
-                    <h4>
-
-                      Upload Profile Photo
-
-                    </h4>
-
-                    <p>
-
-                      Click or drag an image here
-
-                    </p>
-
-                    <small>
-
-                      JPG â€¢ PNG â€¢ WEBP (Max 5MB)
-
-                    </small>
-
-                  </label>
-
-                </div>
-
-              </div>
-
-              <!-- Terms -->
-
-              <div class="checkbox-group">
-
-                <label>
-
-                  <input id="agreeTerms" type="checkbox" required>
-
-                  I agree to the
-
-                  <a href="../general/terms.htm">
-
-                    Terms
-
-                  </a>
-
-                  and
-
-                  <a href="../general/privacy.htm">
-
-                    Privacy Policy
-
-                  </a>
-
-                </label>
-
-              </div>
-
-              <!-- Submit -->
-
-              <button class="btn-primary auth-submit" type="submit">
-
-                Create Account
-
-              </button>
-
-              <p class="auth-switch">
-
-                Already have an account?
-
-                <a href="../auth/student_login.htm">
-
-                  Login
-
-                </a>
-
-              </p>
-
-            </form>
-
-          </section>
-
-        </div>
-
-      </div>
-
-    </section>
-
   </main>
 
-  <div id="footer"></div>
+  <footer class="auth-strip">
+    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
+    <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
+    <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+  </footer>
 
-    <script type="module" src="../js/core/app.js"></script>
+  <!-- Global Scripts -->
+  <script type="module" src="../js/core/app.js"></script>
+  <script type="module">
+    import { initAuthPage } from "../js/pages/auth/auth-flow.js";
+    initAuthPage();
+
+    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const input = document.getElementById(button.dataset.passwordToggle);
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+        button.setAttribute("aria-pressed", String(input.type === "text"));
+      });
+    });
+  </script>
 </body>
 
 </html>
-
-
-

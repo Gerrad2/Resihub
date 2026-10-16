@@ -60,227 +60,114 @@
 
 </head>
 
-<body>
+<body class="auth-page">
 
-  <div id="scrollProgress"></div>
+  <header class="auth-topbar">
+    <a class="auth-brand" href="../general/index.htm">
+      <span class="auth-logo"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+      <span class="auth-brand-name">ResiHub</span>
+      <span class="auth-tagline">Student Accommodation Made Easy</span>
+    </a>
+    <a class="auth-pill" href="../general/index.htm"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to
+      Home</a>
+  </header>
 
-  <div class="floating-shapes" aria-hidden="true">
+  <main class="auth-main">
+    <section class="auth-shell">
 
-    <span class="shape shape-1"></span>
-
-    <span class="shape shape-2"></span>
-
-    <span class="shape shape-3"></span>
-
-    <span class="shape shape-4"></span>
-
-  </div>
-
-  <!-- ==========================
-         HEADER / NAVIGATION
-    =========================== -->
-
-  <div id="header"></div>
-
-  <!-- ==========================
-         MAIN CONTENT
-    =========================== -->
-
-  <main>
-
-    <!-- Hero -->
-    <section id="landlord-login-hero" class="auth-hero reveal fade-up">
-
-      <div class="container">
-
-        <div class="page-hero-content hero-content">
-
-          <span class="page-badge floating-badge">
-
-            <i class="fa-solid fa-house-user" aria-hidden="true"></i>
-
-            Landlord Login
-
-          </span>
-
-          <h1 class="hero-title">
-
-            Welcome Back
-
-          </h1>
-
-          <p class="hero-description">
-
-            Sign in to manage your property listings, respond to
-            enquiries, schedule inspections and grow your rental
-            business with ResiHub.
-
-          </p>
-
+      <aside class="auth-aside">
+        <span class="auth-badge"><i class="fa-solid fa-house" aria-hidden="true"></i> Landlord Login</span>
+        <h1>Welcome Back</h1>
+        <p class="auth-lead">Sign in to manage your property listings, respond to enquiries, schedule inspections and
+          grow your rental business with ResiHub.</p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></span>
+            <div>
+              <h3>Manage Listings</h3>
+              <p>Create, edit and publish room listings.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+            <div>
+              <h3>Reply to Students</h3>
+              <p>Answer enquiries in real time.</p>
+            </div>
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i></span>
+            <div>
+              <h3>Manage Bookings</h3>
+              <p>Approve inspection requests with ease.</p>
+            </div>
+          </div>
         </div>
+      </aside>
 
-      </div>
+      <section class="auth-form-panel">
+        <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-house-chimney"></i></div>
 
-    </section>
-
-    <!-- =========================================
-     AUTHENTICATION WRAPPER
-========================================= -->
-    <section class="auth-section reveal fade-up">
-
-      <div class="container">
-        <div class="auth-wrapper">
-
-          <!-- =========================================
-         LANDLORD LOGIN INFORMATION PANEL
-    ========================================= -->
-          <div class="auth-info">
-
-            <h2>Manage Your Listings Anywhere</h2>
-
-            <!-- Feature 1 -->
-            <div class="auth-feature">
-              <i class="fa-solid fa-house" aria-hidden="true"></i>
-
-              <div>
-                <h4>Manage Listings</h4>
-
-                <p>
-                  Create, edit and publish accommodation listings.
-                </p>
-              </div>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="auth-feature">
-              <i class="fa-solid fa-comments" aria-hidden="true"></i>
-
-              <div>
-                <h4>Reply to Students</h4>
-
-                <p>
-                  Answer enquiries in real time.
-                </p>
-              </div>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="auth-feature">
-              <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-
-              <div>
-                <h4>Manage Bookings</h4>
-
-                <p>
-                  Approve inspection requests with ease.
-                </p>
-              </div>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="auth-feature">
-              <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-
-              <div>
-                <h4>Track Performance</h4>
-
-                <p>
-                  Monitor listing views, favourites and student enquiries.
-                </p>
-              </div>
-            </div>
-
+        <form id="landlordLoginForm" novalidate>
+          <div class="auth-field">
+            <label for="landlordEmail">Email Address</label>
+            <input type="email" id="landlordEmail" name="landlordEmail" placeholder="landlord@resihub.com"
+              autocomplete="username" required>
           </div>
 
-          <!-- =========================================
-         LANDLORD LOGIN FORM
-    ========================================= -->
-          <div class="auth-card">
+          <div class="auth-field">
+            <label for="landlordPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="password" name="password" placeholder="Enter your password"
+                autocomplete="current-password" required>
 
-            <form id="landlordLoginForm" novalidate>
-
-              <h2>Landlord Login</h2>
-
-              <div class="form-group">
-
-                <label for="landlordEmail">
-                  Email Address
-                </label>
-
-                <input type="email" id="landlordEmail" name="landlordEmail" placeholder="Enter your email"
-                  autocomplete="username" required>
-
-              </div>
-
-              <div class="form-group">
-
-                <label for="landlordPassword">
-                  Password
-                </label>
-
-                <input type="password" id="landlordPassword" name="landlordPassword" placeholder="Enter your password"
-                  autocomplete="current-password" required>
-
-              </div>
-
-              <div class="remember-row">
-
-                <label for="rememberLandlord">
-
-                  <input type="checkbox" id="rememberLandlord" name="rememberLandlord">
-
-                  Remember Me
-
-                </label>
-
-                <a href="../auth/forgot_password.htm">
-                  Forgot Password?
-                </a>
-
-              </div>
-
-              <button type="submit" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
-
-                Login
-
+              <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Show password"
+                aria-pressed="false">
+                <i class="fa-regular fa-eye" aria-hidden="true"></i>
               </button>
-
-            </form>
-
-            <!-- Registration Link -->
-
-            <div class="auth-links">
-
-              <p>
-                Don't have a landlord account?
-              </p>
-
-              <a href="../auth/landlord_signup.htm">
-                Create Landlord Account
-              </a>
-
             </div>
-
+          </div>
           </div>
 
-        </div>
+          <div class="auth-row">
+            <label class="auth-check"><input type="checkbox" id="rememberLandlord" name="rememberLandlord"> Remember
+              me</label>
+            <a href="forgot_password.htm">Forgot password?</a>
+          </div>
 
-      </div>
+          <p class="form-message" id="landlordMessage" role="status"></p>
+
+          <button type="submit" class="auth-submit"><i class="fa-solid fa-arrow-right-to-bracket"
+              aria-hidden="true"></i> Login to Your Account</button>
+
+          <p class="auth-switch">Don't have an account? <a href="landlord_signup.htm">Sign up</a></p>
+        </form>
+      </section>
+
     </section>
   </main>
 
-  <div id="footer"></div>
+  <footer class="auth-strip">
+    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
+    <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
+    <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+  </footer>
 
-  <!-- =========================================
-         JAVASCRIPT
-    ========================================= -->
+  <!-- Global Scripts -->
+  <script type="module" src="../js/core/app.js"></script>
+  <script type="module">
+    import { initAuthPage } from "../js/pages/auth/auth-flow.js";
+    initAuthPage();
 
-    <script type="module" src="../js/core/app.js"></script>
+    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const input = document.getElementById(button.dataset.passwordToggle);
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+        button.setAttribute("aria-pressed", String(input.type === "text"));
+      });
+    });
+  </script>
 </body>
 
 </html>
-
-
-

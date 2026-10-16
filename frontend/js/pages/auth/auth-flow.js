@@ -107,17 +107,165 @@ function initResetPassword(form) {
     });
 }
 
+
 export function initAuthPage() {
+    initPasswordToggles();
+    initPasswordStrengthMeter();
     const pairs = [
-        ["studentSignupForm", "student", signUp], ["landlordSignupForm", "landlord", signUp],
-        ["studentLoginForm", "student", signIn], ["landlordLoginForm", "landlord", signIn], ["adminLoginForm", "admin", signIn],
+        ["studentSignupForm", "student", signUp],
+        ["landlordSignupForm", "landlord", signUp],
+        ["studentLoginForm", "student", signIn],
+        ["landlordLoginForm", "landlord", signIn],
+        ["adminLoginForm", "admin", signIn],
     ];
+
     pairs.forEach(([id, role, handler]) => {
         const form = document.getElementById(id);
-        form?.addEventListener("submit", (event) => { event.preventDefault(); handler(form, role); });
+
+        form?.addEventListener("submit", (event) => {
+            event.preventDefault();
+            handler(form, role);
+        });
     });
+
     const forgot = document.getElementById("forgotPasswordForm");
     const reset = document.getElementById("resetPasswordForm");
+
     if (forgot) initForgotPassword(forgot);
     if (reset) initResetPassword(reset);
+}
+
+
+/* ==========================================
+   ResiHub Auth UI Enhancements
+   Safe additions to the existing auth-flow.js
+   ========================================== */
+
+function initPasswordToggles() {
+    document.querySelectorAll("[data-password-toggle]").forEach(button => {
+        if (button.dataset.authToggleReady === "true") return;
+        button.dataset.authToggleReady = "true";
+
+        button.addEventListener("click", () => {
+            const input = document.getElementById(
+                button.dataset.passwordToggle
+            );
+
+            if (!input) return;
+
+            const show = input.type === "password";
+            input.type = show ? "text" : "password";
+
+            button.setAttribute("aria-pressed", String(show));
+            button.setAttribute(
+                "aria-label",
+                show ? "Hide password" : "Show password"
+            );
+
+            const icon = button.querySelector("i");
+
+            if (icon) {
+                icon.classList.toggle("fa-eye", !show);
+                icon.classList.toggle("fa-eye-slash", show);
+            }
+        });
+    });
+}
+
+function initPasswordStrengthMeter() {
+    const password = document.getElementById("password");
+
+    if (!password) return;
+
+    const form = password.closest("form");
+
+    if (!form || !/SignupForm/i.test(form.id)) return;
+
+    const field = password.closest(".auth-field, .form-group");
+
+    if (!field || field.querySelector(".auth-strength-meter")) return;
+
+    const meter = document.createElement("div");
+    meter.className = "auth-strength-meter";
+
+    const bar = document.createElement("div");
+    bar.className = "auth-strength-bar";
+
+    const label = document.createElement("small");
+    label.className = "auth-strength-label";
+    label.textContent = "Password strength";
+
+    meter.append(bar, label);
+    password.insertAdjacentElement("afterend", meter);
+
+    password.addEventListener("input", () => {
+        const value = password.value;
+
+        let score = 0;
+
+        if (value.length >= 8) score++;
+        if (/[a-z]/.test(value) && /[A-Z]/.test(value)) score++;
+        if (/\d/.test(value)) score++;
+        if (/[^A-Za-z0-9]/.test(value)) score++;
+
+        const levels = [
+            ["Enter a password", "0%", ""],
+            ["Weak", "25%", "#ff647c"],
+            ["Fair", "50%", "#ffbf47"],
+            ["Good", "75%", "#38bdf8"],
+            ["Strong", "100%", "#38e6a5"]
+        ];
+
+        const result = value
+            ? levels[Math.max(1, score)]
+            : levels[0];
+
+        label.textContent = result[0];
+        bar.style.width = result[1];
+        bar.style.background = result[2];
+    });
+}
+document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+    button.addEventListener("click", () => {
+        const input = document.getElementById(button.dataset.passwordToggle);
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+        button.setAttribute("aria-pressed", String(input.type === "text"));
+    });
+});
+
+function initPasswordToggles() {
+    document.querySelectorAll("[data-password-toggle]").forEach(button => {
+        if (button.dataset.authToggleReady === "true") return;
+        button.dataset.authToggleReady = "true";
+
+        button.addEventListener("click", () => {
+            const input = document.getElementById(
+                button.dataset.passwordToggle
+            );
+
+            if (!input) return;
+
+            const showPassword = input.type === "password";
+
+            input.type = showPassword ? "text" : "password";
+
+            button.setAttribute(
+                "aria-label",
+                showPassword ? "Hide password" : "Show password"
+            );
+
+            button.setAttribute(
+                "aria-pressed",
+                String(showPassword)
+            );
+
+            const icon = button.querySelector("i");
+
+            if (icon) {
+                icon.classList.toggle("fa-eye", !showPassword);
+                icon.classList.toggle("fa-eye-slash", showPassword);
+            }
+        });
+    });
 }

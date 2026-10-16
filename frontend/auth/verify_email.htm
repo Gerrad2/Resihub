@@ -99,256 +99,86 @@
 
 <body>
 
-    <!-- Scroll Progress -->
-    <div id="scrollProgress"></div>
+    <header class="rh-topbar">
+        <a href="../general/index.htm" class="rh-brand">
+            <span class="rh-logo"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+            <span class="rh-name">ResiHub</span>
+            <span class="rh-tagline">Student Accommodation Made Easy</span>
+        </a>
+        <a href="student_login.htm" class="rh-pill">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Back to Login
+        </a>
+    </header>
 
-    <!-- Floating Background Shapes -->
-    <div class="floating-shapes" aria-hidden="true">
+    <main class="rh-main">
 
-        <span class="shape shape-1"></span>
+        <div class="rh-deco rh-deco-plane" aria-hidden="true">
+            <i class="fa-solid fa-paper-plane"></i>
+        </div>
 
-        <span class="shape shape-2"></span>
+        <div class="rh-deco rh-deco-card" aria-hidden="true">
+            Your next chapter starts here
+            <i class="fa-solid fa-arrow-right"></i>
+        </div>
 
-        <span class="shape shape-3"></span>
+        <section class="rh-card" aria-labelledby="verifyHeading">
 
-        <span class="shape shape-4"></span>
-
-    </div>
-
-    <!-- =========================
-         HEADER
-    ========================== -->
-
-    <div id="header"></div>
-
-    <!-- =========================
-         MAIN
-    ========================== -->
-
-    <main>
-
-        <!-- Hero -->
-
-        <section class="page-hero">
-
-            <div class="container">
-
-                <section class="auth-hero reveal fade-up">
-
-                    <span class="page-badge floating-badge">
-
-                        <i class="fa-solid fa-envelope-circle-check" aria-hidden="true"></i>
-
-                        Email Verification
-
-                    </span>
-
-                    <h1>
-
-                        Verify Your Email
-
-                    </h1>
-
-                    <p>
-
-                        We've sent a verification link to your email address.
-                        Verify your account to unlock all ResiHub features.
-
-                    </p>
-
-                </section>
-
+            <div class="rh-envelope" aria-hidden="true">
+                <i class="fa-solid fa-envelope"></i>
+                <span class="rh-check"><i class="fa-solid fa-check"></i></span>
             </div>
 
-        </section>
-
-        <!-- Verification -->
-
-        <section class="auth-section">
-
-            <div class="container">
-
-                <div class="auth-wrapper">
-
-                    <!-- Information -->
-
-                    <aside class="auth-info">
-
-                        <h2>
-
-                            Why Verify Your Email?
-
-                        </h2>
-
-                        <div class="auth-feature">
-
-                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-
-                            <div>
-
-                                <h3>
-
-                                    Secure Your Account
-
-                                </h3>
-
-                                <p>
-
-                                    Verification prevents unauthorized access.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="auth-feature">
-
-                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-
-                            <div>
-
-                                <h3>
-
-                                    Unlock Every Feature
-
-                                </h3>
-
-                                <p>
-
-                                    Access bookings, favourites, messaging and more.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="auth-feature">
-
-                            <i class="fa-solid fa-headset" aria-hidden="true"></i>
-
-                            <div>
-
-                                <h3>
-
-                                    Need Help?
-
-                                </h3>
-
-                                <p>
-
-                                    Resend the email or contact our support team.
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    </aside>
-
-                    <!-- Verification Card -->
-
-                    <section class="auth-card">
-
-                        <div class="verify-card">
-
-                            <i class="fa-solid fa-envelope-open-text verify-icon" aria-hidden="true"></i>
-
-                            <h2>
-
-                                Check Your Inbox
-
-                            </h2>
-
-                            <p>
-
-                                A verification email has been sent to
-
-                                <strong id="verificationEmail"></strong>
-
-                            </p>
-
-                            <button id="resendVerificationBtn" type="button" class="btn-primary">
-
-                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-
-                                Resend Verification Email
-
-                            </button>
-
-                            <a href="../auth/student_login.htm" class="btn-outline">
-
-                                Back to Login
-
-                            </a>
-
-                        </div>
-
-                        <div id="verificationSent" class="success-card hidden">
-
-                            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-
-                            <h2>
-
-                                Email Sent Successfully
-
-                            </h2>
-
-                            <p>
-
-                                A new verification email has been sent.
-
-                            </p>
-
-                        </div>
-
-                    </section>
-
+            <h1 id="verifyHeading">Check Your <span>Inbox</span></h1>
+
+            <p id="verifyIntro" class="rh-intro">
+                We've sent a verification link to your email address.<br>
+                Confirm your email to unlock your ResiHub account.
+            </p>
+
+            <div class="rh-email">
+                <span class="rh-email-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+                <div>
+                    <small>Verification email sent to</small>
+                    <strong id="verificationEmail"></strong>
                 </div>
-
             </div>
 
-        </section>
+            <button id="resendVerificationBtn" type="button" class="rh-btn">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                Resend Verification Email
+            </button>
 
-        <!-- Help -->
+            <p id="resendCountdown" class="rh-timer" hidden>
+                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                You can resend in <strong id="resendTimer">02:00</strong>
+            </p>
 
-        <section class="contact-card-section">
-
-            <div class="container">
-
-                <div class="contact-card">
-
-                    <h2>
-
-                        Still Having Problems?
-
-                    </h2>
-
-                    <p>
-
-                        If you're unable to verify your email, our support team is ready to help.
-
-                    </p>
-
-                    <a href="../general/contact.htm" class="btn-primary">
-
-                        Contact Support
-
-                    </a>
-
-                </div>
-
+            <div id="verificationSent" class="rh-success hidden">
+                A new verification email has been sent.
             </div>
+
+            <a href="student_login.htm" class="rh-link">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                Back to Login
+            </a>
+
+            <hr class="rh-divider">
+
+            <p class="rh-help">
+                <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                Didn't receive the email? Check your spam folder or try resending the email.
+            </p>
 
         </section>
 
     </main>
 
-    <div id="footer"></div>
-
-    <!-- JavaScript -->
+    <footer class="rh-footer">
+        <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
+        <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
+        <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+    </footer>
 
     <script type="module" src="../js/core/app.js"></script>
     <script type="module" src="../js/pages/auth/verify_email.js"></script>

@@ -103,279 +103,113 @@
 
 </head>
 
-<body>
+<body class="auth-page">
 
-  <div id="scrollProgress"></div>
+  <header class="auth-topbar">
+    <a class="auth-brand" href="../general/index.htm">
+      <span class="auth-logo"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+      <span class="auth-brand-name">ResiHub</span>
+      <span class="auth-tagline">Student Accommodation Made Easy</span>
+    </a>
+    <a class="auth-pill" href="../general/index.htm"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to
+      Home</a>
+  </header>
 
-  <div class="floating-shapes" aria-hidden="true">
+  <main class="auth-main">
+    <section class="auth-shell">
 
-    <span class="shape shape-1"></span>
-    <span class="shape shape-2"></span>
-    <span class="shape shape-3"></span>
-    <span class="shape shape-4"></span>
-
-  </div>
-
-  <!-- =========================
-            HEADER
-    ========================== -->
-
-  <div id="header"></div>
-
-  <!-- =========================
-             MAIN
-    ========================== -->
-
-  <main>
-
-    <!-- Hero -->
-
-    <section class="page-hero">
-
-      <div class="container">
-
-        <section class="auth-hero reveal fade-up" aria-labelledby="loginTitle">
-
-          <span class="page-badge floating-badge">
-
-            <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
-
-            Student Login
-
-          </span>
-
-          <h1 id="loginTitle">
-
-            Welcome Back
-
-          </h1>
-
-          <p>
-
-            Sign in to continue browsing accommodation,
-            chatting with landlords and managing your saved properties.
-
-          </p>
-
-        </section>
-
-      </div>
-
-    </section>
-
-    <!-- Login -->
-
-    <section class="auth-section">
-
-      <div class="container">
-
-        <div class="auth-wrapper">
-
-          <!-- Left Information -->
-
-          <aside class="auth-info">
-
-            <h2>
-
-              Continue Your Journey
-
-            </h2>
-
-            <p>
-
-              Access thousands of verified student accommodations across Nigeria.
-
-            </p>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-house"></i>
-
-              <div>
-
-                <h4>Browse Listings</h4>
-
-                <p>
-
-                  Thousands of verified rooms await you.
-
-                </p>
-
-              </div>
-
+      <aside class="auth-aside">
+        <span class="auth-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Student Login</span>
+        <h1>Welcome Back</h1>
+        <p class="auth-lead">Sign in to find verified student accommodation, save favourites and message landlords.</p>
+        <div class="auth-features">
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></span>
+            <div>
+              <h3>Verified Listings</h3>
+              <p>Browse accommodation that has been checked.</p>
             </div>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-heart"></i>
-
-              <div>
-
-                <h4>Your Saved Properties</h4>
-
-                <p>
-
-                  Continue where you stopped searching.
-
-                </p>
-
-              </div>
-
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+            <div>
+              <h3>Save Favourites</h3>
+              <p>Keep track of the places you like.</p>
             </div>
-
-            <div class="auth-feature">
-
-              <i class="fa-solid fa-comments"></i>
-
-              <div>
-
-                <h4>Chat with Landlords</h4>
-
-                <p>
-
-                  Receive replies instantly.
-
-                </p>
-
-              </div>
-
+          </div>
+          <div class="auth-feature">
+            <span class="auth-feature-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+            <div>
+              <h3>Chat with Landlords</h3>
+              <p>Get quick answers and arrange viewings.</p>
             </div>
-
-          </aside>
-
-          <!-- Login Card -->
-
-          <section class="auth-card">
-
-            <div class="social-auth">
-
-              <button id="googleLoginBtn" class="social-btn" type="button">
-
-                <i class="fa-brands fa-google"></i>
-
-                Continue with Google
-
-              </button>
-
-              <button id="microsoftLoginBtn" class="social-btn" type="button">
-
-                <i class="fa-brands fa-microsoft"></i>
-
-                Continue with Microsoft
-
-              </button>
-
-              <button id="appleLoginBtn" class="social-btn" type="button">
-
-                <i class="fa-brands fa-apple"></i>
-
-                Continue with Apple
-
-              </button>
-
-            </div>
-
-            <div class="auth-divider">
-
-              <span>OR</span>
-
-            </div>
-
-            <form id="studentLoginForm" autocomplete="on">
-
-              <div id="loginMessage" class="form-message"></div>
-
-              <div class="form-group">
-
-                <label for="loginEmail">
-
-                  Email Address
-
-                </label>
-
-                <input type="email" id="loginEmail" name="email" autocomplete="email" required>
-
-              </div>
-
-              <div class="form-group">
-
-                <label for="loginPassword">
-
-                  Password
-
-                </label>
-
-                <div class="password-input">
-
-                  <input type="password" id="loginPassword" name="password" autocomplete="current-password" required>
-
-                  <button id="toggleLoginPassword" class="password-toggle" type="button">
-
-                    <i class="fa-solid fa-eye"></i>
-
-                  </button>
-
-                </div>
-
-              </div>
-
-              <div class="login-options">
-
-                <label>
-
-                  <input id="rememberMe" type="checkbox">
-
-                  Remember Me
-
-                </label>
-
-                <a href="../auth/forgot_password.htm">
-
-                  Forgot Password?
-
-                </a>
-
-              </div>
-
-              <button id="loginBtn" class="btn-primary auth-submit" type="submit">
-
-                Login
-
-              </button>
-
-            </form>
-
-            <p class="auth-switch">
-
-              Don't have an account?
-
-              <a href="../auth/student_signup.htm">
-
-                Create One
-
-              </a>
-
-            </p>
-
-          </section>
-
+          </div>
         </div>
+      </aside>
 
-      </div>
+      <section class="auth-form-panel">
+        <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
+
+        <form id="studentLoginForm" autocomplete="on">
+          <div class="auth-field">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" name="email" placeholder="you@example.com" autocomplete="email"
+              required>
+          </div>
+
+          <div class="auth-field">
+            <label for="loginPassword">Password</label>
+            <div class="password-field">
+              <input type="password" id="password" name="password" placeholder="Enter your password"
+                autocomplete="current-password" required>
+
+              <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Show password"
+                aria-pressed="false">
+                <i class="fa-regular fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          </div>
+
+          <div class="auth-row">
+            <label class="auth-check"><input type="checkbox" id="rememberMe"> Remember me</label>
+            <a href="forgot_password.htm">Forgot password?</a>
+          </div>
+
+          <p class="form-message" id="loginMessage" role="status"></p>
+
+          <button type="submit" class="auth-submit" id="loginBtn"><i class="fa-solid fa-arrow-right-to-bracket"
+              aria-hidden="true"></i> Login to Your Account</button>
+
+          <p class="auth-switch">Don't have an account? <a href="student_signup.htm">Sign up</a></p>
+        </form>
+      </section>
 
     </section>
-
   </main>
 
+  <footer class="auth-strip">
+    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
+    <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
+    <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+  </footer>
 
-  <div id="footer"></div>
+  <!-- Global Scripts -->
+  <script type="module" src="../js/core/app.js"></script>
 
-  <!-- Student Login Script -->
+  <script type="module">
+    import { initAuthPage } from "../js/pages/auth/auth-flow.js";
+    initAuthPage();
 
-    <script type="module" src="../js/core/app.js"></script>
+    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const input = document.getElementById(button.dataset.passwordToggle);
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+        button.setAttribute("aria-pressed", String(input.type === "text"));
+      });
+    });
+  </script>
 </body>
 
 </html>
-
-
-
