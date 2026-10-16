@@ -25,8 +25,8 @@ services:
     name: resihub-web
     runtime: static
     buildCommand: ""
-    staticPublishPath: .
+    staticPublishPath: ./frontend
     routes:
-      - type: rewrite
+      - type: redirect
         source: /
         destination: /general/index.htm
