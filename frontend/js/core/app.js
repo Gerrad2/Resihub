@@ -22,6 +22,9 @@ const methods = {
 };
 
 function area() {
+    const declared = document.documentElement.dataset.area;
+    if (loaders[declared]) return declared;
+    if (location.pathname === "/" || location.pathname === "") return "general";
     const folder = location.pathname.replace(/\\/g, "/").split("/").filter(Boolean).at(-2);
     return loaders[folder] ? folder : "auth";
 }
