@@ -25,6 +25,20 @@ const LOGIN_DESTINATIONS = {
 
 const PENDING_EMAIL_KEY = "resihub:pendingEmail";
 
+function requestedRole() {
+    const role = new URLSearchParams(window.location.search).get("role");
+    return Object.hasOwn(LOGIN_DESTINATIONS, role) ? role : null;
+}
+
+function initRoleAwareLoginLinks() {
+    const destination = LOGIN_DESTINATIONS[requestedRole()];
+    if (!destination) return;
+
+    document.querySelectorAll("[data-auth-back-login]").forEach((link) => {
+        link.href = destination;
+    });
+}
+
 async function getUserRole() {
     const { data: sessionData, error: sessionError } =
         await supabase.auth.getSession();
@@ -662,6 +676,7 @@ function attachSubmit(formId, handler) {
 }
 
 export function initAuthPage() {
+    initRoleAwareLoginLinks();
     initPasswordToggles();
     initPasswordStrengthMeter();
 
