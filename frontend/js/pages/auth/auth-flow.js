@@ -475,8 +475,8 @@ async function requestPasswordReset(form) {
 ========================================= */
 
 async function updatePassword(form) {
-    const password = getPassword(form, "password");
-    const confirmPassword = getPassword(form, "confirmPassword");
+    const password = getPassword(form, "Password");
+    const confirmPassword = getPassword(form, "ConfirmPassword");
 
     if (!passwordIsStrong(password)) {
         showMessage(
