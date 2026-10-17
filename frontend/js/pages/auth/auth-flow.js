@@ -198,36 +198,24 @@ function initPasswordStrengthMeter() {
 }
 
 function initPasswordToggles() {
-    document.querySelectorAll("[data-password-toggle]").forEach(button => {
-        if (button.dataset.authToggleReady === "true") return;
-        button.dataset.authToggleReady = "true";
+    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
+        if (button.dataset.toggleReady === "true") return;
+        button.dataset.toggleReady = "true";
 
         button.addEventListener("click", () => {
-            const input = document.getElementById(
-                button.dataset.passwordToggle
-            );
-
+            const input = document.getElementById(button.dataset.passwordToggle);
             if (!input) return;
 
-            const showPassword = input.type === "password";
+            const showing = input.type === "password";
+            input.type = showing ? "text" : "password";
 
-            input.type = showPassword ? "text" : "password";
-
-            button.setAttribute(
-                "aria-label",
-                showPassword ? "Hide password" : "Show password"
-            );
-
-            button.setAttribute(
-                "aria-pressed",
-                String(showPassword)
-            );
+            button.setAttribute("aria-pressed", String(showing));
+            button.setAttribute("aria-label", showing ? "Hide password" : "Show password");
 
             const icon = button.querySelector("i");
-
             if (icon) {
-                icon.classList.toggle("fa-eye", !showPassword);
-                icon.classList.toggle("fa-eye-slash", showPassword);
+                icon.classList.toggle("fa-eye", !showing);
+                icon.classList.toggle("fa-eye-slash", showing);
             }
         });
     });
