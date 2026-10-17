@@ -169,7 +169,6 @@
               </button>
             </div>
           </div>
-          </div>
 
           <div class="auth-row">
             <label class="auth-check"><input type="checkbox" id="rememberMe"> Remember me</label>
@@ -199,16 +198,6 @@
 
   <script type="module">
     import { initAuthPage } from "../js/pages/auth/auth-flow.js";
-    initAuthPage();
-
-    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const input = document.getElementById(button.dataset.passwordToggle);
-        if (!input) return;
-        input.type = input.type === "password" ? "text" : "password";
-        button.setAttribute("aria-pressed", String(input.type === "text"));
-      });
-    });
   </script>
 </body>
 

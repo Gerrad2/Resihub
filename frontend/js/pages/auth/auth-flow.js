@@ -141,36 +141,7 @@ export function initAuthPage() {
    Safe additions to the existing auth-flow.js
    ========================================== */
 
-function initPasswordToggles() {
-    document.querySelectorAll("[data-password-toggle]").forEach(button => {
-        if (button.dataset.authToggleReady === "true") return;
-        button.dataset.authToggleReady = "true";
 
-        button.addEventListener("click", () => {
-            const input = document.getElementById(
-                button.dataset.passwordToggle
-            );
-
-            if (!input) return;
-
-            const show = input.type === "password";
-            input.type = show ? "text" : "password";
-
-            button.setAttribute("aria-pressed", String(show));
-            button.setAttribute(
-                "aria-label",
-                show ? "Hide password" : "Show password"
-            );
-
-            const icon = button.querySelector("i");
-
-            if (icon) {
-                icon.classList.toggle("fa-eye", !show);
-                icon.classList.toggle("fa-eye-slash", show);
-            }
-        });
-    });
-}
 
 function initPasswordStrengthMeter() {
     const password = document.getElementById("password");
@@ -225,14 +196,6 @@ function initPasswordStrengthMeter() {
         bar.style.background = result[2];
     });
 }
-document.querySelectorAll("[data-password-toggle]").forEach((button) => {
-    button.addEventListener("click", () => {
-        const input = document.getElementById(button.dataset.passwordToggle);
-        if (!input) return;
-        input.type = input.type === "password" ? "text" : "password";
-        button.setAttribute("aria-pressed", String(input.type === "text"));
-    });
-});
 
 function initPasswordToggles() {
     document.querySelectorAll("[data-password-toggle]").forEach(button => {

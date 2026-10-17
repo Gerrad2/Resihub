@@ -228,16 +228,15 @@
               <label class="auth-check"><input type="checkbox" id="agreeTerms" name="agreeTerms" required> I agree to
                 the Terms and Privacy Policy</label>
             </div>
-          </div>
 
-          <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" hidden>
+            <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" hidden>
 
-          <p class="form-message" id="signupMessage" role="status"></p>
+            <p class="form-message" id="signupMessage" role="status"></p>
 
-          <button type="submit" class="auth-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Create
-            Student Account</button>
+            <button type="submit" class="auth-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Create
+              Student Account</button>
 
-          <p class="auth-switch">Already have an account? <a href="student_login.htm">Login</a></p>
+            <p class="auth-switch">Already have an account? <a href="student_login.htm">Login</a></p>
         </form>
       </section>
 
@@ -254,16 +253,6 @@
   <script type="module" src="../js/core/app.js"></script>
   <script type="module">
     import { initAuthPage } from "../js/pages/auth/auth-flow.js";
-    initAuthPage();
-
-    document.querySelectorAll("[data-password-toggle]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const input = document.getElementById(button.dataset.passwordToggle);
-        if (!input) return;
-        input.type = input.type === "password" ? "text" : "password";
-        button.setAttribute("aria-pressed", String(input.type === "text"));
-      });
-    });
   </script>
 </body>
 
