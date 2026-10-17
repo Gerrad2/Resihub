@@ -23,6 +23,8 @@ const LOGIN_DESTINATIONS = {
     admin: "./admin_login.htm"
 };
 
+const PENDING_EMAIL_KEY = "resihub:pendingEmail";
+
 async function getUserRole() {
     const { data: sessionData, error: sessionError } =
         await supabase.auth.getSession();
@@ -63,16 +65,40 @@ async function redirectToRoleLogin() {
     window.location.replace(destination);
 }
 
+async function redirectAuthenticatedUser() {
+    const role = await getUserRole();
+    const destination = DESTINATIONS[role];
+
+    if (destination) {
+        window.location.replace(destination);
+        return true;
+    }
+
+    return false;
+}
+
 
 /* =========================================
    GENERAL HELPERS
 ========================================= */
 
 function getField(form, name) {
-    return (
+    const field = (
         form.querySelector(`[name="${name}"]`) ||
         form.querySelector(`#${CSS.escape(name)}`)
     );
+
+    if (field) return field;
+
+    if (name === "email") {
+        return form.querySelector('input[type="email"]');
+    }
+
+    if (name === "password") {
+        return form.querySelector('input[type="password"]');
+    }
+
+    return null;
 }
 
 function getValue(form, name) {
@@ -390,10 +416,20 @@ async function signUp(form, role) {
                 "Account created successfully. You can now sign in."
             );
         } else {
+            try {
+                sessionStorage.setItem(PENDING_EMAIL_KEY, email);
+            } catch {
+                /* Storage is optional; verification still works through Supabase. */
+            }
+
             showMessage(
                 form,
-                "Account created. Check your email to verify your address before signing in."
+                "Account created. Taking you to email verification..."
             );
+
+            window.setTimeout(() => {
+                window.location.assign("./verify_email.htm");
+            }, 700);
         }
 
         form.reset();
@@ -512,6 +548,8 @@ async function requestPasswordReset(form) {
             form,
             "If an account exists for that email, a password reset link will be sent."
         );
+
+        form.querySelector('button[type="submit"]')?.focus();
     } catch (error) {
         console.error("Password reset request error:", error);
         showMessage(form, getSupabaseError(error), true);
@@ -527,7 +565,9 @@ async function requestPasswordReset(form) {
 
 async function updatePassword(form) {
     const password = getPassword(form, "password");
-    const confirmPassword = getPassword(form, "ConfirmPassword");
+    const confirmPassword =
+        getPassword(form, "ConfirmPassword") ||
+        getPassword(form, "confirmNewPassword");
 
     if (!passwordIsStrong(password)) {
         showMessage(
@@ -571,10 +611,6 @@ async function updatePassword(form) {
             throw new Error("We couldn't identify your account role. Please try again.");
         }
 
-        const role =
-            profile?.role ||
-            user.user_metadata?.role;
-
         // Update the password in Supabase.
         const { error: updateError } =
             await supabase.auth.updateUser({ password });
@@ -582,8 +618,6 @@ async function updatePassword(form) {
         if (updateError) throw updateError;
 
         // Clear the form and show feedback.
-        form.reset();
-
         showMessage(form, "Password updated successfully. Redirecting to login...");
 
         form.reset();
@@ -593,21 +627,9 @@ async function updatePassword(form) {
                 await redirectToRoleLogin();
             } catch (error) {
                 console.error("Could not determine login destination:", error);
-                window.location.replace("./login.htm");
+                window.location.replace("./student_login.htm");
             }
         }, 1200);
-
-
-        if (destinations[role]) {
-            window.setTimeout(() => {
-                window.location.replace(destinations[role]);
-            }, 1500);
-        } else {
-            showMessage(
-                form,
-                "Password updated successfully. Please choose your account type to log in."
-            );
-        }
     } catch (error) {
         console.error("Password reset error:", error);
 
@@ -665,6 +687,19 @@ export function initAuthPage() {
 
     attachSubmit("forgotPasswordForm", requestPasswordReset);
     attachSubmit("resetPasswordForm", updatePassword);
+
+    const page = location.pathname.split("/").pop()?.toLowerCase();
+    const loginPages = new Set([
+        "student_login.htm",
+        "landlord_login.htm",
+        "admin_login.htm",
+    ]);
+
+    if (loginPages.has(page)) {
+        redirectAuthenticatedUser().catch((error) => {
+            console.warn("ResiHub could not check the existing session.", error);
+        });
+    }
 
 
     const resetForm = document.getElementById("resetPasswordForm");

@@ -4,11 +4,22 @@ const PENDING_EMAIL_KEY = "resihub:pendingEmail";
 const RESEND_SECONDS = 120;
 const VERIFY_URL = new URL("verify_email.htm", window.location.href).href;
 
+const DESTINATIONS = {
+    student: "../student/dashboard_student.htm",
+    landlord: "../landlord/dashboard_landlord.htm",
+    admin: "../admin/admin_dashboard.htm",
+};
+
 let cooldownTimer = null;
+let redirectScheduled = false;
 
 function readPendingEmail() {
     try {
-        return localStorage.getItem(PENDING_EMAIL_KEY) || "";
+        return (
+            sessionStorage.getItem(PENDING_EMAIL_KEY) ||
+            localStorage.getItem(PENDING_EMAIL_KEY) ||
+            ""
+        );
     } catch {
         return "";
     }
@@ -16,6 +27,7 @@ function readPendingEmail() {
 
 function clearPendingEmail() {
     try {
+        sessionStorage.removeItem(PENDING_EMAIL_KEY);
         localStorage.removeItem(PENDING_EMAIL_KEY);
     } catch {
         /* storage unavailable */
@@ -65,6 +77,32 @@ function showVerified() {
     clearPendingEmail();
 }
 
+async function continueAfterVerification(user) {
+    if (redirectScheduled) return;
+
+    const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+    if (error) throw error;
+
+    const role = profile?.role || user.user_metadata?.role;
+    const destination = DESTINATIONS[role];
+
+    if (!destination) return;
+
+    redirectScheduled = true;
+
+    document.getElementById("verifyIntro").textContent =
+        "Your email address has been confirmed. Redirecting to your ResiHub account...";
+
+    window.setTimeout(() => {
+        window.location.replace(destination);
+    }, 1000);
+}
+
 async function resend() {
     const email = readPendingEmail();
     const button = document.getElementById("resendVerificationBtn");
@@ -99,10 +137,24 @@ export async function init() {
 
     document.getElementById("resendVerificationBtn")?.addEventListener("click", resend);
 
+    const handleVerifiedSession = async (session) => {
+        const user = session?.user;
+        if (!user?.email_confirmed_at) return;
+
+        showVerified();
+        await continueAfterVerification(user);
+    };
+
     try {
         const { data } = await supabase.auth.getSession();
-        if (data?.session?.user?.email_confirmed_at) showVerified();
+        await handleVerifiedSession(data?.session);
     } catch (error) {
         console.error("ResiHub could not check the verification status.", error);
     }
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+        handleVerifiedSession(session).catch((error) => {
+            console.error("ResiHub could not continue after verification.", error);
+        });
+    });
 }

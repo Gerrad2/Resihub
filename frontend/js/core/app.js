@@ -102,6 +102,42 @@ async function protectPrivateArea() {
     return true;
 }
 
+async function getSessionDestination() {
+    const { getCurrentUser, getProfile } = await import("../api.js");
+    const userResult = await getCurrentUser();
+
+    if (!userResult.success || !userResult.data) return null;
+
+    const profileResult = await getProfile(userResult.data.id);
+    const destinations = {
+        student: "../student/dashboard_student.htm",
+        landlord: "../landlord/dashboard_landlord.htm",
+        admin: "../admin/admin_dashboard.htm",
+    };
+
+    return destinations[profileResult.data?.role] || null;
+}
+
+function initSessionAwareAccountLinks() {
+    document.querySelectorAll("a.profile-btn[href*='_login.htm']").forEach((link) => {
+        if (link.dataset.sessionRouteReady === "true") return;
+        link.dataset.sessionRouteReady = "true";
+
+        link.addEventListener("click", async (event) => {
+            event.preventDefault();
+            link.setAttribute("aria-busy", "true");
+
+            try {
+                const destination = await getSessionDestination();
+                location.assign(destination || link.href);
+            } catch (error) {
+                console.warn("ResiHub could not check the current session.", error);
+                location.assign(link.href);
+            }
+        });
+    });
+}
+
 function optimizePageDelivery() {
     document.querySelectorAll("img:not([loading])").forEach((image) => {
         image.loading = "lazy";
@@ -124,6 +160,7 @@ async function boot() {
     initAccessibility();
     if (!(await protectPrivateArea())) return;
     try { await loadLayout(); } catch (error) { console.error("ResiHub layout failed to load.", error); }
+    initSessionAwareAccountLinks();
     initNavigation();
     initModal();
     initAnimations();
