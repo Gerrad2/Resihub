@@ -14,6 +14,56 @@ const DESTINATIONS = {
 const EMAIL_REDIRECT_URL =
     "https://resihub-web-vnxe.onrender.com/auth/verify_email.htm";
 
+
+
+
+const LOGIN_DESTINATIONS = {
+    student: "./student_login.htm",
+    landlord: "./landlord_login.htm",
+    admin: "./admin_login.htm"
+};
+
+async function getUserRole() {
+    const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession();
+
+    if (sessionError) throw sessionError;
+
+    const user = sessionData.session?.user;
+
+    if (!user) return null;
+
+    const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+    if (error) throw error;
+
+    return profile?.role || user.user_metadata?.role || null;
+}
+
+async function redirectToRoleLogin() {
+    const role = await getUserRole();
+    const destination = LOGIN_DESTINATIONS[role];
+
+
+    if (!destination) {
+        console.error("Unable to determine the user's role.");
+
+        alert(
+            "We couldn't identify your account type. " +
+            "Please choose your account's login page."
+        );
+
+        return;
+    }
+
+    window.location.replace(destination);
+}
+
+
 /* =========================================
    GENERAL HELPERS
 ========================================= */
@@ -474,8 +524,9 @@ async function requestPasswordReset(form) {
    SET NEW PASSWORD
 ========================================= */
 
+
 async function updatePassword(form) {
-    const password = getPassword(form, "Password");
+    const password = getPassword(form, "password");
     const confirmPassword = getPassword(form, "ConfirmPassword");
 
     if (!passwordIsStrong(password)) {
@@ -495,28 +546,81 @@ async function updatePassword(form) {
     setLoading(form, true);
 
     try {
-        const { error } = await supabase.auth.updateUser({ password });
+        // Identify the account while the password-reset session is active.
+        const { data: userData, error: userError } =
+            await supabase.auth.getUser();
 
-        if (error) throw error;
+        if (userError) throw userError;
 
-        showMessage(
-            form,
-            "Password updated successfully. You can now sign in with your new password."
-        );
+        const user = userData.user;
+
+        if (!user) {
+            throw new Error(
+                "Your reset link is invalid or expired. Please request a new one."
+            );
+        }
+
+        // Look up the account's role before updating the password.
+        const { data: profile, error: profileError } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .maybeSingle();
+
+        if (profileError) {
+            throw new Error("We couldn't identify your account role. Please try again.");
+        }
+
+        const role =
+            profile?.role ||
+            user.user_metadata?.role;
+
+        // Update the password in Supabase.
+        const { error: updateError } =
+            await supabase.auth.updateUser({ password });
+
+        if (updateError) throw updateError;
+
+        // Clear the form and show feedback.
+        form.reset();
+
+        showMessage(form, "Password updated successfully. Redirecting to login...");
 
         form.reset();
+
+        setTimeout(async () => {
+            try {
+                await redirectToRoleLogin();
+            } catch (error) {
+                console.error("Could not determine login destination:", error);
+                window.location.replace("./login.htm");
+            }
+        }, 1200);
+
+
+        if (destinations[role]) {
+            window.setTimeout(() => {
+                window.location.replace(destinations[role]);
+            }, 1500);
+        } else {
+            showMessage(
+                form,
+                "Password updated successfully. Please choose your account type to log in."
+            );
+        }
     } catch (error) {
-        console.error("Password update error:", error);
+        console.error("Password reset error:", error);
+
         showMessage(
             form,
-            "Unable to update your password. Open the reset link from your email again and retry."
-            + ` (${getSupabaseError(error)})`,
+            error.message || "Unable to update your password. Please try again.",
             true
         );
     } finally {
         setLoading(form, false);
     }
 }
+
 
 /* =========================================
    CONNECT FORM HANDLERS
@@ -561,6 +665,26 @@ export function initAuthPage() {
 
     attachSubmit("forgotPasswordForm", requestPasswordReset);
     attachSubmit("resetPasswordForm", updatePassword);
+
+
+    const resetForm = document.getElementById("resetPasswordForm");
+
+    if (resetForm && !resetForm.dataset.messageClearReady) {
+        resetForm.dataset.messageClearReady = "true";
+
+        resetForm.addEventListener("input", () => {
+            const message = resetForm.querySelector(
+                ".form-message, #resetMessage"
+            );
+
+            if (message) {
+                message.textContent = "";
+                message.hidden = true;
+                message.classList.remove("error", "success");
+            }
+        });
+    }
+
 }
 
 /* Initialize this module when the page is ready. */
