@@ -138,6 +138,27 @@ function initSessionAwareAccountLinks() {
     });
 }
 
+function initLogoutLinks() {
+    document.querySelectorAll("[data-auth-logout]").forEach((link) => {
+        if (link.dataset.logoutReady === "true") return;
+        link.dataset.logoutReady = "true";
+
+        link.addEventListener("click", async (event) => {
+            event.preventDefault();
+            link.setAttribute("aria-busy", "true");
+
+            try {
+                const { signOut } = await import("../api.js");
+                await signOut();
+            } catch (error) {
+                console.warn("ResiHub could not contact the sign-out service.", error);
+            } finally {
+                location.replace(link.href);
+            }
+        });
+    });
+}
+
 function optimizePageDelivery() {
     document.querySelectorAll("img:not([loading])").forEach((image) => {
         image.loading = "lazy";
@@ -161,6 +182,7 @@ async function boot() {
     if (!(await protectPrivateArea())) return;
     try { await loadLayout(); } catch (error) { console.error("ResiHub layout failed to load.", error); }
     initSessionAwareAccountLinks();
+    initLogoutLinks();
     initNavigation();
     initModal();
     initAnimations();

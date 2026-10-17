@@ -632,17 +632,17 @@ async function updatePassword(form) {
         if (updateError) throw updateError;
 
         // Clear the form and show feedback.
+        const role = profile?.role || user.user_metadata?.role;
+        const loginDestination = LOGIN_DESTINATIONS[role] || LOGIN_DESTINATIONS.student;
+
+        await supabase.auth.signOut({ scope: "local" });
+
         showMessage(form, "Password updated successfully. Redirecting to login...");
 
         form.reset();
 
-        setTimeout(async () => {
-            try {
-                await redirectToRoleLogin();
-            } catch (error) {
-                console.error("Could not determine login destination:", error);
-                window.location.replace("./student_login.htm");
-            }
+        window.setTimeout(() => {
+            window.location.replace(loginDestination);
         }, 1200);
     } catch (error) {
         console.error("Password reset error:", error);
