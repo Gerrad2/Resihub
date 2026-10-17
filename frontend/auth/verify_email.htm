@@ -182,8 +182,54 @@
 
     <script type="module" src="../js/core/app.js"></script>
     <script type="module">
-        import { initAuthPage } from "../js/pages/auth/auth-flow.js";
+        import { initAuthPage } from "./js/auth-flow.js";
+
+        if (document.readyState === "loading") {
+            document.addEventListener(
+                "DOMContentLoaded",
+                initAuthPage,
+                { once: true }
+            );
+        } else {
+            initAuthPage();
+        }
     </script>
+
+    <script>
+        document.addEventListener("click", function (event) {
+            const button = event.target.closest("[data-password-toggle]");
+            if (!button) return;
+
+            event.preventDefault();
+
+            const inputId = button.getAttribute("data-password-toggle");
+            const passwordInput = document.getElementById(inputId);
+
+            if (!passwordInput) {
+                console.error("Password input not found:", inputId);
+                return;
+            }
+
+            const isPassword = passwordInput.type === "password";
+
+            passwordInput.type = isPassword ? "text" : "password";
+
+            button.setAttribute(
+                "aria-label",
+                isPassword ? "Hide password" : "Show password"
+            );
+
+            button.setAttribute("aria-pressed", String(isPassword));
+
+            const icon = button.querySelector("i");
+
+            if (icon) {
+                icon.classList.toggle("fa-eye", !isPassword);
+                icon.classList.toggle("fa-eye-slash", isPassword);
+            }
+        });
+    </script>
+
 </body>
 
 </html>
