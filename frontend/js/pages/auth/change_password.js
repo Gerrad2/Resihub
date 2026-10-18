@@ -43,6 +43,11 @@ async function init() {
     form.addEventListener("submit", (event) => onSubmit(event, session.user.email));
 }
 
+function showMessage(text, isError = true) {
+    message.textContent = text;
+    message.classList.toggle("is-success", !isError);
+}
+
 async function onSubmit(event, email) {
     event.preventDefault();
     showMessage("");

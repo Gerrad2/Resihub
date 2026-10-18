@@ -1356,3 +1356,22 @@ body[data-resihub-surface="auth"]::after {
         padding: 16px 18px;
     }
 }
+
+/* ===== Change password page: status messages and busy state ===== */
+
+.form-message.is-success {
+    color: var(--success);
+    background: rgba(127, 240, 192, 0.12);
+    border-color: rgba(127, 240, 192, 0.35);
+}
+
+.auth-submit.is-busy {
+    opacity: .7;
+    cursor: wait;
+    transform: none;
+}
+
+.auth-switch a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
