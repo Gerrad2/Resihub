@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -94,11 +94,16 @@
     }
   }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 
 </head>
 
 
-<body class="auth-page">
+<body data-resihub-surface="auth" class="auth-page">
 
   <header class="auth-topbar">
     <a class="auth-brand" href="../general/index.htm">
@@ -145,6 +150,17 @@
 
       <section class="auth-form-panel">
         <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-house-chimney"></i></div>
+
+        <div class="auth-card-brand" aria-hidden="true"><span class="auth-card-logo"><i
+              class="fa-solid fa-house"></i></span><span>ResiHub</span></div>
+        <h2 class="auth-form-title">Create your account</h2>
+        <p class="auth-form-copy">Start reaching more verified students.</p>
+
+        <nav class="auth-role-switch" aria-label="Choose account type">
+          <a href="student_signup.htm"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Student</a>
+          <a class="is-active" href="landlord_signup.htm"><i class="fa-solid fa-house" aria-hidden="true"></i>
+            Landlord</a>
+        </nav>
 
         <form id="landlordSignupForm">
           <div class="auth-grid">
@@ -251,9 +267,21 @@
 
           <p class="form-message" id="landlordSignupMessage" role="status"></p>
 
-          <button type="submit" class="auth-submit" id="signupBtn"><i class="fa-solid fa-paper-plane"
-              aria-hidden="true"></i> Create Landlord Account</button>
+          <button type="submit" class="auth-submit" id="signupBtn"><i class="fa-solid fa-arrow-right"
+              aria-hidden="true"></i> Create landlord account</button>
 
+          <div class="auth-divider">or continue with</div>
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn" data-social-provider="google" data-auth-role="student">
+              <i class="fa-brands fa-google" aria-hidden="true"></i>
+              Continue with Google
+            </button>
+            <button type="button" class="auth-social-btn is-apple" data-social-provider="apple"
+              data-auth-role="student">
+              <i class="fa-brands fa-apple" aria-hidden="true"></i>
+              Continue with Apple
+            </button>
+          </div>
           <p class="auth-switch">Already have an account? <a href="landlord_login.htm">Login</a></p>
         </form>
       </section>
@@ -261,14 +289,29 @@
     </section>
   </main>
 
-  <footer class="auth-strip">
-    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
-    <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
-    <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+  <footer class="auth-stats" aria-label="ResiHub at a glance">
+    <div class="auth-stat">
+      <span class="auth-stat-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+      <div><strong>10K+</strong><small>Verified Listings</small></div>
+    </div>
+    <div class="auth-stat">
+      <span class="auth-stat-icon"><i class="fa-solid fa-user-group" aria-hidden="true"></i></span>
+      <div><strong>50K+</strong><small>Students</small></div>
+    </div>
+    <div class="auth-stat">
+      <span class="auth-stat-icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span>
+      <div><strong>1K+</strong><small>Landlords</small></div>
+    </div>
+    <div class="auth-stat">
+      <span class="auth-stat-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+      <div><strong>20+</strong><small>Universities</small></div>
+    </div>
+    <p class="auth-script">Better Homes<br>Brighter Futures</p>
   </footer>
 
   <!-- Global Scripts -->
   <script type="module" src="../js/core/app.js"></script>
+  <script type="module" src="../js/pages/auth/social-auth.js"></script>
   <script type="module">
     import { initAuthPage } from "../js/pages/auth/auth-flow.js";
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -55,10 +55,16 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="../styles/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
 </head>
 
 
-<body class="auth-page">
+<body data-resihub-surface="auth" class="auth-page">
 
     <header class="auth-topbar">
         <a class="auth-brand" href="../general/index.htm">
@@ -71,6 +77,7 @@
     </header>
 
     <main class="auth-main">
+
         <section class="auth-shell">
 
             <aside class="auth-aside">
@@ -102,9 +109,71 @@
                         </div>
                     </div>
                 </div>
+                <div class="auth-art" aria-hidden="true">
+                    <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="auth-art-glass" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#7fe9ff" stop-opacity=".55" />
+                                <stop offset="1" stop-color="#1f6bff" stop-opacity=".25" />
+                            </linearGradient>
+                            <linearGradient id="auth-art-accent" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stop-color="#a6eeff" />
+                                <stop offset="1" stop-color="#1f8bff" />
+                            </linearGradient>
+                            <radialGradient id="auth-art-floor" cx=".5" cy=".5" r=".5">
+                                <stop offset="0" stop-color="#37d6ff" stop-opacity=".55" />
+                                <stop offset="1" stop-color="#37d6ff" stop-opacity="0" />
+                            </radialGradient>
+                        </defs>
+                        <ellipse cx="200" cy="262" rx="170" ry="26" fill="url(#auth-art-floor)" />
+                        <rect x="70" y="60" width="170" height="120" rx="18" fill="url(#auth-art-glass)"
+                            stroke="rgba(255,255,255,.35)" transform="rotate(-8 155 120)" />
+                        <path d="M90 200 L330 200 L350 226 L70 226 Z" fill="url(#auth-art-glass)"
+                            stroke="rgba(255,255,255,.35)" />
+                        <rect x="120" y="80" width="200" height="124" rx="14" fill="url(#auth-art-glass)"
+                            stroke="rgba(255,255,255,.4)" />
+                        <rect x="134" y="94" width="172" height="96" rx="10" fill="rgba(3,19,90,.45)" />
+                        <circle cx="200" cy="128" r="16" fill="url(#auth-art-accent)" />
+                        <path d="M176 170 Q200 150 224 170 Z" fill="url(#auth-art-accent)" opacity=".9" />
+                        <rect x="172" y="178" width="56" height="5" rx="2.5" fill="rgba(166,238,255,.6)" />
+                        <rect x="160" y="188" width="80" height="4" rx="2" fill="rgba(166,238,255,.35)" />
+                        <g transform="translate(300 132)">
+                            <rect x="-22" y="-22" width="44" height="44" rx="14" fill="url(#auth-art-accent)" />
+                            <path d="M0 -10 L11 0 H8 V9 H-8 V0 H-11 Z" fill="#04243a" />
+                        </g>
+                        <g transform="translate(350 200)">
+                            <path d="M-12 0 H12 L9 18 H-9 Z" fill="url(#auth-art-accent)" />
+                            <path d="M0 0 Q-16 -18 -22 -34 Q-6 -30 0 -10 Q6 -30 22 -34 Q16 -18 0 0" fill="#37d6ff"
+                                opacity=".8" />
+                        </g>
+                        <g transform="translate(60 80)">
+                            <circle r="18" fill="url(#auth-art-accent)" />
+                            <path d="M0 6 C-10 -2 -8 -10 0 -4 C8 -10 10 -2 0 6 Z" fill="#04243a" />
+                        </g>
+                        <text x="300" y="70" font-family="'Segoe Print','Bradley Hand',cursive" font-size="16"
+                            fill="#a6eeff" text-anchor="middle">Find your</text>
+                        <text x="300" y="90" font-family="'Segoe Print','Bradley Hand',cursive" font-size="16"
+                            fill="#a6eeff" text-anchor="middle">perfect space</text>
+                        <path d="M300 100 q-4 14 -14 18" fill="none" stroke="#a6eeff" stroke-width="1.5" />
+                    </svg>
+                </div>
             </aside>
 
             <section class="auth-form-panel">
+                <div class="auth-social">
+                    <button type="button" class="auth-social-btn" data-social-provider="google"
+                        data-auth-role="student">
+                        <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        Continue with Google
+                    </button>
+                    <button type="button" class="auth-social-btn is-apple" data-social-provider="apple"
+                        data-auth-role="student">
+                        <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                        Continue with Apple
+                    </button>
+                </div>
+                <div class="auth-divider">or continue with</div>
+
                 <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-user-shield"></i></div>
 
                 <form id="adminLoginForm" novalidate>
@@ -144,16 +213,31 @@
         </section>
     </main>
 
-    <footer class="auth-strip">
-        <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
-        <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
-        <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+    <footer class="auth-stats" aria-label="ResiHub at a glance">
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+            <div><strong>10K+</strong><small>Verified Listings</small></div>
+        </div>
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-user-group" aria-hidden="true"></i></span>
+            <div><strong>50K+</strong><small>Students</small></div>
+        </div>
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span>
+            <div><strong>1K+</strong><small>Landlords</small></div>
+        </div>
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+            <div><strong>20+</strong><small>Universities</small></div>
+        </div>
+        <p class="auth-script">Better Homes<br>Brighter Futures</p>
     </footer>
 
     <!-- Global Scripts -->
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module" src="../js/pages/auth/social-auth.js"></script>
     <script type="module">
-    import { initAuthPage } from "../js/pages/auth/auth-flow.js";
+        import { initAuthPage } from "../js/pages/auth/auth-flow.js";
 
         if (document.readyState === "loading") {
             document.addEventListener(

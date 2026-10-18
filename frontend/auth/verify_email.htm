@@ -1,4 +1,4 @@
-﻿<head>
+<head>
 
     <meta charset="UTF-8">
 
@@ -94,10 +94,15 @@
       }
     }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 
 </head>
 
-<body>
+<body data-resihub-surface="auth">
 
     <header class="rh-topbar">
         <a href="../general/index.htm" class="rh-brand">
@@ -174,14 +179,29 @@
 
     </main>
 
-    <footer class="rh-footer">
-        <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
-        <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
-        <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
+    <footer class="auth-stats" aria-label="ResiHub at a glance">
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+            <div><strong>10K+</strong><small>Verified Listings</small></div>
+        </div>
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-user-group" aria-hidden="true"></i></span>
+            <div><strong>50K+</strong><small>Students</small></div>
+        </div>
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span>
+            <div><strong>1K+</strong><small>Landlords</small></div>
+        </div>
+        <div class="auth-stat">
+            <span class="auth-stat-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+            <div><strong>20+</strong><small>Universities</small></div>
+        </div>
+        <p class="auth-script">Better Homes<br>Brighter Futures</p>
     </footer>
 
     <script type="module" src="../js/core/app.js"></script>
     <script type="module" src="../js/pages/auth/verify_email.js"></script>
+    <script type="module" src="../js/pages/auth/social-auth.js"></script>
     <script type="module">
         import { initAuthPage } from "../js/pages/auth/auth-flow.js";
 

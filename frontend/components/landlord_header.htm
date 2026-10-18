@@ -1,46 +1,8 @@
-<header class="main-header">
+<header class="main-header portal-header landlord-portal-header">
     <div class="container">
-        <a href="../landlord/dashboard_landlord.htm" class="logo" aria-label="ResiHub landlord dashboard">
-            <div class="logo-icon"><i class="fa-solid fa-house"></i></div>
-            <div class="logo-text"><h2>ResiHub</h2><span>Landlord Portal</span></div>
-        </a>
-        <a href="../landlord/create_listing.htm" class="header-cta"><i class="fa-solid fa-plus"></i><span>Add listing</span></a>
-
-        <button class="menu-toggle" id="landlordMenuToggle" type="button" aria-label="Open menu" aria-expanded="false"
-            aria-controls="mainNavigation"><i class="fa-solid fa-bars"></i></button>
-
-        <nav class="main-nav" id="mainNavigation" aria-label="Landlord menu">
-            <ul>
-                <li><a href="../landlord/dashboard_landlord.htm"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
-                <li><a href="../landlord/my_listing.htm"><i class="fa-solid fa-building"></i> My Listings</a></li>
-                <li><a href="../landlord/create_listing.htm"><i class="fa-solid fa-plus"></i> Add Listing</a></li>
-                <li><a href="../system/coming_soon.htm"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
-                <li><a href="../landlord/landlord_messages.htm"><i class="fa-solid fa-comments"></i> Messages</a></li>
-            </ul>
-
-            <div class="header-actions">
-                <a class="icon-btn" href="../landlord/landlord_notifications.htm" aria-label="Notifications"><i class="fa-solid fa-bell"></i><span class="notification-badge">0</span></a>
-                <div class="profile-dropdown" id="profileDropdown">
-                    <button class="profile-btn" type="button" aria-label="Landlord account menu" aria-expanded="false" aria-controls="profileMenu">
-                        <img src="../assets/images/default-avatar.png" alt="Landlord profile"><span>Landlord</span><i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu" id="profileMenu">
-                        <a href="../landlord/landlord_profile.htm">My Profile</a>
-                        <a href="../system/coming_soon.htm">Statistics</a>
-                        <a href="../system/coming_soon.htm">Reviews</a>
-                        <a href="../landlord/landlord_notifications.htm">Notifications</a>
-                        <a href="../landlord/landlord_settings.htm">Settings</a>
-                        <a href="../system/coming_soon.htm">Verification</a>
-                        <hr><a data-auth-logout href="../auth/landlord_login.htm">Logout</a>
-                    </div>
-                </div>
-                <label for="themeSelect">Theme</label>
-                <select id="themeSelect" data-theme-select>
-                    <option value="azure">Azure</option><option value="midnight">Midnight</option>
-                    <option value="emerald">Emerald</option><option value="sunset">Sunset</option>
-                    <option value="lavender">Lavender</option>
-                </select>
-            </div>
-        </nav>
+        <a href="../landlord/dashboard_landlord.htm" class="logo" aria-label="ResiHub landlord dashboard"><div class="logo-icon"><i class="fa-solid fa-house"></i></div><div class="logo-text"><h2>ResiHub</h2><span>Landlord Portal</span></div></a>
+        <button class="menu-toggle" id="landlordMenuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainNavigation"><i class="fa-solid fa-bars"></i></button>
+        <nav class="main-nav" id="mainNavigation" aria-label="Landlord menu"><div class="menu-heading"><span class="menu-heading-kicker">Landlord portal</span><strong>Manage your properties</strong></div><ul><li><a href="../landlord/dashboard_landlord.htm"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li><li><a href="../landlord/my_listing.htm"><i class="fa-solid fa-building"></i> My listings</a></li><li><a href="../landlord/create_listing.htm"><i class="fa-solid fa-circle-plus"></i> Create listing</a></li><li><a href="../landlord/landlord_messages.htm"><i class="fa-solid fa-comments"></i> Messages</a></li><li><a href="../landlord/landlord_notifications.htm"><i class="fa-solid fa-bell"></i> Notifications</a></li><li><a href="../landlord/landlord_profile.htm"><i class="fa-solid fa-user"></i> My profile</a></li><li><a href="../landlord/landlord_settings.htm"><i class="fa-solid fa-gear"></i> Settings</a></li></ul><div class="header-actions"><a class="header-cta" href="../landlord/create_listing.htm"><i class="fa-solid fa-plus"></i><span>Add listing</span></a><div class="profile-dropdown" id="profileDropdown"><button class="profile-btn" type="button" aria-label="Landlord account menu" aria-expanded="false" aria-controls="profileMenu"><img src="../assets/images/default-avatar.png" alt="Landlord profile"><span>Landlord</span><i class="fa-solid fa-chevron-down"></i></button><div class="dropdown-menu" id="profileMenu"><a href="../landlord/landlord_profile.htm">My profile</a><a href="../landlord/landlord_settings.htm">Settings</a><hr><a data-auth-logout href="../auth/landlord_login.htm">Logout</a></div></div></div></nav>
+        <div class="portal-topbar" aria-label="Landlord workspace tools"><div class="portal-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span>Search listings, enquiries, or messages</span></div><div class="portal-topbar-actions"><a href="../landlord/landlord_notifications.htm" aria-label="Notifications"><i class="fa-solid fa-bell"></i></a><a href="../landlord/landlord_profile.htm" aria-label="Landlord profile"><i class="fa-solid fa-user"></i></a></div></div>
     </div>
 </header>

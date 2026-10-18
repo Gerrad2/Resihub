@@ -1,164 +1,180 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Student Login | ResiHub Nigeria</title>
 
-  <!-- Primary SEO -->
-
   <meta name="description"
-    content="Log in to your ResiHub student account to browse accommodation, save favourite properties, chat with landlords, manage bookings and continue your accommodation search across Nigeria.">
-
-  <meta name="keywords"
-    content="student login, ResiHub login, accommodation Nigeria, student housing, hostel, apartment, university accommodation">
-
+    content="Log in to ResiHub to discover student accommodation, save favourite properties, chat with landlords and manage bookings across Nigeria.">
   <meta name="author" content="ResiHub">
-
   <meta name="robots" content="index,follow">
-
-  <meta name="theme-color" content="#0F766E">
-
+  <meta name="theme-color" content="#002C85">
   <meta name="application-name" content="ResiHub">
-
-  <meta name="apple-mobile-web-app-title" content="ResiHub">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
-  <meta name="mobile-web-app-capable" content="yes">
-
-  <meta name="format-detection" content="telephone=no">
-
   <meta name="referrer" content="strict-origin-when-cross-origin">
-
-  <!-- Canonical -->
 
   <link rel="canonical" href="https://www.resihub.com/student_login.htm">
 
-  <!-- Open Graph -->
-
   <meta property="og:site_name" content="ResiHub">
-
   <meta property="og:type" content="website">
-
   <meta property="og:title" content="Student Login | ResiHub Nigeria">
-
   <meta property="og:description"
-    content="Access your ResiHub student account to browse accommodation, save favourites and communicate with landlords securely.">
-
+    content="Sign in to find student accommodation and connect with landlords on ResiHub.">
   <meta property="og:url" content="https://www.resihub.com/student_login.htm">
-
   <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.png">
-
-  <meta property="og:image:alt" content="ResiHub Student Login">
-
   <meta property="og:locale" content="en_NG">
 
-  <!-- Twitter -->
-
   <meta name="twitter:card" content="summary_large_image">
-
   <meta name="twitter:title" content="Student Login | ResiHub Nigeria">
-
-  <meta name="twitter:description"
-    content="Sign in to your ResiHub student account to continue searching for verified accommodation across Nigeria.">
-
+  <meta name="twitter:description" content="Access your ResiHub student account.">
   <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.png">
-
-  <!-- Favicon -->
 
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-  <!-- Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-  <!-- Global Styles -->
-
   <link rel="stylesheet" href="../styles/style.css">
 
-  <!-- Structured Data -->
-
   <script type="application/ld+json">
-{
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Student Login",
-    "url":"https://www.resihub.com/student_login.htm",
-    "description":"Secure student login page for accessing accommodation listings, favourites, chats and bookings on ResiHub.",
-    "publisher":{
-        "@type":"Organization",
-        "name":"ResiHub",
-        "logo":{
-            "@type":"ImageObject",
-            "url":"https://www.resihub.com/assets/images/logo.png"
-        }
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Student Login",
+    "url": "https://www.resihub.com/student_login.htm",
+    "description": "Secure student login page for ResiHub.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ResiHub"
     }
-}
-</script>
-
+  }
+  </script>
 </head>
 
-<body class="auth-page">
+<body data-resihub-surface="auth" class="auth-page">
 
   <header class="auth-topbar">
-    <a class="auth-brand" href="../general/index.htm">
-      <span class="auth-logo"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+    <a class="auth-brand" href="../general/index.htm" aria-label="ResiHub home">
+      <span class="auth-logo">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+      </span>
+
       <span class="auth-brand-name">ResiHub</span>
       <span class="auth-tagline">Student Accommodation Made Easy</span>
     </a>
-    <a class="auth-pill" href="../general/index.htm"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to
-      Home</a>
+
+    <a class="auth-pill" href="../general/index.htm">
+      <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+      Back to Home
+    </a>
   </header>
 
   <main class="auth-main">
-    <section class="auth-shell">
+    <section class="auth-shell" aria-label="Student sign in">
 
       <aside class="auth-aside">
-        <span class="auth-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Student Login</span>
-        <h1>Welcome Back</h1>
-        <p class="auth-lead">Sign in to find verified student accommodation, save favourites and message landlords.</p>
+        <span class="auth-badge">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          Student Portal
+        </span>
+
+        <h1>Welcome Back<span aria-hidden="true">.</span></h1>
+
+        <p class="auth-lead">
+          Your next home is closer than you think. Sign in to discover
+          accommodation, save your favourites and connect directly with
+          landlords.
+        </p>
+
         <div class="auth-features">
+
           <div class="auth-feature">
-            <span class="auth-feature-icon"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i></span>
+            <span class="auth-feature-icon">
+              <i class="fa-solid fa-house-circle-check" aria-hidden="true"></i>
+            </span>
+
             <div>
-              <h3>Verified Listings</h3>
-              <p>Browse accommodation that has been checked.</p>
+              <h3>Discover Your Space</h3>
+              <p>Explore available accommodation around your campus.</p>
             </div>
           </div>
+
           <div class="auth-feature">
-            <span class="auth-feature-icon"><i class="fa-solid fa-heart" aria-hidden="true"></i></span>
+            <span class="auth-feature-icon">
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            </span>
+
             <div>
-              <h3>Save Favourites</h3>
-              <p>Keep track of the places you like.</p>
+              <h3>Your Favourites, Together</h3>
+              <p>Save interesting properties and revisit them anytime.</p>
             </div>
           </div>
+
           <div class="auth-feature">
-            <span class="auth-feature-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+            <span class="auth-feature-icon">
+              <i class="fa-solid fa-comments" aria-hidden="true"></i>
+            </span>
+
             <div>
-              <h3>Chat with Landlords</h3>
-              <p>Get quick answers and arrange viewings.</p>
+              <h3>Connect Directly</h3>
+              <p>Talk to landlords and arrange accommodation inspections.</p>
             </div>
           </div>
+
         </div>
+
       </aside>
 
       <section class="auth-form-panel">
-        <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
+
+        <div class="auth-illustration" aria-hidden="true">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+
+        <div class="auth-card-brand" aria-hidden="true">
+          <span class="auth-card-logo">
+            <i class="fa-solid fa-house"></i>
+          </span>
+          <span>ResiHub</span>
+        </div>
+
+        <h2 class="auth-form-title">Welcome back</h2>
+
+        <p class="auth-form-copy">
+          Sign in to continue your accommodation journey.
+        </p>
+
+        <nav class="auth-role-switch" aria-label="Choose account type">
+          <a class="is-active" href="student_login.htm" aria-current="page">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            Student
+          </a>
+
+          <a href="landlord_login.htm">
+            <i class="fa-solid fa-house" aria-hidden="true"></i>
+            Landlord
+          </a>
+        </nav>
 
         <form id="studentLoginForm" autocomplete="on">
+
           <div class="auth-field">
             <label for="loginEmail">Email Address</label>
+
             <input type="email" id="loginEmail" name="email" placeholder="you@example.com" autocomplete="email"
-              required>
+              inputmode="email" autocapitalize="none" spellcheck="false" required>
           </div>
 
           <div class="auth-field full">
-            <label for="loginPassword">Password</label>
+            <label for="StudentLoginPassword">Password</label>
 
             <div class="password-wrapper">
               <input type="password" id="StudentLoginPassword" name="StudentLoginPassword"
@@ -172,31 +188,69 @@
           </div>
 
           <div class="auth-row">
-            <label class="auth-check"><input type="checkbox" id="rememberMe"> Remember me</label>
-            <a href="forgot_password.htm?role=student">Forgot password?</a>
+            <label class="auth-check">
+              <input type="checkbox" id="rememberMe">
+              <span>Remember me</span>
+            </label>
+
+            <a href="forgot_password.htm?role=student">
+              Forgot password?
+            </a>
           </div>
 
-          <p class="form-message" id="loginMessage" role="status"></p>
+          <p class="form-message" id="loginMessage" role="status" aria-live="polite"></p>
 
-          <button type="submit" class="auth-submit" id="loginBtn"><i class="fa-solid fa-arrow-right-to-bracket"
-              aria-hidden="true"></i> Login to Your Account</button>
+          <button type="submit" class="auth-submit" id="loginBtn">
+            <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+            Sign in securely
+          </button>
 
-          <p class="auth-switch">Don't have an account? <a href="student_signup.htm">Sign up</a></p>
+          <div class="auth-divider">or continue with</div>
+          <div class="auth-social">
+            <button type="button" class="auth-social-btn" data-social-provider="google" data-auth-role="student">
+              <i class="fa-brands fa-google" aria-hidden="true"></i>
+              Continue with Google
+            </button>
+            <button type="button" class="auth-social-btn is-apple" data-social-provider="apple"
+              data-auth-role="student">
+              <i class="fa-brands fa-apple" aria-hidden="true"></i>
+              Continue with Apple
+            </button>
+          </div>
+          <p class="auth-switch">
+            New to ResiHub?
+            <a href="student_signup.htm">Create an account</a>
+          </p>
+
         </form>
+
       </section>
 
     </section>
   </main>
 
-  <footer class="auth-strip">
-    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Secure &amp; Trusted</span>
-    <span><i class="fa-solid fa-user-group" aria-hidden="true"></i> Connecting Students</span>
-    <span><i class="fa-solid fa-house" aria-hidden="true"></i> Better Housing, Brighter Future</span>
-  </footer>
+<footer class="auth-stats" aria-label="ResiHub at a glance">
+  <div class="auth-stat">
+    <span class="auth-stat-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+    <div><strong>10K+</strong><small>Verified Listings</small></div>
+  </div>
+  <div class="auth-stat">
+    <span class="auth-stat-icon"><i class="fa-solid fa-user-group" aria-hidden="true"></i></span>
+    <div><strong>50K+</strong><small>Students</small></div>
+  </div>
+  <div class="auth-stat">
+    <span class="auth-stat-icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span>
+    <div><strong>1K+</strong><small>Landlords</small></div>
+  </div>
+  <div class="auth-stat">
+    <span class="auth-stat-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span>
+    <div><strong>20+</strong><small>Universities</small></div>
+  </div>
+  <p class="auth-script">Better Homes<br>Brighter Futures</p>
+</footer>
 
-  <!-- Global Scripts -->
   <script type="module" src="../js/core/app.js"></script>
-
+  <script type="module" src="../js/pages/auth/social-auth.js"></script>
   <script type="module">
     import { initAuthPage } from "../js/pages/auth/auth-flow.js";
 
@@ -214,6 +268,7 @@
   <script>
     document.addEventListener("click", function (event) {
       const button = event.target.closest("[data-password-toggle]");
+
       if (!button) return;
 
       event.preventDefault();
