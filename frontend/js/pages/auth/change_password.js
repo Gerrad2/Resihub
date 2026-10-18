@@ -18,6 +18,10 @@ const message = document.getElementById("changeMessage");
 const submitBtn = document.getElementById("changeBtn");
 const backLink = document.getElementById("backLink");
 const cancelLink = document.getElementById("cancelLink");
+const currentField = document.getElementById("currentPassword").closest(".auth-field");
+const currentInput = document.getElementById("currentPassword");
+
+let mode = "change"; // "change" or "set"
 
 function showMessage(text, isError = true) {
     message.textContent = text;
@@ -29,6 +33,27 @@ function setBusy(busy) {
     submitBtn.classList.toggle("is-busy", busy);
 }
 
+/* A user has a password only if the email provider is linked to their account.
+   Google-only and Apple-only accounts have no password yet. */
+function hasPassword(user) {
+    const providers = user.app_metadata?.providers ?? [user.app_metadata?.provider];
+    return providers.includes("email");
+}
+
+function useSetPasswordMode() {
+    mode = "set";
+    currentField.hidden = true;
+    currentInput.required = false;
+
+    document.querySelector(".auth-aside h1").innerHTML = "Set Your<br>Password";
+    document.querySelector(".auth-lead").textContent =
+        "Your account signs in with Google. Add a password to also sign in with your email address.";
+    document.querySelector(".auth-form-title").textContent = "Set a password";
+    document.querySelector(".auth-form-copy").textContent =
+        "Choose a password you'll use to sign in with your email.";
+    submitBtn.innerHTML = '<i class="fa-solid fa-lock" aria-hidden="true"></i> Set Password';
+}
+
 async function init() {
     const { success, data: session } = await getCurrentSession();
 
@@ -37,38 +62,34 @@ async function init() {
         return;
     }
 
-    const profile = await getProfile(session.user.id);
+    const user = session.user;
+    const profile = await getProfile(user.id);
     const role = profile.success && profile.data?.role ? profile.data.role : "student";
 
     backLink.href = DASHBOARDS[role] ?? DASHBOARDS.student;
     cancelLink.href = DASHBOARDS[role] ?? DASHBOARDS.student;
 
-    // Accounts created with Google or Apple have no password to change here
-    const provider = session.user.app_metadata?.provider;
-    if (provider && provider !== "email") {
-        form.hidden = true;
-        showMessage(
-            `This account signs in with ${provider === "google" ? "Google" : "Apple"}. ` +
-            "Change your password through that provider instead."
-        );
-        return;
+    if (!hasPassword(user)) {
+        useSetPasswordMode();
     }
 
-    form.addEventListener("submit", (event) =>
-        onSubmit(event, session.user.email, role)
-    );
+    form.addEventListener("submit", (event) => onSubmit(event, user, role));
 }
 
-async function onSubmit(event, email, role) {
+async function onSubmit(event, user, role) {
     event.preventDefault();
     showMessage("");
 
-    const currentPassword = document.getElementById("currentPassword").value;
+    const currentPassword = currentInput.value;
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmNewPassword").value;
 
-    if (!currentPassword || !newPassword || !confirmPassword) {
-        return showMessage("Please fill in all three fields.");
+    if (mode === "change" && !currentPassword) {
+        return showMessage("Please enter your current password.");
+    }
+
+    if (!newPassword || !confirmPassword) {
+        return showMessage("Please fill in the new password fields.");
     }
 
     if (newPassword.length < MIN_LENGTH) {
@@ -79,45 +100,52 @@ async function onSubmit(event, email, role) {
         return showMessage("The new passwords don't match.");
     }
 
-    if (newPassword === currentPassword) {
+    if (mode === "change" && newPassword === currentPassword) {
         return showMessage("Choose a password that's different from your current one.");
     }
 
     setBusy(true);
 
     try {
-        // Check the current password
-        const { error: verifyError } = await supabase.auth.signInWithPassword({
-            email,
-            password: currentPassword,
-        });
+        // Only accounts that already have a password need to prove it first
+        if (mode === "change") {
+            const { error: verifyError } = await supabase.auth.signInWithPassword({
+                email: user.email,
+                password: currentPassword,
+            });
 
-        if (verifyError) {
-            console.error("Current password check failed:", verifyError);
-            showMessage(
-                verifyError.message === "Invalid login credentials"
-                    ? "Your current password is incorrect."
-                    : `We couldn't verify your password: ${verifyError.message}`
-            );
-            return;
+            if (verifyError) {
+                console.error("Current password check failed:", verifyError);
+                showMessage(
+                    verifyError.message === "Invalid login credentials"
+                        ? "Your current password is incorrect."
+                        : `We couldn't verify your password: ${verifyError.message}`
+                );
+                return;
+            }
         }
 
         const { error } = await supabase.auth.updateUser({ password: newPassword });
 
         if (error) {
             console.error("Password update failed:", error);
-            showMessage(error.message || "We couldn't update your password. Please try again.");
+            showMessage(error.message || "We couldn't save your password. Please try again.");
             return;
         }
 
-        showMessage("Your password has been changed. Taking you to your dashboard...", false);
+        showMessage(
+            mode === "set"
+                ? "Password saved. Taking you to your dashboard..."
+                : "Your password has been changed. Taking you to your dashboard...",
+            false
+        );
         form.reset();
 
         setTimeout(() => {
             window.location.replace(DASHBOARDS[role] ?? DASHBOARDS.student);
         }, REDIRECT_DELAY_MS);
     } catch (err) {
-        console.error("Change password failed:", err);
+        console.error("Password save failed:", err);
         showMessage("Something went wrong. Please try again.");
     } finally {
         setBusy(false);
