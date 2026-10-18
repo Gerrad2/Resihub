@@ -19,8 +19,6 @@ const submitBtn = document.getElementById("changeBtn");
 const backLink = document.getElementById("backLink");
 const cancelLink = document.getElementById("cancelLink");
 
-let dashboardUrl = DASHBOARDS.student;
-
 function showMessage(text, isError = true) {
     message.textContent = text;
     message.classList.toggle("is-success", !isError);
@@ -42,9 +40,19 @@ async function init() {
     const profile = await getProfile(session.user.id);
     const role = profile.success && profile.data?.role ? profile.data.role : "student";
 
-    dashboardUrl = DASHBOARDS[role] ?? DASHBOARDS.student;
-    backLink.href = dashboardUrl;
-    cancelLink.href = dashboardUrl;
+    backLink.href = DASHBOARDS[role] ?? DASHBOARDS.student;
+    cancelLink.href = DASHBOARDS[role] ?? DASHBOARDS.student;
+
+    // Accounts created with Google or Apple have no password to change here
+    const provider = session.user.app_metadata?.provider;
+    if (provider && provider !== "email") {
+        form.hidden = true;
+        showMessage(
+            `This account signs in with ${provider === "google" ? "Google" : "Apple"}. ` +
+            "Change your password through that provider instead."
+        );
+        return;
+    }
 
     form.addEventListener("submit", (event) =>
         onSubmit(event, session.user.email, role)
@@ -78,28 +86,32 @@ async function onSubmit(event, email, role) {
     setBusy(true);
 
     try {
-        // Confirm the current password before changing it
+        // Check the current password
         const { error: verifyError } = await supabase.auth.signInWithPassword({
             email,
             password: currentPassword,
         });
 
         if (verifyError) {
-            showMessage("Your current password is incorrect.");
+            console.error("Current password check failed:", verifyError);
+            showMessage(
+                verifyError.message === "Invalid login credentials"
+                    ? "Your current password is incorrect."
+                    : `We couldn't verify your password: ${verifyError.message}`
+            );
             return;
         }
 
         const { error } = await supabase.auth.updateUser({ password: newPassword });
 
         if (error) {
+            console.error("Password update failed:", error);
             showMessage(error.message || "We couldn't update your password. Please try again.");
             return;
         }
 
-        // Success: confirm, then go to the dashboard
         showMessage("Your password has been changed. Taking you to your dashboard...", false);
         form.reset();
-        setBusy(false);
 
         setTimeout(() => {
             window.location.replace(DASHBOARDS[role] ?? DASHBOARDS.student);
@@ -107,6 +119,7 @@ async function onSubmit(event, email, role) {
     } catch (err) {
         console.error("Change password failed:", err);
         showMessage("Something went wrong. Please try again.");
+    } finally {
         setBusy(false);
     }
 }
