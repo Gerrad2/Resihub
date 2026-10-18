@@ -5,7 +5,13 @@ const DASHBOARDS = {
     landlord: "../landlord/dashboard_landlord.htm",
 };
 
+const LOGIN_PAGES = {
+    student: "../auth/student_login.htm",
+    landlord: "../auth/landlord_login.htm",
+};
+
 const MIN_LENGTH = 8;
+const REDIRECT_DELAY_MS = 1500;
 
 const form = document.getElementById("changePasswordForm");
 const message = document.getElementById("changeMessage");
@@ -13,11 +19,11 @@ const submitBtn = document.getElementById("changeBtn");
 const backLink = document.getElementById("backLink");
 const cancelLink = document.getElementById("cancelLink");
 
+let dashboardUrl = DASHBOARDS.student;
+
 function showMessage(text, isError = true) {
     message.textContent = text;
-    message.style.color = isError ? "" : "var(--success)";
-    message.style.background = isError ? "" : "rgba(127, 240, 192, 0.12)";
-    message.style.borderColor = isError ? "" : "rgba(127, 240, 192, 0.35)";
+    message.classList.toggle("is-success", !isError);
 }
 
 function setBusy(busy) {
@@ -29,26 +35,23 @@ async function init() {
     const { success, data: session } = await getCurrentSession();
 
     if (!success || !session?.user) {
-        window.location.replace("student_login.htm");
+        window.location.replace(LOGIN_PAGES.student);
         return;
     }
 
-    // Send Back and Cancel to the dashboard for this user's role
     const profile = await getProfile(session.user.id);
     const role = profile.success && profile.data?.role ? profile.data.role : "student";
-    const dashboard = DASHBOARDS[role] ?? DASHBOARDS.student;
-    backLink.href = dashboard;
-    cancelLink.href = dashboard;
 
-    form.addEventListener("submit", (event) => onSubmit(event, session.user.email));
+    dashboardUrl = DASHBOARDS[role] ?? DASHBOARDS.student;
+    backLink.href = dashboardUrl;
+    cancelLink.href = dashboardUrl;
+
+    form.addEventListener("submit", (event) =>
+        onSubmit(event, session.user.email, role)
+    );
 }
 
-function showMessage(text, isError = true) {
-    message.textContent = text;
-    message.classList.toggle("is-success", !isError);
-}
-
-async function onSubmit(event, email) {
+async function onSubmit(event, email, role) {
     event.preventDefault();
     showMessage("");
 
@@ -75,7 +78,7 @@ async function onSubmit(event, email) {
     setBusy(true);
 
     try {
-        // Check the current password first
+        // Confirm the current password before changing it
         const { error: verifyError } = await supabase.auth.signInWithPassword({
             email,
             password: currentPassword,
@@ -93,12 +96,17 @@ async function onSubmit(event, email) {
             return;
         }
 
+        // Success: confirm, then go to the dashboard
+        showMessage("Your password has been changed. Taking you to your dashboard...", false);
         form.reset();
-        showMessage("Your password has been changed.", false);
+        setBusy(false);
+
+        setTimeout(() => {
+            window.location.replace(DASHBOARDS[role] ?? DASHBOARDS.student);
+        }, REDIRECT_DELAY_MS);
     } catch (err) {
         console.error("Change password failed:", err);
         showMessage("Something went wrong. Please try again.");
-    } finally {
         setBusy(false);
     }
 }
