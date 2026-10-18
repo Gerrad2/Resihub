@@ -1375,3 +1375,45 @@ body[data-resihub-surface="auth"]::after {
     color: #fff;
     text-decoration: underline;
 }
+
+/* ===== Layout fix: stop sideways overflow and match button width ===== */
+
+body[data-resihub-surface="auth"] *,
+body[data-resihub-surface="auth"] *::before,
+body[data-resihub-surface="auth"] *::after {
+    box-sizing: border-box;
+}
+
+body[data-resihub-surface="auth"] {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Let the shell size to the window instead of its widest word */
+body[data-resihub-surface="auth"] .auth-main {
+    display: block;
+    min-width: 0;
+}
+
+body[data-resihub-surface="auth"] .auth-shell {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr) 440px;
+}
+
+.auth-aside,
+.auth-form-panel {
+    min-width: 0;
+}
+
+.auth-aside h1 {
+    overflow-wrap: break-word;
+}
+
+/* Full-width submit button, matching the inputs */
+.auth-form-panel .auth-submit {
+    width: 100%;
+    max-width: none;
+}
