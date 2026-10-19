@@ -1417,3 +1417,48 @@ body[data-resihub-surface="auth"] .auth-shell {
     width: 100%;
     max-width: none;
 }
+
+/* Stack hero and card on small screens */
+@media (max-width: 900px) {
+
+    .auth-container,
+    /* outer wrapper holding hero + card */
+    .auth-wrapper {
+        flex-direction: column;
+        display: flex;
+        align-items: stretch;
+        padding: 1.5rem 1rem;
+    }
+
+    .auth-hero,
+    /* left "Welcome Back" column */
+    .auth-hero-content {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        /* stops flex children from squeezing */
+        padding: 0;
+    }
+
+    .auth-hero h1 {
+        font-size: clamp(2.25rem, 9vw, 3rem);
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .auth-card,
+    /* the login/signup card */
+    .glass-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+}
+
+/* Keep inputs inside the card */
+.auth-card input,
+.auth-card select {
+    width: 100%;
+    box-sizing: border-box;
+}
