@@ -1497,3 +1497,92 @@ body[data-resihub-surface="auth"] .auth-shell {
         padding: 26px 20px 22px;
     }
 }
+
+/* ===== Mobile header: keep "Find a room" and "Sign in" labels visible (keep LAST) ===== */
+@media (max-width: 768px) {
+    .main-header .header-cta {
+        display: inline-flex;
+        width: auto;
+        min-height: 38px;
+        padding: 0 .65rem;
+        gap: .35rem;
+        font-size: .8rem;
+        justify-content: center;
+    }
+
+    .main-header .header-cta span {
+        display: inline;
+    }
+
+    .main-header .profile-btn span,
+    .main-header .account-entry span {
+        display: inline;
+    }
+
+    .main-header .profile-btn,
+    .main-header .account-entry {
+        padding: 0 .9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-header .header-cta {
+        padding: 0 .45rem;
+        font-size: .74rem;
+    }
+}
+
+/* ===== Phone header: logo + name on the left, "Find a room" and menu on the right (keep LAST) ===== */
+@media (max-width: 768px) {
+    .main-header .logo-text {
+        display: block;
+    }
+
+    .main-header .logo-text h2 {
+        font-size: 1.05rem;
+        line-height: 1.1;
+    }
+
+    .main-header .logo-text span {
+        display: none;
+    }
+
+    .main-header .header-actions .search-toggle {
+        display: none;
+    }
+}
+
+/* ===== Mobile stacking fix (must stay LAST: overrides the 1fr 440px desktop rules above) ===== */
+@media (max-width: 960px) {
+    body[data-resihub-surface="auth"] .auth-shell {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+        max-width: 540px;
+    }
+
+    body[data-resihub-surface="auth"] .auth-form-panel {
+        width: 100%;
+        max-width: 100%;
+        justify-self: stretch;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    body[data-resihub-surface="auth"] .auth-aside h1 {
+        font-size: clamp(34px, 9vw, 40px);
+    }
+}
+
+@media (max-width: 560px) {
+    body[data-resihub-surface="auth"] .auth-main {
+        padding: 8px 16px 20px;
+    }
+
+    body[data-resihub-surface="auth"] .auth-shell {
+        gap: 28px;
+    }
+
+    body[data-resihub-surface="auth"] .auth-form-panel {
+        padding: 26px 20px 22px;
+    }
+}
