@@ -125,7 +125,12 @@ async function onSubmit(event, user, role) {
             }
         }
 
-        const { error } = await supabase.auth.updateUser({ password: newPassword });
+        // Newer Supabase versions require the current password on the update call itself
+        const { error } = await supabase.auth.updateUser(
+            mode === "change"
+                ? { password: newPassword, current_password: currentPassword }
+                : { password: newPassword }
+        );
 
         if (error) {
             console.error("Password update failed:", error);
