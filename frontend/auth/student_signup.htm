@@ -170,49 +170,66 @@
         </div>
         <div class="auth-art" aria-hidden="true">
           <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="auth-art-glass" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#7fe9ff" stop-opacity=".55" />
-                <stop offset="1" stop-color="#1f6bff" stop-opacity=".25" />
-              </linearGradient>
-              <linearGradient id="auth-art-accent" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#a6eeff" />
-                <stop offset="1" stop-color="#1f8bff" />
-              </linearGradient>
-              <radialGradient id="auth-art-floor" cx=".5" cy=".5" r=".5">
-                <stop offset="0" stop-color="#37d6ff" stop-opacity=".55" />
-                <stop offset="1" stop-color="#37d6ff" stop-opacity="0" />
-              </radialGradient>
-            </defs>
-            <ellipse cx="200" cy="262" rx="170" ry="26" fill="url(#auth-art-floor)" />
-            <rect x="70" y="60" width="170" height="120" rx="18" fill="url(#auth-art-glass)"
-              stroke="rgba(255,255,255,.35)" transform="rotate(-8 155 120)" />
-            <path d="M90 200 L330 200 L350 226 L70 226 Z" fill="url(#auth-art-glass)" stroke="rgba(255,255,255,.35)" />
-            <rect x="120" y="80" width="200" height="124" rx="14" fill="url(#auth-art-glass)"
-              stroke="rgba(255,255,255,.4)" />
-            <rect x="134" y="94" width="172" height="96" rx="10" fill="rgba(3,19,90,.45)" />
-            <circle cx="200" cy="128" r="16" fill="url(#auth-art-accent)" />
-            <path d="M176 170 Q200 150 224 170 Z" fill="url(#auth-art-accent)" opacity=".9" />
-            <rect x="172" y="178" width="56" height="5" rx="2.5" fill="rgba(166,238,255,.6)" />
-            <rect x="160" y="188" width="80" height="4" rx="2" fill="rgba(166,238,255,.35)" />
-            <g transform="translate(300 132)">
-              <rect x="-22" y="-22" width="44" height="44" rx="14" fill="url(#auth-art-accent)" />
-              <path d="M0 -10 L11 0 H8 V9 H-8 V0 H-11 Z" fill="#04243a" />
-            </g>
-            <g transform="translate(350 200)">
-              <path d="M-12 0 H12 L9 18 H-9 Z" fill="url(#auth-art-accent)" />
-              <path d="M0 0 Q-16 -18 -22 -34 Q-6 -30 0 -10 Q6 -30 22 -34 Q16 -18 0 0" fill="#37d6ff" opacity=".8" />
-            </g>
-            <g transform="translate(60 80)">
-              <circle r="18" fill="url(#auth-art-accent)" />
-              <path d="M0 6 C-10 -2 -8 -10 0 -4 C8 -10 10 -2 0 6 Z" fill="#04243a" />
-            </g>
-            <text x="300" y="70" font-family="'Segoe Print','Bradley Hand',cursive" font-size="16" fill="#a6eeff"
-              text-anchor="middle">More than</text>
-            <text x="300" y="90" font-family="'Segoe Print','Bradley Hand',cursive" font-size="16" fill="#a6eeff"
-              text-anchor="middle">Just a Room</text>
-            <path d="M300 100 q-4 14 -14 18" fill="none" stroke="#a6eeff" stroke-width="1.5" />
-          </svg>
+  <defs>
+    <linearGradient id="auth-art-glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7fe9ff" stop-opacity=".55" />
+      <stop offset="1" stop-color="#1f6bff" stop-opacity=".25" />
+    </linearGradient>
+    <linearGradient id="auth-art-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a6eeff" />
+      <stop offset="1" stop-color="#1f8bff" />
+    </linearGradient>
+    <linearGradient id="auth-art-dusk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2d5fb8" />
+      <stop offset="1" stop-color="#8fb4e8" />
+    </linearGradient>
+    <radialGradient id="auth-art-floor" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#37d6ff" stop-opacity=".55" />
+      <stop offset="1" stop-color="#37d6ff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="210" cy="262" rx="190" ry="30" fill="url(#auth-art-floor)" />
+
+  <!-- Back phone -->
+  <g transform="rotate(-10 140 135)">
+    <rect x="80" y="30" width="120" height="210" rx="22" fill="url(#auth-art-glass)" stroke="rgba(255,255,255,.4)" />
+    <rect x="92" y="46" width="96" height="178" rx="14" fill="rgba(3,19,90,.4)" />
+    <rect x="110" y="88" width="60" height="46" rx="12" fill="url(#auth-art-accent)" />
+    <text x="140" y="106" font-family="'Segoe Print','Bradley Hand',cursive" font-size="9" fill="#04243a" text-anchor="middle">Student</text>
+    <text x="140" y="122" font-family="'Segoe Print','Bradley Hand',cursive" font-size="9" fill="#04243a" text-anchor="middle">Housing</text>
+  </g>
+
+  <!-- Front glass card with house photo -->
+  <g transform="rotate(-6 255 185)">
+    <rect x="150" y="120" width="210" height="130" rx="18" fill="url(#auth-art-glass)" stroke="rgba(255,255,255,.45)" />
+    <rect x="165" y="134" width="180" height="104" rx="12" fill="url(#auth-art-dusk)" />
+    <path d="M190 230 L190 170 L232 140 L274 170 L274 230 Z" fill="#1c3566" />
+    <rect x="200" y="180" width="12" height="12" fill="#ffd28a" />
+    <rect x="222" y="180" width="12" height="12" fill="#ffd28a" />
+    <rect x="244" y="180" width="12" height="12" fill="#ffd28a" />
+    <rect x="200" y="204" width="12" height="12" fill="#ffd28a" />
+    <rect x="244" y="204" width="12" height="12" fill="#ffd28a" />
+  </g>
+
+  <!-- Left floating label -->
+  <g transform="rotate(-14 125 198)">
+    <rect x="40" y="180" width="170" height="36" rx="12" fill="url(#auth-art-glass)" stroke="rgba(255,255,255,.4)" />
+    <circle cx="62" cy="198" r="9" fill="url(#auth-art-accent)" />
+    <text x="80" y="202" font-family="'Segoe Print','Bradley Hand',cursive" font-size="12" fill="#e8fbff">Student Housing</text>
+  </g>
+
+  <!-- Heart badge -->
+  <g transform="translate(340 215)">
+    <circle r="20" fill="url(#auth-art-accent)" />
+    <path d="M0 6 C-10 -2 -8 -10 0 -4 C8 -10 10 -2 0 6 Z" fill="#04243a" />
+  </g>
+
+  <!-- Caption and arrow -->
+  <text x="330" y="40" font-family="'Segoe Print','Bradley Hand',cursive" font-size="14" fill="#a6eeff" text-anchor="middle">More than</text>
+  <text x="330" y="58" font-family="'Segoe Print','Bradley Hand',cursive" font-size="14" fill="#a6eeff" text-anchor="middle">just a room</text>
+  <path d="M330 66 q-4 16 -14 24" fill="none" stroke="#a6eeff" stroke-width="1.5" />
+</svg>
         </div>
       </aside>
 
