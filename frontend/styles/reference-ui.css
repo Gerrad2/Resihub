@@ -1480,3 +1480,24 @@ body:has(.dashboard-hero) main {
         display: none;
     }
 }
+
+/* ===== Header dropdown: labelled "Search rooms" button (keep LAST) ===== */
+.main-header .header-actions .btn-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid var(--rh-line);
+    background: rgba(17, 93, 213, .18);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.main-header .header-actions .btn-search:hover {
+    background: rgba(33, 212, 253, .16);
+}
