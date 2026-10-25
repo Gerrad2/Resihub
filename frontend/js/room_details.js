@@ -1,5 +1,7 @@
 
 import {
+    getPublicProfile,
+    supabase,
     getListing,
     getListings,
     getReviews,
@@ -16,6 +18,8 @@ import { showToast } from "./ui/toast.js";
 import { openModal, closeModal } from "./ui/modal.js";
 import { saveRecentlyViewed } from "./core/storage.js";
 import { createListingCard, getListingImageUrl, formatPrice } from "./listings.js";
+import { initBookingForm } from "./ui/booking-form.js";
+import { trustBadge, unverifiedNotice } from "./core/verification.js";
 
 
 const DEFAULT_AVATAR = "../assets/images/default-user.png";
@@ -297,6 +301,14 @@ function renderSidebar(listing) {
         listing.availability_status === "available" ? "Available Now" : "Currently Booked";
 
     el("propertyDate").textContent = formatDate(listing.created_at);
+
+    el("propertyDescription").textContent =
+        listing.description || "No description has been added for this room yet.";
+
+    const badge = el("propertyBadge");
+    if (badge) {
+        badge.textContent = listing.availability_status === "available" ? "Available" : "Booked";
+    }
 }
 
 async function renderLandlord(listing) {
@@ -312,9 +324,18 @@ async function renderLandlord(listing) {
     }
 
     const profile = result.data;
+    const status = profile.verification_status ?? "unverified";
 
     el("landlordName").textContent = profile.full_name || "Landlord";
     el("landlordImage").src = profile.avatar_url || DEFAULT_AVATAR;
+    el("landlordStatus").textContent = profile.business_name || "ResiHub landlord";
+
+    // Verified badge under the landlord's name
+    el("landlordTrust")?.replaceChildren(trustBadge(status));
+
+    // Caution note above Book Now, only for unverified landlords
+    const notice = unverifiedNotice(status);
+    el("verifyNoticeSlot")?.replaceChildren(...(notice ? [notice] : []));
 }
 
 function renderStarDisplay(container, rating) {
@@ -605,6 +626,9 @@ function buildReviewModal() {
     el("reviewForm").addEventListener("submit", handleReviewSubmit);
 }
 
+const STAR_OFF = "#5B6B8C";
+const STAR_ON = "#FFC53D";
+
 function buildStarRatingInput() {
     const container = el("starRatingInput");
     container.replaceChildren();
@@ -613,35 +637,67 @@ function buildStarRatingInput() {
     for (let value = 1; value <= 5; value += 1) {
         const button = document.createElement("button");
         button.type = "button";
+        button.className = "review-star";
         button.setAttribute("role", "radio");
         button.setAttribute("aria-checked", "false");
         button.setAttribute("aria-label", `${value} star${value > 1 ? "s" : ""}`);
-        button.style.background = "none";
-        button.style.border = "none";
-        button.style.cursor = "pointer";
-        button.style.fontSize = "1.4rem";
-        button.style.color = "rgba(255, 255, 255, 0.3)";
+        button.style.cssText = "background:none;border:none;cursor:pointer;padding:.2rem;font-size:1.5rem;line-height:1;";
 
         const icon = document.createElement("i");
         icon.className = "fa-solid fa-star";
+        icon.style.color = STAR_OFF;
         button.append(icon);
 
         button.addEventListener("click", () => {
             selectedRating = value;
-            updateStarRatingDisplay(container);
+            paintStars(container, value);
             el("ratingError").hidden = true;
         });
 
+        // Preview on hover; it returns to the chosen rating when the mouse leaves
+        button.addEventListener("mouseenter", () => paintStars(container, value));
+        button.addEventListener("mouseleave", () => paintStars(container, selectedRating));
+
         container.append(button);
     }
+
+    paintStars(container, 0);
 }
 
-function updateStarRatingDisplay(container) {
-    [...container.children].forEach((button, index) => {
-        const active = index < selectedRating;
-        button.style.color = active ? "#FFD54F" : "rgba(255, 255, 255, 0.3)";
-        button.setAttribute("aria-checked", String(active));
+function paintStars(container, count) {
+    [...container.querySelectorAll(".review-star")].forEach((button, index) => {
+        const icon = button.querySelector("i");
+        if (icon) icon.style.color = index < count ? STAR_ON : STAR_OFF;
+        button.setAttribute("aria-checked", String(index < selectedRating));
     });
+}
+
+let myReviewId = null;
+
+async function openReviewForm() {
+    buildReviewModal();
+
+    const { data: mine } = currentUser
+        ? await supabase
+            .from("reviews")
+            .select("id, rating, comment")
+            .eq("student_id", currentUser.id)
+            .eq("listing_id", currentListing.id)
+            .maybeSingle()
+        : { data: null };
+
+    myReviewId = mine?.id ?? null;
+
+    buildStarRatingInput();
+
+    if (mine) {
+        selectedRating = mine.rating;
+        paintStars(el("starRatingInput"), mine.rating);
+        el("reviewComment").value = mine.comment ?? "";
+        el("submitReviewBtn").textContent = "Update Review";
+    }
+
+    openModal("reviewModal");
 }
 
 async function handleReviewSubmit(event) {
@@ -667,22 +723,31 @@ async function handleReviewSubmit(event) {
     submitButton.disabled = true;
     submitButton.textContent = "Submitting...";
 
-    const result = await createReview({
-        listingId: currentListing.id,
+    const payload = {
         rating: selectedRating,
-        comment: el("reviewComment").value,
-    });
+        comment: el("reviewComment").value.trim() || null,
+    };
+
+    const result = myReviewId
+        ? await supabase.from("reviews").update(payload).eq("id", myReviewId)
+        : await supabase.from("reviews").insert({
+            ...payload,
+            student_id: currentUser.id,
+            listing_id: currentListing.id,
+        });
 
     submittingReview = false;
     submitButton.disabled = false;
     submitButton.textContent = "Submit Review";
 
-    if (!result.success) {
-        showToast(result.error?.message || "Couldn't submit your review.", { type: "error" });
+    if (result.error) {
+        console.error("[review] submit failed:", result.error);
+        showToast(reviewErrorMessage(result.error), { type: "error" });
         return;
     }
 
-    showToast("Thanks for your review!", { type: "success" });
+    showToast(myReviewId ? "Your review has been updated." : "Thanks for your review!", { type: "success" });
+    myReviewId = myReviewId ?? "saved";
     el("reviewForm").reset();
     buildStarRatingInput();
     closeModal();
@@ -691,6 +756,16 @@ async function handleReviewSubmit(event) {
     if (reviewsResult.success) {
         renderReviews(reviewsResult.data);
     }
+}
+
+function reviewErrorMessage(error) {
+    if (error?.code === "42501") {
+        return "You can review this room once your stay has been marked as completed.";
+    }
+    if (error?.code === "23505") {
+        return "You have already reviewed this room.";
+    }
+    return error?.message || "Your review could not be submitted. Please try again.";
 }
 
 /*
@@ -732,16 +807,42 @@ function handleWhatsAppClick() {
     window.open(`https://wa.me/${number}?text=${message}`, "_blank", "noopener");
 }
 
-function handleChatClick() {
-    if (!currentUser) {
-        showToast("Please log in as a student to message the landlord.", { type: "info" });
-        window.location.href = "../auth/student_login.htm";
+async function handleChatClick() {
+    if (!currentListing?.landlord_id) return;
+
+    const userResult = await getCurrentUser();
+    const user = userResult.success ? userResult.data : null;
+
+    if (!user) {
+        showToast("Sign in as a student to chat with this landlord.", { type: "info" });
         return;
     }
 
-    window.location.href =
-        `../student/messages.htm?landlord=${encodeURIComponent(currentListing.landlord_id)}` +
-        `&listing=${encodeURIComponent(currentListing.id)}`;
+    if (user.id === currentListing.landlord_id) {
+        showToast("Landlords can open this chat from their messages page.", { type: "info" });
+        return;
+    }
+
+    const { data, error } = await supabase
+        .from("conversations")
+        .select("id")
+        .eq("student_id", user.id)
+        .eq("landlord_id", currentListing.landlord_id)
+        .eq("property_id", currentListing.id)
+        .eq("status", "active")
+        .maybeSingle();
+
+    if (error) {
+        showToast("Chat is not available right now. Please try again.", { type: "error" });
+        return;
+    }
+
+    if (!data) {
+        showToast("You can chat with this landlord once they approve your booking for this room.", { type: "info" });
+        return;
+    }
+
+    window.location.href = `../student/messages.htm?c=${encodeURIComponent(data.id)}`;
 }
 
 /*
@@ -753,21 +854,15 @@ function handleChatClick() {
 function wireActions() {
     el("saveListing")?.addEventListener("click", toggleFavorite);
 
-    el("bookInspection")?.addEventListener("click", () => {
-        buildBookingModal();
-        openModal("bookingInspectionModal");
-    });
-
-    el("writeReviewBtn")?.addEventListener("click", () => {
-        buildReviewModal();
-        openModal("reviewModal");
-    });
+    el("writeReviewBtn")?.addEventListener("click", openReviewForm);
 
     el("whatsappBtn")?.addEventListener("click", handleWhatsAppClick);
     el("chatBtn")?.addEventListener("click", handleChatClick);
 
     el("viewLandlordProfile")?.addEventListener("click", () => {
-        showToast("Public landlord profile pages are coming soon.", { type: "info" });
+        if (!currentListing?.landlord_id) return;
+        window.location.href =
+            `../general/landlord_profile_public.htm?id=${encodeURIComponent(currentListing.landlord_id)}`;
     });
 }
 
@@ -777,7 +872,15 @@ function wireActions() {
 |--------------------------------------------------------------------------
 */
 
+let initialised = false;
+
 export async function init() {
+    if (initialised) return;
+    initialised = true;
+
+    // Connect the booking button first, before any network request can fail
+    initBookingForm(document.getElementById("bookInspection"), () => currentListing);
+
     const listingId = getListingId();
 
     if (!listingId) {
@@ -811,10 +914,8 @@ export async function init() {
     if (currentUser) {
         const favoriteResult = await isFavorite(currentUser.id, currentListing.id);
         favorited = favoriteResult.success && favoriteResult.data;
-        renderFavoriteButton();
-    } else {
-        renderFavoriteButton();
     }
+    renderFavoriteButton();
 
     const [reviewsResult] = await Promise.all([
         getReviews(currentListing.id),
@@ -822,11 +923,7 @@ export async function init() {
         renderSimilarListings(currentListing),
     ]);
 
-    if (reviewsResult.success) {
-        renderReviews(reviewsResult.data);
-    } else {
-        renderReviews([]);
-    }
+    renderReviews(reviewsResult.success ? reviewsResult.data : []);
 }
 
 if (document.readyState === "loading") {

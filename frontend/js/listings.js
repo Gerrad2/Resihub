@@ -145,7 +145,16 @@ export function createListingCard(listing) {
 
     footer.append(badge);
 
-    content.append(title, location, price, features, footer);
+    const trust = document.createElement("span");
+    trust.className = listing.landlord_verified
+        ? "landlord-trust verified"
+        : "landlord-trust unverified";
+    trust.textContent = listing.landlord_verified
+        ? "✔ Verified landlord"
+        : "Landlord not yet verified";
+
+    content.append(title, location, price, features, trust, footer);
+
     card.append(imageWrap, content);
 
     return card;

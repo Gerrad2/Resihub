@@ -1,0 +1,162 @@
+/*==========================================
+    SITE FOOTER: general pages
+    Scoped to pages with data-resihub-surface="public".
+==========================================*/
+
+body[data-resihub-surface="public"] .main-footer {
+    margin-top: 0 !important;
+    padding: 2.25rem 0 1.5rem !important;
+    background: rgba(3, 14, 43, .75) !important;
+    border-top: 1px solid rgba(92, 150, 255, .14) !important;
+    color: rgba(190, 210, 245, .62);
+    font-size: .88rem;
+}
+
+/* ---------- Brand strip ---------- */
+body[data-resihub-surface="public"] .footer-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body[data-resihub-surface="public"] .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+body[data-resihub-surface="public"] .footer-logo-mark {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    box-shadow: 0 0 22px rgba(31, 107, 255, .35);
+    color: #fff;
+    font-size: 1rem;
+}
+
+body[data-resihub-surface="public"] .footer-name {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body[data-resihub-surface="public"] .footer-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(92, 150, 255, .4);
+}
+
+body[data-resihub-surface="public"] .footer-tagline {
+    margin: 0;
+    font-size: 1rem;
+    color: rgba(225, 236, 255, .85);
+}
+
+/* ---------- Links, social, copyright ---------- */
+body[data-resihub-surface="public"] .footer-bottom {
+    width: min(1280px, 100% - 2.5rem);
+    margin: 1.75rem auto 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid rgba(92, 150, 255, .14);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+body[data-resihub-surface="public"] .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .6rem 1.5rem;
+}
+
+body[data-resihub-surface="public"] .footer-links a {
+    color: rgba(190, 210, 245, .7);
+    text-decoration: none;
+    font-size: .88rem;
+}
+
+body[data-resihub-surface="public"] .footer-links a:hover {
+    color: #3FD0FF;
+}
+
+body[data-resihub-surface="public"] .social-links {
+    display: flex;
+    gap: .6rem;
+}
+
+body[data-resihub-surface="public"] .social-links a {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    border: 1px solid rgba(92, 150, 255, .24);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    text-decoration: none;
+}
+
+body[data-resihub-surface="public"] .social-links a:hover {
+    border-color: rgba(63, 208, 255, .6);
+    color: #3FD0FF;
+}
+
+body[data-resihub-surface="public"] .footer-copy {
+    margin: 0;
+    font-size: .8rem;
+    color: rgba(190, 210, 245, .5);
+}
+
+/* ---------- Back to top ---------- */
+body[data-resihub-surface="public"] .back-to-top {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 150;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    border: 1px solid rgba(92, 150, 255, .24);
+    background: rgba(8, 28, 74, .9);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 680px) {
+    body[data-resihub-surface="public"] .footer-strip {
+        flex-direction: column;
+        gap: .6rem;
+    }
+
+    body[data-resihub-surface="public"] .footer-divider {
+        display: none;
+    }
+
+    body[data-resihub-surface="public"] .footer-tagline {
+        font-size: .92rem;
+        text-align: center;
+    }
+
+    body[data-resihub-surface="public"] .footer-links {
+        gap: .55rem 1rem;
+    }
+}

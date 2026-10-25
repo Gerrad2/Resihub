@@ -1,0 +1,288 @@
+/*==========================================
+    NOTIFICATIONS (student/notification.htm)
+    Scoped to body.page-notifications
+==========================================*/
+
+body.page-notifications {
+    --nt-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --nt-line: rgba(92, 150, 255, .24);
+    --nt-line-soft: rgba(92, 150, 255, .14);
+    --nt-accent: #3FD0FF;
+    --nt-text-2: rgba(225, 236, 255, .82);
+    --nt-text-3: rgba(190, 210, 245, .62);
+    --nt-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --nt-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-notifications h1,
+body.page-notifications h2 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-notifications p {
+    color: var(--nt-text-2);
+    margin: 0;
+}
+
+body.page-notifications a {
+    text-decoration: none;
+}
+
+body.page-notifications .container {
+    width: min(960px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-notifications .hidden {
+    display: none !important;
+}
+
+/* ---------- Hero ---------- */
+body.page-notifications .n-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-notifications .n-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--nt-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-notifications .n-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Card and items ---------- */
+body.page-notifications .n-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-notifications .n-card {
+    border-radius: 18px;
+    background: var(--nt-card);
+    border: 1px solid var(--nt-line);
+    box-shadow: var(--nt-shadow);
+    overflow: hidden;
+}
+
+body.page-notifications .n-list {
+    display: grid;
+}
+
+body.page-notifications .n-item {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--nt-line-soft);
+    color: inherit;
+    cursor: pointer;
+    position: relative;
+}
+
+body.page-notifications .n-item:last-child {
+    border-bottom: 0;
+}
+
+body.page-notifications .n-item:hover {
+    background: rgba(47, 140, 255, .08);
+}
+
+body.page-notifications .n-item.unread::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--nt-accent);
+}
+
+body.page-notifications .n-item.unread strong {
+    color: #fff;
+}
+
+body.page-notifications .n-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 1rem;
+    border: 1px solid transparent;
+}
+
+body.page-notifications .n-booking {
+    background: rgba(47, 140, 255, .18);
+    color: #6CB8FF;
+    border-color: rgba(47, 140, 255, .35);
+}
+
+body.page-notifications .n-message {
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+    border-color: rgba(34, 197, 94, .35);
+}
+
+body.page-notifications .n-inspection {
+    background: rgba(245, 158, 11, .16);
+    color: #F59E0B;
+    border-color: rgba(245, 158, 11, .35);
+}
+
+body.page-notifications .n-property {
+    background: rgba(250, 204, 21, .14);
+    color: #FACC15;
+    border-color: rgba(250, 204, 21, .35);
+}
+
+body.page-notifications .n-review {
+    background: rgba(168, 85, 247, .16);
+    color: #C084FC;
+    border-color: rgba(168, 85, 247, .35);
+}
+
+body.page-notifications .n-system {
+    background: rgba(148, 163, 184, .16);
+    color: #CBD5E1;
+    border-color: rgba(148, 163, 184, .35);
+}
+
+body.page-notifications .n-text {
+    min-width: 0;
+    display: grid;
+    gap: .2rem;
+}
+
+body.page-notifications .n-text strong {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--nt-text-2);
+}
+
+body.page-notifications .n-text p {
+    font-size: .85rem;
+    color: var(--nt-text-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.page-notifications .n-time {
+    font-size: .76rem;
+    color: var(--nt-text-3);
+    white-space: nowrap;
+}
+
+body.page-notifications .n-chevron {
+    color: var(--nt-text-3);
+    font-size: .85rem;
+}
+
+/* ---------- Empty and footer ---------- */
+body.page-notifications .n-empty {
+    text-align: center;
+    padding: 3rem 1.25rem;
+}
+
+body.page-notifications .n-empty i {
+    font-size: 2rem;
+    color: var(--nt-accent);
+    margin-bottom: .75rem;
+}
+
+body.page-notifications .n-empty h2 {
+    font-size: 1.15rem;
+    margin-bottom: .4rem;
+}
+
+body.page-notifications .n-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+body.page-notifications .n-markall {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.4rem;
+    border-radius: 10px;
+    border: 0;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--nt-glow);
+}
+
+body.page-notifications .n-markall:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
+    body.page-notifications .n-item {
+        grid-template-columns: 40px minmax(0, 1fr) auto;
+        gap: .75rem;
+        padding: .9rem 1rem;
+    }
+
+    body.page-notifications .n-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    body.page-notifications .n-chevron {
+        display: none;
+    }
+}
+
+.alert-note {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 4000;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .8rem 1rem;
+    border-radius: 14px;
+    background: rgba(8, 28, 74, .96);
+    border: 1px solid rgba(63, 208, 255, .45);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .45);
+    color: #fff;
+    font-size: .9rem;
+}
+
+.alert-note a {
+    color: #3FD0FF;
+    font-weight: 600;
+}

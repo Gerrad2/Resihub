@@ -1,0 +1,541 @@
+/*==========================================
+    ABOUT (general/about.htm)
+    Scoped to body.page-about. Load order: style.css -> about-page.css
+==========================================*/
+
+body.page-about {
+    --ab-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --ab-line: rgba(92, 150, 255, .24);
+    --ab-line-soft: rgba(92, 150, 255, .14);
+    --ab-accent: #3FD0FF;
+    --ab-text-2: rgba(225, 236, 255, .82);
+    --ab-text-3: rgba(190, 210, 245, .62);
+    --ab-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --ab-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.6;
+}
+
+body.page-about h1,
+body.page-about h2,
+body.page-about h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    letter-spacing: -.01em;
+}
+
+body.page-about p {
+    color: var(--ab-text-2);
+}
+
+body.page-about a {
+    text-decoration: none;
+}
+
+/* plain container width; no shared glass frame */
+body.page-about .container {
+    width: min(1280px, 100% - 2.5rem);
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body.page-about .container::before,
+body.page-about .container::after {
+    content: none;
+    display: none;
+}
+
+/* shared buttons */
+body.page-about .btn-primary,
+body.page-about .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .8rem 1.4rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .2s;
+}
+
+body.page-about .btn-primary {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    border: 0;
+    box-shadow: var(--ab-glow);
+}
+
+body.page-about .btn-outline {
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    border: 1px solid rgba(92, 150, 255, .5);
+}
+
+body.page-about .btn-primary:hover,
+body.page-about .btn-outline:hover {
+    transform: translateY(-1px);
+}
+
+body.page-about .card-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(47, 140, 255, .3), rgba(31, 79, 216, .2));
+    border: 1px solid rgba(92, 150, 255, .35);
+    color: var(--ab-accent);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+body.page-about .about-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--ab-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+/* ---------- Hero ---------- */
+body.page-about .about-hero {
+    padding: 5.5rem 0 4rem;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--ab-line-soft);
+}
+
+body.page-about .about-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+}
+
+body.page-about .hero-text h1 {
+    font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 1rem 0 1rem;
+}
+
+body.page-about .hero-description {
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 0 1.75rem;
+}
+
+body.page-about .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+}
+
+body.page-about .hero-photo {
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--ab-line);
+    box-shadow: var(--ab-shadow), 0 0 60px rgba(31, 107, 255, .25);
+}
+
+body.page-about .hero-photo img {
+    width: 100%;
+    height: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ---------- Story heading ---------- */
+body.page-about .about-story {
+    padding: 4rem 0 1rem;
+}
+
+body.page-about .story-head {
+    text-align: center;
+}
+
+body.page-about .story-head h2 {
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    font-weight: 700;
+    margin: .8rem auto 0;
+    max-width: 720px;
+}
+
+/* ---------- Mission / vision / values ---------- */
+body.page-about .mission-section {
+    padding: 2.5rem 0 3.5rem;
+}
+
+body.page-about .mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+body.page-about .mission-card {
+    padding: 1.6rem 1.5rem;
+    border-radius: 16px;
+    background: var(--ab-card);
+    border: 1px solid var(--ab-line);
+    box-shadow: var(--ab-shadow);
+}
+
+body.page-about .mission-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 .5rem;
+}
+
+body.page-about .mission-card p {
+    margin: 0;
+    font-size: .92rem;
+}
+
+/* ---------- Stats ---------- */
+body.page-about .about-stats {
+    padding: 0 0 3.5rem;
+}
+
+body.page-about .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-about .about-stat {
+    padding: 1.4rem 1.2rem;
+    border-radius: 14px;
+    background: var(--ab-card);
+    border: 1px solid var(--ab-line);
+    box-shadow: var(--ab-shadow);
+    text-align: center;
+}
+
+body.page-about .about-stat h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0 0 .25rem;
+    color: var(--ab-accent);
+}
+
+body.page-about .about-stat p {
+    margin: 0;
+    font-size: .85rem;
+    color: var(--ab-text-3);
+}
+
+/* ---------- Values row (aboutFeatures, filled by script) ---------- */
+body.page-about .why-us {
+    padding: 0 0 3.5rem;
+}
+
+body.page-about .section-title {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 2rem;
+}
+
+body.page-about .section-title h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin: .6rem 0 .5rem;
+}
+
+body.page-about .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+body.page-about .features-grid>* {
+    padding: 1.4rem 1.2rem;
+    border-radius: 16px;
+    background: var(--ab-card);
+    border: 1px solid var(--ab-line);
+    box-shadow: var(--ab-shadow);
+    color: #fff;
+}
+
+body.page-about .features-grid h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: .8rem 0 .35rem;
+}
+
+body.page-about .features-grid p {
+    margin: 0;
+    font-size: .85rem;
+}
+
+/* ---------- Team (cards filled by script) ---------- */
+body.page-about .team-section {
+    padding: 0 0 3.5rem;
+}
+
+body.page-about .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+body.page-about .team-grid>* {
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: var(--ab-card);
+    border: 1px solid var(--ab-line);
+    box-shadow: var(--ab-shadow);
+    text-align: center;
+}
+
+body.page-about .team-grid img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--ab-accent);
+    margin: 0 auto .8rem;
+    display: block;
+}
+
+/* ---------- Journey / timeline (filled by script) ---------- */
+body.page-about .timeline-section {
+    padding: 0 0 3.5rem;
+}
+
+body.page-about .timeline {
+    display: grid;
+    gap: .9rem;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+body.page-about .timeline>* {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+    background: var(--ab-card);
+    border: 1px solid var(--ab-line);
+}
+
+body.page-about .timeline>*> :first-child {
+    color: var(--ab-accent);
+    font-weight: 700;
+}
+
+/* ---------- Closing banner ---------- */
+body.page-about .cta {
+    padding: 0 0 4rem;
+}
+
+body.page-about .cta-card {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    border-radius: 22px;
+    border: 1px solid var(--ab-line);
+    box-shadow: var(--ab-shadow);
+    background:
+        linear-gradient(180deg, rgba(4, 16, 48, .75), rgba(6, 24, 70, .9)),
+        url("../assets/images/hero-campus.jpg") center / cover no-repeat,
+        linear-gradient(180deg, #0B2A6F, #061A4A);
+}
+
+body.page-about .cta-card h2 {
+    font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+    font-weight: 700;
+    margin: 0 0 .7rem;
+}
+
+body.page-about .cta-card p {
+    max-width: 560px;
+    margin: 0 auto 1.8rem;
+}
+
+body.page-about .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .9rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+    body.page-about .about-hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-about .features-grid,
+    body.page-about .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+
+    body.page-about .mission-grid,
+    body.page-about .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-about .mission-grid> :last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+
+    body.page-about .mission-grid,
+    body.page-about .stats-grid,
+    body.page-about .features-grid,
+    body.page-about .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-about .timeline>* {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Hero: left-aligned text, equal buttons, photo frame that holds its size ---------- */
+body.page-about .hero-text {
+    text-align: left;
+}
+
+body.page-about .hero-text h1,
+body.page-about .hero-description {
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+body.page-about .hero-description {
+    max-width: 520px;
+}
+
+body.page-about .hero-buttons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 190px;
+    height: 54px;
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    font-size: .95rem;
+}
+
+/* keep the photo frame at a fixed size, even before the image loads */
+body.page-about .hero-photo {
+    min-height: 380px;
+    display: flex;
+    background: linear-gradient(160deg, #13418F 0%, #0A2A6B 55%, #061A4A 100%);
+}
+
+body.page-about .hero-photo img {
+    width: 100%;
+    height: auto;
+    min-height: 380px;
+    max-height: 480px;
+    object-fit: cover;
+    flex: 1;
+}
+
+/* ---------- Hero: photo as the background, text over a dark overlay ---------- */
+body.page-about .about-hero {
+    position: relative;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    padding: 7rem 0 4.5rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--ab-line-soft);
+    background:
+        linear-gradient(90deg,
+            rgba(4, 16, 48, .94) 0%,
+            rgba(6, 24, 70, .82) 45%,
+            rgba(6, 24, 70, .40) 100%),
+        url("../assets/images/hero-campus.jpg") center / cover no-repeat,
+        linear-gradient(180deg, #0B2A6F, #061A4A);
+}
+
+body.page-about .about-hero-inner {
+    display: block;
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+}
+
+body.page-about .about-hero .hero-text {
+    max-width: 640px;
+    text-align: left;
+}
+
+body.page-about .about-hero .hero-text h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1.08;
+    margin: 1rem 0;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, .45);
+}
+
+body.page-about .about-hero .hero-description {
+    font-size: 1.1rem;
+    margin: 0 0 2rem;
+    max-width: 540px;
+}
+
+@media (max-width: 760px) {
+    body.page-about .about-hero {
+        min-height: auto;
+        padding: 6rem 0 3rem;
+        background:
+            linear-gradient(180deg, rgba(4, 16, 48, .92), rgba(6, 24, 70, .86)),
+            url("../assets/images/hero-campus.jpg") center / cover no-repeat,
+            linear-gradient(180deg, #0B2A6F, #061A4A);
+    }
+}
+
+/* ---------- Hero: same height as the other photo heroes ---------- */
+body.page-about .about-hero {
+    min-height: 62vh;
+    padding: 5.5rem 0 3rem;
+}
+
+body.page-about .about-hero .hero-text h1 {
+    font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+    line-height: 1.1;
+    margin: .8rem 0;
+}
+
+body.page-about .about-hero .hero-description {
+    font-size: 1.02rem;
+    margin: 0 0 1.5rem;
+}
+
+@media (max-width: 760px) {
+    body.page-about .about-hero {
+        min-height: auto;
+        padding: 6rem 0 3rem;
+    }
+}

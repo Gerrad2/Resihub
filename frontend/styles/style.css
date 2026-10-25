@@ -1,44 +1,101 @@
-@import url("variables.css");
-@import url("themes.css");
-@import url("about.css");
-@import url("admin.css");
-@import url("animation.css");
-@import url("auth.css");
-@import url("background.css");
-@import url("browse.css");
-@import url("button.css");
-@import url("cards.css");
-@import url("components.css");
-@import url("contact.css");
-@import url("faq.css");
-@import url("footer.css");
-@import url("form.css");
-@import url("glass.css");
-@import url("hero.css");
-@import url("inputs.css");
-@import url("journey.css");
-@import url("landlord.css");
-@import url("layout.css");
+@import url("general-header.css");
+@import url("general-footer.css");
+@import url("student-header.css");
+@import url("auth-pages.css");
+@import url("general-response.css");
+@import url("about-page.css");
+@import url("browse-page.css");
+@import url("contact-page.css");
+@import url("faq-page.css");
+@import url("index-page.css");
+@import url("privacy-page.css");
+@import url("room-details-page.css");
+@import url("terms-page.css");
 @import url("modal.css");
-@import url("navigation.css");
-@import url("newsletter.css");
-@import url("policy.css");
-@import url("room_details.css");
-@import url("sections.css");
-@import url("stats.css");
-@import url("student.css");
-@import url("system.css");
-@import url("reset.css");
+@import url("universities-page.css");
+@import url("university-details-page.css");
+@import url("student-dashboard.css");
+@import url("booking-request.css");
+@import url("edit-profile.css");
+@import url("inspection-request.css");
+@import url("messages.css");
 @import url("responsive.css");
-@import url("tables.css");
-@import url("terms.css");
-@import url("testimonials.css");
-@import url("reference-ui.css");
+@import url("landlord-profile-public.css");
+@import url("notifications-page.css");
+@import url("profile-page.css");
+@import url("reviews-page.css");
+@import url("saved-pages.css");
+@import url("student-settings.css");
+@import url("landlord-dashboard.css");
+@import url("landlord-bookings.css");
+@import url("support-pages.css");
+@import url("listing-pages.css");
+@import url("edit-listing-pages.css");
+@import url("listing-details-page.css");
+@import url("system.css");
+@import url("verify-account.css");
 
-@import url("typography.css");
-@import url("uni.css");
-@import url("universities.css");
-@import url("university_details.css");
-@import url("utilities.css");
-@import url("why-us.css");
-@import url("reference-ui.css");
+/* ---------- Verification badges and notices ---------- */
+.trust-badge {
+    display: inline-block;
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.trust-badge.verified {
+    background: rgba(34, 197, 94, .16);
+    color: #86EFAC;
+}
+
+.trust-badge.unverified {
+    background: rgba(245, 158, 11, .14);
+    color: #FCD34D;
+}
+
+.trust-notice {
+    margin: .6rem 0;
+    padding: .75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(245, 158, 11, .35);
+    background: rgba(245, 158, 11, .08);
+    color: #FCD34D;
+    font-size: .88rem;
+}
+
+.verify-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem 1rem;
+    margin-bottom: 1.2rem;
+    padding: .9rem 1.1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(245, 158, 11, .4);
+    background: rgba(245, 158, 11, .1);
+    color: #FDE68A;
+    font-size: .9rem;
+}
+
+.verify-banner p {
+    margin: 0;
+    flex: 1 1 260px;
+}
+
+.verify-banner a {
+    color: #3FD0FF;
+    font-weight: 600;
+}
+
+.verify-banner button {
+    padding: .4rem .8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(253, 230, 138, .4);
+    background: transparent;
+    color: #FDE68A;
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}

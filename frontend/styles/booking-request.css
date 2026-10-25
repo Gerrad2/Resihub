@@ -1,0 +1,280 @@
+/*==========================================
+    BOOKING REQUESTS (student/booking_requests.htm)
+    Scoped to body.page-booking-requests
+==========================================*/
+
+body.page-booking-requests {
+    --br-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --br-line: rgba(92, 150, 255, .24);
+    --br-line-soft: rgba(92, 150, 255, .14);
+    --br-accent: #3FD0FF;
+    --br-text-2: rgba(225, 236, 255, .82);
+    --br-text-3: rgba(190, 210, 245, .62);
+    --br-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --br-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-booking-requests h1,
+body.page-booking-requests h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-booking-requests p {
+    color: var(--br-text-2);
+    margin: 0;
+}
+
+body.page-booking-requests a {
+    text-decoration: none;
+}
+
+body.page-booking-requests .container {
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-booking-requests .hidden {
+    display: none !important;
+}
+
+body.page-booking-requests .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+body.page-booking-requests .booking-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-booking-requests .booking-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--br-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-booking-requests .booking-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Toolbar: tabs and search ---------- */
+body.page-booking-requests .booking-section {
+    padding: .5rem 0 3rem;
+}
+
+body.page-booking-requests .booking-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+body.page-booking-requests .booking-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+body.page-booking-requests .booking-tab {
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--br-line);
+    background: rgba(20, 58, 130, .35);
+    color: var(--br-text-2);
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+body.page-booking-requests .booking-tab.active {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: var(--br-glow);
+}
+
+body.page-booking-requests .booking-filter input {
+    width: min(320px, 100%);
+    padding: .65rem .9rem;
+    border-radius: 10px;
+    border: 1px solid var(--br-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .88rem;
+    outline: none;
+}
+
+body.page-booking-requests .booking-filter input:focus {
+    border-color: rgba(63, 208, 255, .65);
+}
+
+/* ---------- Table ---------- */
+body.page-booking-requests .booking-card {
+    border-radius: 18px;
+    background: var(--br-card);
+    border: 1px solid var(--br-line);
+    box-shadow: var(--br-shadow);
+    overflow-x: auto;
+}
+
+body.page-booking-requests .booking-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: .88rem;
+}
+
+body.page-booking-requests .booking-table th {
+    padding: 1rem 1.1rem;
+    text-align: left;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--br-text-3);
+    border-bottom: 1px solid var(--br-line-soft);
+}
+
+body.page-booking-requests .booking-table td {
+    padding: .9rem 1.1rem;
+    color: var(--br-text-2);
+    border-bottom: 1px solid var(--br-line-soft);
+    vertical-align: middle;
+}
+
+body.page-booking-requests .booking-table tbody tr:hover {
+    background: rgba(63, 208, 255, .05);
+}
+
+body.page-booking-requests .property-cell {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+}
+
+body.page-booking-requests .property-cell img {
+    width: 72px;
+    height: 52px;
+    border-radius: 9px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+body.page-booking-requests .property-cell strong {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+}
+
+body.page-booking-requests .property-cell span {
+    font-size: .78rem;
+    color: var(--br-text-3);
+}
+
+body.page-booking-requests .booking-status {
+    display: inline-block;
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+body.page-booking-requests .status-approved {
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+}
+
+body.page-booking-requests .status-pending {
+    background: rgba(245, 158, 11, .16);
+    color: #F59E0B;
+}
+
+body.page-booking-requests .status-rejected {
+    background: rgba(239, 68, 68, .16);
+    color: #EF4444;
+}
+
+body.page-booking-requests .booking-view {
+    padding: .45rem .95rem;
+    border-radius: 9px;
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+/* ---------- Empty state and note ---------- */
+body.page-booking-requests .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    border-radius: 18px;
+    background: var(--br-card);
+    border: 1px solid var(--br-line);
+}
+
+body.page-booking-requests .empty-state i {
+    font-size: 2rem;
+    color: var(--br-accent);
+    margin-bottom: .75rem;
+}
+
+body.page-booking-requests .empty-state h3 {
+    font-size: 1.15rem;
+    margin-bottom: .4rem;
+}
+
+body.page-booking-requests .booking-note {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-top: 1.25rem;
+    font-size: .88rem;
+    color: var(--br-text-3);
+}
+
+body.page-booking-requests .booking-note i {
+    color: var(--br-accent);
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 680px) {
+    body.page-booking-requests .booking-filter input {
+        width: 100%;
+    }
+
+    body.page-booking-requests .booking-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

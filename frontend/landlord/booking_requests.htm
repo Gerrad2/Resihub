@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bookings | ResiHub Landlord</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="page-landlord-bookings" data-resihub-surface="student">
+    <div id="scrollProgress"></div>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main>
+        <!-- HERO -->
+        <section class="lb-hero">
+            <div class="container">
+                <span class="lb-badge"><i class="fa-solid fa-calendar-check" aria-hidden="true"></i>Bookings</span>
+                <h1>Bookings</h1>
+                <p class="lb-sub">Manage and track all booking requests for your properties.</p>
+            </div>
+        </section>
+
+        <section class="lb-section">
+            <div class="container lb-layout">
+
+                <!-- LIST -->
+                <div class="lb-main">
+                    <div class="lb-toolbar">
+                        <div class="lb-search">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <label class="visually-hidden" for="bookingSearch">Search bookings</label>
+                            <input type="search" id="bookingSearch" placeholder="Search by student or property"
+                                autocomplete="off">
+                        </div>
+
+                        <label class="visually-hidden" for="bookingStatus">Filter by status</label>
+                        <select id="bookingStatus">
+                            <option value="">All statuses</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Confirmed</option>
+                            <option value="completed">Completed</option>
+                            <option value="rejected">Rejected</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+
+                        <label class="visually-hidden" for="bookingProperty">Filter by property</label>
+                        <select id="bookingProperty">
+                            <option value="">All properties</option>
+                        </select>
+                    </div>
+
+                    <div class="lb-card lb-table-card">
+                        <div class="lb-table-wrap">
+                            <table class="lb-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Student</th>
+                                        <th scope="col">Property</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bookingRows" aria-live="polite"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="emptyBookings" class="lb-empty hidden">
+                        <i class="fa-solid fa-calendar-xmark" aria-hidden="true"></i>
+                        <h2>No bookings yet</h2>
+                        <p>When students request an inspection of your properties, the requests will appear here.</p>
+                    </div>
+                </div>
+
+                <!-- SIDE -->
+                <aside class="lb-side">
+                    <div class="lb-card">
+                        <h2>Booking Stats</h2>
+
+                        <div class="lb-donut-wrap">
+                            <div id="bookingDonut" class="lb-donut">
+                                <div class="lb-donut-centre">
+                                    <strong id="statTotal">0</strong>
+                                    <span>Total Bookings</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="lb-legend">
+                            <li><span class="lb-dot lb-dot-confirmed"></span> Confirmed <strong
+                                    id="statConfirmed">0</strong></li>
+                            <li><span class="lb-dot lb-dot-pending"></span> Pending <strong id="statPending">0</strong>
+                            </li>
+                            <li><span class="lb-dot lb-dot-cancelled"></span> Cancelled <strong
+                                    id="statCancelled">0</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="lb-card">
+                        <h2>Recent Bookings</h2>
+                        <div id="recentBookings" class="lb-recent"></div>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/booking_requests.js";
+        init();
+    </script>
+</body>
+
+</html>

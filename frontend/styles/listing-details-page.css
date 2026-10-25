@@ -1,0 +1,387 @@
+/*==========================================
+    LANDLORD LISTING DETAILS (landlord/listing_details.htm)
+    Scoped to body.page-landlord-listing
+==========================================*/
+
+body.page-landlord-listing {
+    --ll-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --ll-line: rgba(92, 150, 255, .24);
+    --ll-line-soft: rgba(92, 150, 255, .14);
+    --ll-accent: #3FD0FF;
+    --ll-text-2: rgba(225, 236, 255, .82);
+    --ll-text-3: rgba(190, 210, 245, .62);
+    --ll-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --ll-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+body.page-landlord-listing h1,
+body.page-landlord-listing h2,
+body.page-landlord-listing h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-landlord-listing p {
+    color: var(--ll-text-2);
+    margin: 0;
+}
+
+body.page-landlord-listing a {
+    text-decoration: none;
+}
+
+body.page-landlord-listing .container {
+    width: min(1200px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* ---------- Hero ---------- */
+body.page-landlord-listing .ll-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-landlord-listing .ll-back {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--ll-accent);
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+body.page-landlord-listing .ll-hero-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: .8rem;
+}
+
+body.page-landlord-listing .ll-hero h1 {
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+    font-weight: 700;
+    margin: .6rem 0 .3rem;
+}
+
+body.page-landlord-listing .ll-location {
+    font-size: .95rem;
+}
+
+body.page-landlord-listing .ll-badges {
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+}
+
+body.page-landlord-listing .ll-badge {
+    padding: .22rem .65rem;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 600;
+    background: rgba(8, 28, 74, .85);
+    border: 1px solid var(--ll-line);
+    color: #fff;
+}
+
+body.page-landlord-listing .ll-badge.published {
+    color: #86EFAC;
+}
+
+body.page-landlord-listing .ll-badge.draft {
+    color: #FCD34D;
+}
+
+body.page-landlord-listing .ll-badge.archived {
+    color: #CBD5E1;
+}
+
+body.page-landlord-listing .ll-badge.available {
+    color: #86EFAC;
+}
+
+body.page-landlord-listing .ll-badge.booked {
+    color: #6CB8FF;
+}
+
+body.page-landlord-listing .ll-badge.unavailable {
+    color: #FCA5A5;
+}
+
+body.page-landlord-listing .ll-actions {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+}
+
+body.page-landlord-listing .ll-primary,
+body.page-landlord-listing .ll-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.2rem;
+    border-radius: 10px;
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+body.page-landlord-listing .ll-primary {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    box-shadow: var(--ll-glow);
+}
+
+body.page-landlord-listing .ll-secondary {
+    border: 1px solid var(--ll-line);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+}
+
+/* ---------- Layout ---------- */
+body.page-landlord-listing .ll-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-landlord-listing .ll-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+body.page-landlord-listing .ll-main,
+body.page-landlord-listing .ll-side {
+    display: grid;
+    gap: 1.1rem;
+    min-width: 0;
+}
+
+body.page-landlord-listing .ll-card {
+    padding: 1.3rem 1.4rem;
+    border-radius: 18px;
+    background: var(--ll-card);
+    border: 1px solid var(--ll-line);
+    box-shadow: var(--ll-shadow);
+    min-width: 0;
+}
+
+body.page-landlord-listing .ll-card h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: .8rem;
+}
+
+body.page-landlord-listing .ll-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .8rem;
+}
+
+body.page-landlord-listing .ll-head h2 {
+    margin: 0;
+}
+
+body.page-landlord-listing .ll-head a {
+    color: var(--ll-accent);
+    font-size: .86rem;
+    font-weight: 600;
+}
+
+body.page-landlord-listing .ll-two {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+}
+
+/* ---------- Gallery and facts ---------- */
+body.page-landlord-listing .ll-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-auto-rows: 150px;
+    gap: .6rem;
+}
+
+body.page-landlord-listing .ll-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+body.page-landlord-listing .ll-gallery img:first-child {
+    grid-row: span 2;
+}
+
+body.page-landlord-listing .ll-facts {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .7rem;
+}
+
+body.page-landlord-listing .ll-fact {
+    padding: .9rem 1rem;
+    border-radius: 14px;
+    background: var(--ll-card);
+    border: 1px solid var(--ll-line);
+    display: grid;
+    gap: .2rem;
+}
+
+body.page-landlord-listing .ll-fact span {
+    font-size: .74rem;
+    color: var(--ll-text-3);
+}
+
+body.page-landlord-listing .ll-fact strong {
+    font-size: .95rem;
+    color: #fff;
+}
+
+/* ---------- Lists and rows ---------- */
+body.page-landlord-listing .ll-text {
+    line-height: 1.7;
+}
+
+body.page-landlord-listing .ll-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: .5rem;
+}
+
+body.page-landlord-listing .ll-list li {
+    font-size: .9rem;
+    color: var(--ll-text-2);
+    display: flex;
+    justify-content: space-between;
+    gap: .8rem;
+}
+
+body.page-landlord-listing .ll-list li strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+body.page-landlord-listing .ll-rows {
+    display: grid;
+    gap: .55rem;
+}
+
+body.page-landlord-listing .ll-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .8rem;
+    padding: .7rem .9rem;
+    border-radius: 12px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--ll-line-soft);
+    color: var(--ll-text-2);
+    font-size: .88rem;
+}
+
+body.page-landlord-listing .ll-row strong {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    font-size: .9rem;
+}
+
+body.page-landlord-listing .ll-row span {
+    font-size: .76rem;
+    color: var(--ll-text-3);
+}
+
+body.page-landlord-listing .ll-row a {
+    color: var(--ll-accent);
+    font-weight: 600;
+    font-size: .84rem;
+}
+
+body.page-landlord-listing .ll-tag {
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 600;
+    background: rgba(47, 140, 255, .18);
+    color: #6CB8FF;
+    white-space: nowrap;
+}
+
+body.page-landlord-listing .ll-stars {
+    color: #F59E0B;
+    font-size: .8rem;
+}
+
+body.page-landlord-listing .ll-empty {
+    font-size: .88rem;
+    padding: .4rem 0;
+}
+
+/* ---------- Owner card ---------- */
+body.page-landlord-listing .ll-owner {
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: .4rem;
+}
+
+body.page-landlord-listing .ll-owner img {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--ll-accent);
+    box-shadow: var(--ll-glow);
+}
+
+body.page-landlord-listing .ll-owner h3 {
+    font-size: 1rem;
+}
+
+body.page-landlord-listing .ll-owner p {
+    font-size: .8rem;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 980px) {
+    body.page-landlord-listing .ll-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-landlord-listing .ll-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-landlord-listing .ll-two {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-landlord-listing .ll-gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 180px;
+    }
+
+    body.page-landlord-listing .ll-gallery img:first-child {
+        grid-row: auto;
+    }
+}

@@ -1,0 +1,324 @@
+/*==========================================
+    SETTINGS (student/student_settings.htm)
+    Scoped to body.page-settings
+==========================================*/
+
+body.page-settings {
+    --st-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --st-line: rgba(92, 150, 255, .24);
+    --st-line-soft: rgba(92, 150, 255, .14);
+    --st-accent: #3FD0FF;
+    --st-text-2: rgba(225, 236, 255, .82);
+    --st-text-3: rgba(190, 210, 245, .62);
+    --st-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --st-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-settings h1,
+body.page-settings h2 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-settings p {
+    color: var(--st-text-2);
+    margin: 0;
+}
+
+body.page-settings a {
+    text-decoration: none;
+}
+
+body.page-settings .container {
+    width: min(1100px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* ---------- Hero ---------- */
+body.page-settings .st-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-settings .st-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--st-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-settings .st-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Layout ---------- */
+body.page-settings .st-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-settings .st-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+body.page-settings .st-nav {
+    display: grid;
+    gap: .35rem;
+    padding: .7rem;
+    border-radius: 16px;
+    background: var(--st-card);
+    border: 1px solid var(--st-line);
+    box-shadow: var(--st-shadow);
+    position: sticky;
+    top: 110px;
+}
+
+body.page-settings .st-nav a {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .7rem .85rem;
+    border-radius: 11px;
+    color: var(--st-text-2);
+    font-size: .92rem;
+    font-weight: 500;
+}
+
+body.page-settings .st-nav a i {
+    width: 18px;
+    text-align: center;
+    color: var(--st-accent);
+}
+
+body.page-settings .st-nav a:hover,
+body.page-settings .st-nav a.active {
+    background: rgba(47, 140, 255, .18);
+    color: #fff;
+}
+
+body.page-settings .st-main {
+    display: grid;
+    gap: 1.25rem;
+    min-width: 0;
+}
+
+body.page-settings .st-card {
+    padding: 1.5rem;
+    border-radius: 18px;
+    background: var(--st-card);
+    border: 1px solid var(--st-line);
+    box-shadow: var(--st-shadow);
+    scroll-margin-top: 110px;
+}
+
+body.page-settings .st-card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+body.page-settings .st-card>p {
+    margin-bottom: 1rem;
+    font-size: .92rem;
+}
+
+/* ---------- Fields ---------- */
+body.page-settings .st-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-settings .st-field {
+    display: grid;
+    gap: .4rem;
+}
+
+body.page-settings .st-field label {
+    font-size: .8rem;
+    color: var(--st-text-3);
+}
+
+body.page-settings .st-field select {
+    width: 100%;
+    padding: .7rem .9rem;
+    border-radius: 10px;
+    border: 1px solid var(--st-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .9rem;
+    outline: none;
+}
+
+body.page-settings .st-field select option {
+    background: #0A2A6B;
+}
+
+/* ---------- Switch rows ---------- */
+body.page-settings .st-rows {
+    display: grid;
+    gap: .6rem;
+}
+
+body.page-settings .st-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .9rem 1rem;
+    border-radius: 12px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--st-line-soft);
+    cursor: pointer;
+}
+
+body.page-settings .st-row strong {
+    display: block;
+    font-size: .92rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+body.page-settings .st-row small {
+    display: block;
+    font-size: .78rem;
+    color: var(--st-text-3);
+}
+
+body.page-settings .st-switch {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+body.page-settings .st-switch input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+body.page-settings .st-switch i {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, .35);
+    transition: background .2s;
+}
+
+body.page-settings .st-switch i::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .2s;
+}
+
+body.page-settings .st-switch input:checked+i {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    box-shadow: var(--st-glow);
+}
+
+body.page-settings .st-switch input:checked+i::after {
+    transform: translateX(20px);
+}
+
+body.page-settings .st-switch input:focus-visible+i {
+    outline: 2px solid var(--st-accent);
+    outline-offset: 3px;
+}
+
+/* ---------- Buttons and actions ---------- */
+body.page-settings .st-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .7rem 1.2rem;
+    border-radius: 10px;
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    font-size: .9rem;
+    font-weight: 600;
+    width: fit-content;
+}
+
+body.page-settings .st-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+body.page-settings .st-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .8rem 1.5rem;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font: inherit;
+    font-size: .92rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--st-glow);
+}
+
+body.page-settings .st-primary:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 860px) {
+    body.page-settings .st-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-settings .st-nav {
+        position: static;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    body.page-settings .st-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-settings .st-nav {
+        grid-template-columns: 1fr;
+    }
+}

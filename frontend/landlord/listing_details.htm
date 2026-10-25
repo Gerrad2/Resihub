@@ -3,334 +3,150 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Student Accommodation Listing Details | ResiHub Nigeria</title>
-
-    <meta name="description"
-        content="View complete student accommodation details on ResiHub. Explore hostel photos, amenities, pricing, landlord information, reviews, location, nearby universities and book an inspection online in Nigeria.">
-
-    <meta name="keywords"
-        content="student accommodation Nigeria, hostel details, apartment details, university housing, ResiHub listings, hostel inspection, student apartments, affordable accommodation Nigeria">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="robots" content="index, follow">
-
-    <meta name="theme-color" content="#0B6E4F">
-
-    <meta name="application-name" content="ResiHub">
-
-    <meta name="apple-mobile-web-app-title" content="ResiHub">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <!-- Open Graph -->
-
-    <meta property="og:site_name" content="ResiHub">
-
-    <meta property="og:title" content="Student Accommodation Listing Details | ResiHub Nigeria">
-
-    <meta property="og:description"
-        content="Browse hostel photos, amenities, landlord details, reviews and inspection booking for student accommodation on ResiHub.">
-
-    <meta property="og:type" content="website">
-
-    <meta property="og:url" content="https://www.resihub.com/room_details.htm">
-
-    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.png">
-
-    <meta property="og:image:alt" content="Student Accommodation Listing on ResiHub">
-
-    <meta property="og:locale" content="en_NG">
-
-    <!-- Twitter -->
-
-    <meta name="twitter:card" content="summary_large_image">
-
-    <meta name="twitter:title" content="Student Accommodation Listing Details | ResiHub Nigeria">
-
-    <meta name="twitter:description"
-        content="Find affordable student accommodation near universities in Nigeria with photos, reviews and inspection booking.">
-
-    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.png">
-
-    <!-- Canonical -->
-
-    <link rel="canonical" href="https://www.resihub.com/room_details.htm">
-
-    <!-- Favicon -->
+    <title>Listing Details | ResiHub Landlord</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-    <!-- Font Awesome -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- Main Stylesheet -->
-
     <link rel="stylesheet" href="../styles/style.css">
-    <!-- Structured Data -->
 
-    <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"WebPage",
-      "name":"Student Accommodation Listing Details",
-      "url":"https://www.resihub.com/room_details.htm",
-      "description":"View complete details of student accommodation listings on ResiHub including amenities, landlord information, location, reviews and inspection booking.",
-      "publisher":{
-        "@type":"Organization",
-        "name":"ResiHub",
-        "logo":{
-          "@type":"ImageObject",
-          "url":"https://www.resihub.com/assets/images/logo.png"
-        }
-      }
-    }
-    </script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="landlord">
+<body class="page-landlord-listing" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-
-        <!-- Listing Gallery -->
-        <section class="listing-hero">
-
+        <!-- HERO -->
+        <section class="ll-hero">
             <div class="container">
+                <a href="my_listing.htm" class="ll-back"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> My
+                    Listings</a>
 
-                <div id="propertyGallery" class="property-gallery" aria-label="Property image gallery">
+                <div class="ll-hero-row">
+                    <div>
+                        <div id="propertyBadges" class="ll-badges"></div>
+                        <h1 id="propertyTitle">Loading listing...</h1>
+                        <p id="propertyLocation" class="ll-location"></p>
+                    </div>
 
+                    <div class="ll-actions">
+                        <a id="inspectionBtn" href="edit_listing.htm" class="ll-primary">
+                            <i class="fa-solid fa-pen" aria-hidden="true"></i> Edit listing
+                        </a>
+                        <a id="chatLandlordBtn" href="booking_requests.htm" class="ll-secondary">
+                            <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> View bookings
+                        </a>
+                    </div>
                 </div>
-
             </div>
-
         </section>
 
-        <!-- Property Details -->
-        <section class="listing-details">
+        <section class="ll-section">
+            <div class="container ll-layout">
 
-            <div class="container">
+                <div class="ll-main">
 
-                <div class="listing-layout">
+                    <!-- GALLERY -->
+                    <div class="ll-card">
+                        <div id="propertyGallery" class="ll-gallery"></div>
+                    </div>
 
-                    <!-- Main Property Information -->
-                    <article class="listing-main">
+                    <!-- KEY FACTS -->
+                    <div class="ll-facts">
+                        <article class="ll-fact">
+                            <span>Price</span>
+                            <strong id="propertyPrice">—</strong>
+                        </article>
+                        <article class="ll-fact">
+                            <span>Type</span>
+                            <strong id="propertyType">—</strong>
+                        </article>
+                        <article class="ll-fact">
+                            <span>Bedrooms</span>
+                            <strong id="bedroomCount">—</strong>
+                        </article>
+                        <article class="ll-fact">
+                            <span>Bathrooms</span>
+                            <strong id="bathroomCount">—</strong>
+                        </article>
+                        <article class="ll-fact">
+                            <span>Rooms available</span>
+                            <strong id="propertySize">—</strong>
+                        </article>
+                    </div>
 
-                        <header class="listing-header">
+                    <!-- DESCRIPTION -->
+                    <div class="ll-card">
+                        <h2>About this property</h2>
+                        <p id="propertyDescription" class="ll-text">—</p>
+                    </div>
 
-                            <h1 id="propertyTitle">
-                                Property Title
-                            </h1>
-
-                            <p id="propertyLocation">
-                                Property Location
-                            </p>
-
-                            <h2 id="propertyPrice">
-                                â‚¦0
-                            </h2>
-
-                            <div id="propertyBadges" class="property-badges" aria-label="Property Highlights">
-
-                            </div>
-
-                        </header>
-
-                        <!-- Description -->
-                        <section class="property-description">
-
-                            <h2>Description</h2>
-
-                            <p id="propertyDescription">
-
-                            </p>
-
-                        </section>
-
-                        <!-- Quick Facts -->
-                        <section class="quick-facts">
-
-                            <h2>Property Details</h2>
-
-                            <div class="facts-grid">
-
-                                <div class="fact-card">
-
-                                    <i class="fa-solid fa-bed" aria-hidden="true"></i>
-
-                                    <span id="bedroomCount"></span>
-
-                                </div>
-
-                                <div class="fact-card">
-
-                                    <i class="fa-solid fa-bath" aria-hidden="true"></i>
-
-                                    <span id="bathroomCount"></span>
-
-                                </div>
-
-                                <div class="fact-card">
-
-                                    <i class="fa-solid fa-ruler-combined" aria-hidden="true"></i>
-
-                                    <span id="propertySize"></span>
-
-                                </div>
-
-                                <div class="fact-card">
-
-                                    <i class="fa-solid fa-building" aria-hidden="true"></i>
-
-                                    <span id="propertyType"></span>
-
-                                </div>
-
-                            </div>
-
-                        </section>
-
-                        <!-- Amenities -->
-                        <section class="property-amenities">
-
+                    <!-- AMENITIES AND DETAILS -->
+                    <div class="ll-two">
+                        <div class="ll-card">
                             <h2>Amenities</h2>
-
-                            <div id="amenitiesGrid" class="amenities-grid">
-
-                            </div>
-
-                        </section>
-
-                        <!-- Features -->
-                        <section class="property-features">
-
-                            <h2>Features</h2>
-
-                            <div id="featuresGrid" class="features-grid">
-
-                            </div>
-
-                        </section>
-
-                        <!-- Map -->
-                        <section class="property-map">
-
-                            <h2>Property Location</h2>
-
-                            <div id="propertyMap" aria-label="Property Map">
-
-                            </div>
-
-                        </section>
-
-                        <!-- Reviews -->
-                        <section class="property-reviews">
-
-                            <div class="section-header">
-
-                                <h2>Student Reviews</h2>
-
-                            </div>
-
-                            <div id="reviewList" class="review-list">
-
-                            </div>
-
-                        </section>
-
-                        <!-- Similar Listings -->
-                        <section class="similar-properties">
-
-                            <div class="section-header">
-
-                                <h2>Similar Properties</h2>
-
-                            </div>
-
-                            <div id="similarListings" class="listing-grid">
-
-                            </div>
-
-                        </section>
-
-                    </article>
-
-                    <!-- Sidebar -->
-                    <aside class="listing-sidebar">
-
-                        <div class="landlord-card">
-
-                            <img id="landlordPhoto" src="../assets/images/default-avatar.png"
-                                alt="Landlord Profile Picture">
-
-                            <h3 id="landlordName">
-
-                            </h3>
-
-                            <p id="landlordJoined">
-
-                            </p>
-
-                            <button id="chatLandlordBtn" class="btn-primary" type="button"
-                                aria-label="Chat with Landlord">
-
-                                <i class="fa-solid fa-comments" aria-hidden="true"></i>
-
-                                Chat
-
-                            </button>
-
-                            <button id="inspectionBtn" class="btn-primary magnetic-btn ripple-btn shine-btn"
-                                type="button" aria-label="Book Property Inspection">
-
-                                Book Inspection
-
-                            </button>
-
+                            <ul id="amenitiesGrid" class="ll-list"></ul>
                         </div>
+                        <div class="ll-card">
+                            <h2>Details</h2>
+                            <ul id="featuresGrid" class="ll-list"></ul>
+                        </div>
+                    </div>
 
-                    </aside>
+                    <!-- BOOKINGS -->
+                    <div class="ll-card">
+                        <div class="ll-head">
+                            <h2>Recent bookings</h2>
+                            <a href="booking_requests.htm">View all</a>
+                        </div>
+                        <div id="listingBookings" class="ll-rows"></div>
+                    </div>
+
+                    <!-- REVIEWS -->
+                    <div class="ll-card">
+                        <h2>Reviews</h2>
+                        <div id="reviewList" class="ll-rows"></div>
+                    </div>
 
                 </div>
 
+                <!-- SIDE -->
+                <aside class="ll-side">
+                    <div class="ll-card ll-owner">
+                        <img id="landlordPhoto" src="../assets/images/default-avatar.png" alt="Your photo">
+                        <h3 id="landlordName">You</h3>
+                        <p id="landlordJoined"></p>
+                    </div>
+
+                    <div class="ll-card">
+                        <h2>Your other listings</h2>
+                        <div id="similarListings" class="ll-rows"></div>
+                    </div>
+                </aside>
+
             </div>
-
         </section>
-
     </main>
 
     <!-- FOOTER -->
-
     <div id="footer"></div>
 
-    <!-- Page Script -->
-
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/listing_details.js";
+        init();
+    </script>
 </body>
 
 </html>
-
-
-

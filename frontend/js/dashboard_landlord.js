@@ -1,969 +1,278 @@
-// js/dashboard_landlord.js
+import { getCurrentUser, getProfile, supabase } from "./api.js";
+import { showError } from "./student_utils.js";
+import { renderLandlordBanner } from "./core/verification.js";
 
-import {
-    supabase,
-    getCurrentUser,
-    getProfile,
-    getLandlordListings,
-    getLandlordBookings
-} from "./core/api.js";
+const $ = (id) => document.getElementById(id);
 
+const DEFAULT_AVATAR = "../assets/images/default-avatar.png";
+const DEFAULT_ROOM = "../assets/images/placeholder-room.jpg";
 
-/* =========================================================
-   CONFIGURATION
-========================================================= */
+const BOOKING_LABEL = {
+    pending: "Pending",
+    approved: "Confirmed",
+    completed: "Completed",
+    rejected: "Rejected",
+    cancelled: "Cancelled",
+};
 
-const MAX_DASHBOARD_LISTINGS = 6;
-const MAX_BOOKING_PREVIEW = 5;
-const MAX_MESSAGE_PREVIEW = 5;
+const money = new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    maximumFractionDigits: 0,
+});
 
+let me = null;
 
-/* =========================================================
-   STATE
-========================================================= */
+/* ---------- Entry point ---------- */
 
-let currentUser = null;
-let currentProfile = null;
-let landlordListings = [];
-let landlordBookings = [];
+export async function init() {
+    setToday();
 
+    const userResult = await getCurrentUser();
+    me = userResult.success ? userResult.data : null;
 
-/* =========================================================
-   DOM
-========================================================= */
-
-const landlordNameElement =
-    document.getElementById("landlordName");
-
-const landlordAvatarElement =
-    document.getElementById("landlordAvatar");
-
-const listingCountElement =
-    document.getElementById("listingCount");
-
-const bookingCountElement =
-    document.getElementById("bookingCount");
-
-const messageCountElement =
-    document.getElementById("messageCount");
-
-const reviewCountElement =
-    document.getElementById("reviewCount");
-
-const landlordListingsElement =
-    document.getElementById("landlordListings");
-
-const bookingPreviewElement =
-    document.getElementById("bookingPreview");
-
-const recentMessagesElement =
-    document.getElementById("recentMessages");
-
-
-/* =========================================================
-   UTILITIES
-========================================================= */
-
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-
-function formatCurrency(value) {
-    const amount = Number(value);
-
-    if (!Number.isFinite(amount)) {
-        return "₦0";
-    }
-
-    return new Intl.NumberFormat("en-NG", {
-        style: "currency",
-        currency: "NGN",
-        maximumFractionDigits: 0
-    }).format(amount);
-}
-
-
-function formatDate(value) {
-    if (!value) {
-        return "N/A";
-    }
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-        return "N/A";
-    }
-
-    return new Intl.DateTimeFormat("en-NG", {
-        day: "numeric",
-        month: "short",
-        year: "numeric"
-    }).format(date);
-}
-
-
-function formatRelativeDate(value) {
-    if (!value) {
-        return "";
-    }
-
-    const date = new Date(value);
-
-    if (Number.isNaN(date.getTime())) {
-        return "";
-    }
-
-    const difference =
-        Date.now() - date.getTime();
-
-    const minutes =
-        Math.floor(difference / 60000);
-
-    if (minutes < 1) {
-        return "Just now";
-    }
-
-    if (minutes < 60) {
-        return `${minutes}m ago`;
-    }
-
-    const hours =
-        Math.floor(minutes / 60);
-
-    if (hours < 24) {
-        return `${hours}h ago`;
-    }
-
-    const days =
-        Math.floor(hours / 24);
-
-    if (days < 7) {
-        return `${days}d ago`;
-    }
-
-    return formatDate(value);
-}
-
-
-function getListingImage(listing) {
-    const images =
-        Array.isArray(listing?.listing_images)
-            ? [...listing.listing_images]
-            : [];
-
-    images.sort(
-        (a, b) =>
-            Number(a.display_order ?? 0) -
-            Number(b.display_order ?? 0)
-    );
-
-    return (
-        images[0]?.image_url ||
-        "../assets/images/placeholder-room.jpg"
-    );
-}
-
-
-function getUniversityName(listing) {
-    return (
-        listing?.universities?.name ||
-        listing?.university?.name ||
-        "University not specified"
-    );
-}
-
-
-function setText(element, value) {
-    if (element) {
-        element.textContent = value;
-    }
-}
-
-
-/* =========================================================
-   AUTHENTICATION
-========================================================= */
-
-async function initializeUser() {
-    const result =
-        await getCurrentUser();
-
-    if (
-        !result.success ||
-        !result.data
-    ) {
-        window.location.href =
-            "../auth/landlord_login.htm";
-
-        return false;
-    }
-
-    currentUser =
-        result.data;
-
-    const profileResult =
-        await getProfile(
-            currentUser.id
-        );
-
-    if (
-        !profileResult.success ||
-        !profileResult.data
-    ) {
-        console.error(
-            "[ResiHub] Unable to load landlord profile:",
-            profileResult.error
-        );
-
-        showDashboardError(
-            "Unable to load your landlord profile."
-        );
-
-        return false;
-    }
-
-    currentProfile =
-        profileResult.data;
-
-    if (
-        currentProfile.role !== "landlord"
-    ) {
-        console.error(
-            "[ResiHub] User attempted to access landlord dashboard."
-        );
-
-        window.location.href =
-            "../general/index.htm";
-
-        return false;
-    }
-
-    return true;
-}
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-function renderProfile() {
-    if (!currentProfile) {
+    if (!me) {
+        showError("Please sign in to see your dashboard.");
         return;
     }
 
-    const name =
-        currentProfile.full_name?.trim() ||
-        "Landlord";
+    await loadProfile();
 
-    setText(
-        landlordNameElement,
-        name
-    );
-
-    if (landlordAvatarElement) {
-        landlordAvatarElement.src =
-            currentProfile.avatar_url ||
-            "../assets/images/default-avatar.png";
-
-        landlordAvatarElement.alt =
-            `${name} profile picture`;
-    }
-}
-
-
-/* =========================================================
-   LISTINGS
-========================================================= */
-
-async function loadListings() {
-    const result =
-        await getLandlordListings(
-            currentUser.id
-        );
-
-    if (!result.success) {
-        console.error(
-            "[ResiHub] Failed to load landlord listings:",
-            result.error
-        );
-
-        landlordListings = [];
-
-        renderListingsError();
-
-        return;
-    }
-
-    landlordListings =
-        Array.isArray(result.data)
-            ? result.data
-            : [];
-
-    renderListings();
-
-    setText(
-        listingCountElement,
-        landlordListings.filter(
-            listing =>
-                listing.availability_status ===
-                "available"
-        ).length
-    );
-}
-
-
-function renderListings() {
-    if (!landlordListingsElement) {
-        return;
-    }
-
-    if (landlordListings.length === 0) {
-        landlordListingsElement.innerHTML = `
-            <div class="dashboard-empty-state">
-                <i class="fa-solid fa-house-circle-exclamation"></i>
-                <h3>No listings yet</h3>
-                <p>
-                    Create your first property listing
-                    to start reaching students.
-                </p>
-
-                <a
-                    href="../landlord/create_listing.htm"
-                    class="btn-primary"
-                >
-                    <i class="fa-solid fa-plus"></i>
-                    Create Listing
-                </a>
-            </div>
-        `;
-
-        return;
-    }
-
-    landlordListingsElement.innerHTML =
-        landlordListings
-            .slice(0, MAX_DASHBOARD_LISTINGS)
-            .map(createListingCard)
-            .join("");
-}
-
-
-function createListingCard(listing) {
-    const image =
-        escapeHtml(
-            getListingImage(listing)
-        );
-
-    const title =
-        escapeHtml(
-            listing.title ||
-            "Untitled Property"
-        );
-
-    const area =
-        escapeHtml(
-            listing.area ||
-            "Location unavailable"
-        );
-
-    const university =
-        escapeHtml(
-            getUniversityName(listing)
-        );
-
-    const price =
-        formatCurrency(
-            listing.price
-        );
-
-    const status =
-        listing.availability_status ||
-        "unknown";
-
-    const statusClass =
-        status.toLowerCase();
-
-    return `
-        <article
-            class="listing-card"
-            data-listing-id="${escapeHtml(listing.id)}"
-        >
-
-            <div class="listing-image">
-                <img
-                    src="${image}"
-                    alt="${title}"
-                    loading="lazy"
-                >
-
-                <span class="listing-status ${statusClass}">
-                    ${escapeHtml(
-        formatStatus(status)
-    )}
-                </span>
-            </div>
-
-            <div class="listing-content">
-
-                <h3>
-                    ${title}
-                </h3>
-
-                <p class="listing-location">
-                    <i class="fa-solid fa-location-dot"></i>
-                    ${area}
-                </p>
-
-                <p class="listing-university">
-                    <i class="fa-solid fa-building-columns"></i>
-                    ${university}
-                </p>
-
-                <div class="listing-footer">
-
-                    <strong>
-                        ${escapeHtml(price)}
-                    </strong>
-
-                    <a
-                        href="../landlord/listing_details.htm?id=${encodeURIComponent(listing.id)}"
-                        class="btn-primary"
-                    >
-                        View
-                    </a>
-
-                </div>
-
-            </div>
-
-        </article>
-    `;
-}
-
-
-function formatStatus(status) {
-    const normalized =
-        String(status ?? "")
-            .replaceAll("_", " ")
-            .trim();
-
-    if (!normalized) {
-        return "Unknown";
-    }
-
-    return normalized
-        .charAt(0)
-        .toUpperCase() +
-        normalized.slice(1);
-}
-
-
-function renderListingsError() {
-    if (!landlordListingsElement) {
-        return;
-    }
-
-    landlordListingsElement.innerHTML = `
-        <div class="dashboard-empty-state">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <h3>Unable to load listings</h3>
-            <p>
-                We couldn't retrieve your properties.
-                Please try again later.
-            </p>
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   BOOKINGS
-========================================================= */
-
-async function loadBookings() {
-    const result =
-        await getLandlordBookings(
-            currentUser.id
-        );
-
-    if (!result.success) {
-        console.error(
-            "[ResiHub] Failed to load landlord bookings:",
-            result.error
-        );
-
-        landlordBookings = [];
-
-        renderBookingsError();
-
-        return;
-    }
-
-    landlordBookings =
-        Array.isArray(result.data)
-            ? result.data
-            : [];
-
-    const pendingBookings =
-        landlordBookings.filter(
-            booking =>
-                booking.status === "pending"
-        );
-
-    setText(
-        bookingCountElement,
-        pendingBookings.length
-    );
-
-    renderBookings();
-}
-
-
-function renderBookings() {
-    if (!bookingPreviewElement) {
-        return;
-    }
-
-    if (landlordBookings.length === 0) {
-        bookingPreviewElement.innerHTML = `
-            <div class="dashboard-empty-state">
-                <i class="fa-solid fa-calendar-xmark"></i>
-                <h3>No inspection requests</h3>
-                <p>
-                    New inspection requests from students
-                    will appear here.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    bookingPreviewElement.innerHTML =
-        landlordBookings
-            .slice(0, MAX_BOOKING_PREVIEW)
-            .map(createBookingItem)
-            .join("");
-}
-
-
-function createBookingItem(booking) {
-    const listing =
-        booking.listings || {};
-
-    const title =
-        escapeHtml(
-            listing.title ||
-            "Property"
-        );
-
-    const area =
-        escapeHtml(
-            listing.area ||
-            "Location unavailable"
-        );
-
-    const status =
-        escapeHtml(
-            formatStatus(
-                booking.status
-            )
-        );
-
-    const inspectionDate =
-        booking.inspection_date
-            ? formatDate(
-                booking.inspection_date
-            )
-            : "Date not selected";
-
-    return `
-        <article
-            class="inspection-item"
-            data-booking-id="${escapeHtml(booking.id)}"
-        >
-
-            <div class="inspection-icon">
-                <i class="fa-solid fa-calendar-check"></i>
-            </div>
-
-            <div class="inspection-content">
-
-                <h3>
-                    ${title}
-                </h3>
-
-                <p>
-                    <i class="fa-solid fa-location-dot"></i>
-                    ${area}
-                </p>
-
-                <span>
-                    Inspection:
-                    ${escapeHtml(inspectionDate)}
-                </span>
-
-            </div>
-
-            <span class="booking-status">
-                ${status}
-            </span>
-
-        </article>
-    `;
-}
-
-
-function renderBookingsError() {
-    if (!bookingPreviewElement) {
-        return;
-    }
-
-    bookingPreviewElement.innerHTML = `
-        <div class="dashboard-empty-state">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <h3>Unable to load requests</h3>
-            <p>
-                We couldn't retrieve your inspection requests.
-            </p>
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   MESSAGES
-========================================================= */
-
-async function loadMessages() {
-    /*
-     * The current API provides getMessages() for a specific
-     * conversation, but the landlord dashboard needs a
-     * conversation-wide preview.
-     *
-     * Therefore this query remains isolated here until a
-     * dedicated conversation-list API method is introduced.
-     */
-
-    try {
-        const {
-            data,
-            error
-        } = await supabase
-            .from("messages")
-            .select(`
-                id,
-                sender_id,
-                receiver_id,
-                listing_id,
-                message,
-                is_read,
-                created_at
-            `)
-            .or(
-                `sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
-            )
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            )
-            .limit(
-                MAX_MESSAGE_PREVIEW
-            );
-
-        if (error) {
-            throw error;
-        }
-
-        const messages =
-            Array.isArray(data)
-                ? data
-                : [];
-
-        const unreadCount =
-            messages.filter(
-                message =>
-                    message.receiver_id ===
-                    currentUser.id &&
-                    message.is_read === false
-            ).length;
-
-        /*
-         * Dashboard count currently represents the
-         * unread messages returned by the preview query.
-         */
-        setText(
-            messageCountElement,
-            unreadCount
-        );
-
-        renderMessages(messages);
-
-    } catch (error) {
-        console.error(
-            "[ResiHub] Failed to load messages:",
-            error
-        );
-
-        renderMessagesError();
-    }
-}
-
-
-function renderMessages(messages) {
-    if (!recentMessagesElement) {
-        return;
-    }
-
-    if (!messages.length) {
-        recentMessagesElement.innerHTML = `
-            <div class="dashboard-empty-state">
-                <i class="fa-solid fa-message"></i>
-                <h3>No messages yet</h3>
-                <p>
-                    Student enquiries will appear here.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    recentMessagesElement.innerHTML =
-        messages
-            .map(message => {
-                const isIncoming =
-                    message.receiver_id ===
-                    currentUser.id;
-
-                const preview =
-                    String(
-                        message.message ?? ""
-                    ).slice(0, 100);
-
-                return `
-                    <article class="message-preview-item">
-
-                        <div class="message-preview-icon">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-
-                        <div class="message-preview-content">
-
-                            <p>
-                                ${escapeHtml(preview)}
-                            </p>
-
-                            <span>
-                                ${escapeHtml(
-                    formatRelativeDate(
-                        message.created_at
-                    )
-                )}
-                            </span>
-
-                        </div>
-
-                        ${isIncoming &&
-                        !message.is_read
-                        ? `
-                                    <span
-                                        class="unread-dot"
-                                        aria-label="Unread message"
-                                    ></span>
-                                `
-                        : ""
-                    }
-
-                    </article>
-                `;
-            })
-            .join("");
-}
-
-
-function renderMessagesError() {
-    if (!recentMessagesElement) {
-        return;
-    }
-
-    recentMessagesElement.innerHTML = `
-        <div class="dashboard-empty-state">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <h3>Unable to load messages</h3>
-            <p>
-                We couldn't retrieve your messages.
-            </p>
-        </div>
-    `;
-}
-
-
-/* =========================================================
-   REVIEWS
-========================================================= */
-
-async function loadReviewStats() {
-    /*
-     * Reviews are connected to listings, so we first collect
-     * this landlord's listing IDs and then retrieve reviews.
-     */
-
-    const listingIds =
-        landlordListings
-            .map(
-                listing => listing.id
-            )
-            .filter(Boolean);
-
-    if (!listingIds.length) {
-        setText(
-            reviewCountElement,
-            "0.0"
-        );
-
-        return;
-    }
-
-    try {
-        const {
-            data,
-            error
-        } = await supabase
-            .from("reviews")
-            .select(
-                "rating, listing_id"
-            )
-            .in(
-                "listing_id",
-                listingIds
-            );
-
-        if (error) {
-            throw error;
-        }
-
-        const reviews =
-            Array.isArray(data)
-                ? data
-                : [];
-
-        if (!reviews.length) {
-            setText(
-                reviewCountElement,
-                "0.0"
-            );
-
-            return;
-        }
-
-        const total =
-            reviews.reduce(
-                (sum, review) =>
-                    sum +
-                    Number(review.rating || 0),
-                0
-            );
-
-        const average =
-            total / reviews.length;
-
-        setText(
-            reviewCountElement,
-            average.toFixed(1)
-        );
-
-    } catch (error) {
-        console.error(
-            "[ResiHub] Failed to load review statistics:",
-            error
-        );
-
-        setText(
-            reviewCountElement,
-            "0.0"
-        );
-    }
-}
-
-
-/* =========================================================
-   ERROR HANDLING
-========================================================= */
-
-function showDashboardError(message) {
-    console.error(
-        `[ResiHub] ${message}`
-    );
-
-    if (
-        typeof window.showToast ===
-        "function"
-    ) {
-        window.showToast(
-            message,
-            "error"
-        );
-    }
-}
-
-
-/* =========================================================
-   INITIALIZATION
-========================================================= */
-
-async function initializeDashboard() {
-    const authenticated =
-        await initializeUser();
-
-    if (!authenticated) {
-        return;
-    }
-
-    renderProfile();
-
-    /*
-     * Listings must load before review statistics because
-     * review statistics depend on the landlord's listing IDs.
-     */
-
+    // Each section loads on its own, so one failure does not stop the others
     await Promise.all([
-        loadListings(),
-        loadBookings(),
-        loadMessages()
+        safely("stats", loadStats),
+        safely("bookings", loadBookings),
+        safely("messages", loadMessages),
+        safely("listings", loadListings),
+    ]);
+}
+
+async function safely(name, task) {
+    try {
+        await task();
+    } catch (error) {
+        console.error(`[dashboard] ${name} failed:`, error);
+    }
+}
+
+/* ---------- Greeting ---------- */
+
+function setToday() {
+    setText(
+        "todayDate",
+        new Date().toLocaleDateString("en-NG", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        })
+    );
+}
+
+async function loadProfile() {
+    const result = await getProfile(me.id);
+    const profile = result.success ? result.data : null;
+
+    setText("landlordName", profile?.business_name || profile?.full_name || "Landlord");
+    setImage("landlordAvatar", profile?.avatar_url || DEFAULT_AVATAR);
+    renderLandlordBanner($("verifyBanner"), profile?.verification_status ?? "unverified");
+}
+
+/* ---------- Stat tiles ---------- */
+
+async function loadStats() {
+    const [listings, bookings, unread, reviews] = await Promise.all([
+        supabase
+            .from("listings")
+            .select("id", { count: "exact", head: true })
+            .eq("landlord_id", me.id),
+
+        supabase
+            .from("booking_requests")
+            .select("id", { count: "exact", head: true })
+            .eq("landlord_id", me.id),
+
+        // Unread messages sent to this landlord, in their conversations
+        supabase
+            .from("messages")
+            .select("id, conversations!inner(landlord_id)", { count: "exact", head: true })
+            .eq("conversations.landlord_id", me.id)
+            .eq("is_read", false)
+            .neq("sender_id", me.id),
+
+        // Reviews on this landlord's listings
+        supabase
+            .from("reviews")
+            .select("id, listings!inner(landlord_id)", { count: "exact", head: true })
+            .eq("listings.landlord_id", me.id),
     ]);
 
-    await loadReviewStats();
-
-    console.log(
-        "[ResiHub] Landlord dashboard initialized."
-    );
+    setText("listingCount", countOf(listings));
+    setText("bookingCount", countOf(bookings));
+    setText("messageCount", countOf(unread));
+    setText("reviewCount", countOf(reviews));
 }
 
+function countOf(result) {
+    if (result.error) {
+        console.error("[dashboard] count failed:", result.error);
+        return "—";
+    }
+    return result.count ?? 0;
+}
 
-/* =========================================================
-   START
-========================================================= */
+/* ---------- Recent bookings ---------- */
 
-if (
-    document.readyState ===
-    "loading"
-) {
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeDashboard,
-        {
-            once: true
-        }
+async function loadBookings() {
+    const { data, error } = await supabase
+        .from("booking_requests")
+        .select(`
+            id,
+            status,
+            created_at,
+            listings(title),
+            student:profiles!booking_requests_student_id_fkey(full_name)
+        `)
+        .eq("landlord_id", me.id)
+        .order("created_at", { ascending: false })
+        .limit(4);
+
+    if (error) throw error;
+
+    const rows = (data ?? []).map((booking) => {
+        const link = element("a", "ld-row");
+        link.href = "booking_requests.htm";
+
+        const text = element("div");
+        text.append(
+            element("strong", "", booking.student?.full_name || "Student"),
+            element("span", "", booking.listings?.title || "Room")
+        );
+
+        const tag = element("span", "ld-tag", BOOKING_LABEL[booking.status] ?? booking.status);
+
+        link.append(text, tag);
+        return link;
+    });
+
+    renderList("bookingPreview", rows, "No bookings yet.");
+}
+
+/* ---------- Recent messages ---------- */
+
+async function loadMessages() {
+    const { data, error } = await supabase
+        .from("messages")
+        .select("id, body, created_at, sender_id, conversation_id, conversations!inner(landlord_id)")
+        .eq("conversations.landlord_id", me.id)
+        .order("created_at", { ascending: false })
+        .limit(4);
+
+    if (error) throw error;
+
+    const rows = (data ?? []).map((message) => {
+        const link = element("a", "ld-row");
+        link.href = `landlord_messages.htm?c=${encodeURIComponent(message.conversation_id)}`;
+
+        const text = element("div");
+        text.append(
+            element("strong", "", message.sender_id === me.id ? "You" : "Student"),
+            element("span", "", message.body ?? "")
+        );
+
+        const time = element("span", "ld-tag", formatTime(message.created_at));
+
+        link.append(text, time);
+        return link;
+    });
+
+    renderList("recentMessages", rows, "No messages yet.");
+}
+
+/* ---------- Your listings ---------- */
+
+async function loadListings() {
+    const { data, error } = await supabase
+        .from("listings")
+        .select("id, title, price, area, listing_images(image_url, display_order)")
+        .eq("landlord_id", me.id)
+        .order("created_at", { ascending: false })
+        .limit(4);
+
+    if (error) throw error;
+
+    const container = $("landlordListings");
+    if (!container) return;
+
+    if (!data?.length) {
+        container.replaceChildren(emptyNote("You have not added any listings yet."));
+        return;
+    }
+
+    container.replaceChildren(...data.map((listing) => createListingCard(listing)));
+}
+
+function createListingCard(listing) {
+    const card = element("a", "ld-listing");
+    card.href = `listing_details.htm?id=${encodeURIComponent(listing.id)}`;
+
+    const image = element("img");
+    image.src = roomImage(listing);
+    image.alt = listing.title || "Room photo";
+
+    const price = element(
+        "span",
+        "ld-price",
+        listing.price != null ? `${money.format(listing.price)}/month` : "Price on request"
     );
-} else {
-    initializeDashboard();
+
+    card.append(image, element("strong", "", listing.title || "Room"), price, element("span", "", listing.area || ""));
+    return card;
+}
+
+function roomImage(listing) {
+    const images = [...(listing.listing_images ?? [])].sort(
+        (a, b) => (a.display_order ?? 0) - (b.display_order ?? 0)
+    );
+    return images[0]?.image_url || DEFAULT_ROOM;
+}
+
+/* ---------- Helpers ---------- */
+
+function renderList(id, nodes, emptyText) {
+    const container = $(id);
+    if (!container) return;
+
+    container.replaceChildren(...(nodes.length ? nodes : [emptyNote(emptyText)]));
+}
+
+function emptyNote(text) {
+    return element("p", "ld-empty", text);
+}
+
+function element(tag, className = "", text = "") {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+}
+
+function formatTime(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    const sameDay = date.toDateString() === new Date().toDateString();
+
+    return sameDay
+        ? date.toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" })
+        : date.toLocaleDateString("en-NG", { day: "numeric", month: "short" });
+}
+
+function setText(id, value) {
+    const node = $(id);
+    if (node) node.textContent = value;
+}
+
+function setImage(id, src) {
+    const node = $(id);
+    if (node) node.src = src;
 }

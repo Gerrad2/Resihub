@@ -5,205 +5,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Landlord Settings | ResiHub Nigeria</title>
+    <title>Landlord Settings | ResiHub</title>
+    <meta name="robots" content="noindex, nofollow">
 
-    <meta name="description"
-        content="Manage your landlord account settings on ResiHub. Update notification preferences, account security, password, privacy and property management options for your student accommodation business in Nigeria.">
-
-    <meta name="keywords"
-        content="ResiHub landlord settings, landlord account, notification settings, security settings, student accommodation Nigeria, hostel management, rental property dashboard">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="robots" content="index, follow">
-
-    <meta name="theme-color" content="#0B6E4F">
-
-    <meta name="application-name" content="ResiHub">
-
-    <meta name="apple-mobile-web-app-title" content="ResiHub">
-
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <meta name="mobile-web-app-capable" content="yes">
-
-    <meta name="format-detection" content="telephone=no">
-
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content="ResiHub">
-
-    <meta property="og:title" content="Landlord Settings | ResiHub Nigeria">
-
-    <meta property="og:description"
-        content="Update your landlord preferences, security settings and notification options on ResiHub.">
-
-    <meta property="og:type" content="website">
-
-    <meta property="og:url" content="https://www.resihub.com/landlord_settings.htm">
-
-    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.png">
-
-    <meta property="og:image:alt" content="ResiHub Landlord Settings">
-
-    <meta property="og:locale" content="en_NG">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <meta name="twitter:title" content="Landlord Settings | ResiHub Nigeria">
-
-    <meta name="twitter:description" content="Manage your ResiHub landlord account preferences and security settings.">
-
-    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.png">
-
-    <!-- Canonical -->
-    <link rel="canonical" href="https://www.resihub.com/landlord_settings.htm">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-    <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context":"https://schema.org",
-      "@type":"WebPage",
-      "name":"Landlord Settings",
-      "url":"https://www.resihub.com/landlord_settings.htm",
-      "description":"Manage landlord account settings, notifications and security on ResiHub.",
-      "publisher":{
-        "@type":"Organization",
-        "name":"ResiHub",
-        "logo":{
-          "@type":"ImageObject",
-          "url":"https://www.resihub.com/assets/images/logo.png"
-        }
-      }
-    }
-    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="landlord">
+<body class="page-settings" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-        <section class="page-hero">
-
+        <section class="st-hero">
             <div class="container">
-
-                <section id="account-suspended-hero" class="auth-hero reveal fade-up">
-
-
-                    <span class="page-badge floating-badge">
-                        <i class="fa-solid fa-gear"></i>
-                        Settings
-                    </span>
-
-                    <h1>Account Settings</h1>
-
-                    <p>Manage your account preferences and security.</p>
-
+                <span class="st-badge"><i class="fa-solid fa-gear" aria-hidden="true"></i>Settings</span>
+                <h1>Account Settings</h1>
+                <p class="st-sub">Manage your preferences, listing visibility, notifications and security.</p>
             </div>
-
-            </div>
-
         </section>
 
-        <section class="settings-page">
+        <section class="st-section">
+            <div class="container st-layout">
 
-            <div class="container">
+                <!-- SIDE NAV -->
+                <nav class="st-nav" aria-label="Settings sections">
+                    <a href="#general" class="active"><i class="fa-solid fa-globe" aria-hidden="true"></i> General</a>
+                    <a href="#appearance"><i class="fa-solid fa-palette" aria-hidden="true"></i> Appearance</a>
+                    <a href="#listings"><i class="fa-solid fa-building" aria-hidden="true"></i> Listings</a>
+                    <a href="#notifications"><i class="fa-regular fa-bell" aria-hidden="true"></i> Notifications</a>
+                    <a href="#security"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Security</a>
+                </nav>
 
-                <form id="settingsForm">
+                <!-- FORM -->
+                <form id="settingsForm" class="st-main" novalidate>
 
-                    <div class="settings-card">
+                    <section id="general" class="st-card">
+                        <h2>General Settings</h2>
 
-                        <h2>Preferences</h2>
-
-                        <div class="setting-item">
-
-                            <div>
-
-                                <h3>Email Notifications</h3>
-
-                                <p>Receive booking requests, messages and important account updates.</p>
-
+                        <div class="st-grid">
+                            <div class="st-field">
+                                <label for="language">Language</label>
+                                <select id="language">
+                                    <option value="en">English</option>
+                                </select>
                             </div>
 
-                            <label class="switch">
+                            <div class="st-field">
+                                <label for="timezone">Time Zone</label>
+                                <select id="timezone">
+                                    <option value="Africa/Lagos">(GMT+1) West Africa Time</option>
+                                    <option value="UTC">(GMT+0) Coordinated Universal Time</option>
+                                </select>
+                            </div>
 
-                                <input type="checkbox" id="marketingEmails">
-                                Email Notification
+                            <div class="st-field">
+                                <label for="currency">Currency</label>
+                                <select id="currency" disabled>
+                                    <option value="NGN">Nigerian Naira (₦)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
 
-                                <span class="slider"></span>
+                    <section id="appearance" class="st-card">
+                        <h2>Appearance</h2>
 
+                        <label class="st-row">
+                            <span>
+                                <strong>Dark theme</strong>
+                                <small>ResiHub is dark by default. Your choice is saved to your account.</small>
+                            </span>
+                            <span class="st-switch">
+                                <input type="checkbox" id="darkMode">
+                                <i aria-hidden="true"></i>
+                            </span>
+                        </label>
+                    </section>
+
+                    <section id="listings" class="st-card">
+                        <h2>Listings</h2>
+
+                        <div class="st-rows">
+                            <label class="st-row">
+                                <span>
+                                    <strong>Show my listings to students</strong>
+                                    <small>When off, your listings are hidden from search and browsing.</small>
+                                </span>
+                                <span class="st-switch"><input type="checkbox" id="listingVisibility"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section id="notifications" class="st-card">
+                        <h2>Notifications</h2>
+
+                        <div class="st-rows">
+                            <label class="st-row">
+                                <span><strong>Email notifications</strong><small>Receive updates by
+                                        email.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="emailNotifications"><i
+                                        aria-hidden="true"></i></span>
                             </label>
 
+                            <label class="st-row">
+                                <span><strong>SMS notifications</strong><small>Receive important alerts by text
+                                        message.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="smsNotifications"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+
+                            <label class="st-row">
+                                <span><strong>New bookings</strong><small>When a student requests to inspect one of your
+                                        properties.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefBooking"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+
+                            <label class="st-row">
+                                <span><strong>Inspection updates</strong><small>Reminders and changes to scheduled
+                                        inspections.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="inspectionNotifications"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+
+                            <label class="st-row">
+                                <span><strong>Messages</strong><small>When a student messages you.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefMessages"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+
+                            <label class="st-row">
+                                <span><strong>Marketing and tips</strong><small>Occasional advice on getting more
+                                        bookings.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="marketingEmails"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+
+                            <label class="st-row">
+                                <span><strong>System announcements</strong><small>Important news about your account and
+                                        ResiHub.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefSystem"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
                         </div>
+                    </section>
 
-                        <label>
-                            <input type="checkbox" id="inspectionNotifications">
-
-                            SMS Notifications
-                        </label>
-
-                        <label>
-                            <input type="checkbox" id="listingVisibility">
-
-                            Dark Mode
-                        </label>
-
-                    </div>
-
-                    <div class="settings-card">
-
+                    <section id="security" class="st-card">
                         <h2>Security</h2>
-
-                        <a href="../auth/change_password.htm" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                            Change Password
-
+                        <p>Keep your account secure by updating your password regularly.</p>
+                        <a href="../auth/change_password.htm" class="st-secondary">
+                            <i class="fa-solid fa-key" aria-hidden="true"></i> Change Password
                         </a>
+                    </section>
 
+                    <div class="st-actions">
+                        <button type="submit" id="saveSettingsBtn" class="st-primary">
+                            <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Settings
+                        </button>
                     </div>
-
-                    <button type="submit" id="saveSettingsBtn" class="btn-primary">
-
-                        Save Settings
-
-                    </button>
 
                 </form>
-
             </div>
-
         </section>
-
     </main>
-    <!--FOOTER-->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/landlord_settings.js";
+        init();
+    </script>
 </body>
 
 </html>

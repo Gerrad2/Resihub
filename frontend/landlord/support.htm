@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Support | ResiHub Landlord</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="page-support" data-resihub-surface="landlord">
+    <div id="scrollProgress"></div>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main>
+        <section class="sp-hero">
+            <div class="container">
+                <span class="sp-badge-hero"><i class="fa-solid fa-life-ring" aria-hidden="true"></i>Support</span>
+                <h1>Report a problem</h1>
+                <p>Tell the ResiHub team what happened. Your message goes straight to the admin, so you don't need to
+                    look for a phone number.</p>
+            </div>
+        </section>
+
+        <section class="sp-section">
+            <div class="container">
+                <form id="supportForm" class="sp-form" novalidate>
+                    <div class="sp-field">
+                        <label for="supportCategory">Category</label>
+                        <select id="supportCategory" name="category" required>
+                            <option value="">Choose a category</option>
+                            <option>Account</option>
+                            <option>Booking</option>
+                            <option>Listing</option>
+                            <option>Messages</option>
+                            <option>Payment</option>
+                            <option>Bug</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="sp-field">
+                        <label for="supportSubject">Subject</label>
+                        <input id="supportSubject" name="subject" maxlength="120" required>
+                    </div>
+
+                    <div class="sp-field">
+                        <label for="supportMessage">Message</label>
+                        <textarea id="supportMessage" name="message" rows="6" maxlength="2000" required></textarea>
+                    </div>
+
+                    <div class="sp-actions">
+                        <button id="supportSubmit" class="sp-primary" type="submit">
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send to ResiHub
+                        </button>
+                    </div>
+                </form>
+
+                <div class="sp-list-section" style="margin-top:2rem">
+                    <h2>Your messages</h2>
+                    <div id="ticketList" class="sp-list"></div>
+                    <p id="ticketEmpty" class="sp-empty hidden">You haven't sent any messages yet.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/support.js";
+        init();
+    </script>
+</body>
+
+</html>

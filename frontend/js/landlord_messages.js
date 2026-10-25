@@ -1,302 +1,390 @@
-// js/landlord_messages.js
-
-import {
-    supabase,
-    getCurrentUser,
-    getProfile,
-    getMessages,
-    sendMessage,
-    markMessageRead
-} from "./core/api.js";
-
+import { getCurrentUser, getPublicProfile, supabase } from "./api.js";
+import { showError } from "./student_utils.js";
 import { showToast } from "./ui/toast.js";
+import { ticksFor, startMessageStatus } from "./core/message-status.js";
 
-let currentUser = null;
-let currentConversation = null;
-let conversations = [];
-
-const conversationSearch = document.getElementById("conversationSearch");
-const conversationList = document.getElementById("conversationList");
-const chatAvatar = document.getElementById("chatAvatar");
-const chatName = document.getElementById("chatName");
-const chatStatus = document.getElementById("chatStatus");
-const chatMessages = document.getElementById("chatMessages");
-const messageForm = document.getElementById("messageForm");
-const messageInput = document.getElementById("messageInput");
-const emptyChat = document.getElementById("emptyChat");
-
+const $ = (id) => document.getElementById(id);
 const DEFAULT_AVATAR = "../assets/images/default-avatar.png";
 
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
+let me = null;
+let conversations = [];
+let activeId = null;
 
-function formatDate(value) {
-    const date = new Date(value);
+/* ---------- Entry point ---------- */
 
-    if (Number.isNaN(date.getTime())) {
-        return "";
-    }
+export async function init() {
+    bindEvents();
 
-    return new Intl.DateTimeFormat("en-NG", {
-        hour: "numeric",
-        minute: "2-digit",
-        day: "numeric",
-        month: "short"
-    }).format(date);
-}
+    const userResult = await getCurrentUser();
+    me = userResult.success ? userResult.data : null;
 
-function setLoading(element, text = "Loading...") {
-    if (element) {
-        element.innerHTML = `<div class="empty-state"><p>${text}</p></div>`;
-    }
-}
-
-async function initialize() {
-    const result = await getCurrentUser();
-
-    if (!result.success || !result.data) {
-        window.location.href = "../auth/landlord_login.htm";
+    if (!me) {
+        showError("Please sign in to see your messages.");
         return;
     }
 
-    currentUser = result.data;
-
     await loadConversations();
 
-    messageForm?.addEventListener("submit", handleSendMessage);
-    conversationSearch?.addEventListener("input", filterConversations);
+    // landlord_messages.htm?c=<conversation id> opens that chat
+    const requested = new URLSearchParams(location.search).get("c");
+    if (requested) {
+        await openConversation(requested);
+    }
+
+    // Delivered and read ticks, refreshed every few seconds
+    startMessageStatus(me.id, refreshActiveThread);
 }
 
+function bindEvents() {
+    $("conversationSearch")?.addEventListener("input", renderList);
+    $("messageForm")?.addEventListener("submit", sendCurrent);
+}
+
+/* ---------- Conversation list ---------- */
+
+/* Active conversations where this person is the landlord */
 async function loadConversations() {
-    setLoading(conversationList);
+    const { data, error } = await supabase
+        .from("conversations")
+        .select("id, student_id, property_id, last_message_at")
+        .eq("landlord_id", me.id)
+        .eq("status", "active")
+        .order("last_message_at", { ascending: false, nullsFirst: false });
+
+    if (error) {
+        console.error("[landlord_messages] conversations failed:", error);
+        showError("Your conversations could not be loaded.");
+        return;
+    }
+
+    const rows = data ?? [];
+
+    if (!rows.length) {
+        conversations = [];
+        renderList();
+        return;
+    }
+
+    const conversationIds = rows.map((row) => row.id);
+    const studentIds = [...new Set(rows.map((row) => row.student_id))];
+    const propertyIds = [...new Set(rows.map((row) => row.property_id).filter(Boolean))];
+
+    const [profiles, listings, messages] = await Promise.all([
+        Promise.all(studentIds.map((id) => getPublicProfile(id))),
+        propertyIds.length
+            ? supabase.from("listings").select("id, title").in("id", propertyIds)
+            : Promise.resolve({ data: [] }),
+        supabase
+            .from("messages")
+            .select("id, sender_id, body, is_read, read_at, delivered_at, created_at")
+            .in("conversation_id", conversationIds)
+            .order("created_at", { ascending: false }),
+    ]);
+
+    const profileMap = new Map();
+    studentIds.forEach((id, index) => {
+        profileMap.set(id, profiles[index].success ? profiles[index].data : null);
+    });
+
+    const titles = new Map((listings.data ?? []).map((listing) => [listing.id, listing.title]));
+
+    const lastByConversation = new Map();
+    const unreadByConversation = new Map();
+
+    for (const message of messages.data ?? []) {
+        if (!lastByConversation.has(message.conversation_id)) {
+            lastByConversation.set(message.conversation_id, message);
+        }
+        if (!message.is_read && message.sender_id !== me.id) {
+            unreadByConversation.set(
+                message.conversation_id,
+                (unreadByConversation.get(message.conversation_id) ?? 0) + 1
+            );
+        }
+    }
+
+    conversations = rows.map((row) => ({
+        id: row.id,
+        profile: profileMap.get(row.student_id) ?? null,
+        listingTitle: titles.get(row.property_id) ?? "",
+        last: lastByConversation.get(row.id) ?? null,
+        unread: unreadByConversation.get(row.id) ?? 0,
+    }));
+
+    renderList();
+}
+
+function renderList() {
+    const query = ($("conversationSearch")?.value ?? "").trim().toLowerCase();
+    const list = $("conversationList");
+    if (!list) return;
+
+    const items = conversations.filter((conv) => {
+        if (!query) return true;
+        return (
+            displayName(conv).toLowerCase().includes(query) ||
+            conv.listingTitle.toLowerCase().includes(query)
+        );
+    });
+
+    list.replaceChildren(...items.map((conv) => createListButton(conv)));
+
+    if (!items.length) {
+        const empty = element("p", "msg-none");
+        empty.textContent = conversations.length
+            ? "No matching conversations."
+            : "No conversations yet. They open when you approve a booking.";
+        list.append(empty);
+    }
+}
+
+function createListButton(conv) {
+    const button = element("button", `msg-conv${conv.id === activeId ? " active" : ""}`);
+    button.type = "button";
+
+    const avatar = element("img");
+    avatar.src = conv.profile?.avatar_url || DEFAULT_AVATAR;
+    avatar.alt = "";
+
+    const text = element("div", "msg-conv-text");
+
+    const top = element("div", "msg-conv-top");
+    const name = element("strong", "", displayName(conv));
+    const time = element("span", "msg-conv-time", conv.last ? formatListTime(conv.last.created_at) : "");
+    top.append(name, time);
+
+    const preview = element("p", "msg-conv-preview");
+    if (conv.last) {
+        preview.textContent = `${conv.last.sender_id === me.id ? "You: " : ""}${conv.last.body}`;
+    } else {
+        preview.textContent = conv.listingTitle || "No messages yet";
+    }
+
+    text.append(top, preview);
+    button.append(avatar, text);
+
+    if (conv.unread) {
+        button.append(element("span", "msg-unread", String(conv.unread)));
+    }
+
+    button.addEventListener("click", () => openConversation(conv.id));
+    return button;
+}
+
+/* ---------- Chat ---------- */
+
+async function openConversation(id) {
+    const conv = conversations.find((c) => c.id === id);
+
+    if (!conv) {
+        showToast("That conversation is no longer available.", { type: "error" });
+        return;
+    }
+
+    activeId = id;
+
+    $("chatAvatar").src = conv.profile?.avatar_url || DEFAULT_AVATAR;
+    setText("chatName", displayName(conv));
+    setText("chatStatus", conv.listingTitle || "Student");
+
+    $("emptyChat")?.classList.add("hidden");
+    $("chatMessages")?.classList.remove("hidden");
+    $("messageInput").disabled = false;
+    $("sendMessage").disabled = false;
+
+    renderActions(conv);
+    renderList();
 
     const { data, error } = await supabase
         .from("messages")
-        .select("*")
-        .or(
-            `sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
-        )
-        .order("created_at", { ascending: false });
+        .select("id, sender_id, body, is_read, read_at, delivered_at, created_at")
+        .eq("conversation_id", id)
+        .order("created_at", { ascending: true });
 
     if (error) {
-        console.error(error);
-        setLoading(conversationList, "Unable to load conversations.");
+        showError("Messages could not be loaded.");
         return;
     }
 
-    const map = new Map();
+    const messages = data ?? [];
+    renderThread(messages);
 
-    for (const message of data ?? []) {
-        const otherId =
-            message.sender_id === currentUser.id
-                ? message.receiver_id
-                : message.sender_id;
+    const unreadIds = messages
+        .filter((m) => !m.is_read && m.sender_id !== me.id)
+        .map((m) => m.id);
 
-        if (!map.has(otherId)) {
-            map.set(otherId, {
-                userId: otherId,
-                lastMessage: message.message,
-                createdAt: message.created_at,
-                unread:
-                    message.receiver_id === currentUser.id &&
-                    !message.is_read
-            });
-        }
+    if (unreadIds.length) {
+        await supabase
+            .from("messages")
+            .update({ is_read: true, read_at: new Date().toISOString() })
+            .in("id", unreadIds);
+
+        conv.unread = 0;
+        renderList();
     }
-
-    conversations = [];
-
-    for (const conversation of map.values()) {
-        const profileResult = await getProfile(conversation.userId);
-
-        conversations.push({
-            ...conversation,
-            profile: profileResult.success
-                ? profileResult.data
-                : null
-        });
-    }
-
-    renderConversations(conversations);
 }
 
-function renderConversations(items) {
-    if (!conversationList) return;
+async function refreshActiveThread() {
+    if (!activeId) return;
 
-    if (!items.length) {
-        conversationList.innerHTML = `
-            <div class="empty-state">
-                <i class="fa-solid fa-comments"></i>
-                <h3>No Conversations</h3>
-                <p>Your messages will appear here.</p>
-            </div>
-        `;
-        return;
-    }
+    const { data, error } = await supabase
+        .from("messages")
+        .select("id, sender_id, body, is_read, read_at, delivered_at, created_at")
+        .eq("conversation_id", activeId)
+        .order("created_at", { ascending: true });
 
-    conversationList.innerHTML = items.map(item => `
-        <button
-            type="button"
-            class="conversation-item ${item.userId === currentConversation ? "active" : ""}"
-            data-user-id="${escapeHtml(item.userId)}"
-        >
-            <img
-                src="${escapeHtml(item.profile?.avatar_url || DEFAULT_AVATAR)}"
-                alt=""
-            >
-
-            <span class="conversation-content">
-                <strong>
-                    ${escapeHtml(item.profile?.full_name || "User")}
-                </strong>
-
-                <small>
-                    ${escapeHtml(item.lastMessage)}
-                </small>
-            </span>
-
-            ${item.unread ? `<span class="unread-dot"></span>` : ""}
-        </button>
-    `).join("");
-
-    conversationList.querySelectorAll("[data-user-id]").forEach(button => {
-        button.addEventListener("click", () => {
-            openConversation(button.dataset.userId);
-        });
-    });
+    if (error || !data) return;
+    renderThread(data);
 }
 
-async function openConversation(userId) {
-    currentConversation = userId;
+function renderThread(messages) {
+    const thread = $("chatMessages");
+    if (!thread) return;
 
-    const conversation = conversations.find(
-        item => item.userId === userId
-    );
-
-    if (!conversation) return;
-
-    chatName.textContent =
-        conversation.profile?.full_name || "User";
-
-    chatAvatar.src =
-        conversation.profile?.avatar_url || DEFAULT_AVATAR;
-
-    chatStatus.textContent = "Conversation";
-
-    emptyChat?.classList.add("hidden");
-    chatMessages?.classList.remove("hidden");
-
-    renderConversations(conversations);
-
-    const result = await getMessages(
-        currentUser.id,
-        userId
-    );
-
-    if (!result.success) {
-        showToast("Unable to load messages.", {
-            type: "error"
-        });
-        return;
-    }
-
-    renderMessages(result.data);
-
-    for (const message of result.data) {
-        if (
-            message.receiver_id === currentUser.id &&
-            !message.is_read
-        ) {
-            await markMessageRead(message.id);
-        }
-    }
-
-    messageInput?.focus();
+    thread.replaceChildren(...messages.map((message) => createBubble(message)));
+    thread.scrollTop = thread.scrollHeight;
 }
 
-function renderMessages(messages) {
-    if (!chatMessages) return;
+function createBubble(message) {
+    const mine = message.sender_id === me.id;
 
-    if (!messages.length) {
-        chatMessages.innerHTML = `
-            <div class="empty-state">
-                <p>No messages yet. Start the conversation.</p>
-            </div>
-        `;
-        return;
-    }
+    const row = element("div", `msg-row ${mine ? "mine" : "theirs"}`);
 
-    chatMessages.innerHTML = messages.map(message => {
-        const own = message.sender_id === currentUser.id;
+    const bubble = element("div", "msg-bubble", message.body);
 
-        return `
-            <div class="message ${own ? "sent" : "received"}">
-                <div class="message-bubble">
-                    <p>${escapeHtml(message.message)}</p>
-                    <small>${formatDate(message.created_at)}</small>
-                </div>
-            </div>
-        `;
-    }).join("");
+    const meta = element("div", "msg-meta");
+    meta.append(element("span", "msg-time", formatTime(message.created_at)));
+    if (mine) meta.append(ticksFor(message));
 
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    row.append(bubble, meta);
+    return row;
 }
 
-async function handleSendMessage(event) {
+async function sendCurrent(event) {
     event.preventDefault();
+    if (!activeId) return;
 
-    if (!currentConversation) {
-        showToast("Select a conversation first.", {
-            type: "error"
-        });
-        return;
-    }
+    const input = $("messageInput");
+    const body = input.value.trim();
+    if (!body) return;
 
-    const message = messageInput.value.trim();
-
-    if (!message) return;
-
-    const button = document.getElementById("sendMessage");
-
+    const button = $("sendMessage");
     button.disabled = true;
 
-    const result = await sendMessage({
-        receiverId: currentConversation,
-        message
-    });
+    const { error } = await supabase
+        .from("messages")
+        .insert({ conversation_id: activeId, sender_id: me.id, body });
 
     button.disabled = false;
 
-    if (!result.success) {
-        showToast("Message could not be sent.", {
-            type: "error"
-        });
+    if (error) {
+        console.error("[landlord_messages] send failed:", error);
+        showToast("Message not sent. This conversation may have been removed or blocked.", { type: "error" });
         return;
     }
 
-    messageInput.value = "";
-
-    await openConversation(currentConversation);
+    input.value = "";
+    await refreshActiveThread();
     await loadConversations();
 }
 
-function filterConversations() {
-    const term =
-        conversationSearch.value.trim().toLowerCase();
+/* ---------- Remove and block ---------- */
 
-    const filtered = conversations.filter(item =>
-        (item.profile?.full_name || "")
-            .toLowerCase()
-            .includes(term)
+function renderActions(conv) {
+    const box = $("chatActions");
+    if (!box) return;
+
+    box.replaceChildren(
+        actionButton("Remove", "msg-action", () => removeConversation(conv)),
+        actionButton("Block", "msg-action danger", () => blockConversation(conv))
     );
-
-    renderConversations(filtered);
 }
 
-initialize();
+function actionButton(label, className, onClick) {
+    const button = element("button", className, label);
+    button.type = "button";
+    button.addEventListener("click", onClick);
+    return button;
+}
+
+async function removeConversation(conv) {
+    const confirmed = confirm(
+        `Remove ${displayName(conv)}? You will no longer be able to message each other here. The chat history is kept.`
+    );
+    if (!confirmed) return;
+
+    const { error } = await supabase.rpc("remove_conversation", { conv_id: conv.id });
+
+    if (error) {
+        showToast("Could not remove this conversation. Please try again.", { type: "error" });
+        return;
+    }
+
+    showToast("Conversation removed.", { type: "success" });
+    resetChat();
+    await loadConversations();
+}
+
+async function blockConversation(conv) {
+    const confirmed = confirm(
+        `Block ${displayName(conv)}? Neither of you can send messages here until it is unblocked.`
+    );
+    if (!confirmed) return;
+
+    const { error } = await supabase.rpc("block_conversation", { conv_id: conv.id });
+
+    if (error) {
+        showToast("Could not block this person. Please try again.", { type: "error" });
+        return;
+    }
+
+    showToast("Blocked.", { type: "success" });
+    resetChat();
+    await loadConversations();
+}
+
+function resetChat() {
+    activeId = null;
+
+    $("emptyChat")?.classList.remove("hidden");
+    $("chatMessages")?.classList.add("hidden");
+    $("chatMessages")?.replaceChildren();
+    $("messageInput").disabled = true;
+    $("sendMessage").disabled = true;
+    $("chatActions")?.replaceChildren();
+
+    $("chatAvatar").src = DEFAULT_AVATAR;
+    setText("chatName", "Select a conversation");
+    setText("chatStatus", "");
+}
+
+/* ---------- Helpers ---------- */
+
+function displayName(conv) {
+    return conv.profile?.full_name || "Student";
+}
+
+function formatTime(value) {
+    return new Date(value).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" });
+}
+
+function formatListTime(value) {
+    const date = new Date(value);
+    const sameDay = date.toDateString() === new Date().toDateString();
+
+    return sameDay
+        ? formatTime(value)
+        : date.toLocaleDateString("en-NG", { day: "numeric", month: "short" });
+}
+
+function element(tag, className = "", text = "") {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+}
+
+function setText(id, value) {
+    const node = $(id);
+    if (node) node.textContent = value;
+}

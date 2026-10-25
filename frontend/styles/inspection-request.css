@@ -1,0 +1,368 @@
+/*==========================================
+    INSPECTION REQUESTS (student/inspection_requests.htm)
+    Scoped to body.page-inspection-requests
+==========================================*/
+
+body.page-inspection-requests {
+    --ir-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --ir-line: rgba(92, 150, 255, .24);
+    --ir-line-soft: rgba(92, 150, 255, .14);
+    --ir-accent: #3FD0FF;
+    --ir-text-2: rgba(225, 236, 255, .82);
+    --ir-text-3: rgba(190, 210, 245, .62);
+    --ir-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --ir-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-inspection-requests h1,
+body.page-inspection-requests h2,
+body.page-inspection-requests h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-inspection-requests p {
+    color: var(--ir-text-2);
+    margin: 0;
+}
+
+body.page-inspection-requests a {
+    text-decoration: none;
+}
+
+body.page-inspection-requests .container {
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-inspection-requests .hidden {
+    display: none !important;
+}
+
+/* ---------- Hero ---------- */
+body.page-inspection-requests .ir-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-inspection-requests .ir-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--ir-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-inspection-requests .ir-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Layout ---------- */
+body.page-inspection-requests .ir-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-inspection-requests .ir-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+body.page-inspection-requests .ir-main {
+    min-width: 0;
+}
+
+/* ---------- Tabs ---------- */
+body.page-inspection-requests .ir-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-bottom: 1.1rem;
+}
+
+body.page-inspection-requests .ir-tab {
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--ir-line);
+    background: rgba(20, 58, 130, .35);
+    color: var(--ir-text-2);
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+body.page-inspection-requests .ir-tab.active {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: var(--ir-glow);
+}
+
+/* ---------- Inspection rows ---------- */
+body.page-inspection-requests .ir-list {
+    display: grid;
+    gap: .8rem;
+}
+
+body.page-inspection-requests .ir-row {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem .9rem .75rem .75rem;
+    border-radius: 16px;
+    background: var(--ir-card);
+    border: 1px solid var(--ir-line);
+    box-shadow: var(--ir-shadow);
+}
+
+body.page-inspection-requests .ir-row img {
+    width: 110px;
+    height: 76px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-inspection-requests .ir-info h3 {
+    font-size: .98rem;
+    font-weight: 600;
+    margin-bottom: .2rem;
+}
+
+body.page-inspection-requests .ir-info p {
+    font-size: .8rem;
+    color: var(--ir-text-3);
+}
+
+body.page-inspection-requests .ir-status {
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+body.page-inspection-requests .ir-upcoming {
+    background: rgba(47, 140, 255, .18);
+    color: #6CB8FF;
+}
+
+body.page-inspection-requests .ir-pending {
+    background: rgba(245, 158, 11, .16);
+    color: #F59E0B;
+}
+
+body.page-inspection-requests .ir-completed {
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+}
+
+body.page-inspection-requests .ir-overdue {
+    background: rgba(239, 68, 68, .16);
+    color: #EF4444;
+}
+
+body.page-inspection-requests .ir-chevron {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--ir-line);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+}
+
+/* ---------- Empty state ---------- */
+body.page-inspection-requests .ir-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    border-radius: 18px;
+    background: var(--ir-card);
+    border: 1px solid var(--ir-line);
+}
+
+body.page-inspection-requests .ir-empty i {
+    font-size: 2rem;
+    color: var(--ir-accent);
+    margin-bottom: .75rem;
+}
+
+body.page-inspection-requests .ir-empty h2 {
+    font-size: 1.2rem;
+    margin-bottom: .4rem;
+}
+
+body.page-inspection-requests .ir-empty p {
+    margin-bottom: 1.2rem;
+}
+
+body.page-inspection-requests .ir-primary {
+    display: inline-flex;
+    padding: .75rem 1.3rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: var(--ir-glow);
+}
+
+/* ---------- Side cards ---------- */
+body.page-inspection-requests .ir-side {
+    display: grid;
+    gap: 1.25rem;
+    position: sticky;
+    top: 110px;
+}
+
+body.page-inspection-requests .ir-card {
+    padding: 1.3rem;
+    border-radius: 18px;
+    background: var(--ir-card);
+    border: 1px solid var(--ir-line);
+    box-shadow: var(--ir-shadow);
+}
+
+body.page-inspection-requests .ir-cal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .9rem;
+}
+
+body.page-inspection-requests .ir-cal-head h2 {
+    font-size: .98rem;
+    font-weight: 600;
+}
+
+body.page-inspection-requests .ir-cal-nav {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--ir-line);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    cursor: pointer;
+}
+
+body.page-inspection-requests .ir-cal-week,
+body.page-inspection-requests .ir-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    text-align: center;
+}
+
+body.page-inspection-requests .ir-cal-week span {
+    font-size: .7rem;
+    color: var(--ir-text-3);
+    padding: .3rem 0;
+}
+
+body.page-inspection-requests .ir-day {
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    font-size: .8rem;
+    color: var(--ir-text-2);
+    position: relative;
+}
+
+body.page-inspection-requests .ir-day.is-today {
+    border: 1px solid var(--ir-accent);
+    color: #fff;
+}
+
+body.page-inspection-requests .ir-day.has-inspection {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-weight: 600;
+}
+
+body.page-inspection-requests .ir-next h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .9rem;
+}
+
+body.page-inspection-requests .ir-next-body {
+    display: grid;
+    gap: .75rem;
+}
+
+body.page-inspection-requests .ir-next img {
+    width: 100%;
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-inspection-requests .ir-next h3 {
+    font-size: .98rem;
+    font-weight: 600;
+}
+
+body.page-inspection-requests .ir-next .ir-view {
+    display: block;
+    text-align: center;
+    padding: .7rem 1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: var(--ir-glow);
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 980px) {
+    body.page-inspection-requests .ir-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-inspection-requests .ir-side {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-inspection-requests .ir-row {
+        grid-template-columns: 90px minmax(0, 1fr);
+    }
+
+    body.page-inspection-requests .ir-row img {
+        width: 90px;
+        height: 66px;
+    }
+
+    body.page-inspection-requests .ir-status,
+    body.page-inspection-requests .ir-chevron {
+        grid-column: 2;
+        justify-self: start;
+    }
+}

@@ -1,175 +1,56 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-
-    <!-- Character Encoding -->
-
     <meta charset="UTF-8">
-
-    <!-- Responsive -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO -->
-
-    <title>
-
-        404 | Page Not Found | ResiHub
-
-    </title>
-
-    <meta name="description" content="The page you are looking for could not be found.">
-
+    <title>Page Not Found | ResiHub</title>
     <meta name="robots" content="noindex, nofollow">
-
-    <!-- Theme Color -->
-
-    <meta name="theme-color" content="#0D6EFD">
-
-    <!-- Favicon -->
-
-    <link rel="icon" href="../assets/images/favicon.png">
-
-    <!-- Font Awesome -->
-
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- Main Stylesheet -->
-
     <link rel="stylesheet" href="../styles/style.css">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/system.css">
 </head>
 
-<body data-resihub-surface="system">
-
-    <!-- ==========================
-         Header
-    =========================== -->
-
+<body class="sys-page" data-resihub-surface="public">
+    <div id="scrollProgress"></div>
     <div id="header"></div>
 
-    <!-- ==========================
-         Main Content
-    =========================== -->
+    <main class="sys-main">
+        <section class="sys-panel">
 
-    <main class="system-page">
-
-        <section class="system-container">
-
-            <div class="system-icon">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
+            <div class="sys-art" aria-hidden="true">
+                <div class="sys-art-glow"></div>
+                <i class="fa-solid fa-magnifying-glass sys-art-icon"></i>
             </div>
 
-            <span class="system-code">
+            <p class="sys-code">404</p>
+            <h1 class="sys-title">Page Not Found</h1>
+            <p class="sys-text">The page you're looking for doesn't exist. It may have been moved or deleted.</p>
 
-                Error 404
-
-            </span>
-
-            <h1>
-
-                Page Not Found
-
-            </h1>
-
-            <p>
-
-                The page you're looking for doesn't exist,
-                may have been moved, renamed,
-                or is temporarily unavailable.
-
-            </p>
-
-            <div class="system-info">
-
-                <div class="info-card">
-
-                    <i class="fa-solid fa-link-slash"></i>
-
-                    <span>
-
-                        Broken Link
-
-                    </span>
-
-                </div>
-
-                <div class="info-card">
-
-                    <i class="fa-solid fa-folder-open"></i>
-
-                    <span>
-
-                        Page Moved
-
-                    </span>
-
-                </div>
-
-                <div class="info-card">
-
-                    <i class="fa-solid fa-circle-question"></i>
-
-                    <span>
-
-                        Resource Missing
-
-                    </span>
-
-                </div>
-
+            <div class="sys-actions">
+                <a href="../general/browse_rooms.htm" class="sys-btn sys-btn-primary">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i> Search Again
+                </a>
+                <a href="../general/index.htm" class="sys-btn sys-btn-ghost">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i> Go to Home
+                </a>
             </div>
 
-            <div class="system-actions">
-
-                <a href="javascript:history.back()" class="btn btn-outline">
-
-                    <i class="fa-solid fa-arrow-left"></i>
-
-                    Go Back
-
-                </a>
-
-                <a href="../general/index.htm" class="btn btn-primary">
-
-                    <i class="fa-solid fa-house"></i>
-
-                    Home
-
-                </a>
-
-                <a href="../general/browse_rooms.htm" class="btn btn-secondary">
-
-                    <i class="fa-solid fa-building"></i>
-
-                    Browse Rooms
-
-                </a>
-
-            </div>
-
+            <p class="sys-ref">Reference: <span data-reference></span></p>
         </section>
-
     </main>
-
-    <!-- ==========================
-         Footer
-    =========================== -->
 
     <div id="footer"></div>
 
-    <!-- ==========================
-         Scripts
-    =========================== -->
-
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { initSystemPage } from "../js/core/system-pages.js";
+        initSystemPage();
+    </script>
 </body>
 
 </html>
-
-
-

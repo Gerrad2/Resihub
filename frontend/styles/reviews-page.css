@@ -1,0 +1,508 @@
+/*==========================================
+    REVIEWS (student/reviews.htm)
+    Scoped to body.page-reviews
+==========================================*/
+
+body.page-reviews {
+    --rv-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --rv-line: rgba(92, 150, 255, .24);
+    --rv-line-soft: rgba(92, 150, 255, .14);
+    --rv-accent: #3FD0FF;
+    --rv-gold: #F59E0B;
+    --rv-text-2: rgba(225, 236, 255, .82);
+    --rv-text-3: rgba(190, 210, 245, .62);
+    --rv-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --rv-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-reviews h1,
+body.page-reviews h2,
+body.page-reviews h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-reviews p {
+    color: var(--rv-text-2);
+    margin: 0;
+}
+
+body.page-reviews a {
+    text-decoration: none;
+}
+
+body.page-reviews .container {
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-reviews .hidden {
+    display: none !important;
+}
+
+body.page-reviews .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+body.page-reviews .rv-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-reviews .rv-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--rv-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-reviews .rv-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Layout ---------- */
+body.page-reviews .rv-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-reviews .rv-layout {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* ---------- Summary ---------- */
+body.page-reviews .rv-summary {
+    padding: 1.4rem;
+    border-radius: 18px;
+    background: var(--rv-card);
+    border: 1px solid var(--rv-line);
+    box-shadow: var(--rv-shadow);
+    position: sticky;
+    top: 110px;
+    display: grid;
+    gap: 1rem;
+}
+
+body.page-reviews .rv-summary h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+body.page-reviews .rv-score {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+body.page-reviews .rv-score>strong {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+}
+
+body.page-reviews .rv-score p {
+    font-size: .8rem;
+    margin-top: .3rem;
+}
+
+body.page-reviews .rv-stars {
+    display: flex;
+    gap: .2rem;
+    color: var(--rv-gold);
+    font-size: .9rem;
+}
+
+body.page-reviews .rv-stars i.off {
+    color: rgba(190, 210, 245, .3);
+}
+
+body.page-reviews .rv-bars {
+    display: grid;
+    gap: .45rem;
+}
+
+body.page-reviews .rv-bar {
+    display: grid;
+    grid-template-columns: 34px 1fr 28px;
+    align-items: center;
+    gap: .5rem;
+    font-size: .76rem;
+    color: var(--rv-text-3);
+}
+
+body.page-reviews .rv-bar-track {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(92, 150, 255, .15);
+    overflow: hidden;
+}
+
+body.page-reviews .rv-bar-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #2F8CFF, #3FD0FF);
+}
+
+body.page-reviews .rv-stat {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .88rem;
+    color: var(--rv-text-2);
+}
+
+body.page-reviews .rv-stat i {
+    color: var(--rv-accent);
+}
+
+body.page-reviews .rv-stat strong {
+    color: #fff;
+}
+
+body.page-reviews .rv-write {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-weight: 600;
+    font-size: .9rem;
+    box-shadow: var(--rv-glow);
+}
+
+body.page-reviews .rv-note {
+    font-size: .78rem;
+    color: var(--rv-text-3);
+}
+
+/* ---------- Tabs and filters ---------- */
+body.page-reviews .rv-tabs {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+body.page-reviews .rv-tab {
+    padding: .55rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--rv-line);
+    background: rgba(20, 58, 130, .35);
+    color: var(--rv-text-2);
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+body.page-reviews .rv-tab.active {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: var(--rv-glow);
+}
+
+body.page-reviews .rv-filters {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) repeat(3, minmax(0, 1fr));
+    gap: .6rem;
+    margin-bottom: 1.25rem;
+}
+
+body.page-reviews .rv-filters input,
+body.page-reviews .rv-filters select {
+    width: 100%;
+    padding: .65rem .8rem;
+    border-radius: 10px;
+    border: 1px solid var(--rv-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .85rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body.page-reviews .rv-filters select option {
+    background: #0A2A6B;
+}
+
+/* ---------- Review cards ---------- */
+body.page-reviews .rv-list {
+    display: grid;
+    gap: .9rem;
+}
+
+body.page-reviews .rv-card {
+    display: grid;
+    gap: .6rem;
+    padding: 1.2rem 1.3rem;
+    border-radius: 16px;
+    background: var(--rv-card);
+    border: 1px solid var(--rv-line);
+    box-shadow: var(--rv-shadow);
+}
+
+body.page-reviews .rv-head {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+body.page-reviews .rv-head img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(63, 208, 255, .45);
+}
+
+body.page-reviews .rv-head strong {
+    display: block;
+    font-size: .92rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+body.page-reviews .rv-head span {
+    font-size: .76rem;
+    color: var(--rv-text-3);
+}
+
+body.page-reviews .rv-listing {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--rv-accent);
+}
+
+body.page-reviews .rv-comment {
+    font-size: .9rem;
+    color: var(--rv-text-2);
+    line-height: 1.6;
+}
+
+body.page-reviews .rv-comment.empty {
+    font-style: italic;
+    color: var(--rv-text-3);
+}
+
+/* ---------- Empty and load more ---------- */
+body.page-reviews .rv-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    border-radius: 18px;
+    background: var(--rv-card);
+    border: 1px solid var(--rv-line);
+}
+
+body.page-reviews .rv-empty i {
+    font-size: 2rem;
+    color: var(--rv-accent);
+    margin-bottom: .75rem;
+}
+
+body.page-reviews .rv-empty h2 {
+    font-size: 1.15rem;
+    margin-bottom: .4rem;
+}
+
+body.page-reviews .rv-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.25rem;
+}
+
+body.page-reviews .rv-more-btn {
+    padding: .7rem 1.3rem;
+    border-radius: 10px;
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 960px) {
+    body.page-reviews .rv-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-reviews .rv-summary {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-reviews .rv-filters {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Write a review ---------- */
+body.page-reviews .rv-compose {
+    padding: 1.4rem 1.5rem;
+    border-radius: 18px;
+    background: var(--rv-card);
+    border: 1px solid var(--rv-line);
+    box-shadow: var(--rv-shadow);
+    margin-bottom: 1.5rem;
+}
+
+body.page-reviews .rv-compose h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+body.page-reviews .rv-compose-empty {
+    font-size: .92rem;
+}
+
+body.page-reviews .rv-compose-form {
+    display: grid;
+    gap: .6rem;
+}
+
+body.page-reviews .rv-compose-form label {
+    font-size: .82rem;
+    color: var(--rv-text-3);
+    margin-top: .3rem;
+}
+
+body.page-reviews .rv-compose-form select,
+body.page-reviews .rv-compose-form textarea {
+    width: 100%;
+    padding: .7rem .9rem;
+    border-radius: 10px;
+    border: 1px solid var(--rv-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .9rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body.page-reviews .rv-compose-form select option {
+    background: #0A2A6B;
+}
+
+body.page-reviews .rv-compose-form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+body.page-reviews .rv-rating-input {
+    border: 0;
+    padding: 0;
+    margin: .3rem 0 0;
+}
+
+body.page-reviews .rv-rating-input legend {
+    font-size: .82rem;
+    color: var(--rv-text-3);
+    margin-bottom: .5rem;
+}
+
+body.page-reviews .rv-rating-options {
+    display: flex;
+    gap: .4rem;
+}
+
+body.page-reviews .rv-rating-options input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+body.page-reviews .rv-rating-options label {
+    margin: 0;
+    font-size: 1.5rem;
+    color: rgba(190, 210, 245, .35);
+    cursor: pointer;
+    transition: color .15s, transform .15s;
+}
+
+body.page-reviews .rv-rating-options label:hover {
+    transform: scale(1.12);
+}
+
+body.page-reviews .rv-rating-options input:checked+label {
+    color: var(--rv-gold);
+}
+
+body.page-reviews .rv-rating-options input:focus-visible+label {
+    outline: 2px solid var(--rv-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+body.page-reviews .rv-compose-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: .6rem;
+}
+
+body.page-reviews .rv-primary,
+body.page-reviews .rv-secondary {
+    padding: .7rem 1.2rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.page-reviews .rv-primary {
+    border: 0;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    box-shadow: var(--rv-glow);
+}
+
+body.page-reviews .rv-primary:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+body.page-reviews .rv-secondary {
+    border: 1px solid var(--rv-line);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+}

@@ -4,6 +4,8 @@ import { initModal } from "../ui/modal.js";
 import { initNavigation } from "../ui/navigation.js";
 import { initTheme } from "../ui/theme.js";
 import { initPage } from "./page.js";
+import { guardPage } from "./access-guard.js";
+import { startNotificationAlerts } from "./alerts.js";
 
 const loaders = {
     admin: "./loadAdmin.js",
@@ -32,8 +34,24 @@ function area() {
 async function loadLayout() {
     const appArea = area();
     if (!document.getElementById("header") || !loaders[appArea]) return;
+
+    // Portal pages check the signed-in person first, before anything is shown
+    if (["student", "landlord", "admin"].includes(appArea)) {
+        const allowed = await guardPage(appArea);
+        if (!allowed) return;
+    }
+
     const module = await import(loaders[appArea]);
-    const methods = { admin: "loadAdminLayout", general: "loadGeneralLayout", landlord: "loadLandlordLayout", student: "loadStudentLayout", system: "loadGeneralLayout" };
+    const methods = {
+        admin: "loadAdminLayout",
+        general: "loadGeneralLayout",
+        landlord: "loadLandlordLayout",
+        student: "loadStudentLayout",
+        system: "loadGeneralLayout",
+    };
+    if (["student", "landlord"].includes(appArea)) {
+        startNotificationAlerts();
+    }
     await module[methods[appArea]]?.();
     document.documentElement.dataset.appArea = appArea;
 }
@@ -50,7 +68,7 @@ const pageModules = {
     "landlord_settings.htm": "../landlord_settings.js",
     "listing_details.htm": "../listing_details.js",
     "my_listing.htm": "../my_listing.js",
-    "notification.htm": "../notifications.js",
+    "notification.htm": "../notification.js",
 };
 
 async function loadFeatureModule() {
@@ -78,7 +96,8 @@ async function loadPageModule() {
             auth.initAuthPage();
         }
     } catch (error) {
-        console.error(`ResiHub could not load the page module for ${page}.`, error);
+
+        console.error(`ResiHub could not load the page module for ${page}. Expected: ../pages/${appArea}/${page}.js`, error);
     }
 }
 

@@ -147,3 +147,4 @@ drop policy if exists "resihub property media delete" on storage.objects;
 create policy "resihub property media upload" on storage.objects for insert to authenticated with check (bucket_id = 'property-media' and owner_id = auth.uid()::text);
 create policy "resihub property media update" on storage.objects for update to authenticated using (bucket_id = 'property-media' and owner_id = auth.uid()::text) with check (bucket_id = 'property-media' and owner_id = auth.uid()::text);
 create policy "resihub property media delete" on storage.objects for delete to authenticated using (bucket_id = 'property-media' and owner_id = auth.uid()::text);
+

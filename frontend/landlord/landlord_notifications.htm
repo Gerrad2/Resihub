@@ -5,150 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Notifications | ResiHub Student Accommodation Nigeria</title>
-
-    <meta name="description"
-        content="View your ResiHub notifications including booking requests, inspection updates, new messages, property activity and important account alerts.">
-
-    <meta name="keywords"
-        content="ResiHub notifications, landlord notifications, booking alerts, student accommodation updates, property notifications Nigeria">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="robots" content="index, follow">
-
-    <link rel="canonical" href="https://www.resihub.com/notifications.htm">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="ResiHub">
-    <meta property="og:title" content="Notifications | ResiHub">
-    <meta property="og:description"
-        content="Stay informed with real-time booking requests, messages and property activity on ResiHub.">
-    <meta property="og:url" content="https://www.resihub.com/notifications.htm">
-    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Notifications | ResiHub">
-    <meta name="twitter:description"
-        content="Receive instant notifications for messages, inspections and accommodation activity.">
-    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+    <title>Notifications | ResiHub Landlord</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="landlord">
+<body class="page-notifications" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-        <section id="notifications-hero" class="auth-hero reveal fade-up">
-
+        <!-- HERO -->
+        <section id="notifications-hero" class="n-hero">
             <div class="container">
+                <span class="n-badge"><i class="fa-solid fa-bell" aria-hidden="true"></i>Notifications</span>
+                <h1>Notifications</h1>
+                <p class="n-sub">Stay updated with bookings, messages, enquiries and account activity.</p>
+            </div>
+        </section>
 
-                <div class="page-hero-content hero-content">
+        <!-- LIST -->
+        <section class="n-section">
+            <div class="container">
+                <div class="n-card">
+                    <div id="notificationList" class="n-list" aria-live="polite"></div>
 
-                    <span class="page-badge floating-badge">
-
-                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
-
-                        Notifications
-
-                    </span>
-
-                    <h1 class="hero-title">
-
-                        Your Notifications
-
-                    </h1>
-
-                    <p class="hero-description">
-
-                        Stay updated with new messages, booking requests, inspections, listings and important account
-                        activity.
-
-                    </p>
-
+                    <div id="emptyNotifications" class="n-empty hidden">
+                        <i class="fa-solid fa-bell-slash" aria-hidden="true"></i>
+                        <h2>No Notifications</h2>
+                        <p>You're all caught up. New notifications will appear here when there is activity on your
+                            properties.</p>
+                    </div>
                 </div>
 
-            </div>
-
-        </section>
-        <section class="notification-actions">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <h2>Recent Notifications</h2>
-
-                    <button id="markAllReadBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                        <i class="fa-solid fa-check-double" aria-hidden="true"></i>
-
-                        Mark All Read
-
+                <div class="n-footer">
+                    <button id="markAllReadBtn" class="n-markall hidden" type="button"
+                        aria-label="Mark all notifications as read">
+                        <i class="fa-solid fa-check-double" aria-hidden="true"></i> Mark all as read
                     </button>
-
                 </div>
-
             </div>
-
-        </section>
-
-        <section class="notifications">
-
-            <div class="container">
-
-                <div id="notificationList" class="notification-list">
-
-                </div>
-
-                <div id="emptyNotifications" class="empty-state hidden">
-
-                    <i class="fa-solid fa-bell-slash" aria-hidden="true"></i>
-
-                    <h3>No Notifications</h3>
-
-                    <p>
-
-                        You're all caught up. New activity will appear here.
-
-                    </p>
-
-                </div>
-
-            </div>
-
         </section>
     </main>
-    <!--FOOTER-->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/landlord_notifications.js";
+        init();
+    </script>
 </body>
 
 </html>
-
-
-

@@ -1,0 +1,447 @@
+/*==========================================
+    EDIT PROFILE (student/edit_profile.htm)
+    Scoped to body.page-edit-profile
+==========================================*/
+
+body.page-edit-profile {
+    --ep-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --ep-line: rgba(92, 150, 255, .24);
+    --ep-line-soft: rgba(92, 150, 255, .14);
+    --ep-accent: #3FD0FF;
+    --ep-text-2: rgba(225, 236, 255, .82);
+    --ep-text-3: rgba(190, 210, 245, .62);
+    --ep-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --ep-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-edit-profile h1,
+body.page-edit-profile h2 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-edit-profile p {
+    color: var(--ep-text-2);
+    margin: 0;
+}
+
+body.page-edit-profile a {
+    text-decoration: none;
+}
+
+body.page-edit-profile .container {
+    width: min(1100px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* ---------- Hero ---------- */
+body.page-edit-profile .ep-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-edit-profile .ep-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--ep-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-edit-profile .ep-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Layout ---------- */
+body.page-edit-profile .ep-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-edit-profile .ep-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+body.page-edit-profile .ep-card {
+    padding: 1.5rem;
+    border-radius: 18px;
+    background: var(--ep-card);
+    border: 1px solid var(--ep-line);
+    box-shadow: var(--ep-shadow);
+}
+
+body.page-edit-profile .ep-card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.1rem;
+}
+
+body.page-edit-profile .ep-main {
+    display: grid;
+    gap: 1.25rem;
+    min-width: 0;
+}
+
+/* ---------- Photo ---------- */
+body.page-edit-profile .ep-photo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: sticky;
+    top: 110px;
+}
+
+body.page-edit-profile .ep-avatar-ring {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, #2F8CFF, #3FD0FF);
+    box-shadow: var(--ep-glow);
+    margin-bottom: 1.1rem;
+}
+
+body.page-edit-profile .ep-avatar-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: #0A2A6B;
+}
+
+body.page-edit-profile .ep-photo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .6rem 1.1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--ep-glow);
+}
+
+body.page-edit-profile .ep-hint {
+    margin-top: .8rem;
+    font-size: .78rem;
+    color: var(--ep-text-3);
+}
+
+/* ---------- Fields ---------- */
+body.page-edit-profile .ep-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.1rem;
+}
+
+body.page-edit-profile .ep-full {
+    grid-column: 1 / -1;
+}
+
+body.page-edit-profile .ep-field {
+    display: grid;
+    gap: .4rem;
+}
+
+body.page-edit-profile .ep-field label {
+    font-size: .8rem;
+    font-weight: 500;
+    color: var(--ep-text-3);
+}
+
+body.page-edit-profile .ep-field input,
+body.page-edit-profile .ep-field select {
+    width: 100%;
+    padding: .7rem .9rem;
+    border-radius: 10px;
+    border: 1px solid var(--ep-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .92rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body.page-edit-profile .ep-field select option {
+    background: #0A2A6B;
+    color: #fff;
+}
+
+body.page-edit-profile .ep-field input:focus,
+body.page-edit-profile .ep-field select:focus {
+    border-color: rgba(63, 208, 255, .65);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .15);
+}
+
+body.page-edit-profile .ep-field input[readonly] {
+    color: var(--ep-text-3);
+    cursor: not-allowed;
+}
+
+/* ---------- Buttons ---------- */
+body.page-edit-profile .ep-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .75rem;
+}
+
+body.page-edit-profile .ep-primary,
+body.page-edit-profile .ep-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .8rem 1.4rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .92rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.page-edit-profile .ep-primary {
+    border: 0;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    box-shadow: var(--ep-glow);
+}
+
+body.page-edit-profile .ep-primary:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+body.page-edit-profile .ep-secondary {
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 900px) {
+    body.page-edit-profile .ep-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-edit-profile .ep-photo-card {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-edit-profile .ep-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-edit-profile .ep-actions {
+        flex-direction: column-reverse;
+    }
+
+    body.page-edit-profile .ep-primary,
+    body.page-edit-profile .ep-secondary {
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   LANDLORD EDIT PROFILE: matches the verify page design
+   Scoped to body.page-landlord-edit-profile
+========================================== */
+body.page-landlord-edit-profile .ep-card {
+    border-radius: 20px;
+    background: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    border: 1px solid rgba(92, 150, 255, .24);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+    padding: 1.5rem 1.6rem;
+}
+
+body.page-landlord-edit-profile .ep-card h2 {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+body.page-landlord-edit-profile .ep-card h2::before {
+    content: "";
+    width: 4px;
+    height: 1.1rem;
+    border-radius: 4px;
+    background: linear-gradient(180deg, #3FD0FF, #2F8CFF);
+}
+
+body.page-landlord-edit-profile .ep-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1.2rem;
+}
+
+body.page-landlord-edit-profile .ep-field {
+    display: grid;
+    gap: .45rem;
+    min-width: 0;
+}
+
+body.page-landlord-edit-profile .ep-field label {
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: rgba(190, 210, 245, .75);
+}
+
+body.page-landlord-edit-profile .ep-field input,
+body.page-landlord-edit-profile .ep-field select,
+body.page-landlord-edit-profile .ep-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: .72rem .9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(92, 150, 255, .3);
+    background: rgba(4, 18, 52, .65);
+    color: #fff;
+    font: inherit;
+    font-size: .92rem;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+body.page-landlord-edit-profile .ep-field input:focus,
+body.page-landlord-edit-profile .ep-field select:focus,
+body.page-landlord-edit-profile .ep-field textarea:focus {
+    border-color: rgba(63, 208, 255, .65);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .15);
+}
+
+body.page-landlord-edit-profile .ep-field input[readonly] {
+    color: rgba(190, 210, 245, .6);
+    cursor: not-allowed;
+}
+
+body.page-landlord-edit-profile .ep-field select option {
+    background: #0A2A6B;
+    color: #fff;
+}
+
+body.page-landlord-edit-profile .ep-hint {
+    font-size: .76rem;
+    color: rgba(190, 210, 245, .6);
+    line-height: 1.45;
+}
+
+body.page-landlord-edit-profile .ep-full {
+    grid-column: 1 / -1;
+}
+
+body.page-landlord-edit-profile .ep-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .7rem;
+    margin-top: .4rem;
+}
+
+body.page-landlord-edit-profile .ep-primary,
+body.page-landlord-edit-profile .ep-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .8rem 1.4rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body.page-landlord-edit-profile .ep-primary {
+    border: 0;
+    background: linear-gradient(135deg, #3A8DFF, #1F5FE0);
+    color: #fff;
+    box-shadow: 0 0 22px rgba(31, 107, 255, .4);
+}
+
+body.page-landlord-edit-profile .ep-secondary {
+    border: 1px solid rgba(63, 208, 255, .45);
+    background: transparent;
+    color: #fff;
+}
+
+@media (max-width: 640px) {
+    body.page-landlord-edit-profile .ep-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   LANDLORD EDIT PROFILE: align fields in rows
+========================================== */
+body.page-landlord-edit-profile .ep-grid {
+    align-items: start;
+}
+
+body.page-landlord-edit-profile .ep-field {
+    gap: 0;
+}
+
+/* Every label takes the same height and spacing */
+body.page-landlord-edit-profile .ep-field label {
+    display: block;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    margin-bottom: .5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Every single-line input and select is the same height */
+body.page-landlord-edit-profile .ep-field input,
+body.page-landlord-edit-profile .ep-field select {
+    display: block;
+    height: 2.9rem;
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-sizing: border-box;
+}
+
+/* Hints reserve two lines, so fields below them line up with their neighbours */
+body.page-landlord-edit-profile .ep-field .ep-hint {
+    display: block;
+    min-height: 2.5rem;
+    margin: .45rem 0 0;
+}
+
+/* Keep the textarea separate: it should stay taller */
+body.page-landlord-edit-profile .ep-field textarea {
+    display: block;
+    min-height: 130px;
+}

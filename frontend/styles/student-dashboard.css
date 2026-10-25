@@ -1,0 +1,394 @@
+/*==========================================
+    STUDENT DASHBOARD (student/dashboard_student.htm)
+    Scoped to body.page-student-dashboard
+==========================================*/
+
+body.page-student-dashboard {
+    --sd-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --sd-line: rgba(92, 150, 255, .24);
+    --sd-line-soft: rgba(92, 150, 255, .14);
+    --sd-accent: #3FD0FF;
+    --sd-text-2: rgba(225, 236, 255, .82);
+    --sd-text-3: rgba(190, 210, 245, .62);
+    --sd-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --sd-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-student-dashboard h1,
+body.page-student-dashboard h2,
+body.page-student-dashboard h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-student-dashboard p {
+    color: var(--sd-text-2);
+    margin: 0;
+}
+
+body.page-student-dashboard a {
+    text-decoration: none;
+}
+
+body.page-student-dashboard .container {
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-student-dashboard .hidden {
+    display: none !important;
+}
+
+/* ---------- Greeting ---------- */
+body.page-student-dashboard .dash-hero {
+    padding: 6.5rem 0 1.75rem;
+}
+
+body.page-student-dashboard .greeting {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+body.page-student-dashboard .greet-avatar {
+    width: 84px;
+    height: 84px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--sd-accent);
+    box-shadow: var(--sd-glow);
+}
+
+body.page-student-dashboard .greet-kicker {
+    font-size: .95rem;
+    color: var(--sd-text-3);
+}
+
+body.page-student-dashboard .greet-text h1 {
+    font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: .15rem 0 .5rem;
+}
+
+body.page-student-dashboard .greet-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
+}
+
+body.page-student-dashboard .student-pill {
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--sd-accent);
+    font-size: .74rem;
+    font-weight: 600;
+}
+
+body.page-student-dashboard .greet-meta {
+    font-size: .85rem;
+    color: var(--sd-text-3);
+}
+
+body.page-student-dashboard .greet-tagline {
+    margin-top: .5rem;
+    font-size: .92rem;
+}
+
+body.page-student-dashboard .today {
+    margin-left: auto;
+    align-self: flex-start;
+    font-size: .85rem;
+    color: var(--sd-text-3);
+    white-space: nowrap;
+}
+
+/* ---------- Stats ---------- */
+body.page-student-dashboard .dash-stats {
+    padding: .5rem 0 1.5rem;
+}
+
+body.page-student-dashboard .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-student-dashboard .stat-tile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 1.3rem;
+    border-radius: 16px;
+    background: var(--sd-card);
+    border: 1px solid var(--sd-line);
+    box-shadow: var(--sd-shadow);
+}
+
+body.page-student-dashboard .stat-tile p {
+    font-size: .82rem;
+    color: var(--sd-text-3);
+    margin-bottom: .25rem;
+}
+
+body.page-student-dashboard .stat-tile strong {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body.page-student-dashboard .stat-tile>i {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(47, 140, 255, .18);
+    color: var(--sd-accent);
+}
+
+/* ---------- Sections ---------- */
+body.page-student-dashboard .dash-section {
+    padding: 1rem 0 1.5rem;
+}
+
+body.page-student-dashboard .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: .9rem;
+}
+
+body.page-student-dashboard .section-head h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+body.page-student-dashboard .section-head a {
+    color: var(--sd-accent);
+    font-size: .86rem;
+    font-weight: 600;
+}
+
+body.page-student-dashboard .empty-note {
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    background: var(--sd-card);
+    border: 1px solid var(--sd-line-soft);
+    font-size: .9rem;
+}
+
+/* ---------- Upcoming bookings ---------- */
+body.page-student-dashboard .booking-list {
+    display: grid;
+    gap: .75rem;
+}
+
+body.page-student-dashboard .booking-item {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 1rem;
+    padding: .7rem .9rem .7rem .7rem;
+    border-radius: 14px;
+    background: var(--sd-card);
+    border: 1px solid var(--sd-line);
+    box-shadow: var(--sd-shadow);
+}
+
+body.page-student-dashboard .booking-item img {
+    width: 110px;
+    height: 78px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-student-dashboard .booking-info h3 {
+    font-size: .98rem;
+    font-weight: 600;
+    margin-bottom: .2rem;
+}
+
+body.page-student-dashboard .booking-info p {
+    font-size: .8rem;
+    color: var(--sd-text-3);
+}
+
+body.page-student-dashboard .booking-status {
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    font-size: .74rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+body.page-student-dashboard .status-confirmed {
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+}
+
+body.page-student-dashboard .status-pending {
+    background: rgba(245, 158, 11, .16);
+    color: #F59E0B;
+}
+
+body.page-student-dashboard .status-rejected {
+    background: rgba(239, 68, 68, .16);
+    color: #EF4444;
+}
+
+body.page-student-dashboard .booking-view {
+    padding: .45rem .9rem;
+    border-radius: 9px;
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+/* ---------- Recommended room cards (built by listings.js) ---------- */
+body.page-student-dashboard .recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-student-dashboard .property-card {
+    display: grid;
+    gap: .7rem;
+    padding: .7rem;
+    border-radius: 14px;
+    background: var(--sd-card);
+    border: 1px solid var(--sd-line);
+    box-shadow: var(--sd-shadow);
+    color: #fff;
+}
+
+body.page-student-dashboard .property-image {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1A4FA8, #0A2A6B);
+}
+
+body.page-student-dashboard .property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-student-dashboard .property-content {
+    display: grid;
+    gap: .3rem;
+}
+
+body.page-student-dashboard .property-price {
+    font-weight: 700;
+    color: #fff;
+}
+
+body.page-student-dashboard .property-title {
+    font-size: .92rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+body.page-student-dashboard .property-location {
+    font-size: .78rem;
+    color: var(--sd-text-3);
+}
+
+body.page-student-dashboard .property-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+body.page-student-dashboard .property-feature {
+    padding: .2rem .55rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .1);
+    border: 1px solid rgba(63, 208, 255, .25);
+    color: var(--sd-text-2);
+    font-size: .68rem;
+}
+
+body.page-student-dashboard .property-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .76rem;
+    color: var(--sd-text-3);
+}
+
+body.page-student-dashboard .status-badge {
+    display: inline-flex;
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .7rem;
+    font-weight: 600;
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    body.page-student-dashboard .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-student-dashboard .recommend-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-student-dashboard .greeting {
+        flex-wrap: wrap;
+    }
+
+    body.page-student-dashboard .today {
+        margin-left: 0;
+    }
+
+    body.page-student-dashboard .booking-item {
+        grid-template-columns: 90px minmax(0, 1fr);
+    }
+
+    body.page-student-dashboard .booking-item img {
+        width: 90px;
+        height: 66px;
+    }
+
+    body.page-student-dashboard .booking-status,
+    body.page-student-dashboard .booking-view {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    body.page-student-dashboard .recommend-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,445 @@
+/*==========================================
+    RESPONSIVE (phone layouts for all general pages)
+    Load LAST, after each page's own stylesheet.
+    Header and footer are not changed here.
+==========================================*/
+
+/* ---------- Shared phone rules ---------- */
+@media (max-width: 680px) {
+
+    body.page-index,
+    body.page-browse,
+    body.page-details,
+    body.page-universities,
+    body.page-university,
+    body.page-about,
+    body.page-contact,
+    body.page-faq,
+    body.page-privacy {
+        overflow-x: clip;
+    }
+
+    body.page-index .container,
+    body.page-browse .container,
+    body.page-details .container,
+    body.page-universities .container,
+    body.page-university .container,
+    body.page-about .container,
+    body.page-contact .container,
+    body.page-faq .container,
+    body.page-privacy .container {
+        width: calc(100% - 2rem);
+    }
+
+    /* 16px inputs stop iPhone Safari zooming in when a field is tapped */
+    body.page-index input,
+    body.page-index select,
+    body.page-index textarea,
+    body.page-browse input,
+    body.page-browse select,
+    body.page-universities input,
+    body.page-universities select,
+    body.page-contact input,
+    body.page-contact textarea,
+    body.page-faq input,
+    body.page-privacy input {
+        font-size: 16px;
+    }
+
+    /* comfortable tap targets for buttons */
+    body.page-index .btn-primary,
+    body.page-index .btn-outline,
+    body.page-browse .btn-primary,
+    body.page-browse .btn-outline,
+    body.page-details .btn-primary,
+    body.page-details .btn-outline,
+    body.page-university .btn-primary,
+    body.page-about .btn-primary,
+    body.page-about .btn-outline,
+    body.page-contact .btn-primary,
+    body.page-contact .btn-outline,
+    body.page-faq .btn-primary {
+        min-height: 44px;
+    }
+}
+
+/* ---------- Index ---------- */
+@media (max-width: 680px) {
+    body.page-index .hero {
+        min-height: auto;
+        padding: 5.5rem 0 2.5rem;
+    }
+
+    body.page-index .hero h1 {
+        font-size: 2rem;
+    }
+
+    body.page-index .hero-sub {
+        font-size: .95rem;
+    }
+
+    body.page-index .trust-row {
+        grid-template-columns: 1fr;
+        gap: .6rem;
+    }
+
+    body.page-index .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-index .featured-grid,
+    body.page-index .features-grid,
+    body.page-index .universities-grid,
+    body.page-index .testimonials-grid,
+    body.page-index .finish-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-index .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body.page-index .newsletter-card {
+        padding: 1.4rem 1.2rem;
+    }
+
+    body.page-index .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* ---------- Browse rooms ---------- */
+@media (max-width: 680px) {
+    body.page-browse .browse-hero {
+        padding: 5rem 0 1.5rem;
+    }
+
+    body.page-browse .browse-hero h1 {
+        font-size: 1.9rem;
+    }
+
+    body.page-browse .browse-search {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.page-browse .listings-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body.page-browse .results-tools {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    body.page-browse .property-card {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-browse .property-image {
+        min-height: 170px;
+    }
+
+    body.page-browse .listings-grid.grid-view {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Room details ---------- */
+@media (max-width: 680px) {
+    body.page-details .room-hero {
+        padding: 5.5rem 0 1rem;
+    }
+
+    body.page-details .room-hero h1 {
+        font-size: 1.7rem;
+    }
+
+    body.page-details .gallery img {
+        height: 230px;
+    }
+
+    body.page-details .thumbnail-gallery>* {
+        flex: 0 0 76px;
+        height: 56px;
+    }
+
+    body.page-details .room-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    body.page-details .room-tabs a {
+        white-space: nowrap;
+    }
+
+    body.page-details .facts {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-details .amenities-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-details .details-side {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-details .listing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-details .tab-panel {
+        padding: 1.1rem 1rem;
+    }
+}
+
+/* ---------- Universities list ---------- */
+@media (max-width: 680px) {
+    body.page-universities .uni-hero {
+        min-height: auto;
+        padding: 5.5rem 0 2.5rem;
+    }
+
+    body.page-universities .uni-hero h1 {
+        font-size: 2.1rem;
+    }
+
+    body.page-universities .uni-search {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.page-universities .uni-search-btn,
+    body.page-universities .uni-reset-btn {
+        width: 100%;
+    }
+
+    body.page-universities .stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-universities .uni-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- University details ---------- */
+@media (max-width: 680px) {
+    body.page-university .uni-hero {
+        min-height: auto;
+        padding: 5.5rem 0 2rem;
+    }
+
+    body.page-university .uni-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    body.page-university .uni-logo-large {
+        width: 80px;
+        height: 80px;
+    }
+
+    body.page-university .uni-id h1 {
+        font-size: 1.9rem;
+    }
+
+    body.page-university .uni-tabs .container {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    body.page-university .uni-tabs a {
+        white-space: nowrap;
+    }
+
+    body.page-university .facilities-grid,
+    body.page-university .areas-grid,
+    body.page-university .listing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-university .panel,
+    body.page-university .side-card {
+        padding: 1.1rem 1rem;
+    }
+
+    body.page-university .map-box {
+        min-height: 180px;
+    }
+}
+
+/* ---------- About ---------- */
+@media (max-width: 680px) {
+    body.page-about .about-hero {
+        min-height: auto;
+        padding: 5.5rem 0 2.5rem;
+    }
+
+    body.page-about .about-hero .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    body.page-about .about-hero .hero-description {
+        font-size: .98rem;
+    }
+
+    body.page-about .hero-buttons a {
+        width: 100%;
+        min-width: 0;
+    }
+
+    body.page-about .mission-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-about .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-about .features-grid,
+    body.page-about .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-about .timeline>* {
+        grid-template-columns: 1fr;
+        gap: .4rem;
+    }
+
+    body.page-about .cta-card {
+        padding: 2.2rem 1.2rem;
+    }
+
+    body.page-about .cta-buttons a {
+        width: 100%;
+    }
+}
+
+/* ---------- Contact ---------- */
+@media (max-width: 680px) {
+    body.page-contact .contact-hero {
+        min-height: auto;
+        padding: 5.5rem 0 2.5rem;
+    }
+
+    body.page-contact .contact-hero h1 {
+        font-size: 2rem;
+    }
+
+    body.page-contact .hero-buttons a {
+        width: 100%;
+    }
+
+    body.page-contact .contact-form,
+    body.page-contact .contact-info {
+        padding: 1.2rem 1rem;
+    }
+
+    body.page-contact .help-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-contact .office-map .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    body.page-contact .map-box {
+        min-height: 220px;
+    }
+}
+
+/* ---------- FAQ ---------- */
+@media (max-width: 680px) {
+    body.page-faq .faq-hero {
+        padding: 5.5rem 0 1.5rem;
+    }
+
+    body.page-faq .faq-hero h1 {
+        font-size: 2rem;
+    }
+
+    body.page-faq .category-buttons {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: .25rem;
+        scrollbar-width: none;
+    }
+
+    body.page-faq .category-buttons button {
+        flex-shrink: 0;
+        padding: .5rem .9rem;
+        font-size: .84rem;
+    }
+
+    body.page-faq .support-card {
+        padding: 1.8rem 1.1rem;
+    }
+}
+
+/* ---------- Privacy ---------- */
+@media (max-width: 900px) {
+    body.page-privacy .policy-nav {
+        padding: .9rem;
+    }
+
+    body.page-privacy .policy-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .4rem;
+    }
+
+    body.page-privacy .policy-nav a {
+        padding: .4rem .75rem;
+        border: 1px solid var(--pv-line);
+        border-radius: 999px;
+        background: rgba(4, 18, 52, .45);
+        font-size: .8rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 680px) {
+    body.page-privacy .privacy-hero {
+        padding: 5.5rem 0 2rem;
+    }
+
+    body.page-privacy .privacy-hero h1 {
+        font-size: 2rem;
+    }
+
+    body.page-privacy .policy-card {
+        padding: 1.1rem 1rem;
+    }
+
+    body.page-privacy .policy-card h2 {
+        font-size: 1.05rem;
+        gap: .6rem;
+    }
+
+    body.page-privacy .policy-card h2::before {
+        width: 28px;
+        height: 28px;
+        font-size: .78rem;
+    }
+
+    body.page-privacy .policy-card p,
+    body.page-privacy .policy-card li {
+        font-size: .9rem;
+    }
+
+    body.page-privacy .privacy-contact .contact-card {
+        padding: 1.8rem 1.1rem;
+    }
+
+    body.page-privacy .privacy-contact a#privacyEmail {
+        display: block;
+        font-size: .9rem;
+        word-break: break-all;
+    }
+}

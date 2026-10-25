@@ -1,0 +1,278 @@
+/*==========================================
+    STUDENT PROFILE (student/profile.htm)
+    Scoped to body.page-profile
+==========================================*/
+
+body.page-profile {
+    --pf-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --pf-line: rgba(92, 150, 255, .24);
+    --pf-line-soft: rgba(92, 150, 255, .14);
+    --pf-accent: #3FD0FF;
+    --pf-text-2: rgba(225, 236, 255, .82);
+    --pf-text-3: rgba(190, 210, 245, .62);
+    --pf-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --pf-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-profile h1,
+body.page-profile h2 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-profile p,
+body.page-profile dd {
+    color: var(--pf-text-2);
+    margin: 0;
+}
+
+body.page-profile a {
+    text-decoration: none;
+}
+
+body.page-profile .container {
+    width: min(1100px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* ---------- Banner and identity ---------- */
+body.page-profile .pf-hero {
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+body.page-profile .pf-banner {
+    height: 260px;
+    background:
+        linear-gradient(180deg, rgba(4, 16, 48, .35), rgba(6, 24, 70, .85)),
+        url("../assets/images/hero-campus.jpg") center / cover no-repeat,
+        linear-gradient(180deg, #0B2A6F, #061A4A);
+    border-bottom: 1px solid var(--pf-line-soft);
+}
+
+body.page-profile .pf-identity {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-top: -70px;
+    flex-wrap: wrap;
+}
+
+body.page-profile .pf-avatar {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #0B2A6F;
+    box-shadow: var(--pf-glow);
+    background: #0A2A6B;
+}
+
+body.page-profile .pf-identity-text {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: .4rem;
+}
+
+body.page-profile .pf-name-row {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex-wrap: wrap;
+}
+
+body.page-profile .pf-name-row h1 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 700;
+}
+
+body.page-profile .pf-pill {
+    padding: .25rem .7rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--pf-accent);
+    font-size: .74rem;
+    font-weight: 600;
+}
+
+body.page-profile .pf-uni {
+    margin-top: .3rem;
+    font-size: .95rem;
+}
+
+body.page-profile .pf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+body.page-profile .pf-primary,
+body.page-profile .pf-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .7rem 1.15rem;
+    border-radius: 10px;
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+body.page-profile .pf-primary {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    box-shadow: var(--pf-glow);
+}
+
+body.page-profile .pf-secondary {
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+}
+
+/* ---------- Stats ---------- */
+body.page-profile .pf-stats-section {
+    padding: 1.5rem 0 1rem;
+}
+
+body.page-profile .pf-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-profile .pf-stat {
+    display: grid;
+    gap: .2rem;
+    padding: 1.1rem;
+    border-radius: 16px;
+    background: var(--pf-card);
+    border: 1px solid var(--pf-line);
+    box-shadow: var(--pf-shadow);
+    text-align: center;
+}
+
+body.page-profile .pf-stat strong {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body.page-profile .pf-stat span {
+    font-size: .82rem;
+    color: var(--pf-text-3);
+}
+
+/* ---------- Detail cards ---------- */
+body.page-profile .pf-details {
+    padding: 1rem 0 4rem;
+}
+
+body.page-profile .pf-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+body.page-profile .pf-card {
+    padding: 1.4rem 1.5rem;
+    border-radius: 18px;
+    background: var(--pf-card);
+    border: 1px solid var(--pf-line);
+    box-shadow: var(--pf-shadow);
+}
+
+body.page-profile .pf-full {
+    grid-column: 1 / -1;
+}
+
+body.page-profile .pf-card h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+body.page-profile .pf-card dl {
+    display: grid;
+    gap: .9rem;
+}
+
+body.page-profile .pf-card dl>div {
+    display: grid;
+    gap: .2rem;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid var(--pf-line-soft);
+}
+
+body.page-profile .pf-card dl>div:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+body.page-profile .pf-card dt {
+    font-size: .78rem;
+    color: var(--pf-text-3);
+}
+
+body.page-profile .pf-card dd {
+    font-size: .95rem;
+    color: #fff;
+    word-break: break-word;
+}
+
+body.page-profile .pf-card dd small {
+    margin-left: .4rem;
+    padding: .15rem .5rem;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, .14);
+    color: #22C55E;
+    font-size: .7rem;
+    font-weight: 600;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 860px) {
+
+    body.page-profile .pf-stats,
+    body.page-profile .pf-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-profile .pf-banner {
+        height: 180px;
+    }
+
+    body.page-profile .pf-identity {
+        margin-top: -60px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+
+    body.page-profile .pf-name-row,
+    body.page-profile .pf-actions {
+        justify-content: center;
+    }
+
+    body.page-profile .pf-avatar {
+        width: 120px;
+        height: 120px;
+    }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Business | ResiHub Landlord</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    >
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="page-verify" data-resihub-surface="student">
+    <div id="scrollProgress"></div>
+    <div id="header"></div>
+
+    <main class="vf-main">
+        <div class="container">
+
+            <!-- HERO -->
+            <section class="vf-hero">
+                <div class="vf-hero-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+                <div>
+                    <span class="vf-badge"><i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+                        Verification</span>
+                    <h1>Verify your business</h1>
+                    <p>Enter your NIN and upload a proof of address. Your portal opens once both are approved.</p>
+                </div>
+            </section>
+
+            <div class="vf-layout">
+
+                <!-- LEFT COLUMN -->
+                <div class="vf-left">
+
+                    <section class="vf-card">
+                        <h2 class="vf-card-title"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            Verification status</h2>
+
+                        <div class="vf-steps">
+                            <div class="vf-step" data-step="details">
+                                <span class="vf-dot"><i class="fa-solid fa-user" aria-hidden="true"></i></span>
+                                <strong>Details Submitted</strong>
+                                <span class="vf-step-state">Pending</span>
+                            </div>
+                            <div class="vf-step" data-step="docs">
+                                <span class="vf-dot"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></span>
+                                <strong>Documents Uploaded</strong>
+                                <span class="vf-step-state">Pending</span>
+                            </div>
+                            <div class="vf-step" data-step="review">
+                                <span class="vf-dot"><i class="fa-solid fa-magnifying-glass"
+                                        aria-hidden="true"></i></span>
+                                <strong>Under Review</strong>
+                                <span class="vf-step-state">Pending</span>
+                            </div>
+                            <div class="vf-step" data-step="approved">
+                                <span class="vf-dot"><i class="fa-solid fa-check" aria-hidden="true"></i></span>
+                                <strong>Approved</strong>
+                                <span class="vf-step-state">Pending</span>
+                            </div>
+                        </div>
+
+                        <div class="vf-banner">
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            <p id="verifyBannerText">Loading your status...</p>
+                        </div>
+                    </section>
+
+                    <section class="vf-card">
+                        <h2 class="vf-card-title"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Proof of
+                            address</h2>
+                        <p class="vf-muted">Upload a clear photo or scan of your proof of address. Accepted documents
+                            include:</p>
+
+                        <div class="vf-chips">
+                            <span class="vf-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Utility
+                                Bill</span>
+                            <span class="vf-chip"><i class="fa-solid fa-building-columns" aria-hidden="true"></i> Bank
+                                Statement</span>
+                            <span class="vf-chip"><i class="fa-solid fa-file-signature" aria-hidden="true"></i> Tenancy
+                                Agreement</span>
+                            <span class="vf-chip"><i class="fa-solid fa-stamp" aria-hidden="true"></i> Government
+                                Letter</span>
+                        </div>
+
+                        <div class="vf-two">
+                            <label class="vf-drop" id="addressDropZone" for="addressFile">
+                                <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+                                <strong>Drag and drop your document here</strong>
+                                <span>or click to browse</span>
+                                <small>Supported formats: JPG, PNG, WebP, PDF · Max size: 10MB</small>
+                            </label>
+                            <input type="file" id="addressFile" accept="image/jpeg,image/png,image/webp,application/pdf"
+                                hidden>
+
+                            <div class="vf-uploaded">
+                                <div class="vf-uploaded-head">
+                                    <strong>Uploaded Documents</strong>
+                                    <span id="docCount">0/1</span>
+                                </div>
+                                <div id="uploadedDocs" class="vf-uploaded-list"></div>
+                            </div>
+                        </div>
+
+                        <p id="verifyMessage" class="vf-message" role="status"></p>
+                    </section>
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="vf-right">
+
+                    <section class="vf-card">
+                        <h2 class="vf-card-title"><i class="fa-solid fa-building" aria-hidden="true"></i> Your business
+                            details</h2>
+                        <div id="businessRows" class="vf-rows"></div>
+
+                        <div class="vf-secure">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Information is secure and
+                            encrypted
+                        </div>
+                    </section>
+
+                    <section class="vf-card">
+                        <h2 class="vf-card-title"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Why we
+                            verify?</h2>
+                        <ul class="vf-why">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Builds trust with students</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Reduces fraudulent listings</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Ensures a safer community</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Helps you get better bookings</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+
+            <!-- HELP -->
+            <section class="vf-help">
+                <div>
+                    <strong>Need help?</strong>
+                    <span>If you have any questions or need assistance, contact our support team.</span>
+                </div>
+                <a href="support.htm" class="vf-btn-primary"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    Contact Support</a>
+            </section>
+
+            <div id="footer"></div>
+
+            <script type="module" src="../js/core/app.js"></script>
+            <script type="module">
+                import { init } from "../js/landlord_verify.js";
+                init();
+            </script>
+
+        </div>
+    </main>

@@ -265,6 +265,28 @@ export async function getProfile(userId) {
     }
 }
 
+export async function getPublicProfile(userId) {
+    try {
+        if (!userId) {
+            return failure(new Error("A user ID is required."));
+        }
+
+        const { data, error } = await supabase
+            .from("profiles")
+            .select("id, full_name, avatar_url, business_name, role, verification_status")
+            .eq("id", userId)
+            .maybeSingle();
+
+        if (error) {
+            return failure(error);
+        }
+
+        return success(data);
+    } catch (error) {
+        return failure(error);
+    }
+}
+
 
 /*
 |--------------------------------------------------------------------------
@@ -453,6 +475,12 @@ export async function getListings({
             .eq(
                 "publication_status",
                 publicationStatus
+            )
+            .order(
+                "landlord_verified",
+                {
+                    ascending: false
+                }
             )
             .order(
                 "created_at",

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Landlord Profile | ResiHub</title>
+    <meta name="description" content="View a landlord's details and the rooms they have available on ResiHub.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="page-landlord-public" data-resihub-surface="public">
+    <div id="scrollProgress"></div>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <main>
+        <section class="lp-hero">
+            <div class="container lp-hero-inner">
+                <img id="landlordAvatar" class="lp-avatar" src="../assets/images/default-avatar.png"
+                    alt="Landlord photo">
+
+                <div>
+                    <span class="lp-badge"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i>
+                        Landlord</span>
+                    <h1 id="landlordName">Loading landlord...</h1>
+                    <p id="landlordNote" class="lp-note">Landlord on ResiHub</p>
+                    <p class="lp-count"><span id="listingCount">0</span> rooms available</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="lp-section">
+            <div class="container">
+                <h2>Available rooms</h2>
+                <div id="landlordListings" class="lp-grid" aria-live="polite"></div>
+                <p id="noListings" class="lp-empty hidden">This landlord has no rooms available right now.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/landlord_profile_public.js";
+        init();
+    </script>
+</body>
+
+</html>

@@ -18,7 +18,7 @@ function initSearchForms() {
 }
 
 function initEmptyActions() {
-    document.querySelectorAll("[id^='loadMore'], #clearSavedBtn, #markAllReadBtn").forEach((button) => {
+    document.querySelectorAll("#clearSavedBtn, #markAllReadBtn").forEach((button) => {
         button.addEventListener("click", () => {
             showToast("This action will use live ResiHub data after Supabase integration.", { type: "info" });
         });

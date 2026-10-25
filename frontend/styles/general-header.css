@@ -1,0 +1,593 @@
+/*==========================================
+    SITE HEADER: desktop (993px and up)
+    Scoped to pages with data-resihub-surface="public".
+==========================================*/
+
+@media (min-width: 993px) {
+
+    /* ---------- Bar ---------- */
+    body[data-resihub-surface="public"] .main-header {
+        position: sticky !important;
+        top: 0 !important;
+        left: auto !important;
+        right: auto !important;
+        z-index: 200;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        background: rgba(5, 20, 58, .88) !important;
+        border: 0 !important;
+        border-bottom: 1px solid rgba(92, 150, 255, .14) !important;
+        box-shadow: none !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* row: same left edge as the page content */
+    body[data-resihub-surface="public"] .main-header>.container {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 2rem !important;
+        width: min(1280px, 100% - 2.5rem) !important;
+        height: auto !important;
+        min-height: 76px;
+        margin-left: max(1.25rem, calc((100vw - 1280px) / 2)) !important;
+        margin-right: auto !important;
+        padding: 0 !important;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        backdrop-filter: none !important;
+    }
+
+    /* ---------- Logo ---------- */
+    body[data-resihub-surface="public"] .logo {
+        display: flex !important;
+        align-items: center;
+        gap: .7rem;
+        flex: 0 0 auto !important;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    body[data-resihub-surface="public"] .logo-icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+        box-shadow: 0 0 22px rgba(31, 107, 255, .35);
+        color: #fff;
+        font-size: 1.15rem;
+    }
+
+    body[data-resihub-surface="public"] .logo-name {
+        font-family: "Poppins", "Inter", system-ui, sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        line-height: 1.1;
+        color: #fff;
+    }
+
+    /* ---------- Phone-only controls: hidden on desktop ---------- */
+    body[data-resihub-surface="public"] .header-cta,
+    body[data-resihub-surface="public"] .menu-toggle,
+    body[data-resihub-surface="public"] .menu-heading {
+        display: none !important;
+    }
+
+    /* ---------- Navigation: plain text links ---------- */
+    body[data-resihub-surface="public"] .main-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        flex: 1 1 auto !important;
+        align-items: center !important;
+        justify-content: flex-start;
+        gap: 0;
+        min-width: 0;
+        width: auto !important;
+        height: auto !important;
+        max-height: none !important;
+        margin: 0 !important;
+        padding: 0 0 0 3.5rem !important;
+        position: static !important;
+        transform: none !important;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    body[data-resihub-surface="public"] .main-nav ul {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: 2.25rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    body[data-resihub-surface="public"] .main-nav li {
+        list-style: none;
+        margin: 0;
+    }
+
+    body[data-resihub-surface="public"] .main-nav ul a {
+        position: relative;
+        display: inline-block;
+        padding: .3rem 0;
+        background: none !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        outline: none;
+        color: rgba(225, 236, 255, .85);
+        font-size: 1rem;
+        font-weight: 500;
+        white-space: nowrap;
+        text-decoration: none;
+        transition: color .2s;
+    }
+
+    body[data-resihub-surface="public"] .main-nav ul a:hover {
+        color: #fff;
+    }
+
+    /* active page: light blue with an underline */
+    body[data-resihub-surface="public"] .main-nav ul a.active {
+        color: #3FD0FF;
+    }
+
+    body[data-resihub-surface="public"] .main-nav ul a.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 2px;
+        border-radius: 2px;
+        background: #3FD0FF;
+    }
+
+    /* ---------- Right side: search and sign in ---------- */
+    body[data-resihub-surface="public"] .header-actions {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        gap: .75rem !important;
+        flex: 0 0 auto;
+        margin-left: auto !important;
+        padding: 0 !important;
+        width: auto !important;
+        height: auto !important;
+        background: none !important;
+        border: 0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* theme picker is not in the design: keep it hidden */
+    body[data-resihub-surface="public"] .theme-toggle,
+    body[data-resihub-surface="public"] label[for="themeSelect"],
+    body[data-resihub-surface="public"] #themeSelect {
+        display: none !important;
+    }
+
+    body[data-resihub-surface="public"] .search-toggle {
+        width: 38px !important;
+        height: 38px !important;
+        padding: 0 !important;
+        display: grid;
+        place-items: center;
+        border-radius: 50% !important;
+        border: 1px solid rgba(92, 150, 255, .4);
+        background: rgba(20, 58, 130, .25);
+        color: #fff;
+        cursor: pointer;
+    }
+
+    body[data-resihub-surface="public"] .account-entry {
+        display: inline-flex;
+        align-items: center;
+        gap: .45rem;
+        height: 38px;
+        padding: 0 1rem;
+        border-radius: 10px;
+        border: 1px solid rgba(92, 150, 255, .5);
+        background: rgba(20, 58, 130, .25);
+        color: #fff;
+        font-size: .92rem;
+        font-weight: 600;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+}
+
+
+@media (min-width: 993px) {
+    body[data-resihub-surface="public"] .main-nav ul {
+        margin-left: auto !important;
+    }
+
+    body[data-resihub-surface="public"] .header-actions {
+        margin-left: 0 !important;
+    }
+}
+
+/*==========================================
+    SITE HEADER: tablet and phone (992px and below)
+==========================================*/
+@media (max-width: 992px) {
+
+    /* bar */
+    body[data-resihub-surface="public"] .main-header {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 200;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        background: rgba(5, 20, 58, .94) !important;
+        border: 0 !important;
+        border-bottom: 1px solid rgba(92, 150, 255, .14) !important;
+        box-shadow: none !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* row: logo, then Find a room, then menu button; the panel wraps below */
+    body[data-resihub-surface="public"] .main-header>.container {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        gap: .5rem !important;
+        width: calc(100% - 2rem) !important;
+        min-height: 64px;
+        height: auto !important;
+        margin: 0 auto !important;
+        padding: .6rem 0 !important;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        backdrop-filter: none !important;
+    }
+
+    /* logo */
+    body[data-resihub-surface="public"] .logo {
+        order: 1;
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: .6rem;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    body[data-resihub-surface="public"] .logo-icon {
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+        box-shadow: 0 0 22px rgba(31, 107, 255, .35);
+        color: #fff;
+        font-size: 1rem;
+    }
+
+    body[data-resihub-surface="public"] .logo-name {
+        font-family: "Poppins", "Inter", system-ui, sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    /* Find a room pill */
+    body[data-resihub-surface="public"] .header-cta {
+        order: 2;
+        display: inline-flex !important;
+        align-items: center;
+        gap: .4rem;
+        height: 38px;
+        padding: 0 .9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(92, 150, 255, .4);
+        background: rgba(20, 58, 130, .3);
+        color: #fff;
+        font-size: .85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+
+    /* menu button */
+    body[data-resihub-surface="public"] .menu-toggle {
+        order: 3;
+        display: grid !important;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid rgba(92, 150, 255, .4);
+        background: rgba(20, 58, 130, .3);
+        color: #fff;
+        cursor: pointer;
+    }
+
+    /* menu panel: hidden until the menu button adds .active */
+    body[data-resihub-surface="public"] .main-nav {
+        order: 4;
+        display: none !important;
+        flex: 0 0 100%;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: .5rem;
+        padding: 1rem !important;
+        margin: .25rem 0 0 !important;
+        position: static !important;
+        transform: none !important;
+        border-radius: 18px !important;
+        background: rgba(6, 22, 60, .97) !important;
+        border: 1px solid rgba(92, 150, 255, .24) !important;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, .4) !important;
+    }
+
+    body[data-resihub-surface="public"] .main-nav.active {
+        display: flex !important;
+    }
+
+    body[data-resihub-surface="public"] .main-nav .menu-heading {
+        display: block !important;
+        padding: 0 .25rem .5rem;
+    }
+
+    body[data-resihub-surface="public"] .menu-heading-kicker {
+        display: block;
+        font-size: .72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+        color: #3FD0FF;
+    }
+
+    body[data-resihub-surface="public"] .menu-heading strong {
+        display: block;
+        font-family: "Poppins", "Inter", system-ui, sans-serif;
+        font-size: 1rem;
+        color: #fff;
+    }
+
+    /* links, stacked */
+    body[data-resihub-surface="public"] .main-nav ul {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: .25rem;
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: none !important;
+        border: 0 !important;
+    }
+
+    body[data-resihub-surface="public"] .main-nav li {
+        list-style: none;
+    }
+
+    body[data-resihub-surface="public"] .main-nav ul a {
+        display: block;
+        padding: .8rem .9rem;
+        border-radius: 12px;
+        background: none;
+        color: rgba(225, 236, 255, .9);
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    body[data-resihub-surface="public"] .main-nav ul a.active {
+        background: rgba(47, 140, 255, .2);
+        color: #3FD0FF;
+    }
+
+    /* Sign in and List actions inside the panel */
+    body[data-resihub-surface="public"] .header-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: .6rem !important;
+        width: 100% !important;
+        margin: .5rem 0 0 !important;
+        padding: .75rem 0 0 !important;
+        background: none !important;
+        border: 0 !important;
+        border-top: 1px solid rgba(92, 150, 255, .14) !important;
+    }
+
+    /* desktop search icon and theme picker are not used on phone */
+    body[data-resihub-surface="public"] .search-toggle,
+    body[data-resihub-surface="public"] .theme-toggle,
+    body[data-resihub-surface="public"] label[for="themeSelect"],
+    body[data-resihub-surface="public"] #themeSelect {
+        display: none !important;
+    }
+
+    body[data-resihub-surface="public"] .account-entry {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        height: 46px;
+        border-radius: 10px;
+        border: 1px solid rgba(92, 150, 255, .5);
+        background: rgba(20, 58, 130, .25);
+        color: #fff;
+        font-size: .95rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+}
+
+/* phone: keep "Find a room" next to the menu button, not beside the logo */
+@media (max-width: 992px) {
+    body[data-resihub-surface="public"] .logo {
+        flex: 0 1 auto !important;
+    }
+
+    body[data-resihub-surface="public"] .header-cta {
+        margin-left: auto !important;
+    }
+
+    body[data-resihub-surface="public"] .menu-toggle {
+        margin-left: 0 !important;
+    }
+}
+
+/* ==========================================
+   HEADER: transparent at the top, rounded bar that fills in on scroll
+   navigation.js adds .scrolled to .main-header after scrolling
+========================================== */
+@media (min-width: 993px) {
+    body[data-resihub-surface="public"] .main-header {
+        background: transparent !important;
+        border-bottom: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding-top: 14px;
+    }
+
+    body[data-resihub-surface="public"] .main-header>.container {
+        min-height: 62px;
+        padding: 0 1.25rem !important;
+        border-radius: 999px !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        box-shadow: none !important;
+        transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+
+    body[data-resihub-surface="public"] .main-header.scrolled>.container {
+        background: rgba(5, 20, 58, .88) !important;
+        border-color: rgba(92, 150, 255, .24) !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, .35) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@media (max-width: 992px) {
+    body[data-resihub-surface="public"] .main-header {
+        background: transparent !important;
+        border-bottom: 0 !important;
+        box-shadow: none !important;
+        padding-top: 10px;
+    }
+
+    body[data-resihub-surface="public"] .main-header>.container {
+        padding: .5rem .9rem !important;
+        border-radius: 26px !important;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        box-shadow: none !important;
+        transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+
+    body[data-resihub-surface="public"] .main-header.scrolled>.container {
+        background: rgba(5, 20, 58, .94) !important;
+        border-color: rgba(92, 150, 255, .24) !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, .35) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+/* ==========================================
+   GENERAL HEADER: force the rounded bar (overrides page stylesheets)
+========================================== */
+@media (min-width: 993px) {
+    html body[data-resihub-surface="public"] .main-header {
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    html body[data-resihub-surface="public"] .main-header>.container {
+        border: 1px solid transparent !important;
+        border-radius: 999px !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    html body[data-resihub-surface="public"] .main-header.scrolled>.container {
+        background: rgba(5, 20, 58, .88) !important;
+        border-color: rgba(92, 150, 255, .24) !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, .35) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+@media (max-width: 992px) {
+    html body[data-resihub-surface="public"] .main-header {
+        border: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    html body[data-resihub-surface="public"] .main-header>.container {
+        border: 1px solid transparent !important;
+        border-radius: 26px !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    html body[data-resihub-surface="public"] .main-header.scrolled>.container {
+        background: rgba(5, 20, 58, .94) !important;
+        border-color: rgba(92, 150, 255, .24) !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, .35) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+}
+
+/* Sticky wrapper + transparent background (general pages) */
+html body[data-resihub-surface="public"] #header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 200;
+    background: transparent !important;
+}
+
+html body[data-resihub-surface="public"] #header .main-header {
+    position: relative !important;
+    top: auto !important;
+}

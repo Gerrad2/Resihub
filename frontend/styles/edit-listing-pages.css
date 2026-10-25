@@ -1,0 +1,333 @@
+/*==========================================
+    EDIT LISTING (landlord/edit_listing.htm)
+    Scoped to body.page-edit-listing
+==========================================*/
+
+body.page-edit-listing {
+    --el-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --el-line: rgba(92, 150, 255, .24);
+    --el-line-soft: rgba(92, 150, 255, .14);
+    --el-accent: #3FD0FF;
+    --el-text-2: rgba(225, 236, 255, .82);
+    --el-text-3: rgba(190, 210, 245, .62);
+    --el-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --el-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+body.page-edit-listing h1,
+body.page-edit-listing h2 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-edit-listing p {
+    color: var(--el-text-2);
+    margin: 0;
+}
+
+body.page-edit-listing a {
+    text-decoration: none;
+}
+
+body.page-edit-listing .container {
+    width: min(1000px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-edit-listing .hidden {
+    display: none !important;
+}
+
+/* ---------- Hero ---------- */
+body.page-edit-listing .el-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-edit-listing .el-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--el-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-edit-listing .el-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+/* ---------- Form cards ---------- */
+body.page-edit-listing .el-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-edit-listing .el-form {
+    display: grid;
+    gap: 1.25rem;
+}
+
+body.page-edit-listing .el-card {
+    padding: 1.5rem;
+    border-radius: 18px;
+    background: var(--el-card);
+    border: 1px solid var(--el-line);
+    box-shadow: var(--el-shadow);
+    display: grid;
+    gap: 1rem;
+}
+
+body.page-edit-listing .el-card h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+body.page-edit-listing .el-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-edit-listing .el-full {
+    grid-column: 1 / -1;
+}
+
+body.page-edit-listing .el-field {
+    display: grid;
+    gap: .4rem;
+    min-width: 0;
+}
+
+body.page-edit-listing .el-field label {
+    font-size: .8rem;
+    color: var(--el-text-3);
+}
+
+body.page-edit-listing .el-field input,
+body.page-edit-listing .el-field select,
+body.page-edit-listing .el-field textarea {
+    width: 100%;
+    padding: .7rem .9rem;
+    border-radius: 10px;
+    border: 1px solid var(--el-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .92rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body.page-edit-listing .el-field select option {
+    background: #0A2A6B;
+}
+
+body.page-edit-listing .el-field textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+body.page-edit-listing .el-field input:focus,
+body.page-edit-listing .el-field select:focus,
+body.page-edit-listing .el-field textarea:focus {
+    border-color: rgba(63, 208, 255, .65);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .15);
+}
+
+/* ---------- Amenities ---------- */
+body.page-edit-listing .el-amenities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: .6rem;
+}
+
+body.page-edit-listing .el-check {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .7rem .9rem;
+    border-radius: 11px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--el-line-soft);
+    font-size: .9rem;
+    color: var(--el-text-2);
+    cursor: pointer;
+}
+
+body.page-edit-listing .el-check input {
+    width: 16px;
+    height: 16px;
+    accent-color: #2F8CFF;
+    cursor: pointer;
+}
+
+/* ---------- Photos ---------- */
+body.page-edit-listing .el-hint {
+    font-size: .85rem;
+    color: var(--el-text-3);
+}
+
+body.page-edit-listing .el-drop {
+    display: grid;
+    justify-items: center;
+    gap: .5rem;
+    padding: 1.6rem;
+    border-radius: 14px;
+    border: 1px dashed rgba(63, 208, 255, .45);
+    background: rgba(4, 18, 52, .45);
+    color: var(--el-text-2);
+    cursor: pointer;
+    text-align: center;
+}
+
+body.page-edit-listing .el-drop i {
+    font-size: 1.6rem;
+    color: var(--el-accent);
+}
+
+body.page-edit-listing .el-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: .8rem;
+}
+
+body.page-edit-listing .el-photo {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--el-line);
+    aspect-ratio: 4 / 3;
+    background: #0A2A6B;
+}
+
+body.page-edit-listing .el-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-edit-listing .el-cover {
+    position: absolute;
+    top: .4rem;
+    left: .4rem;
+    padding: .15rem .5rem;
+    border-radius: 999px;
+    background: rgba(8, 28, 74, .9);
+    font-size: .68rem;
+    font-weight: 600;
+    color: var(--el-accent);
+}
+
+body.page-edit-listing .el-photo-remove {
+    position: absolute;
+    top: .4rem;
+    right: .4rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(239, 68, 68, .9);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ---------- Messages and actions ---------- */
+body.page-edit-listing .el-message {
+    min-height: 1.2rem;
+    font-size: .9rem;
+}
+
+body.page-edit-listing .el-message.error {
+    color: #FCA5A5;
+}
+
+body.page-edit-listing .el-message.success {
+    color: #86EFAC;
+}
+
+body.page-edit-listing .el-message.info {
+    color: var(--el-accent);
+}
+
+body.page-edit-listing .el-actions {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex-wrap: wrap;
+}
+
+body.page-edit-listing .el-spacer {
+    flex: 1;
+}
+
+body.page-edit-listing .el-actions button {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.2rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.page-edit-listing .el-primary {
+    border: 0;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    box-shadow: var(--el-glow);
+}
+
+body.page-edit-listing .el-secondary {
+    border: 1px solid var(--el-line);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+}
+
+body.page-edit-listing .el-danger {
+    border: 1px solid rgba(239, 68, 68, .45);
+    background: rgba(239, 68, 68, .1);
+    color: #FCA5A5;
+}
+
+body.page-edit-listing .el-actions button:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 640px) {
+    body.page-edit-listing .el-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-edit-listing .el-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    body.page-edit-listing .el-spacer {
+        display: none;
+    }
+}

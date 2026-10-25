@@ -1,0 +1,134 @@
+/*==========================================
+    TERMS (general/terms.htm)
+    Loads after privacy-page.css, which provides the shared legal page layout.
+    Scoped to body.page-terms.
+==========================================*/
+
+/* contact card icon */
+body.page-terms .privacy-contact .contact-card>i {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    margin: 0 auto 1rem;
+    border-radius: 16px;
+    background: rgba(47, 140, 255, .18);
+    border: 1px solid rgba(92, 150, 255, .35);
+    color: var(--pv-accent);
+    font-size: 1.3rem;
+}
+
+/* email button, same style as the privacy contact */
+body.page-terms .privacy-contact a#termsEmail {
+    display: inline-block;
+    padding: .7rem 1.3rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: var(--pv-glow);
+}
+
+/* back to top */
+body.page-terms .terms-top {
+    padding: 0 0 4rem;
+    text-align: center;
+}
+
+body.page-terms .terms-top .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .8rem 1.4rem;
+    border-radius: 10px;
+    background: rgba(20, 58, 130, .35);
+    border: 1px solid rgba(92, 150, 255, .5);
+    color: #fff;
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+body.page-terms .terms-top .btn-outline:hover {
+    border-color: rgba(63, 208, 255, .6);
+    text-decoration: none;
+}
+
+/* ---------- Phone view ---------- */
+body.page-terms {
+    overflow-x: clip;
+}
+
+/* Contents: show as compact wrapping chips instead of a long list */
+@media (max-width: 900px) {
+    body.page-terms .policy-nav {
+        padding: .9rem;
+    }
+
+    body.page-terms .policy-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .4rem;
+        grid-template-columns: none;
+    }
+
+    body.page-terms .policy-nav a {
+        padding: .4rem .75rem;
+        border: 1px solid var(--pv-line);
+        border-radius: 999px;
+        background: rgba(4, 18, 52, .45);
+        font-size: .8rem;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 560px) {
+    body.page-terms .container {
+        width: calc(100% - 2rem);
+    }
+
+    body.page-terms .privacy-hero {
+        padding: 5.5rem 0 2rem;
+    }
+
+    body.page-terms .privacy-hero h1 {
+        font-size: 2rem;
+    }
+
+    body.page-terms .privacy-sub {
+        font-size: .95rem;
+    }
+
+    body.page-terms .policy-meta {
+        padding-bottom: 1rem;
+    }
+
+    body.page-terms .policy-card {
+        padding: 1.1rem 1rem;
+    }
+
+    body.page-terms .policy-card h2 {
+        font-size: 1.05rem;
+        gap: .6rem;
+    }
+
+    body.page-terms .policy-card h2::before {
+        width: 28px;
+        height: 28px;
+        font-size: .78rem;
+    }
+
+    body.page-terms .policy-card p,
+    body.page-terms .policy-card li {
+        font-size: .9rem;
+    }
+
+    body.page-terms .privacy-contact .contact-card {
+        padding: 1.8rem 1.1rem;
+    }
+
+    body.page-terms .privacy-contact a#termsEmail {
+        display: block;
+        font-size: .9rem;
+        word-break: break-all;
+    }
+}

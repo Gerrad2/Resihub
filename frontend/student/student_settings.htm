@@ -2,163 +2,165 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="Manage your ResiHub account settings, notifications, security preferences and account options.">
-
-    <meta name="keywords"
-        content="ResiHub settings, student settings, account settings, notifications, security, student housing">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="theme-color" content="#0F766E">
-
-    <title>Student Settings | ResiHub</title>
-
-    <!-- Favicon -->
+    <title>Account Settings | ResiHub</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-    <!-- Font Awesome -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- Main Stylesheet -->
-
     <link rel="stylesheet" href="../styles/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="student">
+<body class="page-settings" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-
-        <section class="page-hero">
-
+        <!-- HERO -->
+        <section class="st-hero">
             <div class="container">
-
-                <section class="auth-hero reveal fade-up">
-
-                    <span class="page-badge floating-badge">
-
-                        <i class="fa-solid fa-gear" aria-hidden="true"></i>
-
-                        Settings
-
-                    </span>
-
-                    <h1>
-
-                        Account Settings
-
-                    </h1>
-
-                    <p>
-
-                        Manage your account preferences, notifications and security from one place.
-
-                    </p>
-
-                </section>
-
+                <span class="st-badge"><i class="fa-solid fa-gear" aria-hidden="true"></i>Settings</span>
+                <h1>Account Settings</h1>
+                <p class="st-sub">Manage your account preferences, notifications and security from one place.</p>
             </div>
-
         </section>
 
-        <section class="settings-page">
+        <section class="st-section">
+            <div class="container st-layout">
 
-            <div class="container">
+                <!-- SIDE NAV -->
+                <nav class="st-nav" aria-label="Settings sections">
+                    <a href="#general" class="active"><i class="fa-solid fa-globe" aria-hidden="true"></i> General</a>
+                    <a href="#appearance"><i class="fa-solid fa-palette" aria-hidden="true"></i> Appearance</a>
+                    <a href="#notifications"><i class="fa-regular fa-bell" aria-hidden="true"></i> Notifications</a>
+                    <a href="#security"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Security</a>
+                </nav>
 
-                <form id="settingsForm">
+                <!-- FORM -->
+                <form id="settingsForm" class="st-main" novalidate>
 
-                    <div class="settings-card">
+                    <section id="general" class="st-card">
+                        <h2>General Settings</h2>
 
-                        <h2>Preferences</h2>
+                        <div class="st-grid">
+                            <div class="st-field">
+                                <label for="language">Language</label>
+                                <select id="language">
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
 
-                        <label>
+                            <div class="st-field">
+                                <label for="timezone">Time Zone</label>
+                                <select id="timezone">
+                                    <option value="Africa/Lagos">(GMT+1) West Africa Time</option>
+                                    <option value="UTC">(GMT+0) Coordinated Universal Time</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
 
-                            <input type="checkbox" id="emailNotifications">
+                    <section id="appearance" class="st-card">
+                        <h2>Appearance</h2>
 
-                            Email Notifications
-
+                        <label class="st-row">
+                            <span>
+                                <strong>Dark theme</strong>
+                                <small>ResiHub is dark by default. Your choice is saved to your account.</small>
+                            </span>
+                            <span class="st-switch">
+                                <input type="checkbox" id="darkMode">
+                                <i aria-hidden="true"></i>
+                            </span>
                         </label>
+                    </section>
 
-                        <label>
+                    <section id="notifications" class="st-card">
+                        <h2>Notifications</h2>
 
-                            <input type="checkbox" id="smsNotifications">
+                        <div class="st-rows">
+                            <label class="st-row">
+                                <span><strong>Email notifications</strong><small>Receive updates by
+                                        email.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="emailNotifications"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
 
-                            SMS Notifications
+                            <label class="st-row">
+                                <span><strong>SMS notifications</strong><small>Receive important alerts by text
+                                        message.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="smsNotifications"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
 
-                        </label>
+                            <label class="st-row">
+                                <span><strong>Booking updates</strong><small>When a landlord approves or rejects a
+                                        request.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefBooking"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
 
-                        <label>
+                            <label class="st-row">
+                                <span><strong>Messages</strong><small>When someone you are connected with messages
+                                        you.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefMessages"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
 
-                            <input type="checkbox" id="darkMode">
+                            <label class="st-row">
+                                <span><strong>Promotions and offers</strong><small>Special deals and new
+                                        listings.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefPromotions"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
 
-                            Dark Mode
+                            <label class="st-row">
+                                <span><strong>System announcements</strong><small>Important news about your account and
+                                        ResiHub.</small></span>
+                                <span class="st-switch"><input type="checkbox" id="prefSystem"><i
+                                        aria-hidden="true"></i></span>
+                            </label>
+                        </div>
+                    </section>
 
-                        </label>
-
-                    </div>
-
-                    <div class="settings-card">
-
+                    <section id="security" class="st-card">
                         <h2>Security</h2>
-
-                        <p>
-
-                            Keep your account secure by updating your password regularly.
-
-                        </p>
-
-                        <a href="../auth/change_password.htm" class="btn-outline">
-
-                            Change Password
-
+                        <p>Keep your account secure by updating your password regularly.</p>
+                        <a href="../auth/change_password.htm" class="st-secondary">
+                            <i class="fa-solid fa-key" aria-hidden="true"></i> Change Password
                         </a>
+                    </section>
 
+                    <div class="st-actions">
+                        <button type="submit" id="saveSettingsBtn" class="st-primary">
+                            <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Settings
+                        </button>
                     </div>
-
-                    <button type="submit" id="saveSettingsBtn" class="btn-primary">
-
-                        <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>
-
-                        Save Settings
-
-                    </button>
 
                 </form>
-
             </div>
-
         </section>
-
     </main>
-    <!-- FOOTER -->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/student_settings.js";
+        init();
+    </script>
 </body>
 
 </html>

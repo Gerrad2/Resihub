@@ -1,0 +1,473 @@
+/*==========================================
+    MY LISTINGS (landlord/my_listing.htm)
+    Scoped to body.page-my-listings
+==========================================*/
+
+body.page-my-listings {
+    --ml-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --ml-line: rgba(92, 150, 255, .24);
+    --ml-line-soft: rgba(92, 150, 255, .14);
+    --ml-accent: #3FD0FF;
+    --ml-text-2: rgba(225, 236, 255, .82);
+    --ml-text-3: rgba(190, 210, 245, .62);
+    --ml-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --ml-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-my-listings h1,
+body.page-my-listings h2 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    margin: 0;
+}
+
+body.page-my-listings p {
+    color: var(--ml-text-2);
+    margin: 0;
+}
+
+body.page-my-listings a {
+    text-decoration: none;
+}
+
+body.page-my-listings .container {
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+body.page-my-listings .hidden {
+    display: none !important;
+}
+
+body.page-my-listings .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- Hero ---------- */
+body.page-my-listings .ml-hero {
+    padding: 6.5rem 0 1.5rem;
+}
+
+body.page-my-listings .ml-hero-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+body.page-my-listings .ml-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--ml-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-my-listings .ml-hero h1 {
+    font-size: clamp(1.9rem, 3.6vw, 2.5rem);
+    font-weight: 700;
+    margin: .8rem 0 .4rem;
+}
+
+body.page-my-listings .ml-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .8rem 1.3rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 600;
+    box-shadow: var(--ml-glow);
+}
+
+/* ---------- Layout ---------- */
+body.page-my-listings .ml-section {
+    padding: .5rem 0 4rem;
+}
+
+body.page-my-listings .ml-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+body.page-my-listings .ml-main {
+    min-width: 0;
+    display: grid;
+    gap: 1.1rem;
+}
+
+body.page-my-listings .ml-side {
+    display: grid;
+    gap: 1.25rem;
+    position: sticky;
+    top: 110px;
+}
+
+body.page-my-listings .ml-card {
+    padding: 1.3rem;
+    border-radius: 18px;
+    background: var(--ml-card);
+    border: 1px solid var(--ml-line);
+    box-shadow: var(--ml-shadow);
+}
+
+body.page-my-listings .ml-card h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .6rem;
+}
+
+body.page-my-listings .ml-total {
+    display: block;
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+body.page-my-listings .ml-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: .6rem;
+    font-size: .88rem;
+    color: var(--ml-text-2);
+}
+
+body.page-my-listings .ml-legend li {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+body.page-my-listings .ml-legend strong {
+    margin-left: auto;
+    color: #fff;
+}
+
+body.page-my-listings .ml-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+body.page-my-listings .ml-dot-published {
+    background: #22C55E;
+}
+
+body.page-my-listings .ml-dot-draft {
+    background: #F59E0B;
+}
+
+body.page-my-listings .ml-dot-archived {
+    background: #94A3B8;
+}
+
+/* ---------- Toolbar and tabs ---------- */
+body.page-my-listings .ml-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 200px;
+    gap: .6rem;
+}
+
+body.page-my-listings .ml-search {
+    position: relative;
+}
+
+body.page-my-listings .ml-search>i {
+    position: absolute;
+    left: .85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ml-accent);
+    font-size: .8rem;
+    pointer-events: none;
+}
+
+body.page-my-listings .ml-search input,
+body.page-my-listings .ml-toolbar select {
+    width: 100%;
+    padding: .7rem .9rem;
+    border-radius: 10px;
+    border: 1px solid var(--ml-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .88rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body.page-my-listings .ml-search input {
+    padding-left: 2.3rem;
+}
+
+body.page-my-listings .ml-toolbar select option {
+    background: #0A2A6B;
+}
+
+body.page-my-listings .ml-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+body.page-my-listings .ml-tab {
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--ml-line);
+    background: rgba(20, 58, 130, .35);
+    color: var(--ml-text-2);
+    font: inherit;
+    font-size: .86rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+body.page-my-listings .ml-tab.active {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: var(--ml-glow);
+}
+
+/* ---------- Listing cards ---------- */
+body.page-my-listings .ml-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-my-listings .ml-card-item {
+    display: grid;
+    border-radius: 16px;
+    background: var(--ml-card);
+    border: 1px solid var(--ml-line);
+    box-shadow: var(--ml-shadow);
+    overflow: hidden;
+}
+
+body.page-my-listings .ml-media {
+    position: relative;
+    height: 160px;
+    background: linear-gradient(160deg, #1A4FA8, #0A2A6B);
+}
+
+body.page-my-listings .ml-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-my-listings .ml-badges {
+    position: absolute;
+    top: .6rem;
+    left: .6rem;
+    display: flex;
+    gap: .35rem;
+    flex-wrap: wrap;
+}
+
+body.page-my-listings .ml-tag {
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .7rem;
+    font-weight: 600;
+    background: rgba(8, 28, 74, .85);
+    color: #fff;
+}
+
+body.page-my-listings .ml-tag.published {
+    color: #86EFAC;
+}
+
+body.page-my-listings .ml-tag.draft {
+    color: #FCD34D;
+}
+
+body.page-my-listings .ml-tag.archived {
+    color: #CBD5E1;
+}
+
+body.page-my-listings .ml-tag.available {
+    color: #86EFAC;
+}
+
+body.page-my-listings .ml-tag.booked {
+    color: #6CB8FF;
+}
+
+body.page-my-listings .ml-tag.unavailable {
+    color: #FCA5A5;
+}
+
+body.page-my-listings .ml-body {
+    display: grid;
+    gap: .35rem;
+    padding: .9rem 1rem 1rem;
+}
+
+body.page-my-listings .ml-title {
+    font-size: .98rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.page-my-listings .ml-meta {
+    font-size: .8rem;
+    color: var(--ml-text-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.page-my-listings .ml-price {
+    font-size: .95rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body.page-my-listings .ml-price span {
+    font-size: .74rem;
+    font-weight: 500;
+    color: var(--ml-text-3);
+}
+
+body.page-my-listings .ml-actions {
+    display: flex;
+    gap: .5rem;
+    margin-top: .4rem;
+}
+
+body.page-my-listings .ml-action {
+    flex: 1;
+    text-align: center;
+    padding: .5rem .6rem;
+    border-radius: 9px;
+    border: 1px solid var(--ml-line);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+}
+
+body.page-my-listings .ml-action.primary {
+    border-color: transparent;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    box-shadow: var(--ml-glow);
+}
+
+/* ---------- Empty and load more ---------- */
+body.page-my-listings .ml-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    border-radius: 18px;
+    background: var(--ml-card);
+    border: 1px solid var(--ml-line);
+    display: grid;
+    gap: .6rem;
+    justify-items: center;
+}
+
+body.page-my-listings .ml-empty i {
+    font-size: 2rem;
+    color: var(--ml-accent);
+}
+
+body.page-my-listings .ml-empty h2 {
+    font-size: 1.15rem;
+}
+
+body.page-my-listings .ml-more {
+    display: flex;
+    justify-content: center;
+}
+
+body.page-my-listings .ml-more-btn {
+    padding: .7rem 1.3rem;
+    border-radius: 10px;
+    border: 1px solid rgba(92, 150, 255, .5);
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+    body.page-my-listings .ml-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    body.page-my-listings .ml-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-my-listings .ml-side {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    body.page-my-listings .ml-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-my-listings .ml-toolbar {
+        grid-template-columns: 1fr;
+    }
+}
+
+body.page-my-listings {
+    overflow-x: hidden;
+}
+
+body.page-my-listings .ml-grid,
+body.page-my-listings .ml-layout,
+body.page-my-listings .ml-main {
+    min-width: 0;
+    max-width: 100%;
+}
+
+body.page-my-listings .ml-media img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}

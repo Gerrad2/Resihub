@@ -1,0 +1,680 @@
+/*==========================================
+    BROWSE ROOMS (general/browse_rooms.htm)
+    Scoped to body.page-browse. Load order: style.css -> browse-page.css
+==========================================*/
+
+body.page-browse {
+    --bp-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --bp-line: rgba(92, 150, 255, .24);
+    --bp-line-soft: rgba(92, 150, 255, .14);
+    --bp-accent: #3FD0FF;
+    --bp-text-2: rgba(225, 236, 255, .82);
+    --bp-text-3: rgba(190, 210, 245, .62);
+    --bp-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --bp-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.5;
+}
+
+body.page-browse h1,
+body.page-browse h2,
+body.page-browse h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    letter-spacing: -.01em;
+}
+
+body.page-browse p {
+    color: var(--bp-text-2);
+}
+
+body.page-browse a {
+    text-decoration: none;
+}
+
+body.page-browse .container {
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+}
+
+body.page-browse .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+body.page-browse .hidden {
+    display: none !important;
+}
+
+/* ---------- Hero + search ---------- */
+body.page-browse .browse-hero {
+    padding: 3.5rem 0 2.5rem;
+}
+
+body.page-browse .browse-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .35rem .85rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--bp-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body.page-browse .browse-hero h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin: .9rem 0 .4rem;
+}
+
+body.page-browse .browse-sub {
+    margin-bottom: 1.5rem;
+}
+
+body.page-browse .browse-search {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, .9fr) auto;
+    gap: .5rem;
+    max-width: 860px;
+    padding: .45rem;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(20, 60, 140, .55), rgba(10, 36, 96, .55));
+    border: 1px solid var(--bp-line);
+    box-shadow: var(--bp-shadow);
+    backdrop-filter: blur(14px);
+}
+
+body.page-browse .search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    border-radius: 8px;
+    background: rgba(4, 18, 52, .6);
+    border: 1px solid var(--bp-line-soft);
+}
+
+body.page-browse .search-field>i {
+    position: absolute;
+    left: .6rem;
+    color: var(--bp-accent);
+    font-size: .75rem;
+    pointer-events: none;
+}
+
+body.page-browse .search-field input,
+body.page-browse .search-field select {
+    width: 100%;
+    min-width: 0;
+    padding: .5rem .5rem .5rem 1.9rem;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: .8rem;
+    outline: none;
+}
+
+body.page-browse .search-field select option {
+    background: #0A2A6B;
+    color: #fff;
+}
+
+body.page-browse .search-field:focus-within {
+    border-color: rgba(63, 208, 255, .65);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .15);
+}
+
+body.page-browse .browse-search-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+    padding: .5rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    font: inherit;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--bp-glow);
+}
+
+/* ---------- Layout ---------- */
+body.page-browse .browse-body {
+    padding: 1rem 0 4rem;
+}
+
+body.page-browse .browse-layout {
+    display: grid;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* ---------- Filters sidebar ---------- */
+body.page-browse .filters-panel {
+    padding: 1.25rem;
+    border-radius: 14px;
+    background: var(--bp-card);
+    border: 1px solid var(--bp-line);
+    box-shadow: var(--bp-shadow);
+    position: sticky;
+    top: 1rem;
+}
+
+body.page-browse .filters-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+body.page-browse .filters-head h2 {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+body.page-browse .filters-head h2 i {
+    color: var(--bp-accent);
+    font-size: .9rem;
+}
+
+body.page-browse .clear-btn {
+    border: 0;
+    background: none;
+    color: var(--bp-accent);
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.page-browse .filter-group {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1.25rem;
+}
+
+body.page-browse .filter-group legend {
+    font-size: .8rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: .6rem;
+    padding: 0;
+}
+
+body.page-browse .range-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+}
+
+body.page-browse .filter-group input,
+body.page-browse .filter-group select {
+    width: 100%;
+    padding: .55rem .65rem;
+    border-radius: 8px;
+    border: 1px solid var(--bp-line-soft);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .8rem;
+    outline: none;
+}
+
+body.page-browse .filter-group input:focus,
+body.page-browse .filter-group select:focus {
+    border-color: rgba(63, 208, 255, .65);
+}
+
+body.page-browse .form-group {
+    margin: 0;
+}
+
+body.page-browse .amenities-grid {
+    display: grid;
+    gap: .5rem;
+}
+
+body.page-browse .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    font-size: .82rem;
+    color: var(--bp-text-2);
+    cursor: pointer;
+}
+
+body.page-browse .checkbox-item input {
+    width: 15px;
+    height: 15px;
+    accent-color: #2F8CFF;
+    cursor: pointer;
+}
+
+/* ---------- Results header ---------- */
+body.page-browse .listings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-bottom: 1rem;
+}
+
+body.page-browse .listings-header>p {
+    margin: 0;
+    font-size: .9rem;
+    color: #fff;
+    font-weight: 600;
+}
+
+body.page-browse .results-tools {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex-wrap: wrap;
+}
+
+body.page-browse .filter-toggle {
+    display: none;
+    align-items: center;
+    gap: .4rem;
+    padding: .5rem .85rem;
+    border-radius: 8px;
+    border: 1px solid var(--bp-line);
+    background: rgba(20, 58, 130, .4);
+    color: #fff;
+    font: inherit;
+    font-size: .8rem;
+    cursor: pointer;
+}
+
+body.page-browse .sort-label {
+    font-size: .8rem;
+    color: var(--bp-text-3);
+}
+
+body.page-browse .sort-select {
+    padding: .5rem .75rem;
+    border-radius: 8px;
+    border: 1px solid var(--bp-line);
+    background: rgba(4, 18, 52, .6);
+    color: #fff;
+    font: inherit;
+    font-size: .8rem;
+}
+
+body.page-browse .sort-select option {
+    background: #0A2A6B;
+}
+
+body.page-browse .view-options {
+    display: flex;
+    gap: .35rem;
+}
+
+body.page-browse .view-btn {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--bp-line);
+    background: rgba(20, 58, 130, .35);
+    color: var(--bp-text-2);
+    cursor: pointer;
+}
+
+body.page-browse .view-btn.active {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: var(--bp-glow);
+}
+
+/* ---------- Listing cards (built by listings.js) ---------- */
+body.page-browse .listings-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+body.page-browse .property-card {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr);
+    gap: 1rem;
+    padding: .75rem;
+    border-radius: 14px;
+    background: var(--bp-card);
+    border: 1px solid var(--bp-line);
+    box-shadow: var(--bp-shadow);
+    color: #fff;
+    transition: transform .15s, border-color .2s;
+}
+
+body.page-browse .property-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(63, 208, 255, .5);
+}
+
+body.page-browse .property-image {
+    position: relative;
+    min-height: 140px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1A4FA8, #0A2A6B);
+}
+
+body.page-browse .property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-browse .property-content {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    min-width: 0;
+}
+
+body.page-browse .property-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body.page-browse .property-price span {
+    font-size: .75rem;
+    font-weight: 500;
+    color: var(--bp-text-3);
+}
+
+body.page-browse .property-title {
+    font-size: .95rem;
+    font-weight: 600;
+    margin: 0;
+    color: #fff;
+}
+
+body.page-browse .property-location {
+    font-size: .8rem;
+    color: var(--bp-text-3);
+}
+
+body.page-browse .property-location i {
+    color: var(--bp-accent);
+    margin-right: .35rem;
+}
+
+body.page-browse .property-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-top: auto;
+}
+
+body.page-browse .property-feature {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .25rem .6rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .1);
+    border: 1px solid rgba(63, 208, 255, .25);
+    color: var(--bp-text-2);
+    font-size: .7rem;
+}
+
+body.page-browse .property-feature i {
+    color: var(--bp-accent);
+}
+
+body.page-browse .property-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    font-size: .78rem;
+    color: var(--bp-text-3);
+}
+
+body.page-browse .status-badge {
+    display: inline-flex;
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .7rem;
+    font-weight: 600;
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+}
+
+body.page-browse .status-badge.pending,
+body.page-browse .status-badge.booked {
+    background: rgba(245, 158, 11, .16);
+    color: #F59E0B;
+}
+
+/* grid view: toggled by page.js on the results container */
+body.page-browse .listings-grid.grid-view {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.page-browse .listings-grid.grid-view .property-card {
+    grid-template-columns: 1fr;
+}
+
+body.page-browse .listings-grid.grid-view .property-image {
+    min-height: 180px;
+}
+
+/* ---------- Empty + load more ---------- */
+body.page-browse .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    border-radius: 14px;
+    background: var(--bp-card);
+    border: 1px solid var(--bp-line);
+}
+
+body.page-browse .empty-state i {
+    font-size: 2rem;
+    color: var(--bp-accent);
+    margin-bottom: .75rem;
+}
+
+body.page-browse .empty-state p {
+    margin: 0 0 1rem;
+}
+
+body.page-browse .btn-primary,
+body.page-browse .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    padding: .7rem 1.25rem;
+    border-radius: 10px;
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body.page-browse .btn-primary {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    border: 0;
+    box-shadow: var(--bp-glow);
+}
+
+body.page-browse .btn-outline {
+    background: rgba(20, 58, 130, .35);
+    color: #fff;
+    border: 1px solid rgba(92, 150, 255, .5);
+}
+
+body.page-browse .load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+    body.page-browse .browse-search {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-browse .browse-search-btn {
+        grid-column: span 2;
+    }
+
+    body.page-browse .property-card {
+        grid-template-columns: 170px minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    body.page-browse .browse-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-browse .filters-panel {
+        display: none;
+        position: static;
+    }
+
+    body.page-browse .filters-panel.active {
+        display: block;
+    }
+
+    body.page-browse .filter-toggle {
+        display: inline-flex;
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-browse .browse-search {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-browse .browse-search-btn {
+        grid-column: auto;
+    }
+
+    body.page-browse .property-card {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-browse .listings-grid.grid-view {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* search bar spans the full container width */
+body.page-browse .browse-search {
+    max-width: none;
+    width: 100%;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(140px, .8fr);
+}
+
+body.page-browse .browse-search-btn {
+    height: 100%;
+    min-height: 40px;
+}
+
+/* fix search bar sizing: keep the button inside the bar */
+body.page-browse .browse-search {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 150px;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+body.page-browse .browse-search .search-field {
+    height: 48px;
+}
+
+body.page-browse .browse-search .browse-search-btn {
+    width: 100%;
+    height: 48px;
+    min-height: 0;
+    min-width: 0;
+    margin: 0;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+/* fix Load more button size */
+body.page-browse .load-more .btn-outline {
+    width: auto;
+    height: auto;
+    min-height: 0;
+    padding: .7rem 1.4rem;
+    line-height: 1.2;
+}
+
+/* keep the smaller-screen layouts working after the desktop rule above */
+@media (max-width: 1100px) {
+    body.page-browse .browse-search {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-browse .browse-search .browse-search-btn {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 640px) {
+    body.page-browse .browse-search {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-browse .browse-search .browse-search-btn {
+        grid-column: auto;
+    }
+}
+
+.landlord-trust {
+    display: inline-block;
+    margin-top: .3rem;
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 600;
+}
+
+.landlord-trust.verified {
+    background: rgba(34, 197, 94, .16);
+    color: #86EFAC;
+}
+
+.landlord-trust.unverified {
+    background: rgba(245, 158, 11, .14);
+    color: #FCD34D;
+}

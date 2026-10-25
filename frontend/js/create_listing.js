@@ -1,760 +1,328 @@
-// js/create_listing.js
+import { getCurrentUser, getUniversities, supabase } from "./api.js";
+import { showError } from "./student_utils.js";
+import { showToast } from "./ui/toast.js";
 
-import {
-    supabase,
-    getCurrentUser
-} from "./core/api.js";
+const $ = (id) => document.getElementById(id);
 
+const BUCKET = "property-media";
+const MAX_PHOTOS = 10;
+const MIN_PHOTOS_TO_PUBLISH = 3;
+const MAX_BYTES = 10 * 1024 * 1024;
+const PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
-/* =========================================================
-   CONFIGURATION
-========================================================= */
+const AMENITIES = {
+    wifi: "wifiAmenity",
+    water: "waterAmenity",
+    electricity: "electricityAmenity",
+    security: "securityAmenity",
+    parking: "parkingAmenity",
+    furnished: "furnishedAmenity",
+    kitchen: "kitchenAmenity",
+    bathroom: "bathroomAmenity",
+};
 
-const MAX_IMAGES = 10;
-const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5 MB
+let me = null;
+let photos = []; // { file, previewUrl }
 
-const ALLOWED_IMAGE_TYPES = [
-    "image/jpeg",
-    "image/png",
-    "image/webp"
-];
+/* ---------- Entry point ---------- */
 
+export async function init() {
+    bindEvents();
 
-/* =========================================================
-   STATE
-========================================================= */
+    const userResult = await getCurrentUser();
+    me = userResult.success ? userResult.data : null;
 
-let currentUser = null;
-let selectedImages = [];
-let uploadedStoragePaths = [];
-
-
-/* =========================================================
-   DOM ELEMENTS
-========================================================= */
-
-const form = document.getElementById("createListingForm");
-const imageInput = document.getElementById("propertyImages");
-const imagePreview = document.getElementById("imagePreview");
-const uploadZone = document.getElementById("imageUploadZone");
-
-const publishButton = document.getElementById("publishListingBtn");
-const draftButton = document.getElementById("saveDraftBtn");
-
-
-/* =========================================================
-   UTILITY
-========================================================= */
-
-function showMessage(message, type = "info") {
-    console[type === "error" ? "error" : "log"](
-        `[ResiHub] ${message}`
-    );
-
-    // Use an existing toast system if your project has one.
-    // Otherwise fall back to a simple alert.
-    if (typeof window.showToast === "function") {
-        window.showToast(message, type);
+    if (!me) {
+        showError("Please sign in to add a listing.");
+        setFormDisabled(true);
         return;
     }
 
-    alert(message);
+    await loadUniversities();
+    renderPhotos();
 }
 
+function bindEvents() {
+    $("createListingForm")?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        submitListing("draft");
+    });
 
-function setButtonLoading(button, loading, text) {
-    if (!button) return;
-
-    if (loading) {
-        button.dataset.originalText = button.innerHTML;
-        button.disabled = true;
-        button.innerHTML = `
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            ${text}
-        `;
-    } else {
-        button.disabled = false;
-
-        if (button.dataset.originalText) {
-            button.innerHTML = button.dataset.originalText;
-            delete button.dataset.originalText;
-        }
-    }
+    $("saveDraftBtn")?.addEventListener("click", () => submitListing("draft"));
+    $("publishListingBtn")?.addEventListener("click", () => submitListing("published"));
+    $("propertyImages")?.addEventListener("change", (event) => addPhotos(event.target.files));
 }
 
+async function loadUniversities() {
+    const result = await getUniversities();
+    if (!result.success) return;
 
-function escapeHtml(value) {
-    return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-}
-
-
-/* =========================================================
-   AUTHENTICATION
-========================================================= */
-
-async function initializeUser() {
-    const result = await getCurrentUser();
-
-    if (!result.success || !result.data) {
-        showMessage(
-            "You must be signed in as a landlord to create a listing.",
-            "error"
-        );
-
-        window.location.href = "../auth/landlord_login.htm";
-        return false;
-    }
-
-    currentUser = result.data;
-
-    const { data: profile, error } = await supabase
-        .from("profiles")
-        .select("id, role, full_name")
-        .eq("id", currentUser.id)
-        .maybeSingle();
-
-    if (error) {
-        console.error("[ResiHub] Profile lookup failed:", error);
-        showMessage(
-            "Unable to verify your landlord account.",
-            "error"
-        );
-        return false;
-    }
-
-    if (!profile || profile.role !== "landlord") {
-        showMessage(
-            "Only verified landlord accounts can create listings.",
-            "error"
-        );
-        return false;
-    }
-
-    return true;
-}
-
-
-/* =========================================================
-   IMAGE VALIDATION
-========================================================= */
-
-function validateImage(file) {
-    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-        return {
-            valid: false,
-            message: `${file.name}: Only JPG, PNG and WebP images are allowed.`
-        };
-    }
-
-    if (file.size > MAX_IMAGE_SIZE) {
-        return {
-            valid: false,
-            message: `${file.name}: Image must be 5 MB or smaller.`
-        };
-    }
-
-    return {
-        valid: true
-    };
-}
-
-
-/* =========================================================
-   IMAGE PREVIEW
-========================================================= */
-
-function renderImagePreview() {
-    if (!imagePreview) return;
-
-    imagePreview.innerHTML = "";
-
-    selectedImages.forEach((file, index) => {
-        const wrapper = document.createElement("div");
-
-        wrapper.className = "image-preview-item";
-
-        const image = document.createElement("img");
-
-        image.alt = `Property image ${index + 1}`;
-
-        const removeButton = document.createElement("button");
-
-        removeButton.type = "button";
-        removeButton.className = "remove-image";
-        removeButton.setAttribute(
-            "aria-label",
-            `Remove image ${index + 1}`
-        );
-
-        removeButton.innerHTML = `
-            <i class="fa-solid fa-xmark"></i>
-        `;
-
-        const objectUrl = URL.createObjectURL(file);
-
-        image.src = objectUrl;
-
-        image.onload = () => {
-            URL.revokeObjectURL(objectUrl);
-        };
-
-        removeButton.addEventListener("click", () => {
-            selectedImages.splice(index, 1);
-
-            renderImagePreview();
-
-            if (imageInput) {
-                imageInput.value = "";
-            }
-        });
-
-        wrapper.appendChild(image);
-        wrapper.appendChild(removeButton);
-
-        imagePreview.appendChild(wrapper);
+    const select = $("propertyUniversity");
+    result.data.forEach((university) => {
+        select.append(new Option(university.name, university.id));
     });
 }
 
+/* ---------- Form ---------- */
 
-/* =========================================================
-   IMAGE SELECTION
-========================================================= */
+function readForm() {
+    const title = $("propertyTitle").value.trim();
+    const propertyType = $("propertyType").value;
+    const area = $("propertyArea").value.trim();
+    const priceText = $("propertyPrice").value;
+    const price = Number(priceText);
+    const rooms = $("availableRooms").value;
 
-function handleImageSelection(files) {
-    const incomingFiles = Array.from(files);
-
-    if (
-        selectedImages.length + incomingFiles.length >
-        MAX_IMAGES
-    ) {
-        showMessage(
-            `You can upload a maximum of ${MAX_IMAGES} images.`,
-            "error"
-        );
-        return;
+    if (title.length < 3) {
+        return { error: "Enter a property title of at least 3 characters." };
+    }
+    if (!propertyType) {
+        return { error: "Choose a property type." };
+    }
+    if (!area) {
+        return { error: "Enter the area the property is in." };
+    }
+    if (priceText === "" || !Number.isFinite(price) || price < 0) {
+        return { error: "Enter a valid monthly price." };
     }
 
-    for (const file of incomingFiles) {
-        const validation = validateImage(file);
-
-        if (!validation.valid) {
-            showMessage(validation.message, "error");
-            continue;
-        }
-
-        selectedImages.push(file);
-    }
-
-    renderImagePreview();
-}
-
-
-/* =========================================================
-   DRAG AND DROP
-========================================================= */
-
-function initializeImageUpload() {
-    if (!imageInput) return;
-
-    imageInput.addEventListener("change", (event) => {
-        handleImageSelection(event.target.files);
-    });
-
-    if (!uploadZone) return;
-
-    ["dragenter", "dragover"].forEach((eventName) => {
-        uploadZone.addEventListener(eventName, (event) => {
-            event.preventDefault();
-            uploadZone.classList.add("dragover");
-        });
-    });
-
-    ["dragleave", "drop"].forEach((eventName) => {
-        uploadZone.addEventListener(eventName, (event) => {
-            event.preventDefault();
-            uploadZone.classList.remove("dragover");
-        });
-    });
-
-    uploadZone.addEventListener("drop", (event) => {
-        const files = event.dataTransfer?.files;
-
-        if (files?.length) {
-            handleImageSelection(files);
-        }
-    });
-}
-
-
-/* =========================================================
-   FORM DATA
-========================================================= */
-
-function getFormData() {
     const amenities = {};
-
-    document
-        .querySelectorAll(
-            'input[name="amenities"]:checked'
-        )
-        .forEach((checkbox) => {
-            amenities[checkbox.value] = true;
-        });
+    Object.entries(AMENITIES).forEach(([key, id]) => {
+        amenities[key] = $(id).checked;
+    });
 
     return {
-        title: document
-            .getElementById("propertyTitle")
-            ?.value.trim(),
-
-        propertyType: document
-            .getElementById("propertyType")
-            ?.value.trim(),
-
-        price: document
-            .getElementById("propertyPrice")
-            ?.value,
-
-        availableRooms: document
-            .getElementById("availableRooms")
-            ?.value,
-
-        university: document
-            .getElementById("propertyUniversity")
-            ?.value.trim(),
-
-        area: document
-            .getElementById("propertyArea")
-            ?.value.trim(),
-
-        address: document
-            .getElementById("propertyAddress")
-            ?.value.trim(),
-
-        description: document
-            .getElementById("propertyDescription")
-            ?.value.trim(),
-
-        amenities
+        payload: {
+            title,
+            property_type: propertyType,
+            university_id: $("propertyUniversity").value || null,
+            area,
+            address: $("propertyAddress").value.trim() || null,
+            price,
+            available_rooms: rooms === "" ? null : Number(rooms),
+            description: $("propertyDescription").value.trim() || null,
+            amenities,
+        },
     };
 }
 
+/* ---------- Saving ---------- */
 
-/* =========================================================
-   UNIVERSITY LOOKUP
-========================================================= */
-
-async function findUniversity(universityName) {
-    if (!universityName) {
-        return null;
+async function submitListing(status) {
+    const { error: validationError, payload } = readForm();
+    if (validationError) {
+        setMessage(validationError, "error");
+        return;
     }
 
-    const { data, error } = await supabase
-        .from("universities")
-        .select("id, name")
-        .ilike("name", universityName)
-        .limit(1)
-        .maybeSingle();
-
-    if (error) {
-        console.error(
-            "[ResiHub] University lookup failed:",
-            error
+    if (status === "published" && photos.length < MIN_PHOTOS_TO_PUBLISH) {
+        setMessage(
+            `Add at least ${MIN_PHOTOS_TO_PUBLISH} photos before publishing. You have ${photos.length}.`,
+            "error"
         );
-
-        throw error;
+        return;
     }
 
-    return data;
-}
+    setBusy(true);
+    setMessage(status === "published" ? "Publishing..." : "Saving draft...", "info");
 
-
-/* =========================================================
-   CREATE LISTING
-========================================================= */
-
-async function createListing(
-    formData,
-    publicationStatus
-) {
-    if (!currentUser) {
-        throw new Error("User session is unavailable.");
-    }
-
-    const university = await findUniversity(
-        formData.university
-    );
-
-    const listingPayload = {
-        landlord_id: currentUser.id,
-
-        university_id: university?.id ?? null,
-
-        title: formData.title,
-
-        description:
-            formData.description || null,
-
-        price:
-            formData.price
-                ? Number(formData.price)
-                : null,
-
-        property_type: formData.propertyType,
-
-        area: formData.area,
-
-        address:
-            formData.address || null,
-
-        availability_status: "available",
-
-        available_rooms:
-            formData.availableRooms
-                ? Number(formData.availableRooms)
-                : null,
-
-        amenities: formData.amenities,
-
-        publication_status: publicationStatus
-    };
-
-    const {
-        data,
-        error
-    } = await supabase
+    // 1. Create the listing as a draft first, so the photos have somewhere to go
+    const { data: created, error: createError } = await supabase
         .from("listings")
-        .insert(listingPayload)
+        .insert({ ...payload, landlord_id: me.id, publication_status: "draft" })
         .select("id")
         .single();
 
-    if (error) {
-        throw error;
+    if (createError || !created) {
+        console.error("[create_listing] insert failed:", createError);
+        setBusy(false);
+        setMessage("The listing could not be saved. Please try again.", "error");
+        return;
     }
 
-    return data;
-}
+    // 2. Upload the photos and link them to the listing
+    const result = await uploadPhotos(created.id);
 
-
-/* =========================================================
-   UPLOAD LISTING IMAGES
-========================================================= */
-
-async function uploadListingImages(listingId) {
-    if (!selectedImages.length) {
-        return [];
+    if (result.failed) {
+        setBusy(false);
+        setMessage(
+            `Saved as a draft, but ${result.failed} photo(s) could not be uploaded. Add them from the edit page.`,
+            "error"
+        );
+        return;
     }
 
-    const imageRecords = [];
-
-    for (
-        let index = 0;
-        index < selectedImages.length;
-        index++
-    ) {
-        const file = selectedImages[index];
-
-        const extension =
-            file.name
-                .split(".")
-                .pop()
-                ?.toLowerCase() || "jpg";
-
-        const filePath =
-            `${currentUser.id}/${listingId}/${crypto.randomUUID()}.${extension}`;
-
-        const {
-            error: uploadError
-        } = await supabase
-            .storage
-            .from("property-media")
-            .upload(
-                filePath,
-                file,
-                {
-                    cacheControl: "3600",
-                    upsert: false,
-                    contentType: file.type
-                }
+    // 3. Publish only if enough photos were saved
+    if (status === "published") {
+        if (result.count < MIN_PHOTOS_TO_PUBLISH) {
+            setBusy(false);
+            setMessage(
+                `Saved as a draft. Publishing needs at least ${MIN_PHOTOS_TO_PUBLISH} photos.`,
+                "error"
             );
-
-        if (uploadError) {
-            throw uploadError;
+            return;
         }
 
-        uploadedStoragePaths.push(filePath);
+        const { error: publishError } = await supabase
+            .from("listings")
+            .update({ publication_status: "published" })
+            .eq("id", created.id)
+            .eq("landlord_id", me.id);
 
-        const {
-            data: publicUrlData
-        } = supabase
-            .storage
-            .from("property-media")
-            .getPublicUrl(filePath);
+        if (publishError) {
+            console.error("[create_listing] publish failed:", publishError);
+            setBusy(false);
+            setMessage(`Saved as a draft. ${publishError.message}`, "error");
+            return;
+        }
+    }
 
-        imageRecords.push({
+    setBusy(false);
+    showToast(status === "published" ? "Listing published." : "Draft saved.", { type: "success" });
+    setMessage(status === "published" ? "Your listing is now published." : "Draft saved.", "success");
+
+    setTimeout(() => {
+        window.location.href = "my_listing.htm";
+    }, 1000);
+}
+
+async function uploadPhotos(listingId) {
+    const rows = [];
+    let failed = 0;
+
+    for (let i = 0; i < photos.length; i++) {
+        const file = photos[i].file;
+        const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
+        const path = `${me.id}/${listingId}/${Date.now()}-${i}.${extension}`;
+
+        const { error: uploadError } = await supabase.storage
+            .from(BUCKET)
+            .upload(path, file, { contentType: file.type, cacheControl: "3600", upsert: false });
+
+        if (uploadError) {
+            console.error("[create_listing] upload failed:", uploadError);
+            failed += 1;
+            continue;
+        }
+
+        const { data: publicData } = supabase.storage.from(BUCKET).getPublicUrl(path);
+
+        rows.push({
             listing_id: listingId,
-            image_url: publicUrlData.publicUrl,
-            display_order: index + 1
+            image_url: publicData.publicUrl,
+            display_order: rows.length,
         });
     }
 
-    const {
-        data,
-        error
-    } = await supabase
-        .from("listing_images")
-        .insert(imageRecords)
-        .select();
+    if (rows.length) {
+        const { error: rowError } = await supabase.from("listing_images").insert(rows);
 
-    if (error) {
-        throw error;
+        if (rowError) {
+            console.error("[create_listing] photo records failed:", rowError);
+            failed += rows.length;
+            return { count: 0, failed };
+        }
     }
 
-    return data;
+    return { count: rows.length, failed };
 }
 
+/* ---------- Photos (held on the page until saved) ---------- */
 
-/* =========================================================
-   CLEANUP FAILED UPLOADS
-========================================================= */
+function addPhotos(fileList) {
+    const files = [...fileList];
+    if (!files.length) return;
 
-async function cleanupUploadedImages() {
-    if (!uploadedStoragePaths.length) {
+    const room = MAX_PHOTOS - photos.length;
+    if (room <= 0) {
+        setMessage(`You can add up to ${MAX_PHOTOS} photos. Remove one to add another.`, "error");
+        $("propertyImages").value = "";
         return;
     }
 
-    try {
-        await supabase
-            .storage
-            .from("property-media")
-            .remove(uploadedStoragePaths);
-    } catch (error) {
-        console.error(
-            "[ResiHub] Storage cleanup failed:",
-            error
-        );
+    const chosen = files.slice(0, room);
+    const invalid = chosen.find((file) => !PHOTO_TYPES.includes(file.type) || file.size > MAX_BYTES);
+
+    if (invalid) {
+        setMessage("Photos must be JPG, PNG or WebP, and under 10 MB each.", "error");
+        $("propertyImages").value = "";
+        return;
     }
 
-    uploadedStoragePaths = [];
-}
+    chosen.forEach((file) => {
+        photos.push({ file, previewUrl: URL.createObjectURL(file) });
+    });
 
+    $("propertyImages").value = "";
+    renderPhotos();
 
-/* =========================================================
-   RESET STATE
-========================================================= */
-
-function resetListingState() {
-    selectedImages = [];
-    uploadedStoragePaths = [];
-
-    if (imageInput) {
-        imageInput.value = "";
+    if (files.length > room) {
+        setMessage(`Only ${room} photo(s) were added. The limit is ${MAX_PHOTOS}.`, "info");
+    } else {
+        setMessage("", "info");
     }
-
-    renderImagePreview();
 }
 
+function removePhoto(index) {
+    const [removed] = photos.splice(index, 1);
+    if (removed) URL.revokeObjectURL(removed.previewUrl);
+    renderPhotos();
+}
 
-/* =========================================================
-   PUBLISH LISTING
-========================================================= */
+function renderPhotos() {
+    const box = $("imagePreview");
+    if (!box) return;
 
-async function publishListing(event) {
-    event.preventDefault();
+    box.replaceChildren(...photos.map((photo, index) => {
+        const card = element("div", "el-photo");
 
+        const image = element("img");
+        image.src = photo.previewUrl;
+        image.alt = index === 0 ? "Cover photo" : "Property photo";
+
+        const remove = element("button", "el-photo-remove");
+        remove.type = "button";
+        remove.setAttribute("aria-label", "Remove photo");
+        remove.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+        remove.addEventListener("click", () => removePhoto(index));
+
+        card.append(image, remove);
+
+        if (index === 0) {
+            card.append(element("span", "el-cover", "Cover"));
+        }
+
+        return card;
+    }));
+}
+
+/* ---------- Helpers ---------- */
+
+function setBusy(on) {
+    ["saveDraftBtn", "publishListingBtn"].forEach((id) => {
+        const button = $(id);
+        if (button) button.disabled = on;
+    });
+}
+
+function setFormDisabled(on) {
+    const form = $("createListingForm");
     if (!form) return;
-
-    if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-    }
-
-    const formData = getFormData();
-
-    if (!formData.title) {
-        showMessage(
-            "Please enter a property title.",
-            "error"
-        );
-        return;
-    }
-
-    try {
-        setButtonLoading(
-            publishButton,
-            true,
-            "Publishing..."
-        );
-
-        const listing = await createListing(
-            formData,
-            "published"
-        );
-
-        await uploadListingImages(listing.id);
-
-        showMessage(
-            "Your listing has been published successfully!",
-            "success"
-        );
-
-        resetListingState();
-
-        form.reset();
-
-        setTimeout(() => {
-            window.location.href =
-                "../landlord/landlord_dashboard.htm";
-        }, 1000);
-
-    } catch (error) {
-        console.error(
-            "[ResiHub] Listing publication failed:",
-            error
-        );
-
-        await cleanupUploadedImages();
-
-        showMessage(
-            error.message ||
-            "Unable to publish your listing.",
-            "error"
-        );
-
-    } finally {
-        setButtonLoading(
-            publishButton,
-            false
-        );
-    }
+    form.querySelectorAll("input, select, textarea, button").forEach((node) => {
+        node.disabled = on;
+    });
 }
 
-
-/* =========================================================
-   SAVE DRAFT
-========================================================= */
-
-async function saveDraft() {
-    const formData = getFormData();
-
-    if (!formData.title) {
-        showMessage(
-            "A property title is required to save a draft.",
-            "error"
-        );
-        return;
-    }
-
-    if (!formData.propertyType) {
-        showMessage(
-            "Please select a property type.",
-            "error"
-        );
-        return;
-    }
-
-    if (!formData.area) {
-        showMessage(
-            "Please enter the property area.",
-            "error"
-        );
-        return;
-    }
-
-    try {
-        setButtonLoading(
-            draftButton,
-            true,
-            "Saving..."
-        );
-
-        const listing = await createListing(
-            formData,
-            "draft"
-        );
-
-        await uploadListingImages(listing.id);
-
-        showMessage(
-            "Your listing draft has been saved.",
-            "success"
-        );
-
-        resetListingState();
-
-    } catch (error) {
-        console.error(
-            "[ResiHub] Draft save failed:",
-            error
-        );
-
-        await cleanupUploadedImages();
-
-        showMessage(
-            error.message ||
-            "Unable to save your draft.",
-            "error"
-        );
-
-    } finally {
-        setButtonLoading(
-            draftButton,
-            false
-        );
-    }
+function setMessage(text, type = "info") {
+    const box = $("createListingMessage");
+    if (!box) return;
+    box.textContent = text;
+    box.className = `el-message ${type}`;
 }
 
-
-/* =========================================================
-   INITIALIZATION
-========================================================= */
-
-async function initializeCreateListing() {
-    if (!form) {
-        console.warn(
-            "[ResiHub] Create listing form not found."
-        );
-        return;
-    }
-
-    const authenticated = await initializeUser();
-
-    if (!authenticated) {
-        return;
-    }
-
-    initializeImageUpload();
-
-    form.addEventListener(
-        "submit",
-        publishListing
-    );
-
-    draftButton?.addEventListener(
-        "click",
-        saveDraft
-    );
-
-    console.log(
-        "[ResiHub] Create Listing initialized successfully."
-    );
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-if (document.readyState === "loading") {
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeCreateListing,
-        { once: true }
-    );
-} else {
-    initializeCreateListing();
+function element(tag, className = "", text = "") {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
 }

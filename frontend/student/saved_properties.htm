@@ -2,162 +2,82 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-        content="View and manage your saved student accommodation listings on ResiHub. Access your favourite hostels, apartments and rental properties near universities across Nigeria.">
-
-    <meta name="keywords"
-        content="saved properties, favourite hostels, student accommodation, apartments, Nigeria, ResiHub">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="theme-color" content="#0F766E">
-
     <title>Saved Properties | ResiHub</title>
-
-    <!-- Favicon -->
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
-    <!-- Font Awesome -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <!-- Main Stylesheet -->
-
     <link rel="stylesheet" href="../styles/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="student">
+<body class="page-saved" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION -->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-
-        <!-- Hero Section -->
-
-        <section class="page-hero">
-
+        <!-- HERO -->
+        <section class="sv-hero">
             <div class="container">
-
-                <section class="auth-hero reveal fade-up" aria-labelledby="savedPropertiesTitle">
-
-                    <span class="page-badge floating-badge">
-
-                        <i class="fa-solid fa-heart" aria-hidden="true"></i>
-
-                        Saved Properties
-
-                    </span>
-
-                    <h1 id="savedPropertiesTitle">
-
-                        Your Saved Accommodation
-
-                    </h1>
-
-                    <p>
-
-                        View and manage all the properties you've saved for future reference.
-
-                    </p>
-
-                </section>
-
+                <span class="sv-badge"><i class="fa-solid fa-heart" aria-hidden="true"></i>Saved Properties</span>
+                <h1 id="savedPropertiesTitle">Your Saved Accommodation</h1>
+                <p class="sv-sub">View and manage all the properties you've saved for future reference.</p>
             </div>
-
         </section>
 
-        <!-- Saved Listings -->
-
-        <section class="saved-properties-section">
-
+        <section class="sv-section">
             <div class="container">
 
-                <div class="section-header">
-
-                    <div>
-
-                        <h2>Saved Listings</h2>
-
-                        <p>
-
-                            Quickly access your favourite student accommodation.
-
-                        </p>
-
+                <div class="sv-toolbar">
+                    <div class="sv-tabs" role="tablist" aria-label="Filter saved properties">
+                        <button class="sv-tab active" type="button" role="tab" data-saved-tab="all">
+                            All (<span id="savedAllCount">0</span>)
+                        </button>
+                        <button class="sv-tab" type="button" role="tab" data-saved-tab="available">
+                            Available (<span id="savedAvailableCount">0</span>)
+                        </button>
+                        <button class="sv-tab" type="button" role="tab" data-saved-tab="booked">
+                            Booked (<span id="savedBookedCount">0</span>)
+                        </button>
                     </div>
 
-                    <button id="clearSavedBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                        <i class="fa-solid fa-trash" aria-hidden="true"></i>
-
-                        Clear All
-
+                    <button id="clearSavedBtn" class="sv-clear" type="button">
+                        <i class="fa-solid fa-trash" aria-hidden="true"></i> Clear All
                     </button>
-
                 </div>
 
-                <div id="savedListings" class="listing-grid">
+                <div id="savedListings" class="sv-grid" aria-live="polite"></div>
 
-                </div>
-
-                <div id="emptySaved" class="empty-state hidden">
-
+                <div id="emptySaved" class="sv-empty hidden">
                     <i class="fa-solid fa-heart-crack" aria-hidden="true"></i>
-
-                    <h3>
-
-                        No Saved Properties
-
-                    </h3>
-
-                    <p>
-
-                        You haven't saved any accommodation yet.
-
-                    </p>
-
-                    <a href="../general/browse_rooms.htm" class="btn-primary">
-
-                        Browse Rooms
-
-                    </a>
-
+                    <h2>No Saved Properties</h2>
+                    <p>You haven't saved any accommodation yet. Tap the heart on any room to keep it here.</p>
+                    <a href="../general/browse_rooms.htm" class="sv-primary">Browse Rooms</a>
                 </div>
 
             </div>
-
         </section>
-
     </main>
-    <!-- FOOTER -->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/saved_properties.js";
+        init();
+    </script>
 </body>
 
 </html>
-
-
-

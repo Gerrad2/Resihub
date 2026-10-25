@@ -3,238 +3,180 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Edit Student Profile | ResiHub</title>
-
-    <meta name="description"
-        content="Edit your ResiHub student profile. Update your personal information, university details, academic records, emergency contact and profile photo for a better accommodation experience.">
-
-    <meta name="keywords"
-        content="ResiHub, Student Profile, Edit Student Profile, University Student, Student Accommodation Nigeria, Student Dashboard, Student Housing">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="robots" content="index, follow">
-
-    <meta name="theme-color" content="#0F766E">
-
-    <meta property="og:type" content="website">
-
-    <meta property="og:title" content="Edit Student Profile | ResiHub">
-
-    <meta property="og:description"
-        content="Manage and update your student profile, academic information and emergency contact on ResiHub.">
-
-    <meta property="og:image" content="../assets/images/logo.png">
-
-    <meta property="og:url" content="https://www.resihub.com/profile_edit.htm">
-
-    <meta property="og:site_name" content="ResiHub">
-
-    <meta name="twitter:card" content="summary_large_image">
-
-    <meta name="twitter:title" content="Edit Student Profile | ResiHub">
-
-    <meta name="twitter:description"
-        content="Update your ResiHub student profile, university information and emergency contacts.">
-
-    <meta name="twitter:image" content="../assets/images/logo.png">
-
-    <link rel="canonical" href="https://www.resihub.com/profile_edit.htm">
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="student">
+<body class="page-edit-profile" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-        <section class="auth-hero reveal fade-up">
-
+        <!-- HERO -->
+        <section class="ep-hero">
             <div class="container">
-
-                <div class="page-hero-content hero-content">
-
-                    <span class="page-badge floating-badge">
-
-                        <i class="fa-solid fa-user-pen"></i>
-
-                        Student Profile
-
-                    </span>
-
-                    <h1 class="hero-title">
-
-                        Edit Profile
-
-                    </h1>
-
-                    <p class="hero-description">
-
-                        Update your personal, academic and emergency contact information.
-
-                    </p>
-
-                </div>
-
+                <span class="ep-badge"><i class="fa-solid fa-user-pen" aria-hidden="true"></i>Profile</span>
+                <h1>Edit Profile</h1>
+                <p>Keep your personal information up to date.</p>
             </div>
-
         </section>
-        <div class="profile-photo-section">
 
-            <img id="profilePreview" src="../assets/images/default-avatar.png" alt="Student Profile Photo">
+        <!-- FORM -->
+        <section class="ep-section">
+            <div class="container">
+                <form id="editProfileForm" class="ep-layout" novalidate>
 
-            <label for="profileImage" class="upload-btn">
-                <i class="fa-solid fa-camera" aria-hidden="true"></i>
-                Change Photo
-            </label>
+                    <!-- PHOTO -->
+                    <aside class="ep-card ep-photo-card">
+                        <div class="ep-avatar-ring">
+                            <img id="profilePreview" src="../assets/images/default-avatar.png"
+                                alt="Profile photo preview">
+                        </div>
 
-            <input type="file" id="profileImage" accept="image/*" aria-label="Upload Profile Photo" hidden>
+                        <label class="ep-photo-btn" for="profileImage">
+                            <i class="fa-solid fa-camera" aria-hidden="true"></i> Change Photo
+                        </label>
+                        <input type="file" id="profileImage" accept="image/jpeg,image/png,image/webp" hidden>
 
-        </div>
-        <div class="profile-card">
+                        <p class="ep-hint">JPG, PNG or WebP, up to 5 MB.</p>
+                    </aside>
 
-            <h2>Personal Information</h2>
+                    <div class="ep-main">
 
-            <div class="profile-grid">
+                        <!-- PERSONAL -->
+                        <div class="ep-card">
+                            <h2>Personal Information</h2>
 
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName">
-                </div>
+                            <div class="ep-grid">
+                                <div class="ep-field">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" autocomplete="name" required>
+                                </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" readonly>
-                </div>
+                                <div class="ep-field">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" readonly>
+                                </div>
 
-                <div class="form-group">
-                    <label for="phone">Phone</label>
-                    <input type="tel" id="phone">
-                </div>
+                                <div class="ep-field">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" autocomplete="tel">
+                                </div>
 
-                <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender">
-                        <option value="">Select</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
+                                <div class="ep-field">
+                                    <label for="gender">Gender</label>
+                                    <select id="gender">
+                                        <option value="">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
 
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input type="date" id="dob">
-                </div>
+                                <div class="ep-field">
+                                    <label for="dob">Date of Birth</label>
+                                    <input type="date" id="dob">
+                                </div>
 
+                                <div class="ep-field">
+                                    <label for="university">University</label>
+                                    <select id="university">
+                                        <option value="">Select university</option>
+                                    </select>
+                                </div>
+
+                                <div class="ep-field">
+                                    <label for="faculty">Faculty</label>
+                                    <input type="text" id="faculty">
+                                </div>
+
+                                <div class="ep-field">
+                                    <label for="department">Department</label>
+                                    <input type="text" id="department">
+                                </div>
+
+                                <div class="ep-field">
+                                    <label for="level">Level</label>
+                                    <select id="level">
+                                        <option value="">Select</option>
+                                        <option value="100">100 Level</option>
+                                        <option value="200">200 Level</option>
+                                        <option value="300">300 Level</option>
+                                        <option value="400">400 Level</option>
+                                        <option value="500">500 Level</option>
+                                    </select>
+                                </div>
+
+                                <div class="ep-field">
+                                    <label for="matricNumber">Matric Number</label>
+                                    <input type="text" id="matricNumber">
+                                </div>
+
+                                <div class="ep-field">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" placeholder="e.g. Lagos">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- EMERGENCY -->
+                        <div class="ep-card">
+                            <h2>Emergency Contact</h2>
+
+                            <div class="ep-grid">
+                                <div class="ep-field">
+                                    <label for="emergencyName">Contact Name</label>
+                                    <input type="text" id="emergencyName">
+                                </div>
+
+                                <div class="ep-field">
+                                    <label for="emergencyRelationship">Relationship</label>
+                                    <input type="text" id="emergencyRelationship" placeholder="e.g. Parent">
+                                </div>
+
+                                <div class="ep-field ep-full">
+                                    <label for="emergencyPhone">Contact Phone</label>
+                                    <input type="tel" id="emergencyPhone">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACTIONS -->
+                        <div class="ep-actions">
+                            <a href="../student/profile.htm" id="cancelEditBtn" class="ep-secondary">Cancel</a>
+                            <button type="submit" id="saveProfileBtn" class="ep-primary">
+                                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
-        </div>
-        <div class="profile-card">
-
-            <h2>Academic Information</h2>
-
-            <div class="profile-grid">
-
-                <div class="form-group">
-                    <label for="university">University</label>
-                    <select id="university"></select>
-                </div>
-
-                <div class="form-group">
-                    <label for="faculty">Faculty</label>
-                    <input type="text" id="faculty">
-                </div>
-
-                <div class="form-group">
-                    <label for="department">Department</label>
-                    <input type="text" id="department">
-                </div>
-
-                <div class="form-group">
-                    <label for="level">Level</label>
-                    <select id="level"></select>
-                </div>
-
-                <div class="form-group">
-                    <label for="matricNumber">Matric Number</label>
-                    <input type="text" id="matricNumber">
-                </div>
-
-            </div>
-
-        </div>
-        <div class="profile-card">
-
-            <h2>Emergency Contact</h2>
-
-            <div class="profile-grid">
-
-                <div class="form-group">
-                    <label for="emergencyName">Full Name</label>
-                    <input type="text" id="emergencyName">
-                </div>
-
-                <div class="form-group">
-                    <label for="emergencyRelationship">Relationship</label>
-                    <input type="text" id="emergencyRelationship">
-                </div>
-
-                <div class="form-group">
-                    <label for="emergencyPhone">Phone</label>
-                    <input type="tel" id="emergencyPhone">
-                </div>
-
-            </div>
-
-        </div>
-        <div class="profile-actions">
-
-            <button id="saveProfileBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>
-
-                Save Changes
-
-            </button>
-
-            <button id="cancelEditBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                Cancel
-
-            </button>
-
-        </div>
+        </section>
     </main>
-    <!--FOOTER-->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/edit_profile.js";
+        init();
+    </script>
 </body>
 
 </html>
-
-
-

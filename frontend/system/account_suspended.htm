@@ -4,157 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Account Suspended | ResiHub</title>
-
-    <meta name="description"
-        content="Your ResiHub account has been temporarily suspended. Learn the possible reasons and how to contact support.">
-
-    <meta name="keywords" content="ResiHub, account suspended, support, verification, student accommodation">
-
-    <meta name="author" content="ResiHub">
-
     <meta name="robots" content="noindex, nofollow">
-
-    <link rel="canonical" href="https://www.resihub.com/account_suspended.htm">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Account Suspended | ResiHub">
-    <meta property="og:description" content="Your ResiHub account has been temporarily suspended.">
-    <meta property="og:url" content="https://www.resihub.com/account_suspended.htm">
-    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Account Suspended | ResiHub">
-    <meta name="twitter:description" content="Your ResiHub account has been temporarily suspended.">
-    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
-
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles/system.css">
 </head>
 
-<body data-resihub-surface="system">
+<body class="sys-page" data-resihub-surface="public">
     <div id="scrollProgress"></div>
-
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
     <div id="header"></div>
-    <main class="system-page status-page">
-        <section id="account-suspended-hero" class="auth-hero reveal fade-up">
 
-            <div class="container">
-                <div class="page-hero-content hero-content">
-                    <span class="page-badge floating-badge">
-                        <i class="fa-solid fa-ban" aria-hidden="true"></i>
-                        Account Status
-                    </span>
+    <main class="sys-main">
+        <section class="sys-panel">
 
-                    <h1 class="hero-title">Account Temporarily Unavailable</h1>
-
-                    <p class="hero-description">
-                        Your account has been temporarily suspended. Please review the information below and contact
-                        support if you believe this is a mistake.
-                    </p>
-
-                </div>
+            <div class="sys-art" aria-hidden="true">
+                <div class="sys-art-glow"></div>
+                <i class="fa-solid fa-user sys-art-icon"></i>
+                <span class="sys-badge danger"><i class="fa-solid fa-ban"></i></span>
             </div>
-        </section>
-        <section id="account-suspended" class="auth-section reveal fade-up">
-            <div class="container">
 
-                <div class="auth-wrapper">
+            <h1 class="sys-title">Account Suspended</h1>
+            <p class="sys-text">Your account has been suspended due to a violation of our terms and conditions, or for
+                security reasons.</p>
 
-                    <div class="auth-info glass-card">
-
-                        <h2>Possible Reasons</h2>
-
-                        <div class="auth-feature tilt-card reveal zoom-in">
-                            <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                            <div>
-                                <h4>Policy Violation</h4>
-                                <p>Your account may have violated one of ResiHub's policies.</p>
-                            </div>
-                        </div>
-
-                        <div class="auth-feature tilt-card reveal zoom-in">
-                            <i class="fa-solid fa-file-circle-question" aria-hidden="true"></i>
-                            <div>
-                                <h4>Verification Needed</h4>
-                                <p>Additional verification documents may be required.</p>
-                            </div>
-                        </div>
-
-                        <div class="auth-feature tilt-card reveal zoom-in">
-                            <i class="fa-solid fa-headset" aria-hidden="true"></i>
-                            <div>
-                                <h4>Need Help?</h4>
-                                <p>Our support team can help resolve your issue.</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="auth-card glass-card">
-                        <div class="status-card suspended glass-card reveal zoom-in">
-
-                            <i class="fa-solid fa-circle-exclamation status-icon" aria-hidden="true"></i>
-
-                            <h2 id="statusTitle">
-                                Account Suspended
-                            </h2>
-
-                            <p id="statusMessage">
-                                Your account has been temporarily suspended.
-                            </p>
-
-                            <div class="status-actions">
-
-                                <a href="../general/contact.htm" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-                                    Contact Support
-
-                                </a>
-
-                                <a href="../general/index.htm" class="btn-outline magnetic-btn">
-
-                                    Return Home
-
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+            <div class="sys-actions">
+                <a href="../general/contact.htm" class="sys-btn sys-btn-primary">
+                    <i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact Support
+                </a>
+                <a href="../general/index.htm" class="sys-btn sys-btn-ghost">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i> Go to Home
+                </a>
             </div>
+
+            <p class="sys-ref">Reference: <span data-reference></span></p>
         </section>
     </main>
-    <!--FOOTER-->
+
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { initSystemPage } from "../js/core/system-pages.js";
+        initSystemPage();
+    </script>
 </body>
 
 </html>
-
-
-

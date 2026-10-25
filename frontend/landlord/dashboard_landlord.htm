@@ -5,246 +5,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Landlord Dashboard | ResiHub Property Management</title>
-
-    <meta name="description"
-        content="Manage your ResiHub landlord account, property listings, inspection requests, student messages and accommodation bookings from one dashboard.">
-
-    <meta name="keywords"
-        content="ResiHub landlord dashboard, landlord portal, property management, student accommodation Nigeria, rental dashboard">
-
-    <meta name="author" content="ResiHub">
-
+    <title>Landlord Dashboard | ResiHub</title>
     <meta name="robots" content="noindex, nofollow">
-
-    <link rel="canonical" href="https://www.resihub.com/dashboard_landlord.htm">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="ResiHub Landlord Dashboard">
-    <meta property="og:description"
-        content="Manage your property listings, bookings and student enquiries from the ResiHub landlord dashboard.">
-    <meta property="og:image" content="../assets/images/og-image.jpg">
-    <meta property="og:url" content="https://www.resihub.com/dashboard_landlord.htm">
-    <meta property="og:site_name" content="ResiHub">
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ResiHub Landlord Dashboard">
-    <meta name="twitter:description" content="Manage your accommodation listings and bookings on ResiHub.">
-    <meta name="twitter:image" content="../assets/images/og-image.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="landlord">
+<body class="page-landlord-dashboard" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-        <section class="dashboard-hero reveal fade-up">
+        <!-- WELCOME -->
+        <section class="ld-hero">
+            <div class="container ld-hero-inner">
+                <div class="ld-hero-text">
+                    <span class="ld-badge"><i class="fa-solid fa-house-circle-check" aria-hidden="true"></i>
+                        Landlord</span>
+                    <h1>Welcome back, <span id="landlordName">Landlord</span></h1>
+                    <p>Here's what's happening with your properties.</p>
+                </div>
 
+                <div class="ld-hero-side">
+                    <img id="landlordAvatar" class="ld-avatar" src="../assets/images/default-avatar.png"
+                        alt="Your profile photo">
+                    <p id="todayDate" class="ld-date"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="ld-section">
             <div class="container">
 
-                <div class="dashboard-welcome-card">
+                <!-- STATS -->
+                <div id="verifyBanner"></div>
+                <div class="ld-stats">
+                    <article class="ld-stat">
+                        <i class="fa-solid fa-building" aria-hidden="true"></i>
+                        <div><strong id="listingCount">0</strong><span>Total Listings</span></div>
+                    </article>
+                    <article class="ld-stat">
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                        <div><strong id="bookingCount">0</strong><span>Total Bookings</span></div>
+                    </article>
+                    <article class="ld-stat">
+                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                        <div><strong id="messageCount">0</strong><span>Unread Messages</span></div>
+                    </article>
+                    <article class="ld-stat">
+                        <i class="fa-solid fa-star" aria-hidden="true"></i>
+                        <div><strong id="reviewCount">0</strong><span>Reviews</span></div>
+                    </article>
+                </div>
 
-                    <div class="dashboard-user">
-
-                        <div class="dashboard-text">
-
-                            <span class="dashboard-badge">
-
-                                <i class="fa-solid fa-sparkles"></i>
-
-                                Landlord Dashboard
-
-                            </span>
-
-                            <h1>
-
-                                Welcome back,
-                                <span id="landlordName">Landlord</span>
-
-                            </h1>
-
-                            <p>
-
-                                Here's what's happening with your properties today.
-
-                            </p>
-
+                <!-- BOOKINGS + MESSAGES -->
+                <div class="ld-two">
+                    <div class="ld-card">
+                        <div class="ld-head">
+                            <h2>Recent Bookings</h2>
+                            <a href="booking_requests.htm">View all</a>
                         </div>
-
-                        <div class="dashboard-avatar">
-
-                            <img id="landlordAvatar" src="../assets/images/default-avatar.png" alt="Profile">
-
-                        </div>
-
+                        <div id="bookingPreview" class="ld-list"></div>
                     </div>
 
+                    <div class="ld-card">
+                        <div class="ld-head">
+                            <h2>Recent Messages</h2>
+                            <a href="landlord_messages.htm">View all</a>
+                        </div>
+                        <div id="recentMessages" class="ld-list"></div>
+                    </div>
+                </div>
+
+                <!-- LISTINGS -->
+                <div class="ld-card">
+                    <div class="ld-head">
+                        <h2>Your Listings</h2>
+                        <a href="my_listing.htm">View all</a>
+                    </div>
+                    <div id="landlordListings" class="ld-listing-grid"></div>
+                </div>
+
+                <!-- QUICK ACTIONS -->
+                <div class="ld-actions">
+                    <a href="create_listing.htm" class="ld-action">
+                        <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+                        <div><strong>Add New Listing</strong><span>Create a new property</span></div>
+                    </a>
+                    <a href="my_listing.htm" class="ld-action">
+                        <i class="fa-solid fa-building" aria-hidden="true"></i>
+                        <div><strong>View Listings</strong><span>Manage your properties</span></div>
+                    </a>
+                    <a href="booking_requests.htm" class="ld-action">
+                        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
+                        <div><strong>Bookings</strong><span>View all bookings</span></div>
+                    </a>
+                    <a href="landlord_messages.htm" class="ld-action">
+                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                        <div><strong>Messages</strong><span>Check your messages</span></div>
+                    </a>
                 </div>
 
             </div>
-
-        </section>
-        <section class="quick-actions">
-
-            <div class="container">
-
-                <div class="quick-actions-grid">
-
-                    <a href="../landlord/create_listing.htm" class="quick-action">
-
-                        <i class="fa-solid fa-plus"></i>
-
-                        <span>Create Listing</span>
-
-                    </a>
-
-                    <a href="../landlord/my_listing.htm" class="quick-action">
-
-                        <i class="fa-solid fa-building"></i>
-
-                        <span>My Listings</span>
-
-                    </a>
-
-                    <a href="../landlord/landlord_messages.htm" class="quick-action">
-
-                        <i class="fa-solid fa-comments"></i>
-
-                        <span>Messages</span>
-
-                    </a>
-
-                    <a href="../landlord/landlord_settings.htm" class="quick-action">
-
-                        <i class="fa-solid fa-gear"></i>
-
-                        <span>Settings</span>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-        <div class="stats-grid">
-
-            <article class="dashboard-stat-card">
-                <i class="fa-solid fa-house" aria-hidden="true"></i>
-                <h2 id="listingCount">0</h2>
-                <p>Active Listings</p>
-            </article>
-
-            <article class="dashboard-stat-card">
-                <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
-                <h2 id="bookingCount">0</h2>
-                <p>Inspection Requests</p>
-            </article>
-
-            <article class="dashboard-stat-card">
-                <i class="fa-solid fa-comments" aria-hidden="true"></i>
-                <h2 id="messageCount">0</h2>
-                <p>Messages</p>
-            </article>
-
-            <article class="dashboard-stat-card">
-                <i class="fa-solid fa-star" aria-hidden="true"></i>
-                <h2 id="reviewCount">0.0</h2>
-                <p>Average Rating</p>
-            </article>
-
-        </div>
-        <section class="dashboard-section">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <h2>My Listings</h2>
-
-                    <a href="../landlord/my_listing.htm">
-
-                        View All
-
-                    </a>
-
-                </div>
-
-                <div id="landlordListings" class="listing-grid">
-
-                </div>
-
-            </div>
-
-        </section>
-        <section class="dashboard-section">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <h2>Recent Inspection Requests</h2>
-
-                </div>
-
-                <div id="bookingPreview" class="inspection-list">
-
-                </div>
-
-            </div>
-
-        </section>
-        <section class="dashboard-section">
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <h2>Recent Messages</h2>
-
-                    <a href="../landlord/landlord_messages.htm">
-
-                        Open Inbox
-
-                    </a>
-
-                </div>
-
-                <div id="recentMessages" class="messages-preview">
-
-                </div>
-
-            </div>
-
         </section>
     </main>
-    <!--FOOTER-->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/dashboard_landlord.js";
+        init();
+    </script>
 </body>
 
 </html>
-
-
-

@@ -1,318 +1,106 @@
-// js/landlord_settings.js
+import { getCurrentUser, supabase } from "./api.js";
+import { showError } from "./student_utils.js";
+import { showToast } from "./ui/toast.js";
 
-import {
-    getCurrentUser
-} from "./core/api.js";
+const $ = (id) => document.getElementById(id);
 
-import {
-    initTheme
-} from "./ui/theme.js";
+let me = null;
+let existingPrefs = {};
 
-import {
-    showToast
-} from "./ui/toast.js";
+export async function init() {
+    $("settingsForm")?.addEventListener("submit", save);
 
+    const userResult = await getCurrentUser();
+    me = userResult.success ? userResult.data : null;
 
-/*
- * ResiHub Landlord Settings
- *
- * These settings are currently stored locally.
- * Authentication is handled through Supabase.
- */
-
-
-const STORAGE_PREFIX = "resihub:landlord-settings";
-
-
-/*
- * DOM Elements
- */
-
-const form = document.getElementById("settingsForm");
-
-const emailNotifications =
-    document.getElementById("marketingEmails");
-
-const smsNotifications =
-    document.getElementById("inspectionNotifications");
-
-const darkMode =
-    document.getElementById("listingVisibility");
-
-const saveButton =
-    document.getElementById("saveSettingsBtn");
-
-
-let currentUser = null;
-
-
-/*
- * Build user-specific storage key
- */
-
-function getStorageKey(userId) {
-    return `${STORAGE_PREFIX}:${userId}`;
-}
-
-
-/*
- * Load Settings
- */
-
-function loadSettings(userId) {
-    try {
-        const stored =
-            localStorage.getItem(
-                getStorageKey(userId)
-            );
-
-        if (!stored) {
-            return {
-                emailNotifications: true,
-                smsNotifications: true,
-                darkMode: false
-            };
-        }
-
-        return {
-            emailNotifications: true,
-            smsNotifications: true,
-            darkMode: false,
-            ...JSON.parse(stored)
-        };
-
-    } catch (error) {
-
-        console.error(
-            "[ResiHub Settings] Unable to load settings:",
-            error
-        );
-
-        return {
-            emailNotifications: true,
-            smsNotifications: true,
-            darkMode: false
-        };
-    }
-}
-
-
-/*
- * Save Settings
- */
-
-function saveSettings(userId, settings) {
-    localStorage.setItem(
-        getStorageKey(userId),
-        JSON.stringify(settings)
-    );
-}
-
-
-/*
- * Apply Settings to UI
- */
-
-function applySettings(settings) {
-
-    if (emailNotifications) {
-        emailNotifications.checked =
-            settings.emailNotifications;
-    }
-
-    if (smsNotifications) {
-        smsNotifications.checked =
-            settings.smsNotifications;
-    }
-
-    if (darkMode) {
-        darkMode.checked =
-            settings.darkMode;
-    }
-
-    /*
-     * Sync Dark Mode with the existing
-     * ResiHub theme system.
-     */
-
-    if (darkMode) {
-
-        const theme =
-            settings.darkMode
-                ? "dark"
-                : "azure";
-
-        try {
-            initTheme(theme);
-        } catch (error) {
-            console.warn(
-                "[ResiHub Settings] Theme could not be applied:",
-                error
-            );
-        }
-    }
-}
-
-
-/*
- * Handle Form Submission
- */
-
-async function handleSubmit(event) {
-
-    event.preventDefault();
-
-    if (!currentUser) {
+    if (!me) {
+        showError("Please sign in to manage your settings.");
         return;
     }
 
-    const settings = {
+    const { data, error } = await supabase
+        .from("profiles")
+        .select("email_notifications, sms_notifications, marketing_emails, inspection_notifications, listing_visibility, preferences")
+        .eq("id", me.id)
+        .maybeSingle();
 
-        emailNotifications:
-            emailNotifications?.checked ?? true,
+    if (error) {
+        console.error("[landlord_settings] load failed:", error);
+        showError("Your settings could not be loaded.");
+        return;
+    }
 
-        smsNotifications:
-            smsNotifications?.checked ?? true,
+    existingPrefs = data?.preferences ?? {};
+    fill(data ?? {});
+}
 
-        darkMode:
-            darkMode?.checked ?? false
+function fill(profile) {
+    setChecked("emailNotifications", profile.email_notifications ?? true);
+    setChecked("smsNotifications", profile.sms_notifications ?? false);
+    setChecked("marketingEmails", profile.marketing_emails ?? false);
+    setChecked("inspectionNotifications", profile.inspection_notifications ?? true);
+    setChecked("listingVisibility", profile.listing_visibility ?? true);
+
+    setChecked("darkMode", (existingPrefs.theme ?? "dark") === "dark");
+    setValue("language", existingPrefs.language ?? "en");
+    setValue("timezone", existingPrefs.timezone ?? "Africa/Lagos");
+
+    setChecked("prefBooking", existingPrefs.booking ?? true);
+    setChecked("prefMessages", existingPrefs.messages ?? true);
+    setChecked("prefSystem", existingPrefs.system ?? true);
+}
+
+async function save(event) {
+    event.preventDefault();
+    if (!me) return;
+
+    const button = $("saveSettingsBtn");
+    button.disabled = true;
+
+    const preferences = {
+        ...existingPrefs,
+        language: $("language").value,
+        timezone: $("timezone").value,
+        currency: "NGN",
+        theme: $("darkMode").checked ? "dark" : "light",
+        booking: $("prefBooking").checked,
+        messages: $("prefMessages").checked,
+        system: $("prefSystem").checked,
     };
 
+    const { error } = await supabase
+        .from("profiles")
+        .update({
+            email_notifications: $("emailNotifications").checked,
+            sms_notifications: $("smsNotifications").checked,
+            marketing_emails: $("marketingEmails").checked,
+            inspection_notifications: $("inspectionNotifications").checked,
+            listing_visibility: $("listingVisibility").checked,
+            preferences,
+        })
+        .eq("id", me.id);
 
-    saveSettings(
-        currentUser.id,
-        settings
-    );
+    button.disabled = false;
 
-
-    /*
-     * Apply theme immediately.
-     */
-
-    if (darkMode) {
-
-        try {
-
-            const theme =
-                darkMode.checked
-                    ? "dark"
-                    : "azure";
-
-            initTheme(theme);
-
-        } catch (error) {
-
-            console.warn(
-                "[ResiHub Settings] Theme update failed:",
-                error
-            );
-        }
-    }
-
-
-    /*
-     * Button feedback
-     */
-
-    if (saveButton) {
-
-        const originalHTML =
-            saveButton.innerHTML;
-
-        saveButton.disabled = true;
-
-        saveButton.innerHTML =
-            '<i class="fa-solid fa-check"></i> Saved';
-
-        setTimeout(() => {
-
-            saveButton.disabled = false;
-
-            saveButton.innerHTML =
-                originalHTML;
-
-        }, 1500);
-    }
-
-
-    showToast(
-        "Settings saved successfully.",
-        {
-            type: "success"
-        }
-    );
-}
-
-
-/*
- * Initialize
- */
-
-async function init() {
-
-    if (!form) {
-        console.warn(
-            "[ResiHub Settings] Settings form not found."
-        );
-
+    if (error) {
+        console.error("[landlord_settings] save failed:", error);
+        showToast("Settings could not be saved. Please try again.", { type: "error" });
         return;
     }
 
-
-    /*
-     * Get authenticated user
-     */
-
-    const result =
-        await getCurrentUser();
-
-
-    if (
-        !result.success ||
-        !result.data
-    ) {
-
-        window.location.href =
-            "../auth/landlord_login.htm";
-
-        return;
-    }
-
-
-    currentUser =
-        result.data;
-
-
-    /*
-     * Load saved preferences
-     */
-
-    const settings =
-        loadSettings(
-            currentUser.id
-        );
-
-
-    /*
-     * Apply saved preferences
-     */
-
-    applySettings(settings);
-
-
-    /*
-     * Form submission
-     */
-
-    form.addEventListener(
-        "submit",
-        handleSubmit
-    );
+    existingPrefs = preferences;
+    showToast("Settings saved.", { type: "success" });
 }
 
+function setChecked(id, value) {
+    const node = $(id);
+    if (node) node.checked = Boolean(value);
+}
 
-/*
- * Start
- */
-
-init();
+function setValue(id, value) {
+    const node = $(id);
+    if (!node) return;
+    if ([...node.options].some((option) => option.value === value)) {
+        node.value = value;
+    }
+}

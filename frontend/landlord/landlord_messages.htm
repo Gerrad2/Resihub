@@ -5,170 +5,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Messages | ResiHub Student Accommodation Nigeria</title>
-
-    <meta name="description"
-        content="Send and receive secure messages between students and landlords on ResiHub. Manage accommodation enquiries, bookings and property conversations in one place.">
-
-    <meta name="keywords"
-        content="ResiHub messages, student landlord chat, accommodation messaging, property enquiries, hostel communication Nigeria">
-
-    <meta name="author" content="ResiHub">
-
-    <meta name="robots" content="index, follow">
-
-    <link rel="canonical" href="https://www.resihub.com/messages.htm">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="ResiHub">
-    <meta property="og:title" content="Messages | ResiHub">
-    <meta property="og:description"
-        content="Securely communicate with landlords and students through the ResiHub messaging platform.">
-    <meta property="og:url" content="https://www.resihub.com/messages.htm">
-    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Messages | ResiHub">
-    <meta name="twitter:description"
-        content="Chat securely about student accommodation, inspections and bookings on ResiHub.">
-    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
+    <title>Messages | ResiHub Landlord</title>
+    <meta name="robots" content="noindex, nofollow">
 
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
-<body data-resihub-surface="landlord">
+<body class="page-messages page-landlord-messages" data-resihub-surface="student">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-    <!-- HEADER / NAVIGATION-->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
     <main>
-        <section id="messages-hero" class="auth-hero reveal fade-up">
-
+        <section id="messages-hero" class="msg-hero">
             <div class="container">
-
-                <div class="page-hero-content hero-content">
-
-                    <span class="page-badge floating-badge">
-                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
-                        Messages
-                    </span>
-
-                    <h1 class="hero-title">
-                        Your Conversations
-                    </h1>
-
-                    <p class="hero-description">
-                        Communicate securely with landlords and students about accommodation enquiries, inspections and
-                        bookings.
-                    </p>
-
-                </div>
-
+                <span class="msg-badge"><i class="fa-solid fa-comments" aria-hidden="true"></i>Messages</span>
+                <h1>Messages</h1>
+                <p class="msg-sub">Chat with students about your properties.</p>
             </div>
-
         </section>
-        <section class="messages-page">
 
-            <div class="container">
+        <section class="msg-section">
+            <div class="container msg-layout">
 
-                <div class="messages-layout">
+                <!-- CONVERSATIONS -->
+                <aside class="msg-sidebar">
+                    <div class="msg-panel msg-panel-grow">
+                        <h3 class="msg-panel-title">Conversations</h3>
 
-                    <aside class="conversation-sidebar">
-
-                        <div class="chat-search">
-
-                            <input type="search" id="conversationSearch" placeholder="Search conversations"
-                                aria-label="Search conversations">
-
+                        <div class="msg-search">
+                            <label class="visually-hidden" for="conversationSearch">Search conversations</label>
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <input type="search" id="conversationSearch" placeholder="Search students or properties..."
+                                autocomplete="off">
                         </div>
 
-                        <div id="conversationList" class="conversation-list">
+                        <div id="conversationList" class="msg-conversations" aria-label="Conversations"></div>
+                    </div>
+                </aside>
 
+                <!-- CHAT -->
+                <section class="msg-chat">
+                    <header class="msg-chat-head">
+                        <img id="chatAvatar" src="../assets/images/default-avatar.png" alt="">
+                        <div>
+                            <h2 id="chatName">Select a conversation</h2>
+                            <p id="chatStatus"></p>
                         </div>
+                        <div id="chatActions" class="msg-actions"></div>
+                    </header>
 
-                    </aside>
-
-                    <section class="chat-area">
-
-                        <div class="chat-header">
-
-                            <img id="chatAvatar" src="../assets/images/default-avatar.png"
-                                alt="Conversation profile picture">
-
-                            <div>
-
-                                <h2 id="chatName"></h2>
-
-                                <p id="chatStatus"></p>
-
-                            </div>
-
-                        </div>
-
-                        <div id="chatMessages" class="chat-messages">
-
-                        </div>
-
-                        <form id="messageForm" class="message-form">
-
-                            <input type="text" id="messageInput" placeholder="Type your message..."
-                                aria-label="Message">
-
-                            <button type="submit" id="sendMessage" aria-label="Send Message">
-
-                                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-
-                            </button>
-
-                        </form>
-
-                        <div id="emptyChat" class="empty-state">
-
+                    <div class="msg-body">
+                        <div id="emptyChat" class="msg-empty">
                             <i class="fa-solid fa-comments" aria-hidden="true"></i>
-
-                            <h3>Select a Conversation</h3>
-
-                            <p>
-                                Choose a conversation to start chatting.
-                            </p>
-
+                            <h3>Select a conversation</h3>
+                            <p>Choose a student on the left to start chatting.</p>
                         </div>
 
-                    </section>
+                        <div id="chatMessages" class="msg-thread hidden" aria-live="polite"></div>
+                    </div>
 
-                </div>
+                    <form id="messageForm" class="msg-form" autocomplete="off">
+                        <label class="visually-hidden" for="messageInput">Type your message</label>
+                        <input type="text" id="messageInput" placeholder="Type your message..." maxlength="1000"
+                            disabled>
+                        <button type="submit" id="sendMessage" aria-label="Send message" disabled>
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </section>
 
             </div>
-
         </section>
     </main>
-    <!--FOOTER-->
 
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/landlord_messages.js";
+        init();
+    </script>
 </body>
 
 </html>
-
-
-

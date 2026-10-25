@@ -5,276 +5,162 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Create Listing | List Student Accommodation in Nigeria | ResiHub</title>
-
-  <meta name="description"
-    content="Create and publish verified student accommodation listings on ResiHub. Upload hostel, apartment or self-contained properties near universities across Nigeria.">
-
-  <meta name="keywords"
-    content="ResiHub, create listing, landlord, student accommodation Nigeria, hostel listing, apartment listing, property upload">
-
-  <meta name="author" content="ResiHub">
-
-  <meta name="robots" content="index, follow">
-
-  <link rel="canonical" href="https://www.resihub.com/create_listing.htm">
+  <title>Create Listing | ResiHub Landlord</title>
+  <meta name="robots" content="noindex, nofollow">
 
   <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
   <link rel="stylesheet" href="../styles/style.css">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Create Listing | ResiHub">
-  <meta property="og:description"
-    content="Publish your student accommodation listing and connect with thousands of students across Nigeria.">
-  <meta property="og:image" content="../assets/images/og-image.jpg">
-  <meta property="og:url" content="https://www.resihub.com/create_listing.htm">
-  <meta property="og:site_name" content="ResiHub">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Create Listing | ResiHub">
-  <meta name="twitter:description" content="Create and publish your student accommodation listing on ResiHub.">
-  <meta name="twitter:image" content="../assets/images/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
 
-<body data-resihub-surface="landlord">
+<body class="page-edit-listing page-create-listing" data-resihub-surface="student">
   <div id="scrollProgress"></div>
 
-  <div class="floating-shapes" aria-hidden="true">
-
-    <span class="shape shape-1"></span>
-
-    <span class="shape shape-2"></span>
-
-    <span class="shape shape-3"></span>
-
-    <span class="shape shape-4"></span>
-
-  </div>
-  <!-- HEADER / NAVIGATION-->
-
+  <!-- HEADER -->
   <div id="header"></div>
 
   <main>
-    <section id="create-listing-hero" class="auth-hero reveal fade-up">
-
+    <section id="create-listing-hero" class="el-hero">
       <div class="container">
-
-        <div class="page-hero-content hero-content">
-
-
-          <span class="page-badge floating-badge">
-            <i class="fa-solid fa-house-circle-plus" aria-hidden="true"></i>
-            New Listing
-          </span>
-
-          <h1 class="hero-title">
-            Create Property Listing
-          </h1>
-
-          <p class="hero-description">
-            Fill in your property details and publish it for thousands of students to discover.
-          </p>
-        </div>
-
+        <span class="el-badge"><i class="fa-solid fa-circle-plus" aria-hidden="true"></i>New listing</span>
+        <h1>Add a property</h1>
+        <p>Describe your property, add photos, then save as a draft or publish it for students to see.</p>
       </div>
-
     </section>
-    <section class="listing-form-section">
+
+    <section class="el-section">
       <div class="container">
+        <form id="createListingForm" class="el-form" novalidate>
 
-        <form id="createListingForm" autocomplete="off">
-
-          <div class="form-card">
-
-            <h2>Basic Information</h2>
-
-            <div class="form-grid">
-
-              <div class="form-group">
-                <label for="propertyTitle">Property Title</label>
-                <input type="text" id="propertyTitle" name="title" required>
+          <!-- BASIC INFORMATION -->
+          <div class="el-card">
+            <h2>Basic information</h2>
+            <div class="el-grid">
+              <div class="el-field el-full">
+                <label for="propertyTitle">Property title</label>
+                <input id="propertyTitle" maxlength="120" required placeholder="e.g. Self contain near UNILAG gate">
               </div>
 
-              <div class="form-group">
-                <label for="propertyType">Property Type</label>
-                <select id="propertyType" name="propertyType" required>
-                  <option value="">Select</option>
-                  <option>Hostel</option>
-                  <option>Self Contain</option>
-                  <option>Single Room</option>
-                  <option>Shared Room</option>
-                  <option>Apartment</option>
+              <div class="el-field">
+                <label for="propertyType">Property type</label>
+                <select id="propertyType" required>
+                  <option value="">Choose a type</option>
+                  <option value="self-contain">Self Contain</option>
+                  <option value="single-room">Single Room</option>
+                  <option value="shared-room">Shared Room</option>
+                  <option value="1-bedroom">1 Bedroom</option>
+                  <option value="2-bedroom">2 Bedroom</option>
+                  <option value="3-bedroom">3 Bedroom</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="hostel">Hostel</option>
                 </select>
               </div>
 
-              <div class="form-group">
-                <label for="propertyPrice">Annual Rent (â‚¦)</label>
-                <input type="number" id="propertyPrice" name="price">
+              <div class="el-field">
+                <label for="propertyUniversity">University</label>
+                <select id="propertyUniversity">
+                  <option value="">Choose a university</option>
+                </select>
               </div>
 
-              <div class="form-group">
-                <label for="availableRooms">Available Rooms</label>
-                <input type="number" id="availableRooms" name="rooms">
+              <div class="el-field">
+                <label for="propertyArea">Area</label>
+                <input id="propertyArea" required placeholder="e.g. Yaba">
               </div>
 
+              <div class="el-field">
+                <label for="propertyAddress">Full address</label>
+                <input id="propertyAddress" placeholder="Street and landmark">
+              </div>
+
+              <div class="el-field">
+                <label for="propertyPrice">Price per month (₦)</label>
+                <input id="propertyPrice" type="number" min="0" step="1" required>
+              </div>
+
+              <div class="el-field">
+                <label for="availableRooms">Rooms available</label>
+                <input id="availableRooms" type="number" min="0" step="1">
+              </div>
             </div>
-
           </div>
 
-      </div>
-      <div class="form-card">
-
-        <h2>Location</h2>
-
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label for="propertyUniversity">Nearest University</label>
-            <input id="propertyUniversity" name="university" type="text" placeholder="Nearest University" required>
+          <!-- DESCRIPTION -->
+          <div class="el-card">
+            <h2>Description</h2>
+            <div class="el-field">
+              <label for="propertyDescription">Describe the property</label>
+              <textarea id="propertyDescription" rows="6" maxlength="2000"
+                placeholder="What makes this place a good home for students?"></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="propertyArea">Area</label>
-            <input id="propertyArea" name="area" type="text" placeholder="Area" required>
+          <!-- AMENITIES -->
+          <div class="el-card">
+            <h2>Amenities</h2>
+            <div class="el-amenities">
+              <label class="el-check"><input type="checkbox" id="wifiAmenity"><span>Wi-Fi</span></label>
+              <label class="el-check"><input type="checkbox" id="waterAmenity"><span>Running water</span></label>
+              <label class="el-check"><input type="checkbox" id="electricityAmenity"><span>Stable
+                  electricity</span></label>
+              <label class="el-check"><input type="checkbox" id="securityAmenity"><span>Security</span></label>
+              <label class="el-check"><input type="checkbox" id="parkingAmenity"><span>Parking</span></label>
+              <label class="el-check"><input type="checkbox" id="furnishedAmenity"><span>Furnished</span></label>
+              <label class="el-check"><input type="checkbox" id="kitchenAmenity"><span>Kitchen</span></label>
+              <label class="el-check"><input type="checkbox" id="bathroomAmenity"><span>Private bathroom</span></label>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="propertyAddress">Address</label>
-            <input id="propertyAddress" name="address" type="text" placeholder="Full Address">
+          <!-- PHOTOS -->
+          <div class="el-card">
+            <h2>Photos</h2>
+            <p class="el-hint">Add at least three photos before publishing. The first photo is the cover. Up to 10
+              photos, JPG, PNG or WebP, 10 MB each.</p>
+
+            <label id="imageUploadZone" class="el-drop" for="propertyImages">
+              <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+              <span>Choose photos</span>
+            </label>
+            <input type="file" id="propertyImages" accept="image/jpeg,image/png,image/webp" multiple hidden>
+
+            <div id="imagePreview" class="el-photos"></div>
           </div>
 
-        </div>
+          <p id="createListingMessage" class="el-message" role="status"></p>
 
-      </div>
-      <div class="form-card">
+          <!-- ACTIONS -->
+          <div class="el-actions">
+            <span class="el-spacer"></span>
 
-        <h2>Description</h2>
+            <button type="button" id="saveDraftBtn" class="el-secondary">
+              <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save as draft
+            </button>
 
-        <label for="propertyDescription">
-          Property Description
-        </label>
-
-        <textarea id="propertyDescription" name="description" rows="6" placeholder="Describe your property..."
-          required></textarea>
-
-      </div>
-      <div class="form-card">
-
-        <h2>Amenities</h2>
-
-        <div class="amenities-grid">
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="wifiAmenity" name="amenities" value="wifi">
-            Wi-Fi
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="waterAmenity" name="amenities" value="water">
-            Running Water
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="electricityAmenity" name="amenities" value="electricity">
-            Stable Electricity
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="securityAmenity" name="amenities" value="security">
-            Security
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="parkingAmenity" name="amenities" value="parking">
-            Parking
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="kitchenAmenity" name="amenities" value="kitchen">
-            Kitchen
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="bathroomAmenity" name="amenities" value="bathroom">
-            Private Bathroom
-          </label>
-
-          <label class="checkbox-item">
-            <input type="checkbox" id="furnishedAmenity" name="amenities" value="furnished">
-            Furnished
-          </label>
-
-        </div>
-
-      </div>
-
-      </div>
-      <div class="form-card">
-
-        <h2>Property Images</h2>
-
-        <div id="imageUploadZone" class="upload-zone">
-          <label for="propertyImages">
-            Upload Images <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
-          </label>
-
-          <p>
-
-            Drag & Drop images here
-
-          </p>
-
-          <label for="propertyImages" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-            Choose Images
-
-          </label>
-
-          <input type="file" aria-label="Upload Property Images" id="propertyImages" name="images" accept="image/*"
-            multiple hidden>
-
-        </div>
-
-        <div id="imagePreview" class="image-preview-grid">
-
-        </div>
-
-      </div>
-      <div class="form-card">
-
-        <div class="publish-actions">
-
-          <button type="submit" id="publishListingBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-
-            Publish Listing
-
-          </button>
-
-          <button type="button" id="saveDraftBtn" class="btn-primary magnetic-btn ripple-btn shine-btn">
-
-            Save Draft
-
-          </button>
-
-        </div>
-
+            <button type="button" id="publishListingBtn" class="el-primary">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Publish
+            </button>
+          </div>
         </form>
-
       </div>
     </section>
   </main>
-  <!--FOOTER-->
 
+  <!-- FOOTER -->
   <div id="footer"></div>
 
-    <script type="module" src="../js/core/app.js"></script>
+  <script type="module" src="../js/core/app.js"></script>
+  <script type="module">
+    import { init } from "../js/create_listing.js";
+    init();
+  </script>
 </body>
 
 </html>
-
-
-

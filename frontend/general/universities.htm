@@ -5,18 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ResiHub | Universities</title>
-
+    <title>Universities | ResiHub</title>
     <meta name="description"
-        content="Browse Nigerian universities and find verified student accommodation near your campus with ResiHub.">
+        content="Explore Nigerian universities and find student accommodation near each campus on ResiHub.">
+    <meta name="robots" content="index, follow">
 
-    <meta name="keywords" content="ResiHub, Nigerian Universities, Student Accommodation, Hostels, Student Housing">
-
-    <meta name="author" content="ResiHub">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <link rel="stylesheet" href="../styles/style.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -24,181 +22,117 @@
         rel="stylesheet">
 </head>
 
-<body data-resihub-surface="public" id="top">
-
+<body class="page-universities" data-resihub-surface="public" id="top">
     <div id="scrollProgress"></div>
 
-    <div class="floating-shapes" aria-hidden="true">
-        <span class="shape shape-1"></span>
-        <span class="shape shape-2"></span>
-        <span class="shape shape-3"></span>
-        <span class="shape shape-4"></span>
-    </div>
-
-    <!-- ================= HEADER ================= -->
-
+    <!-- HEADER -->
     <div id="header"></div>
 
-    <!-- ================= MAIN ================= -->
-
     <main>
-
-        <!-- Hero -->
-
-        <section class="universities-hero">
-
+        <!-- HERO + SEARCH -->
+        <section class="uni-hero">
             <div class="container">
+                <span class="uni-badge"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>Explore
+                    Universities</span>
+                <h1>Explore Universities</h1>
+                <p class="uni-sub">Find and view all major universities with available nearby rooms and accommodation
+                    options.</p>
 
-                <span class="page-badge floating-badge">
-
-                    <i class="fa-solid fa-building-columns"></i>
-
-                    Nigerian Universities
-
-                </span>
-
-                <h1>Find Accommodation Near Your University</h1>
-
-                <p>
-
-                    Browse verified student accommodation around universities across Nigeria.
-
-                </p>
-
-            </div>
-
-        </section>
-
-        <!-- Statistics -->
-
-        <section class="universities-stats">
-
-            <div class="container">
-
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-
-                        <h2 id="totalUniversities">0</h2>
-
-                        <p>Universities</p>
-
+                <form id="universitySearchForm" class="uni-search" autocomplete="off">
+                    <div class="search-field">
+                        <label for="searchUniversity" class="sr-only">Search university</label>
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="text" id="searchUniversity" name="university" placeholder="Search university...">
                     </div>
-
-                    <div class="stat-card">
-
-                        <h2 id="totalListings">0</h2>
-
-                        <p>Available Listings</p>
-
+                    <div class="search-field">
+                        <label for="stateFilter" class="sr-only">State</label>
+                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                        <select id="stateFilter" name="state">
+                            <option value="">All states</option>
+                        </select>
                     </div>
-
-                    <div class="stat-card">
-
-                        <h2 id="totalStates">0</h2>
-
-                        <p>States Covered</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- Search -->
-
-        <section class="universities-search">
-
-            <div class="container">
-
-                <form id="universitySearchForm">
-
-                    <div class="search-box">
-
-                        <input type="text" id="searchUniversity" placeholder="Search by university name..."
-                            autocomplete="off">
-
-                        <button type="submit" class="btn-primary">
-
-                            <i class="fa-solid fa-magnifying-glass"></i>
-
-                            Search
-
-                        </button>
-
-                    </div>
-
+                    <button type="submit" class="uni-search-btn">Search</button>
+                    <button type="button" id="resetUniversitySearch" class="uni-reset-btn">Reset</button>
                 </form>
-
             </div>
-
         </section>
 
-        <!-- Filter -->
-
-        <section class="universities-filter">
-
-            <div class="container">
-
-                <select id="stateFilter">
-
-                    <option value="">All States</option>
-
-                </select>
-
+        <!-- STATS -->
+        <section class="uni-stats">
+            <div class="container stats-row">
+                <div class="stat-card">
+                    <span class="stat-icon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></span>
+                    <div>
+                        <h2 id="totalUniversities">...</h2>
+                        <p>Universities</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon"><i class="fa-solid fa-map" aria-hidden="true"></i></span>
+                    <div>
+                        <h2 id="totalStates">...</h2>
+                        <p>States covered</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon"><i class="fa-solid fa-house" aria-hidden="true"></i></span>
+                    <div>
+                        <h2 id="totalListings">...</h2>
+                        <p>Available rooms</p>
+                    </div>
+                </div>
             </div>
-
         </section>
 
-        <!-- Universities -->
-
-        <section class="universities-list">
-
+        <!-- UNIVERSITY LIST -->
+        <section class="uni-list">
             <div class="container">
-
-                <div id="universitiesGrid" class="universities-grid">
-
+                <div class="section-head">
+                    <div>
+                        <h2>Popular Universities</h2>
+                        <p>Browse accommodation around Nigerian universities.</p>
+                    </div>
                 </div>
 
+                <div id="universitiesGrid" class="uni-grid" aria-live="polite">
+                    <article class="uni-card is-skeleton" aria-hidden="true">
+                        <span class="sk uni-sk-logo"></span>
+                        <div class="uni-body"><span class="sk sk-line w60"></span><span class="sk sk-line w40"></span>
+                        </div>
+                    </article>
+                    <article class="uni-card is-skeleton" aria-hidden="true">
+                        <span class="sk uni-sk-logo"></span>
+                        <div class="uni-body"><span class="sk sk-line w60"></span><span class="sk sk-line w40"></span>
+                        </div>
+                    </article>
+                    <article class="uni-card is-skeleton" aria-hidden="true">
+                        <span class="sk uni-sk-logo"></span>
+                        <div class="uni-body"><span class="sk sk-line w60"></span><span class="sk sk-line w40"></span>
+                        </div>
+                    </article>
+                    <article class="uni-card is-skeleton" aria-hidden="true">
+                        <span class="sk uni-sk-logo"></span>
+                        <div class="uni-body"><span class="sk sk-line w60"></span><span class="sk sk-line w40"></span>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="emptyUniversities" class="empty-state hidden">
+                    <i class="fa-solid fa-building-circle-xmark" aria-hidden="true"></i>
+                    <p>No universities match your search.</p>
+                </div>
             </div>
-
         </section>
-
-        <!-- Empty State -->
-
-        <section id="emptyUniversities" class="empty-state hidden">
-
-            <div class="container">
-
-                <i class="fa-solid fa-building-circle-xmark"></i>
-
-                <h2>No Universities Found</h2>
-
-                <p>
-
-                    Try another search term or browse all universities.
-
-                </p>
-
-                <button id="resetUniversitySearch" class="btn-primary">
-
-                    View All Universities
-
-                </button>
-
-            </div>
-
-        </section>
-
     </main>
 
-    <!-- ================= FOOTER ================= -->
-
+    <!-- FOOTER -->
     <div id="footer"></div>
 
     <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/universities.js";
+        init();
+    </script>
 </body>
 
 </html>

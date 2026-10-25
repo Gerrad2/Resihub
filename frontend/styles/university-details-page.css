@@ -1,0 +1,509 @@
+/*==========================================
+    UNIVERSITY DETAILS (general/university_details.htm)
+    Scoped to body.page-university. Load order: style.css -> university-details-page.css
+==========================================*/
+
+/* ---------- Page base ---------- */
+body.page-university {
+    --ud-card: linear-gradient(180deg, rgba(28, 78, 170, .46), rgba(12, 42, 105, .40));
+    --ud-line: rgba(92, 150, 255, .24);
+    --ud-line-soft: rgba(92, 150, 255, .14);
+    --ud-accent: #3FD0FF;
+    --ud-text-2: rgba(225, 236, 255, .82);
+    --ud-text-3: rgba(190, 210, 245, .62);
+    --ud-glow: 0 0 22px rgba(31, 107, 255, .35);
+    --ud-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+
+    background:
+        radial-gradient(1100px 620px at 78% -8%, rgba(31, 107, 255, .38), transparent 62%),
+        linear-gradient(180deg, #0B2A6F 0%, #061A4A 42%, #030E2B 100%);
+    background-attachment: fixed;
+    color: #fff;
+    font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.55;
+}
+
+body.page-university h1,
+body.page-university h2,
+body.page-university h3 {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    color: #fff;
+    letter-spacing: -.01em;
+}
+
+body.page-university p {
+    color: var(--ud-text-2);
+}
+
+body.page-university a {
+    text-decoration: none;
+}
+
+/* ---------- Containers: plain width only, no shared glass frame ----------
+   style.css gives .container a blurred rounded panel. This page resets it
+   everywhere so no block draws a frame over the hero or the content. */
+body.page-university .container {
+    width: min(1280px, 100% - 2.5rem);
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: relative;
+    inset: auto;
+    transform: none;
+    min-height: 0;
+    height: auto;
+    overflow: visible;
+}
+
+body.page-university .container::before,
+body.page-university .container::after {
+    content: none;
+    display: none;
+}
+
+/* ---------- Hero: university-campus.jpg, full width ---------- */
+body.page-university .uni-hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 62vh;
+    padding: 7rem 0 3.5rem;
+    background:
+        linear-gradient(90deg,
+            rgba(4, 16, 48, .94) 0%,
+            rgba(6, 24, 70, .80) 42%,
+            rgba(6, 24, 70, .35) 100%),
+        url("../assets/images/university-campus.jpg") center / cover no-repeat,
+        linear-gradient(180deg, #0B2A6F, #061A4A);
+    border-bottom: 1px solid var(--ud-line-soft);
+}
+
+body.page-university .uni-hero-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    width: min(1280px, 100% - 2.5rem);
+    margin-inline: auto;
+}
+
+body.page-university .uni-logo-large {
+    width: 104px;
+    height: 104px;
+    flex-shrink: 0;
+    border-radius: 18px;
+    object-fit: cover;
+    border: 2px solid rgba(63, 208, 255, .55);
+    box-shadow: var(--ud-glow);
+    background: rgba(4, 18, 52, .7);
+}
+
+body.page-university .uni-id {
+    min-width: 0;
+    text-align: left;
+}
+
+body.page-university .uni-chip {
+    display: inline-block;
+    padding: .3rem .8rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .38);
+    color: var(--ud-accent);
+    font-size: .75rem;
+    font-weight: 600;
+    margin-bottom: .6rem;
+}
+
+body.page-university .uni-id h1 {
+    font-size: clamp(2rem, 4.4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 .5rem;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, .45);
+}
+
+body.page-university .uni-loc {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 0 0 .25rem;
+    font-size: .98rem;
+    color: var(--ud-text-2);
+}
+
+body.page-university .uni-loc i {
+    color: var(--ud-accent);
+}
+
+body.page-university .uni-address {
+    margin: 0;
+    font-size: .88rem;
+    color: var(--ud-text-3);
+}
+
+/* ---------- Tabs ---------- */
+body.page-university .uni-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(5, 20, 58, .9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ud-line-soft);
+}
+
+body.page-university .uni-tabs .container {
+    display: flex;
+    gap: .25rem;
+    padding: .5rem 0;
+    overflow-x: auto;
+}
+
+body.page-university .uni-tabs a {
+    padding: .55rem 1rem;
+    border-radius: 9px;
+    color: var(--ud-text-2);
+    font-size: .88rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+body.page-university .uni-tabs a.active,
+body.page-university .uni-tabs a:hover {
+    background: linear-gradient(135deg, #2F8CFF, #1F4FD8);
+    color: #fff;
+    box-shadow: var(--ud-glow);
+}
+
+/* ---------- Body layout ---------- */
+body.page-university .uni-body {
+    padding: 2.5rem 0 4rem;
+}
+
+body.page-university .uni-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 330px;
+    gap: 1.75rem;
+    align-items: start;
+}
+
+body.page-university .uni-main {
+    display: grid;
+    gap: 1.25rem;
+    min-width: 0;
+}
+
+body.page-university .panel,
+body.page-university .side-card {
+    padding: 1.4rem 1.5rem;
+    border-radius: 16px;
+    background: var(--ud-card);
+    border: 1px solid var(--ud-line);
+    box-shadow: var(--ud-shadow);
+    scroll-margin-top: 70px;
+}
+
+body.page-university .panel h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 .75rem;
+}
+
+body.page-university .panel h3,
+body.page-university .side-card h3 {
+    font-size: .98rem;
+    font-weight: 600;
+    margin: 1.4rem 0 .7rem;
+}
+
+body.page-university .side-card h3 {
+    margin-top: 0;
+}
+
+body.page-university .about-text {
+    margin: 0;
+    font-size: .95rem;
+}
+
+body.page-university .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .75rem;
+}
+
+body.page-university .panel-head h2 {
+    margin: 0;
+}
+
+body.page-university .count-pill {
+    padding: .3rem .75rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .12);
+    border: 1px solid rgba(63, 208, 255, .35);
+    color: var(--ud-accent);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+/* ---------- Facilities, areas, tips, FAQ ---------- */
+body.page-university .facilities-grid,
+body.page-university .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+}
+
+body.page-university .facilities-grid>*,
+body.page-university .areas-grid>* {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .7rem .85rem;
+    border-radius: 11px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--ud-line-soft);
+    font-size: .86rem;
+    color: var(--ud-text-2);
+}
+
+body.page-university .facilities-grid>* i,
+body.page-university .areas-grid>* i {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: rgba(47, 140, 255, .18);
+    color: var(--ud-accent);
+}
+
+body.page-university .tips,
+body.page-university .faq-list {
+    display: grid;
+    gap: .55rem;
+}
+
+body.page-university .faq-list>* {
+    padding: .8rem 1rem;
+    border-radius: 11px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--ud-line-soft);
+}
+
+/* ---------- Nearby rooms (cards built by listings.js) ---------- */
+body.page-university .listing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body.page-university .property-card {
+    display: grid;
+    gap: .7rem;
+    padding: .7rem;
+    border-radius: 14px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--ud-line);
+    color: #fff;
+}
+
+body.page-university .property-image {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1A4FA8, #0A2A6B);
+}
+
+body.page-university .property-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+body.page-university .property-content {
+    display: grid;
+    gap: .3rem;
+}
+
+body.page-university .property-price {
+    font-weight: 700;
+    color: #fff;
+}
+
+body.page-university .property-title {
+    margin: 0;
+    font-size: .92rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+body.page-university .property-location {
+    font-size: .78rem;
+    color: var(--ud-text-3);
+}
+
+body.page-university .property-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+
+body.page-university .property-feature {
+    padding: .2rem .55rem;
+    border-radius: 999px;
+    background: rgba(63, 208, 255, .1);
+    border: 1px solid rgba(63, 208, 255, .25);
+    color: var(--ud-text-2);
+    font-size: .68rem;
+}
+
+body.page-university .status-badge {
+    display: inline-flex;
+    padding: .2rem .6rem;
+    border-radius: 999px;
+    font-size: .7rem;
+    font-weight: 600;
+    background: rgba(34, 197, 94, .16);
+    color: #22C55E;
+}
+
+body.page-university .property-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .76rem;
+    color: var(--ud-text-3);
+}
+
+/* ---------- Side column ---------- */
+body.page-university .uni-side {
+    display: grid;
+    gap: 1.25rem;
+    position: sticky;
+    top: 70px;
+}
+
+body.page-university .glance {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: .55rem;
+}
+
+body.page-university .glance li {
+    display: grid;
+    grid-template-columns: 30px 1fr auto;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem .7rem;
+    border-radius: 10px;
+    background: rgba(4, 18, 52, .45);
+    border: 1px solid var(--ud-line-soft);
+    font-size: .85rem;
+    color: var(--ud-text-2);
+}
+
+body.page-university .glance li i {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(47, 140, 255, .18);
+    color: var(--ud-accent);
+    font-size: .8rem;
+}
+
+body.page-university .glance li strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+body.page-university .map-box {
+    min-height: 220px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(4, 18, 52, .55);
+    border: 1px dashed var(--ud-line);
+    color: var(--ud-text-3);
+    font-size: .85rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+    body.page-university .uni-layout {
+        grid-template-columns: 1fr;
+    }
+
+    body.page-university .uni-side {
+        position: static;
+    }
+}
+
+@media (max-width: 680px) {
+    body.page-university .uni-hero {
+        padding: 6rem 0 2.5rem;
+    }
+
+    body.page-university .uni-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body.page-university .facilities-grid,
+    body.page-university .areas-grid,
+    body.page-university .listing-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- Hero photo from database (falls back to campus image) ---------- */
+body.page-university .uni-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg,
+            rgba(4, 16, 48, .94) 0%,
+            rgba(6, 24, 70, .80) 42%,
+            rgba(6, 24, 70, .35) 100%),
+        var(--uni-hero-photo, url("../assets/images/university-campus.jpg")) center / cover no-repeat,
+        linear-gradient(180deg, #0B2A6F, #061A4A);
+}
+
+/* ---------- Large faded logo behind the hero content ---------- */
+body.page-university .uni-logo-bg {
+    position: absolute;
+    right: -6%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(44vw, 520px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    opacity: .1;
+    filter: saturate(.8);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* keep the text above the faded logo */
+body.page-university .uni-hero-inner {
+    position: relative;
+    z-index: 1;
+}
