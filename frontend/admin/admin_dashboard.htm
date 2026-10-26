@@ -2,681 +2,144 @@
 <html lang="en">
 
 <head>
-
-    <!-- ==========================================
-         Basic Meta Information
-    =========================================== -->
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Admin Dashboard | ResiHub</title>
-
     <meta name="description"
-        content="ResiHub administrator dashboard for managing students, landlords, listings, bookings, reports, analytics and platform activities.">
-
-    <meta name="keywords" content="ResiHub, Admin Dashboard, Administrator, Student Accommodation, Platform Management">
-
-    <meta name="author" content="ResiHub">
-
+        content="ResiHub administrator dashboard: users, listings, bookings and platform activity at a glance.">
     <meta name="robots" content="noindex, nofollow">
-
-    <link rel="canonical" href="https://www.resihub.com/admin_dashboard.htm">
-
-    <!-- ==========================================
-         Open Graph
-    =========================================== -->
-
-    <meta property="og:type" content="website">
-
-    <meta property="og:title" content="Admin Dashboard | ResiHub">
-
-    <meta property="og:description"
-        content="Manage every aspect of the ResiHub platform from one central administration dashboard.">
-
-    <meta property="og:url" content="https://www.resihub.com/admin_dashboard.htm">
-
-    <meta property="og:image" content="https://www.resihub.com/assets/images/og-image.jpg">
-
-    <!-- ==========================================
-         Twitter
-    =========================================== -->
-
-    <meta name="twitter:card" content="summary_large_image">
-
-    <meta name="twitter:title" content="Admin Dashboard | ResiHub">
-
-    <meta name="twitter:description" content="Central administration dashboard for the ResiHub platform.">
-
-    <meta name="twitter:image" content="https://www.resihub.com/assets/images/og-image.jpg">
-
-    <!-- ==========================================
-         Favicon
-    =========================================== -->
-
     <link rel="icon" type="image/png" href="../assets/images/favicon.png">
-
-    <!-- ==========================================
-         Master Stylesheet
-    =========================================== -->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="../styles/style.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body data-resihub-surface="admin">
 
-    <!-- ==========================================
-         Scroll Progress
-    =========================================== -->
-
     <div id="scrollProgress"></div>
-
-    <!-- ==========================================
-         Floating Background Shapes
-    =========================================== -->
-
-    <div class="floating-shapes" aria-hidden="true">
-
-        <span class="shape shape-1"></span>
-
-        <span class="shape shape-2"></span>
-
-        <span class="shape shape-3"></span>
-
-        <span class="shape shape-4"></span>
-
-    </div>
-
-    <!-- ==========================================
-         Header
-    =========================================== -->
-
     <div id="header"></div>
 
-    <!-- ==========================================
-         Main Content
-    =========================================== -->
+    <main id="mainContent">
+        <section id="adminDashboardContent" class="page-section">
+            <div class="page-container">
 
-    <main id="mainContent" class="page-transition">
-
-        <section id="adminDashboardContent" class="page-section ">
-
-            <div class="container page-container">
-
-                <!-- ==========================================
-                     Page Header
-                =========================================== -->
-
-                <section class="dashboard-hero glass-card">
-
-                    <div class="dashboard-hero-content">
-
-                        <div>
-
-                            <span class="page-badge floating-badge">
-
-                                <i class="fa-solid fa-user-shield"></i>
-
-                                ResiHub Control Center
-
-                            </span>
-
-                            <h1>
-                                Welcome Back,
-                                <span id="adminName">Administrator</span>
-                            </h1>
-
-                            <p>
-
-                                Manage users, listings, bookings, reports,
-                                analytics and platform security from one
-                                centralized command center.
-
-                            </p>
-
-                        </div>
-
-                        <div class="hero-status">
-
-                            <div class="status-chip">
-
-                                <i class="fa-solid fa-circle"></i>
-
-                                System Online
-
-                            </div>
-
-                            <div id="currentDateTime" class="status-chip">
-
-                                Loading...
-
-                            </div>
-
-                        </div>
-
+                <!-- Heading -->
+                <header class="dashboard-heading">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Welcome back, <span id="adminName">Admin</span>. Here's what's happening on ResiHub.</p>
                     </div>
+                </header>
 
-                </section>
-                <!-- ==========================================
-                     Dashboard Statistics
-                =========================================== -->
+                <!-- Key figures -->
+                <section class="statistics-section" aria-label="Key figures">
+                    <div class="statistics-grid">
 
-                <section class="dashboard-section statistics-section glass-reveal">
-
-                    <div class="dashboard-grid statistics-grid">
-
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-user-graduate"></i>
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-blue"><i class="fa-solid fa-users" aria-hidden="true"></i>
                             </div>
-
                             <div class="card-content">
-
-                                <h2 id="studentCount" class="count-up">
-
-                                    0
-
-                                </h2>
-
-                                <p>Total Students</p>
-
-                                <small>
-
-                                    Active registrations
-
-                                </small>
-
+                                <p class="card-label">Total Users</p>
+                                <h2 id="totalUsers">&mdash;</h2>
+                                <small id="totalUsersChange" class="change">Loading...</small>
                             </div>
-
                         </article>
 
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-building-user"></i>
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-cyan"><i class="fa-solid fa-house" aria-hidden="true"></i>
                             </div>
-
                             <div class="card-content">
-                                <h2 id="landlordCount" class="count-up">0</h2>
-                                <p>Total Landlords</p>
-                                <small>Verified landlords</small>
+                                <p class="card-label">Total Listings</p>
+                                <h2 id="listingCount">&mdash;</h2>
+                                <small id="listingCountChange" class="change">Loading...</small>
                             </div>
-
                         </article>
 
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-house"></i>
-                            </div>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-indigo"><i class="fa-solid fa-calendar-check"
+                                    aria-hidden="true"></i></div>
                             <div class="card-content">
-                                <h2 id="listingCount" class="count-up">0</h2>
-                                <p>Active Listings</p>
-                                <small>Published listings</small>
-
+                                <p class="card-label">Total Bookings</p>
+                                <h2 id="bookingCount">&mdash;</h2>
+                                <small id="bookingCountChange" class="change">Loading...</small>
                             </div>
-
                         </article>
 
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-calendar-check"></i>
-                            </div>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-teal"><i class="fa-solid fa-naira-sign"
+                                    aria-hidden="true"></i></div>
                             <div class="card-content">
-                                <h2 id="bookingCount" class="count-up">0</h2>
-                                <p>Total Bookings</p>
-                                <small>Completed bookings</small>
+                                <p class="card-label">Total Revenue</p>
+                                <h2 id="revenueCount">&mdash;</h2>
+                                <small id="revenueChange" class="change flat">Payments not connected yet</small>
                             </div>
-
-                        </article>
-
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-money-bill-wave"></i>
-                            </div>
-
-                            <div class="card-content">
-                                <h2 id="revenueCount" class="count-up">â‚¦0</h2>
-                                <p>Total Revenue</p>
-                                <small>Total platform revenue</small>
-                            </div>
-
-                        </article>
-
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                            </div>
-
-                            <div class="card-content">
-                                <h2 id="reportCount" class="count-up">0</h2>
-                                <p>Pending Reports</p>
-                                <small>Awaiting review</small>
-                            </div>
-
                         </article>
 
                     </div>
-
                 </section>
 
-                <!-- ==========================================
-                     Quick Actions
-                =========================================== -->
+                <!-- Activity and usage -->
+                <div class="dashboard-columns">
 
-                <section class="dashboard-section">
+                    <section class="dashboard-panel glass-card" aria-labelledby="recentActivityTitle">
+                        <div class="panel-header">
+                            <h2 id="recentActivityTitle">Recent Activity</h2>
+                        </div>
+                        <ul id="recentActivity" class="activity-list">
+                            <li class="activity-empty">Loading...</li>
+                        </ul>
+                    </section>
 
-                    <h2>Quick Actions</h2>
+                    <section class="dashboard-panel glass-card" aria-labelledby="platformUsageTitle">
+                        <div class="panel-header">
+                            <h2 id="platformUsageTitle">Platform Usage</h2>
+                        </div>
+                        <div class="usage-body">
+                            <div id="platformUsageRing" class="usage-ring" role="img"
+                                aria-label="Share of listings that are published">
+                                <span id="platformUsagePercent">0%</span>
+                            </div>
+                            <ul class="usage-legend">
+                                <li><span class="dot dot-published"></span> Published <strong
+                                        id="usagePublished">0</strong></li>
+                                <li><span class="dot dot-draft"></span> Draft <strong id="usageDraft">0</strong></li>
+                                <li><span class="dot dot-archived"></span> Archived <strong
+                                        id="usageArchived">0</strong></li>
+                            </ul>
+                        </div>
+                    </section>
 
+                </div>
+
+                <!-- Quick actions -->
+                <section class="dashboard-panel glass-card" aria-labelledby="quickActionsTitle">
+                    <div class="panel-header">
+                        <h2 id="quickActionsTitle">Quick Actions</h2>
+                    </div>
                     <div class="action-grid">
-
-                        <a href="admin_students.htm" class="action-card glass-card hover-lift">
-
-                            <div class="action-icon">
-
-                                <i class="fa-solid fa-user-graduate"></i>
-
-                            </div>
-
-                            <div class="action-content">
-
-                                <h3>
-
-                                    Students
-
-                                </h3>
-
-                                <p>
-
-                                    Manage student accounts
-
-                                </p>
-
-                            </div>
-
-                            <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-                        </a>
-
-                        <a href="admin_landlords.htm" class="action-card glass-card hover-lift">
-                            <i class="fa-solid fa-building-user"></i>
-                            <div class="action-content">
-
-                                <h3>
-
-                                    Landlords
-
-                                </h3>
-
-                                <p>
-
-                                    Manage landlord accounts
-
-                                </p>
-
-                            </div>
-
-                            <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-                        </a>
-
-                        <a href="admin_listings.htm" class="action-card glass-card hover-lift">
-                            <i class="fa-solid fa-house"></i>
-                            <div class="action-content">
-
-                                <h3>
-
-                                    Listings
-
-                                </h3>
-
-                                <p>
-
-                                    Review property listings
-
-                                </p>
-
-                            </div>
-
-                            <i class="fa-solid fa-arrow-right action-arrow"></i>
-
-                        </a>
-
-                        <a href="admin_reports.htm" class="action-card glass-card hover-lift">
-                            <i class="fa-solid fa-flag"></i>
-                            <div class="action-content">
-
-                                <h3>
-
-                                    Reports
-
-                                </h3>
-
-                                <p>
-
-                                    Resolve user reports
-
-                                </p>
-
-                            </div>
-                        </a>
-
-                        <a href="admin_settings.htm" class="action-card glass-card hover-lift">
-                            <i class="fa-solid fa-gears"></i>
-                            <div class="action-content">
-
-                                <h3>
-
-                                    Setting
-
-                                </h3>
-
-                                <p>
-
-                                    Configure platform
-
-                                </p>
-
-                            </div>
-                        </a>
-
-                        <a href="admin_analytics.htm" class="action-card glass-card hover-lift">
-                            <i class="fa-solid fa-chart-line"></i>
-                            <div class="action-content">
-
-                                <h3>
-
-                                    Analytics
-
-                                </h3>
-
-                                <p>
-
-                                    View platform insights
-
-                                </p>
-
-                            </div>
-                        </a>
-
+                        <a class="action-button" href="admin_listings.htm"><i class="fa-solid fa-plus"
+                                aria-hidden="true"></i> Add Listing</a>
+                        <a class="action-button" href="admin_students.htm"><i class="fa-solid fa-users-gear"
+                                aria-hidden="true"></i> Manage Users</a>
+                        <a class="action-button" href="admin_bookings.htm"><i class="fa-solid fa-calendar-check"
+                                aria-hidden="true"></i> View Bookings</a>
+                        <a class="action-button" href="admin_reports.htm"><i class="fa-solid fa-chart-column"
+                                aria-hidden="true"></i> Reports</a>
                     </div>
-
-                </section>
-                <!-- ==========================================
-                     Pending Approvals
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Pending Approvals</h2>
-
-                        <a href="admin_listings.htm">View All</a>
-
-                    </div>
-
-                    <div id="pendingApprovals" class="dashboard-table">
-
-                        <!-- Loaded dynamically -->
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Recent Activity
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Recent Activity</h2>
-
-                    </div>
-
-                    <div id="recentActivity" class="activity-list">
-
-                        <!-- Loaded dynamically -->
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Analytics Overview
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Analytics Overview</h2>
-
-                        <a href="admin_analytics.htm">View Analytics</a>
-
-                    </div>
-
-                    <div class="analytics-grid">
-
-                        <div class="analytics-card glass-card">
-
-                            <h3>User Growth</h3>
-
-                            <canvas id="userGrowthChart"></canvas>
-
-                        </div>
-
-                        <div class="analytics-card glass-card">
-
-                            <h3>Listing Growth</h3>
-
-                            <canvas id="listingGrowthChart"></canvas>
-
-                        </div>
-
-                        <div class="analytics-card glass-card">
-
-                            <h3>Booking Trends</h3>
-
-                            <canvas id="bookingTrendChart"></canvas>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Recent Reports
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Recent Reports</h2>
-
-                        <a href="admin_reports.htm">View All</a>
-
-                    </div>
-
-                    <div id="recentReports" class="dashboard-table">
-
-                        <!-- Loaded dynamically -->
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Recently Registered Users
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Recently Registered Users</h2>
-
-                    </div>
-
-                    <div id="recentUsers" class="dashboard-table">
-
-                        <!-- Loaded dynamically -->
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Platform Status
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Platform Status</h2>
-
-                    </div>
-
-                    <div class="status-grid">
-
-                        <div class="status-card">
-
-                            <i class="fa-solid fa-server"></i>
-
-                            <h3>Server</h3>
-
-                            <span id="serverStatus" class="status online">
-
-                                Online
-
-                            </span>
-
-                        </div>
-
-                        <div class="status-card">
-
-                            <i class="fa-solid fa-database"></i>
-
-                            <h3>Database</h3>
-
-                            <span id="databaseStatus" class="status online">
-
-                                Connected
-
-                            </span>
-
-                        </div>
-
-                        <div class="status-card">
-
-                            <i class="fa-solid fa-cloud"></i>
-
-                            <h3>Storage</h3>
-
-                            <span id="storageStatus" class="status online">
-
-                                Healthy
-
-                            </span>
-
-                        </div>
-
-                        <div class="status-card">
-
-                            <i class="fa-solid fa-shield-halved"></i>
-
-                            <h3>Security</h3>
-
-                            <span id="securityStatus" class="status online">
-
-                                Protected
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Announcements
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Announcements</h2>
-
-                    </div>
-
-                    <div id="adminAnnouncements" class="announcement-list">
-
-                        <!-- Loaded dynamically -->
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Administrator Notes
-                =========================================== -->
-
-                <section class="dashboard-panel glass-card">
-
-                    <div class="panel-header">
-
-                        <h2>Administrator Notes</h2>
-
-                    </div>
-
-                    <textarea id="adminNotes" class="liquid-input" rows="6"
-                        placeholder="Write reminders, platform notes or future tasks..."></textarea>
-
-                    <button id="saveAdminNotes" class="btn btn-primary azure-sweep ripple">
-
-                        <i class="fa-solid fa-floppy-disk"></i>
-
-                        Save Notes
-
-                    </button>
-
                 </section>
 
             </div>
-
         </section>
-
     </main>
-
-    <!-- ==========================================
-         Footer
-    =========================================== -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
-
+    <!-- The page script (js/pages/admin/admin_dashboard.js) is loaded automatically by app.js -->
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

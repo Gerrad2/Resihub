@@ -160,20 +160,6 @@
             </aside>
 
             <section class="auth-form-panel">
-                <div class="auth-social">
-                    <button type="button" class="auth-social-btn" data-social-provider="google"
-                        data-auth-role="student">
-                        <i class="fa-brands fa-google" aria-hidden="true"></i>
-                        Continue with Google
-                    </button>
-                    <button type="button" class="auth-social-btn is-apple" data-social-provider="apple"
-                        data-auth-role="student">
-                        <i class="fa-brands fa-apple" aria-hidden="true"></i>
-                        Continue with Apple
-                    </button>
-                </div>
-                <div class="auth-divider">or continue with</div>
-
                 <div class="auth-illustration" aria-hidden="true"><i class="fa-solid fa-user-shield"></i></div>
 
                 <form id="adminLoginForm" novalidate>
@@ -184,7 +170,7 @@
                     </div>
 
                     <div class="auth-field full">
-                        <label for="loginPassword">Password</label>
+                        <label for="AdminPassword">Password</label>
 
                         <div class="password-wrapper">
                             <input type="password" id="AdminPassword" name="AdminPassword"
@@ -235,7 +221,6 @@
 
     <!-- Global Scripts -->
     <script type="module" src="../js/core/app.js"></script>
-    <script type="module" src="../js/pages/auth/social-auth.js"></script>
     <script type="module">
         import { initAuthPage } from "../js/pages/auth/auth-flow.js";
 
@@ -248,41 +233,6 @@
         } else {
             initAuthPage();
         }
-    </script>
-
-    <script>
-        document.addEventListener("click", function (event) {
-            const button = event.target.closest("[data-password-toggle]");
-            if (!button) return;
-
-            event.preventDefault();
-
-            const inputId = button.getAttribute("data-password-toggle");
-            const passwordInput = document.getElementById(inputId);
-
-            if (!passwordInput) {
-                console.error("Password input not found:", inputId);
-                return;
-            }
-
-            const isPassword = passwordInput.type === "password";
-
-            passwordInput.type = isPassword ? "text" : "password";
-
-            button.setAttribute(
-                "aria-label",
-                isPassword ? "Hide password" : "Show password"
-            );
-
-            button.setAttribute("aria-pressed", String(isPassword));
-
-            const icon = button.querySelector("i");
-
-            if (icon) {
-                icon.classList.toggle("fa-eye", !isPassword);
-                icon.classList.toggle("fa-eye-slash", isPassword);
-            }
-        });
     </script>
 
 </body>

@@ -1,0 +1,366 @@
+/*==========================================
+    ADMIN SHELL (all admin pages)
+    Scoped to body[data-resihub-surface="admin"]
+    Design tokens, background, and the header.
+    Load order: loaded through style.css.
+==========================================*/
+
+body[data-resihub-surface="admin"] {
+    /* Tokens */
+    --ad-bg-top: #0A2A78;
+    --ad-bg-mid: #061A4F;
+    --ad-bg-bottom: #030D2A;
+    --ad-glow: rgba(37, 110, 255, .42);
+    --ad-glass: linear-gradient(180deg, rgba(42, 92, 190, .42), rgba(14, 42, 110, .36));
+    --ad-glass-strong: linear-gradient(180deg, rgba(52, 112, 220, .52), rgba(18, 52, 130, .46));
+    --ad-line: rgba(110, 165, 255, .26);
+    --ad-line-soft: rgba(110, 165, 255, .14);
+    --ad-text: #ffffff;
+    --ad-text-2: rgba(225, 236, 255, .84);
+    --ad-text-3: rgba(190, 210, 245, .64);
+    --ad-accent: #3FD0FF;
+    --ad-primary: #2F7BFF;
+    --ad-primary-hi: #5BA0FF;
+    --ad-success: #22C55E;
+    --ad-warning: #F59E0B;
+    --ad-danger: #EF4444;
+    --ad-radius-lg: 22px;
+    --ad-radius: 14px;
+    --ad-radius-sm: 10px;
+    --ad-shadow: 0 18px 44px rgba(0, 0, 0, .34), 0 0 36px rgba(55, 140, 255, .14);
+    --ad-glow-line: 0 0 22px rgba(47, 123, 255, .35);
+    --ad-font-head: "Poppins", "Inter", system-ui, sans-serif;
+    --ad-font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    line-height: 1.5;
+    background:
+        radial-gradient(1100px 620px at 78% -8%, var(--ad-glow), transparent 62%),
+        radial-gradient(700px 500px at -6% 30%, rgba(31, 107, 255, .18), transparent 70%),
+        linear-gradient(180deg, var(--ad-bg-top) 0%, var(--ad-bg-mid) 45%, var(--ad-bg-bottom) 100%);
+    background-attachment: fixed;
+}
+
+body[data-resihub-surface="admin"] h1,
+body[data-resihub-surface="admin"] h2,
+body[data-resihub-surface="admin"] h3 {
+    font-family: var(--ad-font-head);
+    color: var(--ad-text);
+    letter-spacing: -.01em;
+}
+
+body[data-resihub-surface="admin"] p {
+    color: var(--ad-text-2);
+}
+
+body[data-resihub-surface="admin"] a {
+    color: var(--ad-primary-hi);
+    text-decoration: none;
+}
+
+/* Hide the decorative blobs from the old design */
+body[data-resihub-surface="admin"] .floating-shapes {
+    display: none;
+}
+
+/* ------------------------------------------
+    HEADER
+------------------------------------------ */
+body[data-resihub-surface="admin"] .admin-portal-header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    padding: .75rem 0;
+    background: rgba(6, 22, 66, .62);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid var(--ad-line-soft);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+}
+
+body[data-resihub-surface="admin"] .admin-header-shell {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: min(1480px, 100% - 2rem);
+    margin-inline: auto;
+}
+
+/* Logo */
+body[data-resihub-surface="admin"] .admin-portal-header .logo {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    flex: 0 0 auto;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .logo-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--ad-primary), #1B56D6);
+    box-shadow: var(--ad-glow-line);
+    color: #fff;
+    font-size: 1.05rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .logo-text h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .logo-text span {
+    display: block;
+    font-size: .72rem;
+    color: var(--ad-text-3);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+/* Desktop nav: a pill strip */
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .75rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading,
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav .header-actions {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    margin: 0;
+    padding: .3rem;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-radius: 999px;
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line-soft);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul::-webkit-scrollbar {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav li {
+    flex: 0 0 auto;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav li.hidden {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .45rem .8rem;
+    border-radius: 999px;
+    color: var(--ad-text-2);
+    font-size: .8rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a i {
+    font-size: .8rem;
+    color: var(--ad-accent);
+    opacity: .9;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, .08);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a.active,
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a[aria-current="page"] {
+    color: #fff;
+    background: linear-gradient(135deg, var(--ad-primary), #1B56D6);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a.active i,
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a[aria-current="page"] i {
+    color: #fff;
+}
+
+/* Topbar: search + actions */
+body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex: 0 0 auto;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-search {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    width: 240px;
+    padding: .55rem .9rem;
+    border-radius: 999px;
+    background: rgba(8, 30, 84, .55);
+    border: 1px solid var(--ad-line-soft);
+    color: var(--ad-text-3);
+    font-size: .82rem;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-search span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-search i {
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line-soft);
+    color: var(--ad-text-2);
+    transition: box-shadow .2s ease, color .2s ease;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a:hover {
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* The hamburger only shows on small screens */
+body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line-soft);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Responsive: collapse the nav and search below 1200px */
+@media (max-width: 1200px) {
+    body[data-resihub-surface="admin"] .admin-portal-header .portal-search {
+        width: 180px;
+    }
+}
+
+@media (max-width: 992px) {
+    body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle {
+        display: grid;
+        place-items: center;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .portal-search {
+        display: none;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(320px, 88vw);
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 1.25rem;
+        background: rgba(6, 22, 66, .97);
+        border-left: 1px solid var(--ad-line);
+        box-shadow: -20px 0 50px rgba(0, 0, 0, .45);
+        transform: translateX(105%);
+        transition: transform .3s ease;
+        overflow-y: auto;
+        z-index: 950;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav.active {
+        transform: translateX(0);
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading {
+        display: block;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading strong {
+        display: block;
+        color: #fff;
+        font-family: var(--ad-font-head);
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading-kicker {
+        display: block;
+        font-size: .72rem;
+        color: var(--ad-accent);
+        text-transform: uppercase;
+        letter-spacing: .08em;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: var(--ad-radius);
+        overflow: visible;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a {
+        padding: .7rem .9rem;
+        border-radius: var(--ad-radius-sm);
+        font-size: .9rem;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions {
+        margin-left: auto;
+    }
+}
+
+/* Mobile: tighter topbar */
+@media (max-width: 576px) {
+    body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar {
+        gap: .4rem;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a {
+        width: 34px;
+        height: 34px;
+    }
+}

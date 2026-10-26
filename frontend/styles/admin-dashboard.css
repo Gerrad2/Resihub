@@ -1,0 +1,349 @@
+/*==========================================
+    ADMIN DASHBOARD (admin/admin_dashboard.htm)
+    Matches the approved admin design.
+    Scoped to body[data-resihub-surface="admin"].
+    Loaded through style.css after admin-shell.css.
+==========================================*/
+
+body[data-resihub-surface="admin"] .page-container {
+    width: min(1480px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+}
+
+/* Glass surface used by every card on the dashboard */
+body[data-resihub-surface="admin"] .glass-card {
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    border-radius: var(--ad-radius-lg);
+    box-shadow: var(--ad-shadow);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+    color: var(--ad-text);
+}
+
+/* ------------------------------------------
+    HEADING
+------------------------------------------ */
+body[data-resihub-surface="admin"] .dashboard-heading h1 {
+    margin: 0 0 .35rem;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+}
+
+body[data-resihub-surface="admin"] .dashboard-heading p {
+    margin: 0;
+    font-size: .95rem;
+}
+
+/* ------------------------------------------
+    STATISTIC CARDS
+------------------------------------------ */
+body[data-resihub-surface="admin"] .statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] .statistics-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.25rem;
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+body[data-resihub-surface="admin"] .statistics-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(140, 190, 255, .42);
+}
+
+body[data-resihub-surface="admin"] .card-icon {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 1.1rem;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .card-icon-blue {
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+}
+
+body[data-resihub-surface="admin"] .card-icon-cyan {
+    background: linear-gradient(135deg, #22D3EE, #0891B2);
+}
+
+body[data-resihub-surface="admin"] .card-icon-indigo {
+    background: linear-gradient(135deg, #818CF8, #4F46E5);
+}
+
+body[data-resihub-surface="admin"] .card-icon-teal {
+    background: linear-gradient(135deg, #2DD4BF, #0F766E);
+}
+
+body[data-resihub-surface="admin"] .card-content {
+    min-width: 0;
+}
+
+body[data-resihub-surface="admin"] .card-label {
+    margin: 0;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--ad-text-3);
+}
+
+body[data-resihub-surface="admin"] .card-content h2 {
+    margin: .15rem 0 .2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+body[data-resihub-surface="admin"] .change {
+    display: block;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--ad-text-3);
+}
+
+body[data-resihub-surface="admin"] .change.up {
+    color: #7DD3FC;
+}
+
+body[data-resihub-surface="admin"] .change.down {
+    color: #FCA5A5;
+}
+
+body[data-resihub-surface="admin"] .change.flat {
+    color: var(--ad-text-3);
+}
+
+/* ------------------------------------------
+    PANELS
+------------------------------------------ */
+body[data-resihub-surface="admin"] .dashboard-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] .dashboard-panel {
+    padding: 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] .panel-header h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+/* ------------------------------------------
+    RECENT ACTIVITY
+------------------------------------------ */
+body[data-resihub-surface="admin"] .activity-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+body[data-resihub-surface="admin"] .activity-item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .8rem;
+    padding: .7rem .75rem;
+    border-radius: var(--ad-radius-sm);
+    border-bottom: 1px solid var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] .activity-item:last-child {
+    border-bottom: none;
+}
+
+body[data-resihub-surface="admin"] .activity-icon {
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(47, 123, 255, .22);
+    color: var(--ad-accent);
+    font-size: .85rem;
+}
+
+body[data-resihub-surface="admin"] .activity-text {
+    font-size: .9rem;
+    color: var(--ad-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body[data-resihub-surface="admin"] .activity-time {
+    font-size: .76rem;
+    color: var(--ad-text-3);
+    white-space: nowrap;
+}
+
+body[data-resihub-surface="admin"] .activity-empty {
+    padding: .9rem .75rem;
+    font-size: .88rem;
+    color: var(--ad-text-3);
+    list-style: none;
+}
+
+/* ------------------------------------------
+    PLATFORM USAGE RING
+------------------------------------------ */
+body[data-resihub-surface="admin"] .usage-body {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+}
+
+body[data-resihub-surface="admin"] .usage-ring {
+    --usage: 0%;
+    position: relative;
+    flex: 0 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(circle, rgba(6, 22, 66, .95) 58%, transparent 59%),
+        conic-gradient(var(--ad-primary-hi) 0 var(--usage), rgba(255, 255, 255, .12) var(--usage) 100%);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .usage-ring span {
+    font-family: var(--ad-font-head);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] .usage-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    flex: 1 1 140px;
+    font-size: .88rem;
+    color: var(--ad-text-2);
+}
+
+body[data-resihub-surface="admin"] .usage-legend li {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+
+body[data-resihub-surface="admin"] .usage-legend strong {
+    margin-left: auto;
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+}
+
+body[data-resihub-surface="admin"] .dot-published {
+    background: var(--ad-primary-hi);
+    box-shadow: 0 0 10px rgba(91, 160, 255, .6);
+}
+
+body[data-resihub-surface="admin"] .dot-draft {
+    background: #F59E0B;
+}
+
+body[data-resihub-surface="admin"] .dot-archived {
+    background: rgba(255, 255, 255, .35);
+}
+
+/* ------------------------------------------
+    QUICK ACTIONS
+------------------------------------------ */
+body[data-resihub-surface="admin"] .action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .9rem;
+}
+
+body[data-resihub-surface="admin"] .action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    padding: .95rem 1rem;
+    border-radius: var(--ad-radius);
+    background: linear-gradient(135deg, var(--ad-primary), #1B56D6);
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 600;
+    box-shadow: var(--ad-glow-line);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] .action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(47, 123, 255, .55);
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] .action-button i {
+    font-size: .9rem;
+}
+
+/* ------------------------------------------
+    RESPONSIVE
+------------------------------------------ */
+@media (max-width: 1100px) {
+    body[data-resihub-surface="admin"] .statistics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body[data-resihub-surface="admin"] .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body[data-resihub-surface="admin"] .page-container {
+        width: min(100%, 100% - 1.25rem);
+    }
+
+    body[data-resihub-surface="admin"] .action-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    body[data-resihub-surface="admin"] .statistics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-resihub-surface="admin"] .action-grid {
+        grid-template-columns: 1fr;
+    }
+}

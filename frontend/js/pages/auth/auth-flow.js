@@ -710,7 +710,7 @@ export function initAuthPage() {
         "admin_login.htm",
     ]);
 
-    if (loginPages.has(page)) {
+    if (loginPages.has(page) && !sessionStorage.getItem("resihub_pending_role")) {
         redirectAuthenticatedUser().catch((error) => {
             console.warn("ResiHub could not check the existing session.", error);
         });

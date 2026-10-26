@@ -34,6 +34,8 @@
 @import url("listing-details-page.css");
 @import url("system.css");
 @import url("verify-account.css");
+@import url("admin-header.css");
+@import url("admin-dashboard.css");
 
 /* ---------- Verification badges and notices ---------- */
 .trust-badge {

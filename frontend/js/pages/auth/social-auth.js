@@ -1,9 +1,14 @@
-import { supabase, getProfile } from "../../core/api.js";
+import { supabase } from "../../core/api.js";
+
+/* =========================================
+   SOCIAL SIGN-IN (Google and Apple)
+   Used by student and landlord login and
+   signup pages. Admin has no social sign-in.
+========================================= */
 
 const PENDING_ROLE_KEY = "resihub_pending_role";
 const ROLES = ["student", "landlord"];
 
-// Adjust these paths to your actual dashboard files
 const DASHBOARD_PAGES = {
     student: "../student/dashboard_student.htm",
     landlord: "../landlord/dashboard_landlord.htm",
@@ -12,6 +17,7 @@ const DASHBOARD_PAGES = {
 const MESSAGES = {
     cancelled: "Sign-in was cancelled. You can try again whenever you're ready.",
     role_mismatch: "This account is registered with a different role. Please use the correct sign-in page.",
+    landlord_claim_failed: "We couldn't switch this account to a landlord account. Please sign up with email instead.",
     setup_failed: "We couldn't finish setting up your account. Please try again.",
     provider_failed: "We couldn't connect to that provider. Please try again.",
 };
@@ -28,7 +34,12 @@ function loginPageFor(role) {
 
 function showMessage(text) {
     const box = document.querySelector(".form-message");
-    if (box) box.textContent = text;
+
+    if (box) {
+        box.textContent = text;
+        box.hidden = !text;
+        box.setAttribute("role", "alert");
+    }
 }
 
 function setBusy(button, busy) {
@@ -42,7 +53,7 @@ function redirectToLogin(role, reason) {
     window.location.replace(url.href);
 }
 
-/* ---------- Step 1: user clicks a social button ---------- */
+/* ---------- Step 1: the user clicks a social button ---------- */
 
 async function startOAuth(button) {
     const provider = button.dataset.socialProvider;
@@ -56,10 +67,12 @@ async function startOAuth(button) {
     try {
         sessionStorage.setItem(PENDING_ROLE_KEY, role);
 
-        // Send the user straight to their dashboard after the provider returns
+        // Return to this same page so the role check runs here.
+        const returnUrl = new URL(window.location.pathname, window.location.origin).href;
+
         const { error } = await supabase.auth.signInWithOAuth({
             provider,
-            options: { redirectTo: dashboardUrl(role) },
+            options: { redirectTo: returnUrl },
         });
 
         if (error) throw error;
@@ -71,7 +84,7 @@ async function startOAuth(button) {
     }
 }
 
-/* ---------- Step 2: user returns on the dashboard ---------- */
+/* ---------- Step 2: the user comes back to this page ---------- */
 
 async function completeSocialSignIn() {
     const url = new URL(window.location.href);
@@ -97,37 +110,51 @@ async function completeSocialSignIn() {
     }
 
     const pendingRole = sessionStorage.getItem(PENDING_ROLE_KEY);
+
     if (!pendingRole) return;
 
-    const {
-        data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session?.user) return;
+    const { data: sessionData } = await supabase.auth.getSession();
+    const user = sessionData?.session?.user;
 
     sessionStorage.removeItem(PENDING_ROLE_KEY);
-    const userId = session.user.id;
+
+    if (!user) return;
 
     try {
-        const { success, data: profile, error } = await getProfile(userId);
-        if (!success) throw error;
+        const { data: profile, error: profileError } = await supabase
+            .from("profiles")
+            .select("role")
+            .eq("id", user.id)
+            .maybeSingle();
 
-        if (profile) {
-            // Existing account: it must match the page the user signed in from
-            if (profile.role !== pendingRole) {
+        if (profileError) throw profileError;
+
+        // The database creates a profile for every new account, so this is a real failure.
+        if (!profile) throw new Error("Profile was not created for this account.");
+
+        let role = profile.role;
+
+        // A brand-new social account starts as a student. Switch it once if the page is landlord.
+        if (role === "student" && pendingRole === "landlord") {
+            const { error: claimError } = await supabase.rpc("resihub_claim_landlord_role");
+
+            if (claimError) {
+                console.error("Landlord claim failed:", claimError);
                 await supabase.auth.signOut({ scope: "local" });
-                redirectToLogin(profile.role, "role_mismatch");
+                redirectToLogin(pendingRole, "landlord_claim_failed");
+                return;
             }
-            // Matching role: already on the right dashboard, nothing more to do
+
+            role = "landlord";
+        }
+
+        if (role !== pendingRole) {
+            await supabase.auth.signOut({ scope: "local" });
+            redirectToLogin(pendingRole, "role_mismatch");
             return;
         }
 
-        // New account: create the profile with the chosen role
-        const { error: insertError } = await supabase
-            .from("profiles")
-            .insert({ id: userId, role: pendingRole });
-
-        if (insertError) throw insertError;
+        window.location.replace(dashboardUrl(role));
     } catch (err) {
         console.error("Social sign-in profile setup failed:", err);
         await supabase.auth.signOut({ scope: "local" });
