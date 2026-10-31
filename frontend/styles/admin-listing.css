@@ -1,0 +1,17 @@
+/* ==========================================
+   ADMIN LISTINGS (admin/admin_listings.htm)
+   Load after admin-students.css, which styles the shared
+   filter, table, badge and button classes.
+========================================== */
+
+body[data-resihub-surface="admin"] .admin-listing-thumb {
+    width: 64px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+}
+
+body[data-resihub-surface="admin"] .admin-listing-note {
+    color: rgba(255, 255, 255, .55);
+}

@@ -39,6 +39,7 @@
 @import url("admin-students.css");
 @import url("admin-bookings.css");
 @import url("admin-footer.css");
+@import url("admin-listing.css");
 
 /* ---------- Verification badges and notices ---------- */
 .trust-badge {
