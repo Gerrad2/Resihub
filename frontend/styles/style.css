@@ -36,6 +36,9 @@
 @import url("verify-account.css");
 @import url("admin-header.css");
 @import url("admin-dashboard.css");
+@import url("admin-students.css");
+@import url("admin-bookings.css");
+@import url("admin-footer.css");
 
 /* ---------- Verification badges and notices ---------- */
 .trust-badge {

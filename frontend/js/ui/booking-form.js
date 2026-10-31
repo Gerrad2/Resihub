@@ -22,6 +22,11 @@ export function initBookingForm(trigger, listingGetter) {
 
     trigger.addEventListener("click", (event) => {
         event.preventDefault();
+        const listing = getListing();
+        if (listing && listing.availability_status && listing.availability_status !== "available") {
+            showToast("This room is fully booked.", { type: "error" });
+            return;
+        }
         openForm();
     });
 }

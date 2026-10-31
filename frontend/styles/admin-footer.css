@@ -1,0 +1,82 @@
+/* ==========================================
+   ADMIN FOOTER (components/admin_footer.htm)
+   Scoped to body[data-resihub-surface="admin"], so every
+   admin page gets it once this is imported from style.css.
+   Uses the --ad-* tokens defined in admin-header.css.
+========================================== */
+
+body[data-resihub-surface="admin"] .portal-footer {
+    margin-top: 2.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--ad-line);
+    background: linear-gradient(180deg, transparent, rgba(3, 13, 42, .55));
+    font-family: var(--ad-font-body);
+    color: rgba(255, 255, 255, .75);
+}
+
+body[data-resihub-surface="admin"] .portal-footer .container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+}
+
+body[data-resihub-surface="admin"] .portal-footer .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-family: var(--ad-font-head);
+    font-weight: 600;
+    color: var(--ad-text);
+    text-decoration: none;
+}
+
+body[data-resihub-surface="admin"] .portal-footer .footer-logo-mark {
+    width: 34px;
+    height: 34px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: var(--ad-radius-sm);
+    background: var(--ad-primary);
+    box-shadow: var(--ad-glow-line);
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] .portal-footer p {
+    margin: .25rem 0 0;
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+body[data-resihub-surface="admin"] .portal-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1.1rem;
+}
+
+body[data-resihub-surface="admin"] .portal-footer nav a {
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .8);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+body[data-resihub-surface="admin"] .portal-footer nav a:hover,
+body[data-resihub-surface="admin"] .portal-footer nav a:focus-visible {
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] .portal-footer .container>span {
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+@media (max-width: 720px) {
+    body[data-resihub-surface="admin"] .portal-footer .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

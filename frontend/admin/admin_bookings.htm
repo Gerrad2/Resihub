@@ -99,310 +99,116 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
-
-        <section id="adminBookingsContent" class="page-section glass-reveal floating-section">
-
-            <div class="container page-container">
-
-                <!-- ==========================================
-                     Page Header
-                =========================================== -->
-
-                <header class="section-header">
-
-                    <div class="container">
-
-                        <header class="auth-hero reveal fade-up">
-
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge glass-card">
-
-                                    <i class="fa-solid fa-calendar-check"></i>
-
-                                    Booking Management
-
-                                </span>
-
-                                <h1>Manage Booking Requests</h1>
-
-                                <p>
-
-                                    Monitor inspection requests, bookings, approvals and completed
-                                    reservations across the ResiHub platform.
-
-                                </p>
-
-                        </header>
-
-                        <!-- ==========================================
-                     Dashboard Statistics
-                =========================================== -->
-
-                        <section class="dashboard-section statistics-section glass-reveal">
-
-                            <div class="dashboard-grid statistics-grid">
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-calendar-check"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h2 id="totalBookings" class="count-up">0</h2>
-
-                                        <p>Total Bookings</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-hourglass-half"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h2 id="pendingBookings" class="count-up">0</h2>
-
-                                        <p>Pending</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-circle-check"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h2 id="approvedBookings" class="count-up">0</h2>
-
-                                        <p>Approved</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-circle-xmark"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h2 id="rejectedBookings" class="count-up">0</h2>
-
-                                        <p>Rejected</p>
-
-                                    </div>
-
-                                </article>
-
-                            </div>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Booking Filters
-                =========================================== -->
-
-                        <section class="filter-section glass-card">
-
-                            <form id="bookingFilterForm" class="filter-form liquid-form">
-
-                                <div class="liquid-group">
-
-                                    <input type="search" id="bookingSearch" class="liquid-input"
-                                        placeholder="Search by student, landlord or property..." autocomplete="off">
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="bookingStatus" class="liquid-input">
-
-                                        <option value="">All Status</option>
-
-                                        <option value="Pending">Pending</option>
-
-                                        <option value="Approved">Approved</option>
-
-                                        <option value="Rejected">Rejected</option>
-
-                                        <option value="Completed">Completed</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="bookingSort" class="liquid-input">
-
-                                        <option value="latest">Latest First</option>
-
-                                        <option value="oldest">Oldest First</option>
-
-                                        <option value="student">Student Name</option>
-
-                                        <option value="landlord">Landlord Name</option>
-
-                                    </select>
-
-                                </div>
-
-                                <button type="submit" class="btn btn-primary azure-sweep ripple">
-
-                                    <i class="fa-solid fa-filter"></i>
-
-                                    <span>Apply</span>
-
-                                </button>
-
-                            </form>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Booking Table
-                =========================================== -->
-
-                        <section class="table-section glass-reveal">
-
-                            <div class="table-responsive">
-
-                                <table class="admin-table data-table">
-
-                                    <thead>
-
-                                        <tr>
-
-                                            <th>ID</th>
-
-                                            <th>Student</th>
-
-                                            <th>Landlord</th>
-
-                                            <th>Property</th>
-
-                                            <th>Date</th>
-
-                                            <th>Status</th>
-
-                                            <th>Actions</th>
-
-                                        </tr>
-
-                                    </thead>
-
-                                    <tbody id="bookingTableBody">
-
-                                        <!-- Loaded dynamically -->
-
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Booking Details Modal
-                =========================================== -->
-
-                        <div id="bookingModal" class="modal hidden">
-
-                            <div class="modal-content glass-card">
-
-                                <button id="closeBookingModal" class="modal-close" aria-label="Close">
-
-                                    <i class="fa-solid fa-xmark"></i>
-
-                                </button>
-
-                                <h2>Booking Details</h2>
-
-                                <div id="bookingDetails">
-
-                                    <!-- Loaded dynamically -->
-
-                                </div>
-
-                                <div class="modal-actions">
-
-                                    <button id="approveBooking" class="btn btn-primary azure-sweep ripple">
-
-                                        <i class="fa-solid fa-circle-check"></i>
-
-                                        Approve
-
-                                    </button>
-
-                                    <button id="rejectBooking" class="btn btn-outline">
-
-                                        <i class="fa-solid fa-circle-xmark"></i>
-
-                                        Reject
-
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- ==========================================
-                     Pagination
-                =========================================== -->
-
-                        <section class="pagination-section">
-
-                            <div id="bookingPagination" class="pagination">
-
-                            </div>
-
-                        </section>
-
+    <main>
+
+        <!-- Bookings -->
+
+        <section id="adminBookingsContent" class="page-section">
+
+            <div class="container">
+
+                <div class="page-heading">
+                    <h1>Bookings</h1>
+                    <p>Manage and track all property bookings.</p>
+                </div>
+
+                <!-- Filters -->
+
+                <form id="bookingFilterForm" class="filter-form liquid-form" role="search">
+
+                    <select id="bookingStatus" class="liquid-input" aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+
+                    <select id="bookingDateRange" class="liquid-input" aria-label="Filter by date range">
+                        <option value="">All Dates</option>
+                        <option value="7">Last 7 days</option>
+                        <option value="30">Last 30 days</option>
+                        <option value="90">Last 90 days</option>
+                    </select>
+
+                    <div class="liquid-group">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="bookingSearch" name="bookingSearch" class="liquid-input"
+                            placeholder="Search booking..." aria-label="Search bookings">
                     </div>
+
+                </form>
+
+                <!-- Table -->
+
+                <div class="table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Property</th>
+                                <th>Student</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="bookingTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+                <div id="bookingPagination" class="pagination"></div>
+
+                <!-- Empty State -->
+
+                <div id="noBookingsFound" class="empty-state hidden">
+
+                    <i class="fa-solid fa-calendar-xmark"></i>
+
+                    <h3>No Bookings Found</h3>
+
+                    <p>No booking matches your current search or filter.</p>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
 
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+    <!-- Booking details (read-only) -->
+
+    <div id="bookingModal" class="modal hidden" aria-hidden="true">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Booking details</h2>
+                <button type="button" id="closeBookingModal" class="modal-close" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="modal-body" id="bookingDetails"></div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

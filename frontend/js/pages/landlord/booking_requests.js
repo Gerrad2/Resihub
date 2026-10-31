@@ -51,6 +51,8 @@ async function loadBookings() {
             status,
             created_at,
             inspection_date,
+            student_decision,
+            landlord_decision,
             student_id,
             listing_id,
             listings(id, title, area, price, listing_images(image_url, display_order)),
@@ -194,9 +196,7 @@ function actionsFor(booking) {
             actionButton("Reject", "lb-btn lb-reject", () => changeStatus(booking, "rejected", box))
         );
     } else if (booking.status === "approved") {
-        box.append(
-            actionButton("Mark completed", "lb-btn lb-complete", () => changeStatus(booking, "completed", box))
-        );
+        box.append(...decisionActions(booking, box));
     } else {
         const none = document.createElement("span");
         none.className = "lb-none";
@@ -205,6 +205,59 @@ function actionsFor(booking) {
     }
 
     return box;
+}
+
+function decisionActions(booking, box) {
+    if (booking.student_decision === "no") {
+        return [statusNote("The student chose not to book this room")];
+    }
+    if (booking.student_decision !== "yes") {
+        return [statusNote("Waiting for the student to answer")];
+    }
+    if (booking.landlord_decision) {
+        return [statusNote("Answered")];
+    }
+    return [
+        actionButton("Confirm booking", "lb-btn lb-approve", () => answerBooking(booking, "yes", box)),
+        actionButton("Decline", "lb-btn lb-reject", () => answerBooking(booking, "no", box)),
+    ];
+}
+
+function statusNote(text) {
+    const note = document.createElement("span");
+    note.className = "lb-none";
+    note.textContent = text;
+    return note;
+}
+
+async function answerBooking(booking, answer, box) {
+    const question = answer === "yes"
+        ? "Confirm this booking? One room will be taken from this listing."
+        : "Decline this booking? The student will not be able to book this room.";
+    if (!confirm(question)) return;
+
+    const buttons = box.querySelectorAll("button");
+    buttons.forEach((button) => (button.disabled = true));
+
+    const { error } = await supabase.rpc("landlord_answer_booking", {
+        p_booking_id: booking.id,
+        p_answer: answer,
+    });
+
+    if (error) {
+        buttons.forEach((button) => (button.disabled = false));
+        showToast(error.message || "Your answer could not be saved.", { type: "error" });
+        return;
+    }
+
+    booking.landlord_decision = answer;
+    booking.status = answer === "yes" ? "completed" : "rejected";
+
+    showToast(
+        answer === "yes" ? "Booking confirmed. The room has been reserved." : "Booking declined.",
+        { type: "success" }
+    );
+    render();
 }
 
 function actionButton(label, className, onClick) {

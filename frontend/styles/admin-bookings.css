@@ -1,0 +1,141 @@
+/* ==========================================
+   ADMIN BOOKINGS (admin/admin_bookings.htm)
+   Matches the approved design (screen 5).
+   Load after admin-students.css, which styles the shared
+   heading, filters, table, pagination and modal frame.
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+/* ------------------------------------------
+    LAYOUT
+------------------------------------------ */
+body[data-resihub-surface="admin"] #adminBookingsContent .container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+/* Search box with the leading magnifier icon */
+body[data-resihub-surface="admin"] #adminBookingsContent .liquid-group {
+    position: relative;
+    flex: 2 1 260px;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+body[data-resihub-surface="admin"] #adminBookingsContent .liquid-group>i {
+    position: absolute;
+    left: .85rem;
+    color: var(--ad-accent);
+    pointer-events: none;
+}
+
+body[data-resihub-surface="admin"] #adminBookingsContent .liquid-group .liquid-input {
+    width: 100%;
+    padding-left: 2.4rem;
+}
+
+/* ------------------------------------------
+    BOOKING STATUS BADGES
+    pending is styled in admin-students.css
+------------------------------------------ */
+body[data-resihub-surface="admin"] .status-badge.approved {
+    color: #86efac;
+    background: rgba(34, 197, 94, .16);
+    border-color: rgba(34, 197, 94, .4);
+}
+
+body[data-resihub-surface="admin"] .status-badge.completed {
+    color: #86efac;
+    background: rgba(34, 197, 94, .12);
+    border-color: rgba(34, 197, 94, .3);
+}
+
+body[data-resihub-surface="admin"] .status-badge.rejected,
+body[data-resihub-surface="admin"] .status-badge.cancelled {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, .16);
+    border-color: rgba(239, 68, 68, .4);
+}
+
+/* ------------------------------------------
+    ACTION BUTTONS
+------------------------------------------ */
+body[data-resihub-surface="admin"] #bookingTableBody .icon-btn {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #bookingTableBody .icon-btn:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+/* ------------------------------------------
+    EMPTY STATE
+------------------------------------------ */
+body[data-resihub-surface="admin"] #noBookingsFound {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noBookingsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noBookingsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noBookingsFound p {
+    margin: 0;
+}
+
+/* ------------------------------------------
+    DETAILS MODAL (read-only)
+    modal.css styles the frame; these style the body.
+------------------------------------------ */
+body[data-resihub-surface="admin"] #bookingModal .modal-content {
+    width: min(560px, 100%);
+}
+
+body[data-resihub-surface="admin"] #bookingDetails {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+body[data-resihub-surface="admin"] #bookingDetails .form-group {
+    margin: 0;
+}
+
+body[data-resihub-surface="admin"] #bookingDetails .form-group label {
+    display: block;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+body[data-resihub-surface="admin"] #bookingDetails .form-group p {
+    margin: .15rem 0 0;
+    font-size: .95rem;
+    color: var(--ad-text);
+    word-break: break-word;
+}

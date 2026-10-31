@@ -81,7 +81,7 @@ async function endSession() {
 async function fetchAdminProfile(userId) {
     const { data, error } = await supabase
         .from("profiles")
-        .select("role, account_status")
+        .select("*")
         .eq("id", userId)
         .maybeSingle();
 

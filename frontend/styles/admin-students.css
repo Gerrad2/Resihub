@@ -1,0 +1,289 @@
+/* ==========================================
+   ADMIN STUDENTS (admin/admin_students.htm)
+   Scoped to body[data-resihub-surface="admin"].
+   Uses the --ad-* tokens defined in admin-header.css.
+   Loaded by admin_students.htm only.
+========================================== */
+
+/* ------------------------------------------
+    LAYOUT
+------------------------------------------ */
+body[data-resihub-surface="admin"] #admin-student-content {
+    padding: 1.75rem 0 3rem;
+}
+
+body[data-resihub-surface="admin"] #admin-student-content .container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ------------------------------------------
+    HEADING
+------------------------------------------ */
+body[data-resihub-surface="admin"] .page-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] .page-heading p {
+    margin: 0;
+    font-size: .95rem;
+    color: rgba(255, 255, 255, .72);
+}
+
+/* ------------------------------------------
+    FILTERS
+------------------------------------------ */
+body[data-resihub-surface="admin"] .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+}
+
+body[data-resihub-surface="admin"] .liquid-input {
+    flex: 1 1 180px;
+    min-width: 0;
+    height: 44px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .55);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .92rem;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] .liquid-input::placeholder {
+    color: rgba(255, 255, 255, .5);
+}
+
+body[data-resihub-surface="admin"] .liquid-input:focus {
+    outline: none;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .22);
+}
+
+body[data-resihub-surface="admin"] .liquid-input option {
+    background: #061A4F;
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] #studentSearch {
+    flex: 2 1 260px;
+    cursor: text;
+}
+
+/* ------------------------------------------
+    TABLE
+------------------------------------------ */
+body[data-resihub-surface="admin"] .table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+    backdrop-filter: blur(16px) saturate(130%);
+    -webkit-backdrop-filter: blur(16px) saturate(130%);
+}
+
+body[data-resihub-surface="admin"] .admin-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: .92rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] .admin-table th {
+    padding: .95rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, .78);
+    background: rgba(6, 26, 79, .45);
+    border-bottom: 1px solid var(--ad-line);
+}
+
+body[data-resihub-surface="admin"] .admin-table td {
+    padding: .85rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] .admin-table tbody tr:hover {
+    background: rgba(91, 160, 255, .08);
+}
+
+body[data-resihub-surface="admin"] .admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+body[data-resihub-surface="admin"] .table-count {
+    margin: 0;
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+/* ------------------------------------------
+    STATUS BADGES
+------------------------------------------ */
+body[data-resihub-surface="admin"] .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: .25rem .65rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+body[data-resihub-surface="admin"] .status-badge.active {
+    color: #86efac;
+    background: rgba(34, 197, 94, .16);
+    border-color: rgba(34, 197, 94, .4);
+}
+
+body[data-resihub-surface="admin"] .status-badge.suspended {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, .16);
+    border-color: rgba(239, 68, 68, .4);
+}
+
+body[data-resihub-surface="admin"] .status-badge.pending {
+    color: #fcd34d;
+    background: rgba(245, 158, 11, .16);
+    border-color: rgba(245, 158, 11, .4);
+}
+
+/* ------------------------------------------
+    ACTION BUTTONS
+------------------------------------------ */
+body[data-resihub-surface="admin"] .admin-actions {
+    display: flex;
+    gap: .4rem;
+}
+
+body[data-resihub-surface="admin"] #studentTableBody .icon-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #studentTableBody .icon-btn:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+/* ------------------------------------------
+    PAGINATION
+------------------------------------------ */
+body[data-resihub-surface="admin"] .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .4rem;
+}
+
+body[data-resihub-surface="admin"] .page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 .6rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .9rem;
+    cursor: pointer;
+    transition: border-color .2s ease;
+}
+
+body[data-resihub-surface="admin"] .page-btn:not(:disabled):hover {
+    border-color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] .page-btn.active {
+    background: var(--ad-primary);
+    border-color: var(--ad-primary-hi);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .page-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* ------------------------------------------
+    EMPTY STATE
+------------------------------------------ */
+body[data-resihub-surface="admin"] #noStudentsFound {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noStudentsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noStudentsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noStudentsFound p {
+    margin: 0;
+}
+
+/* ------------------------------------------
+    DETAILS PANEL
+    modal.css styles the frame; these style the body.
+------------------------------------------ */
+body[data-resihub-surface="admin"] #studentDetailsModal .modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+body[data-resihub-surface="admin"] #studentDetailsModal .form-group {
+    margin: 0;
+}
+
+body[data-resihub-surface="admin"] #studentDetailsModal .form-group label {
+    display: block;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+body[data-resihub-surface="admin"] #studentDetailsModal .form-group p {
+    margin: .15rem 0 0;
+    font-size: .95rem;
+    color: var(--ad-text);
+    word-break: break-word;
+}

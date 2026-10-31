@@ -95,207 +95,79 @@
 
         <!-- Student Management -->
 
-        <section id="admin-student-content" class="auth-section reveal fade-up">
+        <section id="admin-student-content" class="page-section">
 
             <div class="container">
 
-                <!-- Page Header -->
+                <div class="page-heading">
+                    <h1>Students</h1>
+                    <p>Manage student accounts and registrations.</p>
+                </div>
 
-                <div class="section-header">
-                    <div class="container">
+                <!-- Filters -->
 
-                        <header class="auth-hero reveal fade-up">
+                <form id="studentFilterForm" class="filter-form liquid-form" role="search">
 
-                            <div id="hero-text">
+                    <input type="search" id="studentSearch" name="studentSearch" class="liquid-input"
+                        placeholder="Search students..." aria-label="Search students">
 
-                                <span class="page-badge floating-badge">
+                    <select id="studentStatus" name="studentStatus" class="liquid-input" aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                        <option value="pending">Pending</option>
+                    </select>
 
-                                    <i class="fa-solid fa-user-graduate"></i>
+                    <select id="studentCourse" name="studentCourse" class="liquid-input" aria-label="Filter by course">
+                        <option value="">All Courses</option>
+                    </select>
 
-                                    Student Management
+                </form>
 
-                                </span>
+                <!-- Table -->
 
-                                <h1>Manage Registered Students</h1>
+                <div class="table-wrapper">
 
-                                <p>
+                    <table class="admin-table data-table">
 
-                                    Search, review, suspend, activate and manage student accounts across the ResiHub
-                                    platform.
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Course</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
 
-                                </p>
+                        <tbody id="studentTableBody"></tbody>
 
-                            </div>
+                    </table>
 
-                            <!-- Statistics -->
+                </div>
 
-                            <section class="dashboard-section statistics-section glass-reveal">
+                <p id="studentCount" class="table-count" aria-live="polite"></p>
 
-                                <div class="dashboard-grid statistics-grid">
+                <div id="studentPagination" class="pagination"></div>
 
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
+                <!-- Empty State -->
 
-                                        <div class="card-icon">
-                                            <i class="fa-solid fa-users"></i>
-                                        </div>
+                <div id="noStudentsFound" class="empty-state hidden">
 
-                                        <div class="card-content">
-                                            <h3 id="totalStudents" class="count-up">0</h3>
-                                            <p>Total Students</p>
-                                        </div>
+                    <i class="fa-solid fa-users-slash"></i>
 
-                                    </article>
+                    <h3>No Students Found</h3>
 
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
+                    <p>No student matches your current search or filter.</p>
 
-                                        <div class="card-icon">
-                                            <i class="fa-solid fa-user-check"></i>
-                                        </div>
+                </div>
 
-                                        <div class="card-content">
-                                            <h3 id="activeStudents" class="count-up">0</h3>
-                                            <p>Active Accounts</p>
-                                        </div>
-
-                                    </article>
-
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                        <div class="card-icon">
-                                            <i class="fa-solid fa-user-slash"></i>
-                                        </div>
-
-                                        <div class="card-content">
-                                            <h3 id="suspendedStudents" class="count-up">0</h3>
-                                            <p>Suspended</p>
-                                        </div>
-
-                                    </article>
-
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                        <div class="card-icon">
-                                            <i class="fa-solid fa-user-clock"></i>
-                                        </div>
-
-                                        <div class="card-content">
-                                            <h3 id="newStudents" class="count-up">0</h3>
-                                            <p>New This Month</p>
-                                        </div>
-
-                                    </article>
-
-                                </div>
-
-                            </section>
-
-
-                            <!-- Search & Filters -->
-
-                            <section class="filter-section glass-card">
-
-                                <form id="studentFilterForm" class="filter-form liquid-form" role="search"
-                                    aria-label="Filter Students">
-                                    <label class="visually-hidden" for="studentSearch">
-
-                                        Search Students
-
-                                    </label>
-
-                                    <input type="search" id="studentSearch" name="studentSearch"
-                                        placeholder="Search by name, email or university..." autocomplete="off">
-
-                                    <label class="visually-hidden" for="studentStatus">
-
-                                        Student Status
-
-                                    </label>
-
-                                    <select id="studentStatus" name="studentStatus">
-
-                                        <option value="">All Status</option>
-
-                                        <option value="Active">Active</option>
-
-                                        <option value="Suspended">Suspended</option>
-
-                                        <option value="Pending">Pending Verification</option>
-
-                                    </select>
-
-                                    <label class="visually-hidden" for="studentUniversity">
-
-                                        University
-
-                                    </label>
-
-                                    <select id="studentUniversity" name="studentUniversity">
-
-                                        <option value="">All Universities</option>
-
-                                    </select>
-
-                                </form>
-
-                                <!-- Students Table -->
-
-                                <section class="table-section glass-reveal">
-
-                                    <div class="table-responsive">
-
-                                        <table class="admin-table">
-
-                                            <thead>
-
-                                                <tr>
-
-                                                    <th>Student</th>
-
-                                                    <th>University</th>
-
-                                                    <th>Email</th>
-
-                                                    <th>Status</th>
-
-                                                    <th>Joined</th>
-
-                                                    <th>Actions</th>
-
-                                                </tr>
-
-                                            </thead>
-
-                                            <tbody id="studentTableBody">
-
-                                                <!-- Loaded dynamically -->
-
-                                            </tbody>
-
-                                        </table>
-
-                                    </div>
-
-                                    <!-- Empty State -->
-
-                                    <div id="noStudentsFound" class="empty-state hidden">
-
-                                        <i class="fa-solid fa-users-slash"></i>
-
-                                        <h3>No Students Found</h3>
-
-                                        <p>
-
-                                            No student matches your current search or filter.
-
-                                        </p>
-
-                                    </div>
-
-                    </div>
+            </div>
 
         </section>
 
     </main>
+
     <!-- FOOTER -->
 
     <div id="footer"></div>
@@ -306,6 +178,3 @@
 </body>
 
 </html>
-
-
-

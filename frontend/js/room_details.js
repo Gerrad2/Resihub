@@ -299,6 +299,13 @@ function renderSidebar(listing) {
     el("propertyAvailability").textContent =
         listing.availability_status === "available" ? "Available Now" : "Currently Booked";
 
+    // A booked room takes no new bookings or chats
+    const bookable = listing.availability_status === "available";
+    for (const id of ["bookInspection", "chatBtn"]) {
+        const button = el(id);
+        if (button) button.style.display = bookable ? "" : "none";
+    }
+
     el("propertyDate").textContent = formatDate(listing.created_at);
 
     el("propertyDescription").textContent =

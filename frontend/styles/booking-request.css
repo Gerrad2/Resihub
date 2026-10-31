@@ -278,3 +278,45 @@ body.page-booking-requests .booking-note i {
         align-items: stretch;
     }
 }
+
+.booking-answer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.booking-answer-question {
+    font-size: .85rem;
+    color: inherit;
+    opacity: .85;
+}
+
+.booking-answer-yes,
+.booking-answer-no {
+    padding: .4rem .8rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.booking-answer-yes {
+    background: #22c55e;
+    color: #fff;
+}
+
+.booking-answer-no {
+    background: transparent;
+    border-color: rgba(239, 68, 68, .6);
+    color: #fca5a5;
+}
+
+.booking-answer-yes:disabled,
+.booking-answer-no:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
