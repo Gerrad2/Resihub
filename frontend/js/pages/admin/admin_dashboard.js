@@ -119,6 +119,9 @@ async function loadStats() {
 
         setText("bookingCount", numberFormat.format(bookings.total));
         renderChange("bookingCountChange", bookings.recent, bookings.previous);
+
+        setText("revenueCount", "\u2014");
+        setText("revenueChange", "Payments not tracked yet");
     } catch (error) {
         console.error("Could not load dashboard figures:", error);
         showUnavailable(["totalUsers", "listingCount", "bookingCount"]);
@@ -132,19 +135,21 @@ async function loadStats() {
 
 async function loadUsage() {
     try {
-        const [published, draft, archived] = await Promise.all(
-            ["published", "draft", "archived"].map((status) =>
+        const statuses = ["published", "pending_review", "draft", "archived"];
+        const [published, pending, draft, archived] = await Promise.all(
+            statuses.map((status) =>
                 count("listings", (query) => query.eq("publication_status", status))
             )
         );
 
-        const total = published + draft + archived;
+        const total = published + pending + draft + archived;
         const percent = total ? Math.round((published / total) * 100) : 0;
 
         setText("platformUsagePercent", `${percent}%`);
         setText("usagePublished", numberFormat.format(published));
         setText("usageDraft", numberFormat.format(draft));
         setText("usageArchived", numberFormat.format(archived));
+        setUsagePending(pending);
 
         $("platformUsageRing")?.style.setProperty("--usage", `${percent}%`);
     } catch (error) {
@@ -152,6 +157,27 @@ async function loadUsage() {
         setText("platformUsagePercent", "\u2014");
         showUnavailable(["usagePublished", "usageDraft", "usageArchived"]);
     }
+}
+
+/* Adds a "Pending review" line to the usage legend after Published.
+   Built here so the HTML does not need changing. Rebuilt on each load. */
+function setUsagePending(value) {
+    const legend = document.querySelector(".usage-legend");
+    if (!legend) return;
+
+    legend.querySelector("[data-usage='pending']")?.remove();
+
+    const item = document.createElement("li");
+    item.dataset.usage = "pending";
+
+    const dot = document.createElement("span");
+    dot.className = "dot dot-pending";
+
+    const strong = document.createElement("strong");
+    strong.textContent = numberFormat.format(value);
+
+    item.append(dot, " Pending review ", strong);
+    legend.insertBefore(item, legend.children[1] ?? null);
 }
 
 /* ---------- Recent activity ---------- */
