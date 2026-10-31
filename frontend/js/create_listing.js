@@ -165,7 +165,7 @@ async function submitListing(status) {
 
         const { error: publishError } = await supabase
             .from("listings")
-            .update({ publication_status: "published" })
+            .update({ publication_status: "pending_review" })
             .eq("id", created.id)
             .eq("landlord_id", me.id);
 

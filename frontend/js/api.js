@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * ResiHub 2.0
+ * ResiHub 3.0
  * Supabase API Layer
  * ============================================================
  *
@@ -747,7 +747,7 @@ export async function createListing(
 
             publication_status:
                 listing.publication_status ??
-                "published"
+                "draft"
         };
 
 

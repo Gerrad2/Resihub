@@ -603,3 +603,8 @@ body.page-details .btn-primary:active,
 body.page-details .btn-outline:active {
     transform: scale(.97);
 }
+
+/* Review modal: hide it when closed. modal.css only hides .modal.hidden, so Cancel, X and Escape never closed it. */
+#reviewModal:not(.active) {
+    display: none;
+}

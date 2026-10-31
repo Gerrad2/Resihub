@@ -205,7 +205,7 @@ async function publishListing() {
 
     const { error } = await supabase
         .from("listings")
-        .update({ ...payload, publication_status: "published" })
+        .update({ ...payload, publication_status: "pending_review" })
         .eq("id", listingId)
         .eq("landlord_id", me.id);
 
@@ -217,9 +217,9 @@ async function publishListing() {
         return;
     }
 
-    listing = { ...listing, ...payload, publication_status: "published" };
+    listing = { ...listing, ...payload, publication_status: "pending_review" };
     updatePublishButton();
-    setMessage("Your listing is now published.", "success");
+    setMessage("Your listing has been sent for admin review.", "success");
     showToast("Listing published.", { type: "success" });
 }
 
