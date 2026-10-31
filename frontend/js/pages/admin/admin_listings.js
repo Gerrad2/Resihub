@@ -4,12 +4,13 @@ import { showToast } from "../../ui/toast.js";
 
 /* =========================================
    ADMIN LISTINGS
-   Matches the approved design (screen 9).
-   Admins see every listing and approve or reject
-   the ones waiting for review. Approve and reject
-   call approve_listing / reject_listing in the database.
+   Matches the design (screen 9).
+   Admins see every listing, view it, and approve or reject
+   listings waiting for review. Approve and reject call
+   approve_listing / reject_listing in the database.
 ========================================= */
 
+const PAGE_SIZE = 5;
 const PLACEHOLDER = "../assets/images/placeholder-room.jpg";
 
 const naira = new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 });
@@ -73,26 +74,27 @@ function renderStats() {
     setText("featuredListings", "");
 }
 
-function renderFilters() {
-    const regionSelect = $("listingState");
-    if (regionSelect) {
-        const keep = regionSelect.value;
-        const regions = [...new Set(state.listings.map((listing) => listing.state).filter(Boolean))].sort();
+function renderRegionOptions() {
+    const select = $("listingState");
+    if (!select) return;
 
-        regionSelect.replaceChildren();
-        const all = document.createElement("option");
-        all.value = "";
-        all.textContent = "All States";
-        regionSelect.append(all);
+    const keep = select.value;
+    const regions = [...new Set(state.listings.map((listing) => listing.state).filter(Boolean))].sort();
 
-        regions.forEach((region) => {
-            const option = document.createElement("option");
-            option.value = region;
-            option.textContent = region;
-            regionSelect.append(option);
-        });
-        regionSelect.value = regions.includes(keep) ? keep : "";
-    }
+    select.replaceChildren();
+    const all = document.createElement("option");
+    all.value = "";
+    all.textContent = "All States";
+    select.append(all);
+
+    regions.forEach((region) => {
+        const option = document.createElement("option");
+        option.value = region;
+        option.textContent = region;
+        select.append(option);
+    });
+
+    select.value = regions.includes(keep) ? keep : "";
 }
 
 /* ---------- Filtering ---------- */
@@ -143,30 +145,42 @@ function statusCell(listing) {
     return td;
 }
 
-function actionButton(label, className, onClick) {
+function iconButton(icon, label, action) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = className;
-    button.textContent = label;
-    button.addEventListener("click", onClick);
+    button.className = "icon-btn";
+    button.dataset.action = action;
+    button.setAttribute("aria-label", label);
+    button.title = label;
+
+    const glyph = document.createElement("i");
+    glyph.className = `fa-solid ${icon}`;
+    button.append(glyph);
+
     return button;
 }
 
-function actionsCell(listing, row) {
+function textButton(label, className, action) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = className;
+    button.dataset.action = action;
+    button.textContent = label;
+    return button;
+}
+
+function actionsCell(listing) {
     const td = document.createElement("td");
     const wrap = document.createElement("div");
     wrap.className = "admin-actions";
 
+    wrap.append(iconButton("fa-eye", "View listing", "view"));
+
     if (listing.publication_status === "pending_review") {
         wrap.append(
-            actionButton("Approve", "btn btn-primary btn-sm", (event) => approve(listing, row, event.currentTarget)),
-            actionButton("Reject", "btn btn-outline btn-sm", (event) => reject(listing, row, event.currentTarget))
+            textButton("Approve", "btn btn-primary btn-sm", "approve"),
+            textButton("Reject", "btn btn-outline btn-sm", "reject")
         );
-    } else {
-        const note = document.createElement("span");
-        note.className = "admin-listing-note";
-        note.textContent = "—";
-        wrap.append(note);
     }
 
     td.append(wrap);
@@ -183,7 +197,7 @@ function createRow(listing) {
         cell(listing.area || "—"),
         cell(listing.price != null ? naira.format(listing.price) : ""),
         statusCell(listing),
-        actionsCell(listing, row)
+        actionsCell(listing)
     );
     return row;
 }
@@ -194,14 +208,52 @@ function renderTable() {
     if (!body) return;
 
     const rows = filteredListings();
-    body.replaceChildren(...rows.map(createRow));
+    const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+    state.page = Math.min(state.page, pages);
+
+    const start = (state.page - 1) * PAGE_SIZE;
+    body.replaceChildren(...rows.slice(start, start + PAGE_SIZE).map(createRow));
 
     if (empty) empty.classList.toggle("hidden", rows.length > 0);
+    renderPagination(pages);
+}
+
+function pageButton(label, page, { active = false, disabled = false } = {}) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `page-btn${active ? " active" : ""}`;
+    button.dataset.page = String(page);
+    button.textContent = label;
+    button.disabled = disabled;
+    return button;
+}
+
+function renderPagination(pages) {
+    const nav = $("listingPagination");
+    if (!nav) return;
+
+    if (pages <= 1) {
+        nav.replaceChildren();
+        return;
+    }
+
+    const items = [pageButton("‹", state.page - 1, { disabled: state.page === 1 })];
+
+    for (let page = 1; page <= pages; page += 1) {
+        items.push(pageButton(String(page), page, { active: page === state.page }));
+    }
+
+    items.push(pageButton("›", state.page + 1, { disabled: state.page === pages }));
+    nav.replaceChildren(...items);
 }
 
 /* ---------- Actions ---------- */
 
-async function approve(listing, row, button) {
+function listingById(id) {
+    return state.listings.find((listing) => listing.id === id);
+}
+
+async function approve(listing, button) {
     if (!confirm(`Approve "${listing.title}"? It will then be visible to students.`)) return;
 
     button.disabled = true;
@@ -217,7 +269,7 @@ async function approve(listing, row, button) {
     await refresh();
 }
 
-async function reject(listing, row, button) {
+async function reject(listing, button) {
     const reason = window.prompt(`Why are you rejecting "${listing.title}"? The landlord will see this reason.`);
     if (reason === null) return;
     if (!reason.trim()) {
@@ -241,17 +293,39 @@ async function reject(listing, row, button) {
     await refresh();
 }
 
+function viewListing(listing) {
+    window.open(`../general/room_details.htm?id=${encodeURIComponent(listing.id)}`, "_blank", "noopener");
+}
+
 async function refresh() {
     await loadListings();
     renderStats();
-    renderFilters();
+    renderRegionOptions();
     renderTable();
 }
 
 /* ---------- Events ---------- */
 
 function bindEvents() {
-    $("listingTableBody")?.addEventListener("click", () => { });
+    $("listingTableBody")?.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-action]");
+        if (!button) return;
+
+        const listing = listingById(button.closest("tr")?.dataset.listingId);
+        if (!listing) return;
+
+        if (button.dataset.action === "view") viewListing(listing);
+        if (button.dataset.action === "approve") approve(listing, button);
+        if (button.dataset.action === "reject") reject(listing, button);
+    });
+
+    $("listingPagination")?.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-page]");
+        if (!button || button.disabled) return;
+
+        state.page = Number(button.dataset.page);
+        renderTable();
+    });
 
     $("listingFilterForm")?.addEventListener("submit", (event) => {
         event.preventDefault();

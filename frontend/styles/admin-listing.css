@@ -1,9 +1,46 @@
 /* ==========================================
    ADMIN LISTINGS (admin/admin_listings.htm)
-   Load after admin-students.css, which styles the shared
-   filter, table, badge and button classes.
+   Matches the design (screen 9).
+   Load after admin-students.css (shared filter, table,
+   badge, pagination) and admin-dashboard.css (stat cards).
+   Scoped to body[data-resihub-surface="admin"].
 ========================================== */
 
+/* ------------------------------------------
+    LAYOUT
+------------------------------------------ */
+body[data-resihub-surface="admin"] #adminListingsContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #adminListingsContent .liquid-group {
+    position: relative;
+    flex: 2 1 260px;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+body[data-resihub-surface="admin"] #adminListingsContent .liquid-group>i {
+    position: absolute;
+    left: .85rem;
+    color: var(--ad-accent);
+    pointer-events: none;
+}
+
+body[data-resihub-surface="admin"] #adminListingsContent .liquid-group .liquid-input {
+    width: 100%;
+    padding-left: 2.4rem;
+}
+
+/* ------------------------------------------
+    TABLE
+------------------------------------------ */
 body[data-resihub-surface="admin"] .admin-listing-thumb {
     width: 64px;
     height: 48px;
@@ -12,6 +49,51 @@ body[data-resihub-surface="admin"] .admin-listing-thumb {
     border: 1px solid var(--ad-line);
 }
 
-body[data-resihub-surface="admin"] .admin-listing-note {
-    color: rgba(255, 255, 255, .55);
+body[data-resihub-surface="admin"] #listingTableBody .icon-btn {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #listingTableBody .icon-btn:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #listingTableBody .admin-actions {
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* ------------------------------------------
+    EMPTY STATE
+------------------------------------------ */
+body[data-resihub-surface="admin"] #noListingsFound {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noListingsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noListingsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noListingsFound p {
+    margin: 0;
 }

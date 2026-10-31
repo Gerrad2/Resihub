@@ -98,275 +98,149 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
-        <section id="adminListingsContent" class="page-section glass-reveal floating-section">
+        <section id="adminListingsContent" class="page-section">
 
-            <div class="container page-container">
+            <div class="page-container">
 
-                <!-- ==========================================
-                     Page Header
-                =========================================== -->
+                <!-- Heading -->
 
-                <header class="section-header">
+                <header class="dashboard-heading">
+                    <div>
+                        <h1>Listings</h1>
+                        <p>Review and manage property listings.</p>
+                    </div>
+                </header>
 
-                    <div class="container">
+                <!-- Key figures -->
 
-                        <header class="auth-hero reveal fade-up">
+                <section class="statistics-section" aria-label="Listing figures">
+                    <div class="statistics-grid">
 
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge glass-card">
-
-                                    <i class="fa-solid fa-house"></i>
-
-                                    Listing Management
-
-                                </span>
-
-                                <h1>Manage Property Listings</h1>
-
-                                <p>
-
-                                    Review, approve, suspend, feature and manage accommodation listings across Nigeria.
-
-                                </p>
-
-                        </header>
-
-                        <!-- ==========================================
-                     Statistics
-                =========================================== -->
-
-                        <section class="dashboard-section statistics-section glass-reveal">
-
-                            <div class="dashboard-grid statistics-grid">
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-house"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="totalListings" class="count-up">0</h3>
-
-                                        <p>Total Listings</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-circle-check"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="approvedListings" class="count-up">0</h3>
-
-                                        <p>Approved</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-clock"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="pendingListings" class="count-up">0</h3>
-
-                                        <p>Pending Approval</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-star"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="featuredListings" class="count-up">0</h3>
-
-                                        <p>Featured Listings</p>
-
-                                    </div>
-
-                                </article>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-cyan"><i class="fa-solid fa-house" aria-hidden="true"></i>
                             </div>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Search & Filters
-                =========================================== -->
-
-                        <section class="filter-section glass-card">
-
-                            <form id="listingFilterForm" class="filter-form liquid-form" role="search"
-                                aria-label="Filter Listings">
-
-                                <div class="liquid-group">
-
-                                    <input type="search" id="listingSearch" class="liquid-input"
-                                        placeholder="Search title, landlord or location..." autocomplete="off">
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="listingStatus" class="liquid-input">
-
-                                        <option value="">All Status</option>
-
-                                        <option value="Approved">Approved</option>
-
-                                        <option value="Pending">Pending</option>
-
-                                        <option value="Featured">Featured</option>
-
-                                        <option value="Suspended">Suspended</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="propertyType" class="liquid-input">
-
-                                        <option value="">All Types</option>
-
-                                        <option value="Self Contain">Self Contain</option>
-
-                                        <option value="Single Room">Single Room</option>
-
-                                        <option value="Room and Parlour">Room & Parlour</option>
-
-                                        <option value="Flat">Flat</option>
-
-                                        <option value="Hostel">Hostel</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="listingState" class="liquid-input">
-
-                                        <option value="">All States</option>
-
-                                    </select>
-
-                                </div>
-
-                            </form>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Listings Table
-                =========================================== -->
-
-                        <section class="table-section glass-reveal">
-
-                            <div class="table-responsive">
-
-                                <table class="admin-table data-table">
-
-                                    <thead>
-
-                                        <tr>
-
-                                            <th>Property</th>
-
-                                            <th>Landlord</th>
-
-                                            <th>Location</th>
-
-                                            <th>Price</th>
-
-                                            <th>Status</th>
-
-                                            <th>Listed</th>
-
-                                            <th>Actions</th>
-
-                                        </tr>
-
-                                    </thead>
-
-                                    <tbody id="listingTableBody">
-
-                                        <!-- Loaded Dynamically -->
-
-                                    </tbody>
-
-                                </table>
-
+                            <div class="card-content">
+                                <p class="card-label">Total Listings</p>
+                                <h2 id="totalListings"></h2>
                             </div>
+                        </article>
 
-                        </section>
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-teal"><i class="fa-solid fa-circle-check"
+                                    aria-hidden="true"></i></div>
+                            <div class="card-content">
+                                <p class="card-label">Approved</p>
+                                <h2 id="approvedListings"></h2>
+                            </div>
+                        </article>
 
-                        <!-- ==========================================
-                     Empty State
-                =========================================== -->
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-indigo"><i class="fa-solid fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <p class="card-label">Pending Review</p>
+                                <h2 id="pendingListings"></h2>
+                            </div>
+                        </article>
 
-                        <div id="noListingsFound" class="empty-state hidden">
-
-                            <i class="fa-solid fa-house-circle-xmark"></i>
-
-                            <h3>No Listings Found</h3>
-
-                            <p>
-
-                                No property listing matches your current search or filters.
-
-                            </p>
-
-                        </div>
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-blue"><i class="fa-solid fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <p class="card-label">Featured</p>
+                                <h2 id="featuredListings"></h2>
+                            </div>
+                        </article>
 
                     </div>
+                </section>
+
+                <!-- Filters -->
+
+                <form id="listingFilterForm" class="filter-form liquid-form" role="search">
+
+                    <div class="liquid-group">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="listingSearch" name="listingSearch" class="liquid-input"
+                            placeholder="Search listings..." aria-label="Search listings">
+                    </div>
+
+                    <select id="listingStatus" name="listingStatus" class="liquid-input" aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Featured">Featured</option>
+                        <option value="Suspended">Suspended</option>
+                    </select>
+
+                    <select id="propertyType" name="propertyType" class="liquid-input"
+                        aria-label="Filter by property type">
+                        <option value="">All Types</option>
+                        <option value="Self Contain">Self Contain</option>
+                        <option value="Single Room">Single Room</option>
+                        <option value="Room and Parlour">Room &amp; Parlour</option>
+                        <option value="Flat">Flat</option>
+                        <option value="Hostel">Hostel</option>
+                    </select>
+
+                    <select id="listingState" name="listingState" class="liquid-input" aria-label="Filter by state">
+                        <option value="">All States</option>
+                    </select>
+
+                </form>
+
+                <!-- Table -->
+
+                <div class="table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Location</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="listingTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+                <div id="listingPagination" class="pagination"></div>
+
+                <!-- Empty State -->
+
+                <div id="noListingsFound" class="empty-state hidden">
+
+                    <i class="fa-solid fa-house-circle-xmark" aria-hidden="true"></i>
+
+                    <h3>No Listings Found</h3>
+
+                    <p>No listing matches your current search or filter.</p>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-
