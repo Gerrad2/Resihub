@@ -120,8 +120,9 @@ async function loadStats() {
         setText("bookingCount", numberFormat.format(bookings.total));
         renderChange("bookingCountChange", bookings.recent, bookings.previous);
 
-        setText("revenueCount", "\u2014");
-        setText("revenueChange", "Payments not tracked yet");
+        // Revenue stays empty until payments exist (e.g. landlord verification fees).
+        setText("revenueCount", "");
+        setText("revenueChange", "");
     } catch (error) {
         console.error("Could not load dashboard figures:", error);
         showUnavailable(["totalUsers", "listingCount", "bookingCount"]);
