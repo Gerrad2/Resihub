@@ -901,8 +901,9 @@ export async function init() {
         getCurrentUser(),
     ]);
 
-    if (!listingResult.success) {
-        showErrorState(listingResult.error?.message || "This listing could not be found.");
+    // A listing that is not approved (or was removed) comes back as no data, not as an error
+    if (!listingResult.success || !listingResult.data) {
+        showErrorState(listingResult.error?.message || "This listing is not available.");
         return;
     }
 

@@ -47,6 +47,10 @@ function setText(id, value) {
     if (el) el.textContent = value;
 }
 
+function regionOf(listing) {
+    return listing.universities?.location || "";
+}
+
 function firstImage(listing) {
     const images = [...(listing.listing_images ?? [])].sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0));
     return images[0]?.image_url || PLACEHOLDER;
@@ -57,7 +61,7 @@ function firstImage(listing) {
 async function loadListings() {
     const { data, error } = await supabase
         .from("listings")
-        .select("id, title, area, state, price, property_type, publication_status, created_at, listing_images(image_url, display_order)")
+        .select("id, title, area, price, property_type, publication_status, created_at, universities(location), listing_images(image_url, display_order)")
         .order("created_at", { ascending: false });
 
     if (error) throw error;
@@ -79,7 +83,7 @@ function renderRegionOptions() {
     if (!select) return;
 
     const keep = select.value;
-    const regions = [...new Set(state.listings.map((listing) => listing.state).filter(Boolean))].sort();
+    const regions = [...new Set(state.listings.map(regionOf).filter(Boolean))].sort();
 
     select.replaceChildren();
     const all = document.createElement("option");
@@ -105,10 +109,10 @@ function filteredListings() {
     return state.listings.filter((listing) => {
         if (wantedStatus && listing.publication_status !== wantedStatus) return false;
         if (state.type && listing.property_type !== state.type) return false;
-        if (state.region && listing.state !== state.region) return false;
+        if (state.region && regionOf(listing) !== state.region) return false;
 
         if (state.search) {
-            const haystack = [listing.title, listing.area, listing.state].filter(Boolean).join(" ").toLowerCase();
+            const haystack = [listing.title, listing.area, regionOf(listing)].filter(Boolean).join(" ").toLowerCase();
             if (!haystack.includes(state.search)) return false;
         }
         return true;
@@ -128,6 +132,10 @@ function imageCell(listing) {
     const img = document.createElement("img");
     img.className = "admin-listing-thumb";
     img.src = firstImage(listing);
+    img.onerror = () => {
+        img.onerror = null;
+        img.src = PLACEHOLDER;
+    };
     img.alt = listing.title || "Listing photo";
     td.append(img);
     return td;
@@ -145,18 +153,16 @@ function statusCell(listing) {
     return td;
 }
 
-function iconButton(icon, label, action) {
+const EYE_ICON = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>`;
+
+function iconButton(label, action) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "icon-btn";
     button.dataset.action = action;
     button.setAttribute("aria-label", label);
     button.title = label;
-
-    const glyph = document.createElement("i");
-    glyph.className = `fa-solid ${icon}`;
-    button.append(glyph);
-
+    button.innerHTML = EYE_ICON;
     return button;
 }
 
@@ -174,7 +180,7 @@ function actionsCell(listing) {
     const wrap = document.createElement("div");
     wrap.className = "admin-actions";
 
-    wrap.append(iconButton("fa-eye", "View listing", "view"));
+    wrap.append(iconButton("View listing", "view"));
 
     if (listing.publication_status === "pending_review") {
         wrap.append(
@@ -294,7 +300,7 @@ async function reject(listing, button) {
 }
 
 function viewListing(listing) {
-    window.open(`../general/room_details.htm?id=${encodeURIComponent(listing.id)}`, "_blank", "noopener");
+    window.location.href = `../general/room_details.htm?id=${encodeURIComponent(listing.id)}`;
 }
 
 async function refresh() {

@@ -97,3 +97,45 @@ body[data-resihub-surface="admin"] #noListingsFound h3 {
 body[data-resihub-surface="admin"] #noListingsFound p {
     margin: 0;
 }
+
+/* ------------------------------------------
+    ACTION BUTTONS
+    The shared .btn classes come from the public stylesheet, so the
+    admin styles are defined here.
+------------------------------------------ */
+body[data-resihub-surface="admin"] #listingTableBody .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    font-family: var(--ad-font-body);
+    font-size: .85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+body[data-resihub-surface="admin"] #listingTableBody .btn-primary {
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #listingTableBody .btn-outline {
+    background: transparent;
+    border-color: rgba(239, 68, 68, .6);
+    color: #fca5a5;
+}
+
+body[data-resihub-surface="admin"] #listingTableBody .btn:hover:not(:disabled) {
+    border-color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #listingTableBody .btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
