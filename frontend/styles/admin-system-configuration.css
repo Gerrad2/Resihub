@@ -1,0 +1,226 @@
+/* ==========================================
+   ADMIN SYSTEM CONFIGURATION (admin/admin_system_configuration.htm)
+   Matches design 18. Read-only.
+   Scoped to #systemConfigurationContent.
+========================================== */
+
+#systemConfigurationContent .cfg-wrap {
+    width: min(1200px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Heading */
+#systemConfigurationContent .cfg-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#systemConfigurationContent .cfg-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#systemConfigurationContent .cfg-heading p {
+    margin: 0;
+    font-size: .95rem;
+    color: rgba(255, 255, 255, .72);
+}
+
+#systemConfigurationContent .cfg-readonly {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 .8rem;
+    border-radius: 999px;
+    border: 1px solid rgba(110, 165, 255, .26);
+    background: rgba(18, 52, 130, .46);
+    color: rgba(225, 236, 255, .84);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+/* Two columns: menu and settings card */
+#systemConfigurationContent .cfg-body {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+#systemConfigurationContent .cfg-card {
+    border-radius: 18px;
+    background: rgba(14, 42, 110, .45);
+    border: 1px solid rgba(110, 165, 255, .24);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+}
+
+/* Menu */
+#systemConfigurationContent .cfg-nav {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    padding: .8rem;
+}
+
+#systemConfigurationContent .cfg-nav-item {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    width: 100%;
+    margin: 0;
+    padding: .7rem .8rem;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: rgba(225, 236, 255, .85);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .92rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: background .2s ease, box-shadow .2s ease;
+}
+
+#systemConfigurationContent .cfg-nav-item i {
+    width: 18px;
+    text-align: center;
+    color: #3FD0FF;
+}
+
+#systemConfigurationContent .cfg-nav-item:hover {
+    background: rgba(91, 160, 255, .12);
+}
+
+#systemConfigurationContent .cfg-nav-item.active {
+    background: linear-gradient(135deg, #2F7BFF, #1B56D6);
+    color: #ffffff;
+    box-shadow: 0 0 18px rgba(47, 123, 255, .35);
+}
+
+#systemConfigurationContent .cfg-nav-item.active i {
+    color: #ffffff;
+}
+
+/* Settings card */
+#systemConfigurationContent .cfg-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 340px;
+    padding: 1.4rem 1.5rem;
+}
+
+#systemConfigurationContent .cfg-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    flex: 1;
+}
+
+#systemConfigurationContent .cfg-panel.hidden {
+    display: none;
+}
+
+#systemConfigurationContent .cfg-panel h2 {
+    margin: 0;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid rgba(110, 165, 255, .22);
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Boxed fields in two columns */
+#systemConfigurationContent .cfg-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1.4rem;
+}
+
+#systemConfigurationContent .cfg-field {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    min-width: 0;
+}
+
+#systemConfigurationContent .cfg-field-label {
+    font-size: .8rem;
+    color: rgba(225, 236, 255, .72);
+}
+
+#systemConfigurationContent .cfg-field-value {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 .9rem;
+    border-radius: 10px;
+    border: 1px solid rgba(110, 165, 255, .24);
+    background: rgba(6, 26, 79, .6);
+    color: #ffffff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .92rem;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+#systemConfigurationContent .cfg-field-value.ok {
+    color: #4ade80;
+}
+
+#systemConfigurationContent .cfg-field-value.bad {
+    color: #f87171;
+}
+
+#systemConfigurationContent .cfg-field-wide {
+    grid-column: span 2;
+}
+
+#systemConfigurationContent .cfg-note {
+    margin: 0;
+    font-size: .88rem;
+    color: rgba(190, 210, 245, .72);
+}
+
+#systemConfigurationContent .cfg-link {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 40px;
+    padding: 0 1.1rem;
+    margin-top: auto;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #5BA0FF, #2F7BFF);
+    color: #ffffff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 18px rgba(47, 123, 255, .35);
+}
+
+@media (max-width: 860px) {
+    #systemConfigurationContent .cfg-body {
+        grid-template-columns: 1fr;
+    }
+
+    #systemConfigurationContent .cfg-fields {
+        grid-template-columns: 1fr;
+    }
+
+    #systemConfigurationContent .cfg-field-wide {
+        grid-column: auto;
+    }
+}

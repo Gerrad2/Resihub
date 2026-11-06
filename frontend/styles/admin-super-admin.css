@@ -1,0 +1,254 @@
+/* ==========================================
+   SUPER ADMIN (admin/super_admin.htm)
+   Matches design 20. Scoped to #superAdminPage.
+========================================== */
+
+#superAdminPage .sa-wrap {
+    width: min(1200px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+#superAdminPage .sa-heading h1 {
+    margin: 0 0 .3rem;
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#superAdminPage .sa-heading p {
+    margin: 0;
+    font-size: .95rem;
+    color: rgba(255, 255, 255, .72);
+}
+
+#superAdminPage .hidden {
+    display: none;
+}
+
+#superAdminPage .sa-card {
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(42, 92, 190, .42), rgba(14, 42, 110, .36));
+    border: 1px solid rgba(110, 165, 255, .26);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+    padding: 1.3rem 1.4rem;
+}
+
+#superAdminPage .sa-card h2 {
+    margin: 0 0 1rem;
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+#superAdminPage .sa-denied {
+    padding: 1.5rem;
+}
+
+#superAdminPage .sa-denied h2 {
+    margin: 0 0 .5rem;
+}
+
+#superAdminPage .sa-denied p {
+    margin: 0;
+    color: rgba(225, 236, 255, .84);
+}
+
+/* Top row: profile and quick actions */
+#superAdminPage .sa-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 1rem;
+}
+
+#superAdminPage .sa-profile {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+#superAdminPage .sa-avatar {
+    flex: 0 0 96px;
+    width: 96px;
+    height: 96px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #5BA0FF, #1B56D6);
+    border: 2px solid rgba(255, 255, 255, .55);
+    box-shadow: 0 0 26px rgba(47, 123, 255, .45);
+    color: #ffffff;
+    font-size: 2.2rem;
+}
+
+#superAdminPage .sa-profile-text {
+    flex: 1 1 200px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
+
+#superAdminPage .sa-profile-text h2 {
+    margin: 0;
+    font-size: 1.15rem;
+}
+
+#superAdminPage .sa-access {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .9rem;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+#superAdminPage .sa-access i {
+    color: #4ade80;
+}
+
+#superAdminPage .sa-email {
+    margin: 0;
+    font-size: .9rem;
+    color: rgba(190, 210, 245, .72);
+    word-break: break-all;
+}
+
+#superAdminPage .sa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 42px;
+    padding: 0 1.1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #5BA0FF, #2F7BFF);
+    color: #ffffff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .92rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 18px rgba(47, 123, 255, .35);
+    white-space: nowrap;
+}
+
+/* Quick actions: two columns of tiles */
+#superAdminPage .sa-action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem;
+}
+
+#superAdminPage .sa-action {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    padding: .9rem 1rem;
+    border-radius: 12px;
+    background: rgba(6, 26, 79, .55);
+    border: 1px solid rgba(110, 165, 255, .18);
+    color: #ffffff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .95rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#superAdminPage .sa-action:hover {
+    border-color: #5BA0FF;
+    box-shadow: 0 0 18px rgba(47, 123, 255, .3);
+}
+
+#superAdminPage .sa-action-icon {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: rgba(63, 208, 255, .12);
+    color: #3FD0FF;
+}
+
+/* Stat cards: coloured icon box, label and value */
+#superAdminPage .sa-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: .9rem;
+}
+
+#superAdminPage .sa-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.3rem;
+}
+
+#superAdminPage .sa-stat-icon {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+#superAdminPage .sa-tone-blue {
+    background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+}
+
+#superAdminPage .sa-tone-cyan {
+    background: linear-gradient(135deg, #22D3EE, #0891B2);
+}
+
+#superAdminPage .sa-tone-indigo {
+    background: linear-gradient(135deg, #818CF8, #4F46E5);
+}
+
+#superAdminPage .sa-tone-green {
+    background: linear-gradient(135deg, #34D399, #059669);
+}
+
+#superAdminPage .sa-stat>div {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    min-width: 0;
+}
+
+#superAdminPage .sa-stat-label {
+    font-size: .85rem;
+    color: rgba(190, 210, 245, .72);
+}
+
+#superAdminPage .sa-stat-value {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#superAdminPage .sa-stat-soon .sa-stat-value {
+    font-size: 1.05rem;
+    color: rgba(225, 236, 255, .7);
+}
+
+@media (max-width: 860px) {
+    #superAdminPage .sa-top {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    #superAdminPage .sa-action-grid {
+        grid-template-columns: 1fr;
+    }
+}

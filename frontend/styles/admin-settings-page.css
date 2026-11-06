@@ -1,0 +1,271 @@
+/* ==========================================
+   ADMIN SETTINGS PAGE (admin/admin_settings.htm)
+   Load after admin-students.css (shared inputs and buttons).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #adminSettingsContent .container {
+    width: min(1200px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .section-header h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .section-header p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-nav,
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panels {
+    padding: 1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-nav {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-nav-item {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem .8rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(255, 255, 255, .75);
+    font-family: var(--ad-font-body);
+    font-size: .92rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-nav-item i {
+    width: 18px;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-nav-item:hover {
+    border-color: var(--ad-line);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-nav-item.active {
+    background: var(--ad-primary);
+    border-color: var(--ad-primary-hi);
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel h2 {
+    margin: .2rem 0 1rem;
+    font-family: var(--ad-font-head);
+    font-size: 1.15rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    margin-bottom: .9rem;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel label {
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel select,
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel input[type="file"] {
+    width: 100%;
+    height: 44px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .6);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .95rem;
+    box-sizing: border-box;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel select:focus {
+    outline: none;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .2);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel select option {
+    background: #061A4F;
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel input:disabled,
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel select:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-hint {
+    margin: .4rem 0 0;
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+/* Switch rows: label on the left, toggle on the right */
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .85rem .9rem;
+    margin-bottom: .6rem;
+    border-radius: var(--ad-radius);
+    background: rgba(6, 26, 79, .5);
+    border: 1px solid var(--ad-line-soft);
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row span {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row strong {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row small {
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, .35);
+    position: relative;
+    cursor: pointer;
+    transition: background .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .2s ease;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .switch-row input[type="checkbox"]:checked::after {
+    transform: translateX(20px);
+}
+
+/* Maintenance buttons */
+body[data-resihub-surface="admin"] #adminSettingsContent .maintenance-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: .8rem;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: transparent;
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .btn-outline:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1.1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    font-family: var(--ad-font-body);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .btn-primary:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-save-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ad-line);
+}
+
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-save-bar.hidden,
+body[data-resihub-surface="admin"] #adminSettingsContent .settings-panel.hidden {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    body[data-resihub-surface="admin"] #adminSettingsContent .settings-layout {
+        grid-template-columns: 1fr;
+    }
+}

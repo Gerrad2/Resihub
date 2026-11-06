@@ -35,11 +35,26 @@
 @import url("system.css");
 @import url("verify-account.css");
 @import url("admin-header.css");
+@import url("admin-header-menu.css");
 @import url("admin-dashboard.css");
 @import url("admin-students.css");
 @import url("admin-bookings.css");
 @import url("admin-footer.css");
 @import url("admin-listing.css");
+@import url("admin-notifications.css");
+@import url("admin-broadcast-messages.css");
+@import url("admin-support-tickets.css");
+@import url("admin-profile.css");
+@import url("admin-settings.css");
+@import url("admin-activity-logs.css");
+@import url("admin-audit-trail.css");
+@import url("admin-settings-page.css");
+@import url("admin-reports.css");
+@import url("admin-analytics.css");
+@import url("admin-system-health.css");
+@import url("admin-system-configuration.css");
+@import url("admin-backup-restore.css");
+@import url("admin-super-admin.css");
 
 /* ---------- Verification badges and notices ---------- */
 .trust-badge {

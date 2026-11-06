@@ -1,0 +1,179 @@
+/* ==========================================
+   ADMIN SUPPORT TICKETS (admin/admin_support_tickets.htm)
+   Load after admin-students.css (filter, table, badge,
+   pagination and icon styles).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #supportTicketsContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #supportTicketsContent .dashboard-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #supportTicketsContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #supportTicketsContent .liquid-group {
+    position: relative;
+    flex: 2 1 260px;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+body[data-resihub-surface="admin"] #supportTicketsContent .liquid-group>i {
+    position: absolute;
+    left: .85rem;
+    color: var(--ad-accent);
+    pointer-events: none;
+}
+
+body[data-resihub-surface="admin"] #supportTicketsContent .liquid-group .liquid-input {
+    width: 100%;
+    padding-left: 2.4rem;
+}
+
+body[data-resihub-surface="admin"] #supportTicketsTable .icon-btn {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #supportTicketsTable .icon-btn:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #noTicketsFound {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noTicketsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noTicketsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noTicketsFound p {
+    margin: 0;
+}
+
+/* Ticket panel */
+body[data-resihub-surface="admin"] .support-panel-content {
+    width: min(720px, 100%);
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+body[data-resihub-surface="admin"] .support-panel-body {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    overflow-y: auto;
+}
+
+body[data-resihub-surface="admin"] .support-meta p {
+    margin: 0 0 .25rem;
+    font-size: .9rem;
+    color: rgba(255, 255, 255, .85);
+}
+
+body[data-resihub-surface="admin"] .support-thread {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: .25rem;
+}
+
+body[data-resihub-surface="admin"] .support-message {
+    padding: .7rem .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .55);
+}
+
+body[data-resihub-surface="admin"] .support-message.staff {
+    background: rgba(47, 123, 255, .16);
+    border-color: rgba(91, 160, 255, .45);
+}
+
+body[data-resihub-surface="admin"] .support-message-meta {
+    display: block;
+    font-size: .78rem;
+    color: rgba(255, 255, 255, .6);
+    margin-bottom: .3rem;
+}
+
+body[data-resihub-surface="admin"] .support-message p {
+    margin: 0;
+    white-space: pre-wrap;
+    color: var(--ad-text);
+    font-size: .92rem;
+}
+
+body[data-resihub-surface="admin"] .support-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+}
+
+body[data-resihub-surface="admin"] .support-controls label {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] .support-controls select {
+    height: 40px;
+}
+
+body[data-resihub-surface="admin"] .support-reply textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: .7rem .9rem;
+    resize: vertical;
+}
+
+body[data-resihub-surface="admin"] .support-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: .6rem;
+}

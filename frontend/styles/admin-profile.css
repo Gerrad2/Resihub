@@ -1,0 +1,190 @@
+/* ==========================================
+   ADMIN PROFILE (admin/admin_profile.htm)
+   Load after admin-students.css (buttons, badges, shared inputs).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #admin-profile-content .container {
+    width: min(1100px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .section-header h1 {
+    margin: .4rem 0 .3rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .section-header p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .settings-grid {
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-card,
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form {
+    padding: 1.4rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .6rem;
+    text-align: center;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-avatar {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-summary h2 {
+    margin: .4rem 0 0;
+    font-family: var(--ad-font-head);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-summary p {
+    margin: 0;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-stats {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-size: .88rem;
+    color: rgba(255, 255, 255, .75);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-stats i {
+    width: 18px;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 36px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: transparent;
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .88rem;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1.1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    font-family: var(--ad-font-body);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .btn-primary:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    margin-bottom: .9rem;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form label {
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form input[type="text"],
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form input[type="email"],
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form input[type="tel"],
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form input[type="password"] {
+    width: 100%;
+    height: 44px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .6);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .95rem;
+    box-sizing: border-box;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form input:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .profile-form input:focus {
+    outline: none;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .2);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .form-subtitle {
+    margin: 1.2rem 0 .7rem;
+    font-family: var(--ad-font-head);
+    font-size: 1rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: .6rem;
+    color: rgba(255, 255, 255, .6);
+    font-size: .9rem;
+}
+
+body[data-resihub-surface="admin"] #admin-profile-content .action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+    body[data-resihub-surface="admin"] #admin-profile-content .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}

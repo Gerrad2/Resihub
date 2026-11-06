@@ -51,7 +51,7 @@ export async function guardPage(requiredRole) {
         return null;
     }
 
-    if (profile.role !== requiredRole) {
+    if (!(profile.role === requiredRole || (requiredRole === "admin" && profile.role === "super_admin"))) {
         showSystemPage("access_denied", "wrong-role");
         return null;
     }

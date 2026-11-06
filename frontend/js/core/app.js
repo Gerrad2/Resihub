@@ -114,7 +114,7 @@ async function protectPrivateArea() {
         return false;
     }
     const profileResult = await getProfile(userResult.data.id);
-    if (!profileResult.success || profileResult.data?.role !== requiredRole) {
+    if (!profileResult.success || !roleMatches(profileResult.data?.role, requiredRole)) {
         location.replace("../auth/student_login.htm");
         return false;
     }
@@ -132,6 +132,7 @@ async function getSessionDestination() {
         student: "../student/dashboard_student.htm",
         landlord: "../landlord/dashboard_landlord.htm",
         admin: "../admin/admin_dashboard.htm",
+        super_admin: "../admin/super_admin.htm",
     };
 
     return destinations[profileResult.data?.role] || null;
@@ -193,6 +194,12 @@ function optimizePageDelivery() {
     if ("serviceWorker" in navigator && location.protocol === "https:") {
         navigator.serviceWorker.register("../sw.js").catch(() => { });
     }
+}
+
+/* A super admin can use every admin page, so admin pages accept either admin role */
+function roleMatches(role, requiredRole) {
+    if (role === requiredRole) return true;
+    return requiredRole === "admin" && role === "super_admin";
 }
 
 async function boot() {

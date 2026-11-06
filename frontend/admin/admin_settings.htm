@@ -106,354 +106,186 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
-
-        <section id="admin-student-content" class="page-section">
-
-            <div class="container page-container">
-
-                <!-- ==========================
-                     Page Header
-                =========================== -->
-
-                <header class="section-header">
-
-                    <div class="container">
-
-                        <header class="auth-hero reveal fade-up">
-
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge glass-card">
-
-                                    <i class="fa-solid fa-gears"></i>
-
-                                    System Settings
-
-                                </span>
-
-                                <h1>Platform Settings</h1>
-
-                                <p>
-
-                                    Configure platform preferences,
-                                    administrator options, security,
-                                    branding and system-wide settings.
-
-                                </p>
-
-                        </header>
-
-                        <form id="adminSettingsForm">
-                            <!-- ==========================
-                         General Settings
-                    =========================== -->
-
-                            <section class="dashboard-section glass-card">
-
-                                <header class="section-header">
-
-                                    <h2>General Settings</h2>
-
-                                </header>
-
-                                <div class="settings-grid">
-
-                                    <div class="form-group">
-
-                                        <label for="siteName">
-
-                                            Platform Name
-
-                                        </label>
-
-                                        <input type="text" id="siteName" name="siteName" value="ResiHub">
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label for="supportEmail">
-
-                                            Support Email
-
-                                        </label>
-
-                                        <input type="email" id="supportEmail" name="supportEmail">
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label for="supportPhone">
-
-                                            Support Phone
-
-                                        </label>
-
-                                        <input type="tel" id="supportPhone" name="supportPhone">
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label for="platformStatus">
-
-                                            Platform Status
-
-                                        </label>
-
-                                        <select id="platformStatus" name="platformStatus">
-
-                                            <option value="online">
-
-                                                Online
-
-                                            </option>
-
-                                            <option value="maintenance">
-
-                                                Maintenance
-
-                                            </option>
-
-                                        </select>
-
-                                    </div>
-
-                                </div>
-
-                            </section>
-
-                            <!-- ==========================
-                         Security Settings
-                    =========================== -->
-
-                            <section class="dashboard-section glass-card">
-
-                                <header class="section-header">
-
-                                    <h2>Security Settings</h2>
-
-                                </header>
-
-                                <div class="settings-grid">
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="twoFactor">
-
-                                        Enable Two-Factor Authentication
-
-                                    </label>
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="loginAlerts">
-
-                                        Email Login Alerts
-
-                                    </label>
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="sessionTimeout">
-
-                                        Automatic Session Timeout
-
-                                    </label>
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="forceStrongPasswords">
-
-                                        Require Strong Passwords
-
-                                    </label>
-
-                                </div>
-
-                            </section>
-
-                            <!-- ==========================
-                         Notification Settings
-                    =========================== -->
-
-                            <section class="dashboard-section glass-card">
-
-                                <header class="section-header">
-
-                                    <h2>Notification Settings</h2>
-
-                                </header>
-
-                                <div class="settings-grid">
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="emailNotifications">
-
-                                        Email Notifications
-
-                                    </label>
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="smsNotifications">
-
-                                        SMS Notifications
-
-                                    </label>
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="pushNotifications">
-
-                                        Push Notifications
-
-                                    </label>
-
-                                    <label class="checkbox-group">
-
-                                        <input type="checkbox" id="systemAnnouncements">
-
-                                        Platform Announcements
-
-                                    </label>
-
-                                </div>
-
-                            </section>
-
-                            <!-- ==========================
-                         Branding
-                    =========================== -->
-
-                            <section class="dashboard-section glass-card">
-
-                                <header class="section-header">
-
-                                    <h2>Branding</h2>
-
-                                </header>
-
-                                <div class="settings-grid">
-
-                                    <div class="form-group">
-
-                                        <label for="siteLogo">
-
-                                            Platform Logo
-
-                                        </label>
-
-                                        <input type="file" id="siteLogo" accept="image/*">
-
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <label for="favicon">
-
-                                            Favicon
-
-                                        </label>
-
-                                        <input type="file" id="favicon" accept="image/*">
-
-                                    </div>
-
-                                </div>
-
-                            </section>
-
-                            <!-- ==========================
-                         Maintenance
-                    =========================== -->
-
-                            <section class="dashboard-section glass-card">
-
-                                <header class="section-header">
-
-                                    <h2>Maintenance</h2>
-
-                                </header>
-
-                                <div class="settings-grid">
-
-                                    <button type="button" id="backupDatabaseBtn" class="btn btn-outline">
-
-                                        <i class="fa-solid fa-database"></i>
-
-                                        Backup Database
-
-                                    </button>
-
-                                    <button type="button" id="restoreDatabaseBtn" class="btn btn-outline">
-
-                                        <i class="fa-solid fa-clock-rotate-left"></i>
-
-                                        Restore Backup
-
-                                    </button>
-
-                                    <button type="button" id="clearCacheBtn" class="btn btn-outline">
-
-                                        <i class="fa-solid fa-broom"></i>
-
-                                        Clear Cache
-
-                                    </button>
-
-                                </div>
-
-                            </section>
-
-                            <!-- ==========================
-                         Action Buttons
-                    =========================== -->
-
-                            <div class="action-buttons">
-
-                                <button type="submit" id="saveSettingsBtn" class="btn btn-primary azure-sweep ripple">
-
-                                    <i class="fa-solid fa-floppy-disk"></i>
-
-                                    <span>Save Settings</span>
-
-                                </button>
-
-                                <button type="reset" class="btn btn-outline">
-
-                                    <i class="fa-solid fa-rotate-left"></i>
-
-                                    <span>Reset</span>
-
-                                </button>
-
+    <main id="mainContent">
+
+        <section id="adminSettingsContent" class="page-section">
+
+            <div class="container">
+
+                <!-- Heading -->
+
+                <header class="section-header" id="hero-text">
+                    <h1>Settings</h1>
+                    <p>Manage platform status, security and notifications.</p>
+                </header>
+
+                <form id="adminSettingsForm" class="settings-layout" autocomplete="off" onsubmit="return false;">
+
+                    <!-- Menu -->
+
+                    <nav class="settings-nav glass-card" aria-label="Settings sections" role="tablist">
+                        <button type="button" class="settings-nav-item active" data-section="general" role="tab">
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i> General
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="security" role="tab">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Security
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="notifications" role="tab">
+                            <i class="fa-solid fa-bell" aria-hidden="true"></i> Notifications
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="appearance" role="tab">
+                            <i class="fa-solid fa-palette" aria-hidden="true"></i> Appearance
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="maintenance" role="tab">
+                            <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Maintenance
+                        </button>
+                    </nav>
+
+                    <!-- Panels -->
+
+                    <div class="settings-panels glass-card">
+
+                        <!-- General -->
+                        <div class="settings-panel" data-panel="general">
+                            <h2>General</h2>
+
+                            <div class="form-group">
+                                <label for="platformStatus">Platform status</label>
+                                <select id="platformStatus" name="platformStatus">
+                                    <option value="active">Active</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="offline">Offline</option>
+                                </select>
                             </div>
 
-                        </form>
+                            <p class="settings-hint">
+                                The platform name, support email and phone are set on Platform Settings.
+                            </p>
+                        </div>
+
+                        <!-- Security -->
+                        <div class="settings-panel hidden" data-panel="security">
+                            <h2>Security</h2>
+
+                            <label class="switch-row">
+                                <span><strong>Two-factor authentication</strong><small>Require a second step when
+                                        signing in</small></span>
+                                <input type="checkbox" id="twoFactor">
+                            </label>
+
+                            <label class="switch-row">
+                                <span><strong>Login alerts</strong><small>Email the administrator about new
+                                        sign-ins</small></span>
+                                <input type="checkbox" id="loginAlerts">
+                            </label>
+
+                            <label class="switch-row">
+                                <span><strong>Session timeout</strong><small>Sign out after a period of
+                                        inactivity</small></span>
+                                <input type="checkbox" id="sessionTimeout">
+                            </label>
+
+                            <label class="switch-row">
+                                <span><strong>Strong passwords</strong><small>Require letters, numbers and
+                                        symbols</small></span>
+                                <input type="checkbox" id="forceStrongPasswords">
+                            </label>
+                        </div>
+
+                        <!-- Notifications -->
+                        <div class="settings-panel hidden" data-panel="notifications">
+                            <h2>Notifications</h2>
+
+                            <label class="switch-row">
+                                <span><strong>Email notifications</strong><small>Send notifications by
+                                        email</small></span>
+                                <input type="checkbox" id="emailNotifications">
+                            </label>
+
+                            <label class="switch-row">
+                                <span><strong>SMS notifications</strong><small>Send notifications by text
+                                        message</small></span>
+                                <input type="checkbox" id="smsNotifications">
+                            </label>
+
+                            <label class="switch-row">
+                                <span><strong>Push notifications</strong><small>Send notifications to the
+                                        browser</small></span>
+                                <input type="checkbox" id="pushNotifications">
+                            </label>
+
+                            <label class="switch-row">
+                                <span><strong>System announcements</strong><small>Show platform announcements to
+                                        users</small></span>
+                                <input type="checkbox" id="systemAnnouncements">
+                            </label>
+                        </div>
+
+                        <!-- Appearance -->
+                        <div class="settings-panel hidden" data-panel="appearance">
+                            <h2>Appearance</h2>
+
+                            <div class="form-group">
+                                <label for="siteLogo">Site logo</label>
+                                <input type="file" id="siteLogo" accept="image/*" disabled>
+                                <small class="settings-hint">Logo upload is coming soon.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="favicon">Favicon</label>
+                                <input type="file" id="favicon" accept="image/*" disabled>
+                                <small class="settings-hint">Favicon upload is coming soon.</small>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance -->
+                        <div class="settings-panel hidden" data-panel="maintenance">
+                            <h2>Maintenance</h2>
+
+                            <p class="settings-hint">Backups and restores are managed on the Backup and restore page.
+                            </p>
+
+                            <div class="maintenance-actions">
+                                <button type="button" id="backupDatabaseBtn" class="btn-outline">
+                                    <i class="fa-solid fa-database" aria-hidden="true"></i> Back up database
+                                </button>
+                                <button type="button" id="restoreDatabaseBtn" class="btn-outline">
+                                    <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Restore database
+                                </button>
+                                <button type="button" id="clearCacheBtn" class="btn-outline" disabled
+                                    title="Coming soon">
+                                    <i class="fa-solid fa-broom" aria-hidden="true"></i> Clear cache (coming soon)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Save bar: shown for sections that save -->
+                        <div id="settingsSaveBar" class="settings-save-bar">
+                            <button type="button" id="resetSettingsBtn" class="btn-outline">
+                                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+                            </button>
+                            <button type="button" id="saveSettingsBtn" class="btn-primary">
+                                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save changes
+                            </button>
+                        </div>
 
                     </div>
+
+                </form>
+
+            </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Dynamic Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

@@ -1,0 +1,199 @@
+/* ==========================================
+   ADMIN AUDIT TRAIL (admin/admin_audit_trail.htm)
+   Matches design 3. Load after admin-students.css
+   (shared inputs, table, pagination and buttons).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #auditTrailContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .dashboard-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .dashboard-heading h1 {
+    margin: 0 0 .3rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .dashboard-heading p {
+    margin: 0;
+    font-size: .95rem;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 38px;
+    padding: 0 .95rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: transparent;
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .btn-outline:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+/* Filter bar: one glass row with the three controls */
+body[data-resihub-surface="admin"] #auditTrailContent .audit-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .6rem;
+    padding: .8rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-filters .liquid-input {
+    flex: 1 1 180px;
+    height: 42px;
+    min-width: 0;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .6);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .92rem;
+    box-sizing: border-box;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-filters select.liquid-input {
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-filters .liquid-input:focus {
+    outline: none;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .2);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-filters option {
+    background: #061A4F;
+    color: #fff;
+}
+
+/* Table */
+body[data-resihub-surface="admin"] #auditTrailContent .table-wrapper {
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+    overflow-x: auto;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    font-size: .9rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-table th {
+    padding: .8rem 1rem;
+    text-align: left;
+    font-size: .82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, .6);
+    border-bottom: 1px solid var(--ad-line);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-table td {
+    padding: .75rem 1rem;
+    vertical-align: middle;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-table tbody tr:hover {
+    background: rgba(91, 160, 255, .08);
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .audit-table td.audit-ip {
+    color: rgba(255, 255, 255, .7);
+}
+
+/* Pagination */
+body[data-resihub-surface="admin"] #auditTrailContent .pagination {
+    display: flex;
+    justify-content: center;
+    gap: .35rem;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .page-btn {
+    min-width: 30px;
+    height: 30px;
+    padding: 0 .5rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .page-btn.active {
+    background: var(--ad-primary);
+    border-color: var(--ad-primary-hi);
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] #auditTrailContent .page-btn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+/* Empty state */
+body[data-resihub-surface="admin"] #auditEmptyState {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #auditEmptyState i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #auditEmptyState h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #auditEmptyState p {
+    margin: 0;
+}

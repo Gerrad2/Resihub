@@ -87,285 +87,105 @@
 
     <div id="header"></div>
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
-        <section id="adminNotificationsContent" class="page-section ">
+        <section id="adminNotificationsContent" class="page-section">
 
-            <div class="container page-container">
+            <div class="page-container">
 
-                <header class="section-header">
+                <!-- Heading -->
 
-                    <div class="container">
-
-                        <header class="auth-hero reveal fade-up">
-
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge glass-card">
-
-                                    <i class="fa-solid fa-bell"></i>
-
-                                    Notifications
-
-                                </span>
-
-                                <h1>Notification Management</h1>
-
-                                <p>
-
-                                    Send announcements, monitor system alerts and manage notifications delivered to
-                                    students,
-                                    landlords and administrators.
-
-                                </p>
-
-                        </header>
-
-                        <!-- Statistics -->
-
-                        <section class="dashboard-section statistics-section glass-reveal">
-
-                            <div class="dashboard-grid statistics-grid">
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-paper-plane"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="totalNotifications" class="count-up">0</h3>
-
-                                        <p>Total Notifications</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-envelope-open-text"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="deliveredNotifications" class="count-up">0</h3>
-
-                                        <p>Delivered</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-clock"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="scheduledNotifications" class="count-up">0</h3>
-
-                                        <p>Scheduled</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-triangle-exclamation"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="systemAlerts" class="count-up">0</h3>
-
-                                        <p>System Alerts</p>
-
-                                    </div>
-
-                                </article>
-
-                            </div>
-
-                        </section>
-
-                        <!-- Notification Form -->
-
-                        <section class="dashboard-section glass-card">
-
-                            <header class="section-header">
-
-                                <h2>Create Notification</h2>
-
-                            </header>
-
-                            <form id="notificationForm" class="filter-form liquid-form">
-
-                                <div class="liquid-group">
-
-                                    <label for="notificationTitle">Title</label>
-
-                                    <input type="text" id="notificationTitle" class="liquid-input"
-                                        placeholder="Notification title" required>
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <label for="notificationAudience">Audience</label>
-
-                                    <select id="notificationAudience" class="liquid-input">
-
-                                        <option value="all">Everyone</option>
-                                        <option value="students">Students</option>
-                                        <option value="landlords">Landlords</option>
-                                        <option value="admins">Administrators</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <label for="notificationPriority">Priority</label>
-
-                                    <select id="notificationPriority" class="liquid-input">
-
-                                        <option value="normal">Normal</option>
-                                        <option value="important">Important</option>
-                                        <option value="critical">Critical</option>
-
-                                    </select>
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <label for="notificationMessage">Message</label>
-
-                                    <textarea id="notificationMessage" class="liquid-input" rows="6"
-                                        placeholder="Write your notification here..." required></textarea>
-
-                                </div>
-
-                                <div class="form-actions">
-
-                                    <button type="submit" id="sendNotificationBtn"
-                                        class="btn btn-primary azure-sweep ripple">
-
-                                        <i class="fa-solid fa-paper-plane"></i>
-
-                                        <span>Send Notification</span>
-
-                                    </button>
-
-                                    <button type="button" id="scheduleNotificationBtn" class="btn btn-outline">
-
-                                        <i class="fa-solid fa-calendar-days"></i>
-
-                                        <span>Schedule</span>
-
-                                    </button>
-
-                                    <button type="reset" class="btn btn-outline">
-
-                                        <i class="fa-solid fa-rotate-left"></i>
-
-                                        <span>Clear</span>
-
-                                    </button>
-
-                                </div>
-
-                            </form>
-
-                        </section>
-
-                        <!-- Notification History -->
-
-                        <section class="dashboard-section glass-card">
-
-                            <header class="section-header">
-
-                                <h2>Notification History</h2>
-
-                            </header>
-
-                            <form id="notificationSearchForm" class="filter-form liquid-form" role="search">
-
-                                <div class="liquid-group">
-
-                                    <input type="search" id="notificationSearch" class="liquid-input"
-                                        placeholder="Search notifications...">
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="notificationStatus" class="liquid-input">
-
-                                        <option value="">All Status</option>
-                                        <option value="sent">Sent</option>
-                                        <option value="scheduled">Scheduled</option>
-                                        <option value="draft">Draft</option>
-
-                                    </select>
-
-                                </div>
-
-                            </form>
-
-                            <div id="notificationHistory" class="notification-grid"></div>
-
-                        </section>
-
-                        <!-- System Alerts -->
-
-                        <section class="dashboard-section glass-card">
-
-                            <header class="section-header">
-
-                                <h2>Recent System Alerts</h2>
-
-                            </header>
-
-                            <div id="systemAlertList" class="activity-list"></div>
-
-                        </section>
-
+                <header class="dashboard-heading">
+                    <div>
+                        <h1>Notifications</h1>
+                        <p>Manage your system notifications.</p>
+                        <p id="totalNotifications"></p>
                     </div>
+                    <button type="button" id="markAllReadBtn" class="btn btn-primary" disabled>
+                        <i class="fa-solid fa-check-double" aria-hidden="true"></i> Mark all read
+                    </button>
+                </header>
+
+                <!-- Tabs -->
+
+                <div class="notif-tabs" role="tablist" aria-label="Filter notifications">
+                    <button type="button" class="notif-tab active" data-filter="all">All</button>
+                    <button type="button" class="notif-tab" data-filter="unread">Unread (<span
+                            id="unreadCount">0</span>)</button>
+                    <button type="button" class="notif-tab" data-filter="booking">Bookings</button>
+                    <button type="button" class="notif-tab" data-filter="message">Messages</button>
+                    <button type="button" class="notif-tab" data-filter="review">Reviews</button>
+                    <button type="button" class="notif-tab" data-filter="account">Account</button>
+                </div>
+
+                <!-- Filters -->
+
+                <form id="notificationSearchForm" class="filter-form liquid-form" role="search">
+
+                    <div class="liquid-group">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="notificationSearch" name="notificationSearch" class="liquid-input"
+                            placeholder="Search notifications..." aria-label="Search notifications">
+                    </div>
+
+                    <select id="notificationStatus" name="notificationStatus" class="liquid-input"
+                        aria-label="Filter by read status">
+                        <option value="">All Status</option>
+                        <option value="unread">Unread</option>
+                        <option value="read">Read</option>
+                    </select>
+
+                </form>
+
+                <!-- Table -->
+
+                <div class="table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="notificationHistory"></tbody>
+
+                    </table>
+
+                </div>
+
+                <div id="notificationPagination" class="pagination"></div>
+
+                <!-- Empty State -->
+
+                <div id="noNotificationsFound" class="empty-state hidden">
+
+                    <i class="fa-solid fa-bell-slash" aria-hidden="true"></i>
+
+                    <h3>No Notifications</h3>
+
+                    <p>You have no notifications that match this filter.</p>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Files
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

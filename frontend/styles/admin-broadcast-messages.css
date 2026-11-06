@@ -1,0 +1,266 @@
+/* ==========================================
+   ADMIN BROADCAST MESSAGES (admin/admin_broadcast_messages.htm)
+   Load after admin-students.css (filter, table, badge,
+   icon and button styles).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .dashboard-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .dashboard-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .broadcast-compose {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    padding: 1.25rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .broadcast-compose .liquid-input,
+body[data-resihub-surface="admin"] #broadcastMessagesContent .broadcast-compose textarea {
+    width: 100%;
+    padding: .7rem .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .55);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .95rem;
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .broadcast-compose textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .broadcast-compose .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    justify-content: flex-end;
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1.05rem;
+    border-radius: var(--ad-radius-sm);
+    font-family: var(--ad-font-body);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .btn-outline {
+    background: transparent;
+    border: 1px solid var(--ad-line);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .btn-primary {
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    border: 1px solid transparent;
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #broadcastMessagesContent .btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+body[data-resihub-surface="admin"] #broadcastPreview {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    padding: 1rem 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: rgba(91, 160, 255, .08);
+    border: 1px dashed var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #broadcastPreview.hidden {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] #broadcastPreviewTitle {
+    margin: 0;
+    font-family: var(--ad-font-head);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #broadcastPreviewAudience {
+    margin: 0;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+body[data-resihub-surface="admin"] #broadcastPreviewBody {
+    margin: 0;
+    white-space: pre-wrap;
+    color: rgba(255, 255, 255, .85);
+}
+
+body[data-resihub-surface="admin"] #broadcastPreview .icon-btn {
+    align-self: flex-end;
+}
+
+body[data-resihub-surface="admin"] #broadcastHistory .icon-btn {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #broadcastHistory .icon-btn:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #noBroadcastsFound {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noBroadcastsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.25rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noBroadcastsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noBroadcastsFound p {
+    margin: 0;
+}
+
+/* ==========================================
+   BROADCAST COMPOSE FORM: compact, aligned inputs
+   Overrides the shared .liquid-input styling inside this form only.
+========================================== */
+
+body[data-resihub-surface="admin"] #broadcastForm {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    padding: 1.25rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body[data-resihub-surface="admin"] #broadcastForm::before,
+body[data-resihub-surface="admin"] #broadcastForm::after {
+    content: none;
+    display: none;
+}
+
+body[data-resihub-surface="admin"] #broadcastForm .liquid-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 46px;
+    min-height: 46px;
+    max-height: 46px;
+    margin: 0;
+    padding: 0 1rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .7);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .95rem;
+    line-height: 1.2;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body[data-resihub-surface="admin"] #broadcastForm .liquid-input::before,
+body[data-resihub-surface="admin"] #broadcastForm .liquid-input::after {
+    content: none;
+    display: none;
+}
+
+body[data-resihub-surface="admin"] #broadcastForm .liquid-input::placeholder {
+    color: rgba(255, 255, 255, .5);
+}
+
+body[data-resihub-surface="admin"] #broadcastForm .liquid-input:focus {
+    outline: none;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .2);
+}
+
+body[data-resihub-surface="admin"] #broadcastForm select.liquid-input {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 2.4rem;
+    cursor: pointer;
+    background-image:
+        linear-gradient(45deg, transparent 50%, var(--ad-accent) 50%),
+        linear-gradient(135deg, var(--ad-accent) 50%, transparent 50%);
+    background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+}
+
+body[data-resihub-surface="admin"] #broadcastForm textarea.liquid-input {
+    height: 150px;
+    min-height: 150px;
+    max-height: none;
+    padding: .8rem 1rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+body[data-resihub-surface="admin"] #broadcastForm option {
+    background: #061A4F;
+    color: #fff;
+}

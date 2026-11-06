@@ -1,0 +1,241 @@
+/* ==========================================
+   ADMIN ANALYTICS (admin/admin_analytics.htm)
+   Matches design 2. Load after admin-students.css
+   (shared buttons, inputs and empty state).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #analyticsContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .dashboard-heading h1 {
+    margin: 0 0 .3rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+/* Period bar */
+body[data-resihub-surface="admin"] #analyticsContent #analyticsFilterForm.analytics-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-bar-field {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    flex: 0 1 240px;
+    min-width: 200px;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-bar-field label {
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent #analyticsPeriod {
+    height: 42px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .6);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .92rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent #analyticsPeriod option {
+    background: #061A4F;
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-export-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 42px;
+    padding: 0 1.05rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    font-family: var(--ad-font-body);
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-status {
+    margin: 0;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-status.hidden {
+    display: none;
+}
+
+/* Figures */
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: .9rem;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stat {
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    padding: 1rem 1.05rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stat p {
+    margin: 0;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .65);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stat h2 {
+    margin: .15rem 0 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stat-icon {
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--ad-radius);
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stat-soon {
+    opacity: .6;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-stat-soon h2 {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, .75);
+}
+
+/* Charts */
+body[data-resihub-surface="admin"] #analyticsContent .analytics-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-chart {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    padding: 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-chart h2 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .analytics-chart-soon {
+    opacity: .6;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .chart-box {
+    width: 100%;
+    min-height: 220px;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .chart-box.chart-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: center;
+    border-radius: var(--ad-radius);
+    border: 1px dashed var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .chart-box.chart-empty p {
+    margin: 0;
+    font-size: .88rem;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .chart-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .chart-grid {
+    stroke: rgba(110, 165, 255, .16);
+    stroke-width: 1;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent .chart-axis {
+    font-size: 11px;
+    fill: rgba(225, 236, 255, .6);
+    font-family: var(--ad-font-body);
+}
+
+/* Empty state */
+body[data-resihub-surface="admin"] #analyticsContent #analyticsEmpty {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent #analyticsEmpty.hidden {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] #analyticsContent #analyticsEmpty i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.25rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent #analyticsEmpty h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #analyticsContent #analyticsEmpty p {
+    margin: 0;
+}

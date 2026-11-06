@@ -92,337 +92,152 @@
 
     <div id="header"></div>
 
-    <main>
+    <main id="mainContent">
 
-        <!-- ==========================================
-             System Configuration Section
-        =========================================== -->
+        <section id="systemConfigurationContent" class="page-section">
 
-        <section id="systemConfigurationContent" class="page-section glass-reveal floating-section">
+            <div class="cfg-wrap">
 
-            <div class="container page-container">
+                <!-- Heading -->
 
-                <div class="container">
+                <header class="cfg-heading" id="hero-text">
+                    <div>
+                        <h1>System Configuration</h1>
+                        <p>Manage technical settings and system parameters.</p>
+                    </div>
+                    <span class="cfg-readonly">Read-only</span>
+                </header>
 
-                    <!-- Page Header -->
+                <div id="systemSettingsForm" class="cfg-body">
 
-                    <div class="section-header">
+                    <!-- Menu -->
 
-                        <div class="container">
+                    <nav class="cfg-card cfg-nav" aria-label="Configuration sections" role="tablist">
+                        <button type="button" class="cfg-nav-item active" data-section="server" role="tab">
+                            <i class="fa-solid fa-server" aria-hidden="true"></i> Server
+                        </button>
+                        <button type="button" class="cfg-nav-item" data-section="database" role="tab">
+                            <i class="fa-solid fa-database" aria-hidden="true"></i> Database
+                        </button>
+                        <button type="button" class="cfg-nav-item" data-section="cache" role="tab">
+                            <i class="fa-solid fa-bolt" aria-hidden="true"></i> Cache
+                        </button>
+                        <button type="button" class="cfg-nav-item" data-section="api" role="tab">
+                            <i class="fa-solid fa-plug" aria-hidden="true"></i> API
+                        </button>
+                        <button type="button" class="cfg-nav-item" data-section="logs" role="tab">
+                            <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Logs
+                        </button>
+                        <button type="button" class="cfg-nav-item" data-section="maintenance" role="tab">
+                            <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> Maintenance
+                        </button>
+                    </nav>
 
-                            <header class="auth-hero reveal fade-up">
+                    <!-- Settings card -->
 
-                                <div id="hero-text">
+                    <div class="cfg-card cfg-main">
 
-                                    <span class="page-badge floating-badge">
-
-                                        <i class="fa-solid fa-sliders"></i>
-
-                                        Platform Configuration
-
-                                    </span>
-
-                                    <h1>System Configuration</h1>
-
-                                    <p>
-
-                                        Manage every major setting that powers the ResiHub platform.
-
-                                    </p>
-
+                        <!-- Server -->
+                        <div class="cfg-panel" data-panel="server">
+                            <h2>Server Configuration</h2>
+                            <div class="cfg-fields">
+                                <div class="cfg-field">
+                                    <span class="cfg-field-label">Environment</span>
+                                    <span id="environmentValue" class="cfg-field-value">—</span>
                                 </div>
-
-                                <!-- ==========================================
-                     Configuration Form
-                =========================================== -->
-
-                                <form id="systemSettingsForm">
-
-                                    <!-- General Settings -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <header class="section-header">
-
-                                            <h2>General Settings</h2>
-
-                                        </header>
-
-                                        <div class="settings-grid">
-
-                                            <div class="form-group">
-
-                                                <label for="platformName">
-
-                                                    Platform Name
-
-                                                </label>
-
-                                                <input type="text" id="platformName" class="liquid-input">
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="supportEmail">
-
-                                                    Support Email
-
-                                                </label>
-
-                                                <input type="email" id="supportEmail" class="liquid-input">
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="supportPhone">
-
-                                                    Support Phone
-
-                                                </label>
-
-                                                <input type="tel" id="supportPhone" class="liquid-input">
-
-                                            </div>
-
-                                        </div>
-
-                                    </section>
-
-                                    <!-- Branding -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <h2>Branding</h2>
-
-                                        <input type="file" id="logoUpload">
-
-                                        <input type="file" id="faviconUpload">
-
-                                        <input type="color" id="primaryColor">
-
-                                        <hr>
-
-                                    </section>
-                                    <!-- Maintenance -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <h2>Maintenance</h2>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="maintenanceMode">
-
-                                            Enable Maintenance Mode
-
-                                        </label>
-
-                                        <textarea id="maintenanceMessage" rows="4" placeholder="Maintenance message..."
-                                            class="liquid-input"></textarea>
-
-                                        <hr>
-
-                                    </section>
-
-                                    <!-- Google Maps -->
-
-                                    <section class="dashboard-section glass-card">
-
-
-                                        <h2>Google Maps & Live Location</h2>
-
-                                        <input type="text" id="googleMapsApiKey" placeholder="Google Maps API Key"
-                                            class="liquid-input">
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="enableLiveLocation">
-
-                                            Enable Live Location
-
-                                        </label>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="allowStudentNavigation">
-
-                                            Allow Students to Navigate to Listings
-
-                                        </label>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="landLordApproval">
-
-                                            Require Landlord Location Verification
-
-                                        </label>
-
-                                        <hr>
-
-                                    </section>
-                                    <!-- Payment Gateway -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <h2>Payment Gateway</h2>
-
-                                        <input type="text" id="paystackKey" placeholder="Paystack Public Key"
-                                            class="liquid-input">
-
-                                        <input type="text" id="flutterwaveKey" placeholder="Flutterwave Key"
-                                            class="liquid-input">
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="enablePayment">="enablePayments">
-
-                                            Enable Payments
-
-                                        </label>
-
-                                        <hr>
-
-                                    </section>
-                                    <!-- Email Configuration -->
-
-                                    <section class="dashboard-section glass-card">
-                                        <h2>Email Configuration</h2>
-
-                                        <input type="text" id="smtpHost" placeholder="SMTP Host">
-
-                                        <input type="text" id="smtpPort" placeholder="SMTP Port">
-
-                                        <input type="email" id="smtpEmail" placeholder="SMTP Email">
-
-                                        <hr>
-
-                                    </section>
-                                    <!-- Security -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <h2>Security</h2>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="enable2FA">
-
-                                            Enable Two-Factor Authentication
-
-                                        </label>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="forceStrongPasswords">
-
-                                            Require Strong Passwords
-
-                                        </label>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox" id="enableLoginAlerts">
-
-                                            Login Alerts
-
-                                        </label>
-
-                                        <hr>
-
-                                    </section>
-                                    <!-- Notifications -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <h2>Notifications</h2>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox">
-
-                                            Email Notifications
-
-                                        </label>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox">
-
-                                            SMS Notifications
-
-                                        </label>
-
-                                        <label class="checkbox-group">
-
-                                            <input type="checkbox">
-
-                                            Push Notifications
-
-                                        </label>
-
-                                        <hr>
-                                    </section>
-                                    <!-- Social Media -->
-
-                                    <section class="dashboard-section glass-card">
-
-                                        <h2>Social Media</h2>
-
-                                        <input type="url" placeholder="Facebook URL">
-
-                                        <input type="url" placeholder="Instagram URL">
-
-                                        <input type="url" placeholder="LinkedIn URL">
-
-                                        <input type="url" placeholder="X (Twitter) URL">
-
-                                        <hr>
-
-                                    </section>
-                                    <!-- Form Actions -->
-
-                                    <div class="action-buttons">
-
-                                        <button type="submit" class="btn btn-primary azure-sweep ripple">
-
-                                            <i class="fa-solid fa-floppy-disk"></i>
-
-                                            Save Configuration
-
-                                        </button>
-
-                                        <button type="reset" class="btn btn-outline">
-
-                                            Reset
-
-                                        </button>
-
-                                    </div>
-
-                                </form>
-
+                                <div class="cfg-field">
+                                    <span class="cfg-field-label">App URL</span>
+                                    <span id="appUrlValue" class="cfg-field-value">—</span>
+                                </div>
+                                <div class="cfg-field">
+                                    <span class="cfg-field-label">Supabase project</span>
+                                    <span id="supabaseUrlValue" class="cfg-field-value">—</span>
+                                </div>
+                                <div class="cfg-field">
+                                    <span class="cfg-field-label">Browser</span>
+                                    <span id="browserValue" class="cfg-field-value">—</span>
+                                </div>
+                            </div>
+                            <p class="cfg-note">These values are read from the running site. They can only be changed in
+                                the hosting settings.</p>
                         </div>
+
+                        <!-- Database -->
+                        <div class="cfg-panel hidden" data-panel="database">
+                            <h2>Database Configuration</h2>
+                            <div class="cfg-fields">
+                                <div class="cfg-field">
+                                    <span class="cfg-field-label">Status</span>
+                                    <span id="databaseStatus" class="cfg-field-value">Checking...</span>
+                                </div>
+                                <div class="cfg-field">
+                                    <span class="cfg-field-label">Open connections</span>
+                                    <span id="databaseConnections" class="cfg-field-value">—</span>
+                                </div>
+                            </div>
+                            <p class="cfg-note">Checked live each time this page opens.</p>
+                        </div>
+
+                        <!-- Cache -->
+                        <div class="cfg-panel hidden" data-panel="cache">
+                            <h2>Cache</h2>
+                            <p class="cfg-note">Cache settings are managed by the hosting provider. There is nothing to
+                                configure here yet.</p>
+                        </div>
+
+                        <!-- API -->
+                        <div class="cfg-panel hidden" data-panel="api">
+                            <h2>API Configuration</h2>
+                            <div class="cfg-fields">
+                                <div class="cfg-field cfg-field-wide">
+                                    <span class="cfg-field-label">Status</span>
+                                    <span id="apiStatus" class="cfg-field-value">Checking...</span>
+                                </div>
+                            </div>
+                            <p class="cfg-note">Response time is measured from this browser.</p>
+                        </div>
+
+                        <!-- Logs -->
+                        <div class="cfg-panel hidden" data-panel="logs">
+                            <h2>Logs</h2>
+                            <p class="cfg-note">Every change an administrator makes is recorded with who did it and
+                                when.</p>
+                            <a class="cfg-link" href="admin_activity_logs.htm">
+                                <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i> Open activity logs
+                            </a>
+                        </div>
+
+                        <!-- Maintenance -->
+                        <div class="cfg-panel hidden" data-panel="maintenance">
+                            <h2>Maintenance</h2>
+                            <div class="cfg-fields">
+                                <div class="cfg-field cfg-field-wide">
+                                    <span class="cfg-field-label">Current state</span>
+                                    <span id="maintenanceStatus" class="cfg-field-value">Checking...</span>
+                                </div>
+                            </div>
+                            <a class="cfg-link" href="admin_platform_settings.htm">
+                                <i class="fa-solid fa-gear" aria-hidden="true"></i> Change platform status
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

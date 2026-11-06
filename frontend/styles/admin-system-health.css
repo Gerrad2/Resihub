@@ -1,0 +1,181 @@
+/* ==========================================
+   ADMIN SYSTEM HEALTH (admin/admin_system_health.htm)
+   Matches design 19. Load after admin-students.css.
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #systemHealthContent .page-container {
+    width: min(1200px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .dashboard-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .dashboard-heading h1 {
+    margin: 0 0 .3rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent #systemUptime.health-updated {
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+/* Service status cards */
+body[data-resihub-surface="admin"] #systemHealthContent .health-status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: .9rem;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-card {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    padding: 1rem 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-card p {
+    margin: 0;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .65);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-status {
+    font-family: var(--ad-font-head);
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--ad-text-2);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-status.ok {
+    color: #4ade80;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-status.bad {
+    color: #f87171;
+}
+
+/* Performance and alerts panels */
+body[data-resihub-surface="admin"] #systemHealthContent .health-performance,
+body[data-resihub-surface="admin"] #systemHealthContent .health-alerts {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-performance h2,
+body[data-resihub-surface="admin"] #systemHealthContent .health-alerts h2 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-gauges {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: .8rem;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-gauge {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    padding: .85rem .95rem;
+    border-radius: var(--ad-radius);
+    background: rgba(6, 26, 79, .5);
+    border: 1px solid var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-gauge p {
+    margin: 0;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .65);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-gauge strong {
+    font-family: var(--ad-font-head);
+    font-size: .95rem;
+    color: var(--ad-text-3);
+}
+
+/* Connection chart */
+body[data-resihub-surface="admin"] #systemHealthContent .health-chart {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-chart h3 {
+    margin: 0;
+    font-size: .92rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-chart-box {
+    width: 100%;
+    min-height: 180px;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-chart-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-chart-axis {
+    font-size: 11px;
+    fill: rgba(225, 236, 255, .6);
+    font-family: var(--ad-font-body);
+}
+
+/* Alerts */
+body[data-resihub-surface="admin"] #systemHealthContent .health-alert-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    font-size: .9rem;
+    color: var(--ad-text-2);
+}
+
+body[data-resihub-surface="admin"] #systemHealthContent .health-alert-list li {
+    padding: .6rem .8rem;
+    border-radius: var(--ad-radius-sm);
+    background: rgba(6, 26, 79, .5);
+    border: 1px solid var(--ad-line-soft);
+}
+
+@media (max-width: 700px) {
+    body[data-resihub-surface="admin"] #systemHealthContent .dashboard-heading {
+        align-items: flex-start;
+    }
+}

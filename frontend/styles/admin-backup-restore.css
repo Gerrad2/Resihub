@@ -1,0 +1,199 @@
+/* ==========================================
+   ADMIN BACKUP AND RESTORE (admin/admin_backup_restore.htm)
+   Matches design 4. Scoped to #backupRestoreContent.
+========================================== */
+
+#backupRestoreContent .bk-wrap {
+    width: min(1200px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+#backupRestoreContent .bk-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#backupRestoreContent .bk-heading p {
+    margin: 0;
+    font-size: .95rem;
+    color: rgba(255, 255, 255, .72);
+}
+
+#backupRestoreContent .bk-card {
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(42, 92, 190, .42), rgba(14, 42, 110, .36));
+    border: 1px solid rgba(110, 165, 255, .26);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, .32);
+}
+
+/* Figures */
+#backupRestoreContent .bk-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: .9rem;
+}
+
+#backupRestoreContent .bk-stat {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    padding: 1.1rem 1.2rem;
+}
+
+#backupRestoreContent .bk-stat-label {
+    font-size: .8rem;
+    color: rgba(190, 210, 245, .72);
+}
+
+#backupRestoreContent .bk-stat-value {
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+#backupRestoreContent .bk-stat-sub {
+    font-size: .8rem;
+    color: rgba(190, 210, 245, .6);
+}
+
+/* Two panels side by side */
+#backupRestoreContent .bk-body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+#backupRestoreContent .bk-panel {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    padding: 1.2rem 1.3rem;
+}
+
+#backupRestoreContent .bk-panel h2 {
+    margin: 0;
+    padding-bottom: .7rem;
+    border-bottom: 1px solid rgba(110, 165, 255, .22);
+    font-family: "Poppins", "Inter", system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+#backupRestoreContent .bk-list {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    margin: 0;
+}
+
+#backupRestoreContent .bk-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .55rem .75rem;
+    border-radius: 10px;
+    background: rgba(6, 26, 79, .55);
+    border: 1px solid rgba(110, 165, 255, .14);
+}
+
+#backupRestoreContent .bk-list dt {
+    font-size: .85rem;
+    color: rgba(190, 210, 245, .72);
+}
+
+#backupRestoreContent .bk-list dd {
+    margin: 0;
+    font-size: .88rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: right;
+}
+
+#backupRestoreContent .bk-note {
+    margin: 0;
+    font-size: .85rem;
+    color: rgba(190, 210, 245, .72);
+}
+
+/* Export controls */
+#backupRestoreContent .bk-export {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .7rem;
+}
+
+#backupRestoreContent .bk-export label {
+    font-size: .85rem;
+    color: rgba(225, 236, 255, .8);
+}
+
+#backupRestoreContent #exportTable {
+    height: 40px;
+    padding: 0 .8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(110, 165, 255, .24);
+    background: rgba(6, 26, 79, .6);
+    color: #ffffff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .9rem;
+}
+
+#backupRestoreContent #exportTable option {
+    background: #061A4F;
+    color: #ffffff;
+}
+
+#backupRestoreContent .bk-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    height: 40px;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #5BA0FF, #2F7BFF);
+    color: #ffffff;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 0 18px rgba(47, 123, 255, .35);
+}
+
+#backupRestoreContent .bk-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* History table */
+#backupRestoreContent .bk-table td:last-child {
+    font-weight: 600;
+}
+
+#backupRestoreContent .bk-empty {
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: rgba(225, 236, 255, .78);
+}
+
+#backupRestoreContent .bk-empty.hidden,
+#backupRestoreContent .hidden {
+    display: none;
+}
+
+@media (max-width: 860px) {
+    #backupRestoreContent .bk-body {
+        grid-template-columns: 1fr;
+    }
+}

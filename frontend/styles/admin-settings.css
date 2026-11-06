@@ -1,0 +1,186 @@
+/* ==========================================
+   ADMIN SETTINGS (platform settings page)
+   Load after admin-students.css (buttons, shared inputs).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #platformSettingsContent .container {
+    width: min(1200px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .section-header h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .section-header p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-nav,
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panels {
+    padding: 1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-nav {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-nav-item {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem .8rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: transparent;
+    color: rgba(255, 255, 255, .75);
+    font-family: var(--ad-font-body);
+    font-size: .92rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-nav-item i {
+    width: 18px;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-nav-item:hover {
+    border-color: var(--ad-line);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-nav-item.active {
+    background: var(--ad-primary);
+    border-color: var(--ad-primary-hi);
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel h2 {
+    margin: .2rem 0 1rem;
+    font-family: var(--ad-font-head);
+    font-size: 1.15rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+    margin-bottom: .9rem;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel label {
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .7);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel input,
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel select {
+    width: 100%;
+    height: 44px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius);
+    border: 1px solid var(--ad-line-soft);
+    background: rgba(6, 26, 79, .6);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .95rem;
+    box-sizing: border-box;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel input:focus,
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel select:focus {
+    outline: none;
+    border-color: var(--ad-accent);
+    box-shadow: 0 0 0 3px rgba(63, 208, 255, .2);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-panel select option {
+    background: #061A4F;
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-soon {
+    margin: 0;
+    color: rgba(255, 255, 255, .6);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-save-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: .6rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ad-line);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .settings-save-bar.hidden {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: transparent;
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1.1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    font-family: var(--ad-font-body);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #platformSettingsContent .btn-primary:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+@media (max-width: 800px) {
+    body[data-resihub-surface="admin"] #platformSettingsContent .settings-layout {
+        grid-template-columns: 1fr;
+    }
+}

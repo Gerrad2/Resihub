@@ -2,12 +2,16 @@
 
 /* =========================================
    ADMIN LOGIN (auth/admin_login.htm)
-   Only accounts with role = "admin" and
-   account_status != "suspended" may enter.
+   Only accounts with role = "admin" or "super_admin", and
+   account_status != "suspended", may enter.
+   Each role lands on its own home page.
 ========================================= */
 
 const ADMIN_DASHBOARD = "../admin/admin_dashboard.htm";
+const SUPER_ADMIN_HOME = "../admin/super_admin.htm";
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const ADMIN_ROLES = ["admin", "super_admin"];
 
 const MESSAGES = {
     missing: "Enter your email address and password.",
@@ -33,6 +37,11 @@ let isSubmitting = false;
 
 function $(id) {
     return document.getElementById(id);
+}
+
+/* Super admins land on the Super Admin page; admins land on the dashboard */
+function homeFor(role) {
+    return role === "super_admin" ? SUPER_ADMIN_HOME : ADMIN_DASHBOARD;
 }
 
 function setMessage(text, isError = true) {
@@ -92,7 +101,7 @@ async function fetchAdminProfile(userId) {
     return data;
 }
 
-/* If an admin is already signed in, skip the form. */
+/* If an admin is already signed in, skip the form and go to their home page. */
 async function redirectIfAdminSession() {
     try {
         const { data } = await supabase.auth.getSession();
@@ -102,8 +111,8 @@ async function redirectIfAdminSession() {
 
         const profile = await fetchAdminProfile(user.id).catch(() => null);
 
-        if (profile?.role === "admin" && profile.account_status !== "suspended") {
-            window.location.replace(ADMIN_DASHBOARD);
+        if (ADMIN_ROLES.includes(profile?.role) && profile.account_status !== "suspended") {
+            window.location.replace(homeFor(profile.role));
         }
     } catch (error) {
         console.warn("Could not check the existing session:", error);
@@ -167,12 +176,13 @@ async function handleSubmit(event) {
             throw new AdminLoginError(MESSAGES.suspended);
         }
 
-        if (profile.role !== "admin") {
+        if (!ADMIN_ROLES.includes(profile.role)) {
             await endSession();
             throw new AdminLoginError(MESSAGES.notAdmin);
         }
 
-        window.location.replace(ADMIN_DASHBOARD);
+        await supabase.rpc("log_admin_sign_in").catch(() => { });
+        window.location.replace(homeFor(profile.role));
     } catch (error) {
         console.error("Admin login failed:", error);
 

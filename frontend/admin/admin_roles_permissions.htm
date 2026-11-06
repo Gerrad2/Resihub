@@ -105,229 +105,100 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
-        <section id="rolesPermissionsContent" class="auth-section reveal fade-up page-section">
+        <section id="rolesPermissionsContent" class="page-section">
 
-            <div class="container page-container">
+            <div class="page-container">
 
-                <!-- ==========================
-                     Page Header
-                =========================== -->
+                <!-- Heading -->
 
-                <header class="section-header">
-                    <div class="container">
-
-                        <header class="auth-hero reveal fade-up">
-
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge glass-card">
-
-                                    <i class="fa-solid fa-user-lock"></i>
-
-                                    Roles & Permissions
-
-                                </span>
-
-                                <h1>Administrator Roles</h1>
-
-                                <p>
-
-                                    Create administrator roles and control
-                                    platform permissions securely across
-                                    the ResiHub administration system.
-
-                                </p>
-
-                        </header>
-
-                        <!-- ==========================
-                     Action Buttons
-                =========================== -->
-
-                        <div class="action-buttons">
-
-                            <button id="addRoleBtn" class="btn btn-primary azure-sweep ripple">
-
-                                <i class="fa-solid fa-plus"></i>
-
-                                <span>Create Role</span>
-
-                            </button>
-
-                        </div>
-
-                        <!-- ==========================
-                     Statistics
-                =========================== -->
-
-                        <section class="dashboard-section statistics-section glass-reveal">
-
-                            <div class="dashboard-grid statistics-grid">
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-user-shield"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="totalRoles" class="count-up">0</h3>
-
-                                        <p>Total Roles</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-users-gear"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="totalAdmins" class="count-up">0</h3>
-
-                                        <p>Administrators</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-key"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="permissionCount" class="count-up">0</h3>
-
-                                        <p>Permissions</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-lock"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="restrictedActions" class="count-up">0</h3>
-
-                                        <p>Restricted Actions</p>
-
-                                    </div>
-
-                                </article>
-
-                            </div>
-
-                        </section>
-
-                        <!-- ==========================
-                     Roles Table
-                =========================== -->
-
-                        <section class="table-section glass-reveal">
-
-                            <div class="table-responsive">
-
-                                <table class="admin-table data-table">
-
-                                    <thead>
-
-                                        <tr>
-
-                                            <th>Role</th>
-
-                                            <th>Administrators</th>
-
-                                            <th>Permissions</th>
-
-                                            <th>Status</th>
-
-                                            <th>Actions</th>
-
-                                        </tr>
-
-                                    </thead>
-
-                                    <tbody id="rolesTable">
-
-                                        <!-- Loaded dynamically -->
-
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-
-                        </section>
-
-                        <!-- ==========================
-                     Permission Matrix
-                =========================== -->
-
-                        <section class="dashboard-section glass-card">
-
-                            <header class="section-header">
-
-                                <h2>Permission Matrix</h2>
-
-                                <p>
-
-                                    Configure access rights for every
-                                    administrator role.
-
-                                </p>
-
-                            </header>
-
-                            <div id="permissionMatrix" class="permission-grid">
-
-                                <!-- Loaded dynamically -->
-
-                            </div>
-
-                        </section>
-
+                <header class="dashboard-heading" id="hero-text">
+                    <div>
+                        <h1>Roles and Permissions</h1>
+                        <p>Manage administrator roles and what each one can do.</p>
                     </div>
+                    <button type="button" id="addRoleBtn" class="role-add-btn" disabled
+                        title="Custom roles are not available yet">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i> Add role
+                    </button>
+                </header>
+
+                <!-- Figures -->
+
+                <section class="role-stats" aria-label="Role figures">
+
+                    <article class="role-stat glass-card">
+                        <p>Roles</p>
+                        <h2 id="totalRoles">0</h2>
+                    </article>
+
+                    <article class="role-stat glass-card">
+                        <p>Administrators</p>
+                        <h2 id="totalAdmins">0</h2>
+                    </article>
+
+                    <article class="role-stat glass-card">
+                        <p>Admin permissions</p>
+                        <h2 id="permissionCount">0</h2>
+                    </article>
+
+                </section>
+
+                <!-- Roles -->
+
+                <section class="role-card glass-card">
+                    <h2>Roles</h2>
+                    <div class="table-wrapper">
+                        <table class="admin-table role-table">
+                            <thead>
+                                <tr>
+                                    <th>Role</th>
+                                    <th>Members</th>
+                                    <th>Access</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rolesTable"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Permissions -->
+
+                <section class="role-card glass-card">
+                    <div class="role-card-head">
+                        <h2>Admin permissions</h2>
+                        <p id="editNotice"></p>
+                    </div>
+                    <div id="permissionMatrix" class="perm-grid"></div>
+                </section>
+
+                <!-- Restricted actions -->
+
+                <section class="role-card glass-card role-restricted">
+                    <h2>Super Admin only</h2>
+                    <p>These actions are always limited to Super Admins:</p>
+                    <ul id="restrictedActions">
+                        <li>Change the permissions of the Admin role</li>
+                        <li>System configuration</li>
+                        <li>Backup and restore</li>
+                        <li>Platform settings</li>
+                    </ul>
+                </section>
+
+            </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Dynamic Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

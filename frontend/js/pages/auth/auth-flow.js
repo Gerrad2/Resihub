@@ -509,14 +509,14 @@ async function signIn(form, expectedRole) {
             );
         }
 
-        if (profile.role !== expectedRole) {
+        if (!(profile.role === expectedRole || (expectedRole === "admin" && profile.role === "super_admin"))) {
             await supabase.auth.signOut();
             throw new Error(
                 `This account is not registered as a ${expectedRole}. Please use the correct login page.`
             );
         }
 
-        const destination = DESTINATIONS[profile.role];
+        const destination = profile.role === "super_admin" ? "../admin/super_admin.htm" : DESTINATIONS[profile.role];
 
         if (!destination) {
             await supabase.auth.signOut();

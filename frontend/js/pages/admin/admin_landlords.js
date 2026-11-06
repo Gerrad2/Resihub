@@ -13,21 +13,40 @@ import { showToast } from "../../ui/toast.js";
 ========================================= */
 
 const SIGNED_URL_SECONDS = 300;
+const PAGE_SIZE = 10;
 const shortDate = new Intl.DateTimeFormat("en-NG", { day: "numeric", month: "short", year: "numeric" });
 
+/* Design labels: verified is Active, rejected is Suspended */
 const STATUS_LABEL = {
+    verified: "Active",
     pending: "Pending",
-    verified: "Verified",
-    rejected: "Rejected",
-    none: "Not submitted",
+    rejected: "Suspended",
+    none: "Unverified",
+};
+
+const STATUS_BADGE_CLASS = {
+    verified: "active",
+    pending: "pending",
+    rejected: "suspended",
+    none: "pending",
+};
+
+/* Values in the status dropdown mapped to verification_status */
+const STATUS_FILTER = {
+    Verified: "verified",
+    Pending: "pending",
+    Suspended: "rejected",
 };
 
 const state = {
     landlords: [],
+    emails: new Map(),
     listingCounts: new Map(),
     totalListings: 0,
     search: "",
     statusFilter: "",
+    propertyFilter: "",
+    page: 1,
     open: null,
 };
 
@@ -55,6 +74,22 @@ async function loadLandlords() {
 
     if (error) throw error;
     state.landlords = data ?? [];
+
+    if (error) throw error;
+    state.landlords = data ?? [];
+
+    try {
+        await loadEmails();
+    } catch (emailError) {
+        console.error("[admin_landlords] could not load emails:", emailError);
+    }
+}
+
+async function loadEmails() {
+    const { data, error } = await supabase.rpc("admin_landlord_emails");
+    if (error) throw error;
+
+    state.emails = new Map((data ?? []).map((row) => [row.id, row.email]));
 }
 
 async function loadListingCounts() {
@@ -79,12 +114,22 @@ function renderStats() {
 
 /* ---------- Table ---------- */
 
+function emailOf(landlord) {
+    return state.emails.get(landlord.id) || "—";
+}
+
 function visibleLandlords() {
+    const wantedStatus = STATUS_FILTER[state.statusFilter] ?? "";
+
     return state.landlords.filter((landlord) => {
-        if (state.statusFilter && statusOf(landlord) !== state.statusFilter) return false;
+        if (wantedStatus && statusOf(landlord) !== wantedStatus) return false;
+
+        const listings = state.listingCounts.get(landlord.id) ?? 0;
+        if (state.propertyFilter === "with" && listings === 0) return false;
+        if (state.propertyFilter === "without" && listings > 0) return false;
 
         if (state.search) {
-            const haystack = [landlord.full_name, landlord.phone, landlord.address]
+            const haystack = [landlord.full_name, landlord.address, emailOf(landlord)]
                 .filter(Boolean)
                 .join(" ")
                 .toLowerCase();
@@ -102,10 +147,12 @@ function cell(text) {
 
 function statusCell(landlord) {
     const td = document.createElement("td");
-    const badge = document.createElement("span");
     const status = statusOf(landlord);
-    badge.className = `status-badge ${status}`;
+
+    const badge = document.createElement("span");
+    badge.className = `status-badge ${STATUS_BADGE_CLASS[status] ?? "pending"}`;
     badge.textContent = STATUS_LABEL[status] ?? status;
+
     td.append(badge);
     return td;
 }
@@ -124,11 +171,9 @@ function createRow(landlord) {
 
     row.append(
         cell(landlord.full_name || "Landlord"),
-        cell("—"),
-        cell(landlord.phone || "—"),
+        cell(emailOf(landlord)),
         cell(String(state.listingCounts.get(landlord.id) ?? 0)),
         statusCell(landlord),
-        cell(landlord.created_at ? shortDate.format(new Date(landlord.created_at)) : "—"),
         actions
     );
     return row;
@@ -140,9 +185,41 @@ function renderTable() {
     if (!body) return;
 
     const rows = visibleLandlords();
-    body.replaceChildren(...rows.map(createRow));
+    const pages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+    state.page = Math.min(state.page, pages);
+
+    const start = (state.page - 1) * PAGE_SIZE;
+    body.replaceChildren(...rows.slice(start, start + PAGE_SIZE).map(createRow));
 
     if (empty) empty.classList.toggle("hidden", rows.length > 0);
+    renderPagination(pages);
+}
+
+function pageButton(label, page, { active = false, disabled = false } = {}) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `page-btn${active ? " active" : ""}`;
+    button.dataset.page = String(page);
+    button.textContent = label;
+    button.disabled = disabled;
+    return button;
+}
+
+function renderPagination(pages) {
+    const nav = $("landlordPagination");
+    if (!nav) return;
+
+    if (pages <= 1) {
+        nav.replaceChildren();
+        return;
+    }
+
+    const items = [pageButton("‹", state.page - 1, { disabled: state.page === 1 })];
+    for (let page = 1; page <= pages; page += 1) {
+        items.push(pageButton(String(page), page, { active: page === state.page }));
+    }
+    items.push(pageButton("›", state.page + 1, { disabled: state.page === pages }));
+    nav.replaceChildren(...items);
 }
 
 /* ---------- Review panel ---------- */
@@ -400,6 +477,19 @@ function bindEvents() {
 
     $("verificationStatus")?.addEventListener("change", (event) => {
         state.statusFilter = event.target.value;
+        renderTable();
+    });
+    $("propertyFilter")?.addEventListener("change", (event) => {
+        state.propertyFilter = event.target.value;
+        state.page = 1;
+        renderTable();
+    });
+
+    $("landlordPagination")?.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-page]");
+        if (!button || button.disabled) return;
+
+        state.page = Number(button.dataset.page);
         renderTable();
     });
 

@@ -98,255 +98,159 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
-        <section id="broadcastMessagesContent" class="page-section glass-reveal floating-section">
+        <section id="broadcastMessagesContent" class="page-section">
 
-            <div class="container page-container">
+            <div class="page-container">
 
-                <!-- ==========================================
-                     Page Header
-                =========================================== -->
+                <!-- Heading -->
 
-                <section class="auth-hero reveal fade-up">
-
-                    <div class="page-hero-content hero-content">
-
-                        <span class="page-badge floating-badge glass-card">
-                            <i class="fa-solid fa-bullhorn"></i>
-                            Broadcast Center
-                        </span>
-
+                <header class="dashboard-heading">
+                    <div>
                         <h1>Broadcast Messages</h1>
-
-                        <p>
-                            Create announcements and send important information to students,
-                            landlords or every user on the ResiHub platform.
-                        </p>
-
+                        <p>Send announcements and notifications to users.</p>
                     </div>
+                    <button type="button" id="newBroadcastBtn" class="btn btn-primary">
+                        <i class="fa-solid fa-bullhorn" aria-hidden="true"></i> New Message
+                    </button>
+                </header>
 
-                </section>
+                <!-- Key figures -->
 
-                <!-- ==========================================
-                     Broadcast Composer
-                =========================================== -->
+                <section class="statistics-section" aria-label="Broadcast figures">
+                    <div class="statistics-grid">
 
-                <section class="dashboard-section glass-card">
-
-                    <form id="broadcastForm" class="filter-form liquid-form">
-
-                        <div class="liquid-group">
-
-                            <input type="text" id="broadcastTitle" class="liquid-input"
-                                placeholder="Announcement Title">
-
-                        </div>
-
-                        <div class="liquid-group">
-
-                            <select id="broadcastAudience" class="liquid-input">
-
-                                <option value="all">All Users</option>
-                                <option value="students">Students</option>
-                                <option value="landlords">Landlords</option>
-                                <option value="administrators">Administrators</option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="liquid-group">
-
-                            <select id="broadcastPriority" class="liquid-input">
-
-                                <option value="normal">Normal</option>
-                                <option value="important">Important</option>
-                                <option value="critical">Critical</option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="liquid-group">
-
-                            <textarea id="broadcastMessage" class="liquid-input" rows="8"
-                                placeholder="Write your announcement here..."></textarea>
-
-                        </div>
-
-                        <div class="form-actions">
-
-                            <button type="button" id="previewBroadcastBtn" class="btn btn-outline">
-
-                                <i class="fa-solid fa-eye"></i>
-
-                                <span>Preview</span>
-
-                            </button>
-
-                            <button type="button" id="scheduleBroadcastBtn" class="btn btn-outline">
-
-                                <i class="fa-solid fa-calendar-days"></i>
-
-                                <span>Schedule</span>
-
-                            </button>
-
-                            <button type="submit" id="sendBroadcastBtn" class="btn btn-primary azure-sweep ripple">
-
-                                <i class="fa-solid fa-paper-plane"></i>
-
-                                <span>Send Broadcast</span>
-
-                            </button>
-
-                        </div>
-
-                    </form>
-
-                </section>
-
-                <!-- ==========================================
-                     Statistics
-                =========================================== -->
-
-                <section class="dashboard-section statistics-section glass-reveal">
-
-                    <div class="dashboard-grid statistics-grid">
-
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-envelope-circle-check"></i>
-
-                            </div>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-cyan"><i class="fa-solid fa-paper-plane"
+                                    aria-hidden="true"></i></div>
                             <div class="card-content">
-
-                                <h3 id="messagesSent" class="count-up">0</h3>
-
-                                <p>Broadcasts Sent</p>
-
+                                <p class="card-label">Messages Sent</p>
+                                <h2 id="messagesSent"></h2>
                             </div>
-
                         </article>
 
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-users"></i>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-indigo"><i class="fa-solid fa-users" aria-hidden="true"></i>
                             </div>
-
                             <div class="card-content">
-
-                                <h3 id="totalRecipients" class="count-up">0</h3>
-
-                                <p>Recipients</p>
-
+                                <p class="card-label">Total Recipients</p>
+                                <h2 id="totalRecipients"></h2>
                             </div>
-
                         </article>
 
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-calendar-check"></i>
-
-                            </div>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-teal"><i class="fa-solid fa-calendar-days"
+                                    aria-hidden="true"></i></div>
                             <div class="card-content">
-
-                                <h3 id="scheduledMessages" class="count-up">0</h3>
-
-                                <p>Scheduled</p>
-
+                                <p class="card-label">Sent This Month</p>
+                                <h2 id="activeAnnouncements"></h2>
                             </div>
-
                         </article>
 
-                        <article class="dashboard-card statistics-card floating-card glass-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-bell"></i>
-
-                            </div>
-
+                        <!-- Scheduling is not supported yet, so this card is hidden -->
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-blue"><i class="fa-solid fa-calendar-check"
+                                    aria-hidden="true"></i></div>
                             <div class="card-content">
-
-                                <h3 id="activeAnnouncements" class="count-up">0</h3>
-
-                                <p>Active Notices</p>
-
+                                <p class="card-label">Scheduled</p>
+                                <h2 id="scheduledMessages"></h2>
                             </div>
-
                         </article>
 
                     </div>
-
                 </section>
 
-                <!-- ==========================================
-                     Broadcast History
-                =========================================== -->
+                <!-- Compose -->
 
-                <section class="table-section glass-reveal">
+                <form id="broadcastForm" class="broadcast-compose glass-card" autocomplete="off">
 
-                    <div class="table-responsive">
+                    <input type="text" id="broadcastTitle" name="broadcastTitle" class="liquid-input"
+                        placeholder="Message title" aria-label="Message title" maxlength="120" required>
 
-                        <table class="admin-table data-table">
+                    <select id="broadcastAudience" name="broadcastAudience" class="liquid-input" aria-label="Audience">
+                        <option value="all">All Users</option>
+                        <option value="students">Students</option>
+                        <option value="landlords">Landlords</option>
+                        <option value="administrators">Administrators</option>
+                    </select>
 
-                            <thead>
+                    <textarea id="broadcastMessage" name="broadcastMessage" class="liquid-input"
+                        placeholder="Write your message..." aria-label="Message" maxlength="2000" required></textarea>
 
-                                <tr>
+                    <input type="datetime-local" id="broadcastSendAt" name="broadcastSendAt" class="liquid-input"
+                        aria-label="Schedule date and time">
 
-                                    <th>Title</th>
-                                    <th>Audience</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="broadcastHistory">
-
-                                <!-- Loaded dynamically -->
-
-                            </tbody>
-
-                        </table>
-
+                    <div id="broadcastPreview" class="hidden" aria-live="polite">
+                        <p id="broadcastPreviewAudience"></p>
+                        <h3 id="broadcastPreviewTitle"></h3>
+                        <p id="broadcastPreviewBody"></p>
+                        <button type="button" id="closeBroadcastPreview" class="icon-btn" aria-label="Close preview">
+                            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                        </button>
                     </div>
 
-                </section>
+                    <div class="form-actions">
+                        <button type="button" id="previewBroadcastBtn" class="btn btn-outline">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i> Preview
+                        </button>
+                        <button type="button" id="scheduleBroadcastBtn" class="btn btn-outline">
+                            <i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Schedule
+                        </button>
+                        <button type="submit" id="sendBroadcastBtn" class="btn btn-primary">
+                            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Send now
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- History -->
+
+                <div class="table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Audience</th>
+                                <th>Sent</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="broadcastHistory"></tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- Empty State -->
+
+                <div id="noBroadcastsFound" class="empty-state hidden">
+
+                    <i class="fa-solid fa-bullhorn" aria-hidden="true"></i>
+
+                    <h3>No Messages Yet</h3>
+
+                    <p>Messages you send to users will appear here.</p>
+
+                </div>
 
             </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

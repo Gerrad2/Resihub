@@ -1,7 +1,8 @@
 /*==========================================
     ADMIN SHELL (all admin pages)
     Scoped to body[data-resihub-surface="admin"]
-    Design tokens, background, and the header.
+    Design tokens, page background, the fixed header, and the scroll bar.
+    Matches components/admin_header.htm (dropdown menu with cards).
     Load order: loaded through style.css.
 ==========================================*/
 
@@ -31,7 +32,10 @@ body[data-resihub-surface="admin"] {
     --ad-glow-line: 0 0 22px rgba(47, 123, 255, .35);
     --ad-font-head: "Poppins", "Inter", system-ui, sans-serif;
     --ad-font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --ad-header-h: 90px;
 
+    /* Leaves room for the fixed header */
+    padding-top: var(--ad-header-h);
     margin: 0;
     min-height: 100vh;
     color: var(--ad-text);
@@ -61,19 +65,25 @@ body[data-resihub-surface="admin"] a {
     text-decoration: none;
 }
 
-/* Hide the decorative blobs from the old design */
+/* Decorative blobs from the old design are not used */
 body[data-resihub-surface="admin"] .floating-shapes {
     display: none;
 }
 
 /* ------------------------------------------
-    HEADER
+    HEADER BAR (fixed at the top)
 ------------------------------------------ */
 body[data-resihub-surface="admin"] .admin-portal-header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 900;
-    padding: .75rem 0;
+    width: 100%;
+    height: var(--ad-header-h);
+    display: flex;
+    align-items: center;
+    padding: 0;
     background: rgba(6, 22, 66, .62);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
@@ -81,11 +91,15 @@ body[data-resihub-surface="admin"] .admin-portal-header {
     box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
 }
 
-body[data-resihub-surface="admin"] .admin-header-shell {
+body[data-resihub-surface="admin"] .admin-portal-header .admin-header-shell {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     width: min(1480px, 100% - 2rem);
+    height: 100%;
     margin-inline: auto;
 }
 
@@ -125,242 +139,436 @@ body[data-resihub-surface="admin"] .admin-portal-header .logo-text span {
     text-transform: uppercase;
 }
 
-/* Desktop nav: a pill strip */
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav {
-    flex: 1 1 auto;
-    min-width: 0;
+/* Right-hand tools: quick links, then the Menu button */
+body[data-resihub-surface="admin"] .admin-portal-header .admin-header-tools {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: .75rem;
+    gap: .6rem;
+    margin-left: auto;
 }
 
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading,
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav .header-actions {
-    display: none;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul {
+body[data-resihub-surface="admin"] .admin-portal-header .admin-quick-links {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: .25rem;
-    margin: 0;
-    padding: .3rem;
-    list-style: none;
-    overflow-x: auto;
-    scrollbar-width: none;
-    border-radius: 999px;
-    background: var(--ad-glass);
-    border: 1px solid var(--ad-line-soft);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+    gap: .45rem;
 }
 
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul::-webkit-scrollbar {
-    display: none;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav li {
-    flex: 0 0 auto;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav li.hidden {
-    display: none;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a {
+body[data-resihub-surface="admin"] .admin-portal-header .quick-link {
+    position: relative;
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
-    gap: .4rem;
-    padding: .45rem .8rem;
-    border-radius: 999px;
-    color: var(--ad-text-2);
-    font-size: .8rem;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: background .2s ease, color .2s ease, box-shadow .2s ease;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a i {
-    font-size: .8rem;
-    color: var(--ad-accent);
-    opacity: .9;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, .08);
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a.active,
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a[aria-current="page"] {
-    color: #fff;
-    background: linear-gradient(135deg, var(--ad-primary), #1B56D6);
-    box-shadow: var(--ad-glow-line);
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a.active i,
-body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a[aria-current="page"] i {
-    color: #fff;
-}
-
-/* Topbar: search + actions */
-body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-    flex: 0 0 auto;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .portal-search {
-    display: flex;
-    align-items: center;
-    gap: .55rem;
-    width: 240px;
-    padding: .55rem .9rem;
-    border-radius: 999px;
-    background: rgba(8, 30, 84, .55);
-    border: 1px solid var(--ad-line-soft);
-    color: var(--ad-text-3);
-    font-size: .82rem;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .portal-search span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .portal-search i {
-    color: var(--ad-accent);
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions {
-    display: flex;
-    align-items: center;
-    gap: .55rem;
-}
-
-body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a {
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
+    justify-content: center;
     border-radius: 50%;
-    background: var(--ad-glass);
-    border: 1px solid var(--ad-line-soft);
-    color: var(--ad-text-2);
-    transition: box-shadow .2s ease, color .2s ease;
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
-body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a:hover {
-    color: #fff;
+body[data-resihub-surface="admin"] .admin-portal-header .quick-link:hover {
+    border-color: var(--ad-accent);
     box-shadow: var(--ad-glow-line);
 }
 
-body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a img {
-    width: 100%;
-    height: 100%;
+body[data-resihub-surface="admin"] .admin-portal-header .quick-link i {
+    font-size: .95rem;
+    color: var(--ad-accent);
+}
+
+/* Notification count badge */
+body[data-resihub-surface="admin"] .admin-portal-header .notification-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: var(--ad-danger);
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .notification-badge:empty,
+body[data-resihub-surface="admin"] .admin-portal-header .notification-badge[data-count="0"] {
+    display: none;
+}
+
+/* Profile button */
+body[data-resihub-surface="admin"] .admin-portal-header .profile-dropdown {
+    position: relative;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 .7rem 0 .3rem;
+    border-radius: 999px;
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .85rem;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .profile-btn img {
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-/* The hamburger only shows on small screens */
-body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle {
+body[data-resihub-surface="admin"] .admin-portal-header .profile-btn .fa-chevron-down {
+    font-size: .7rem;
+    color: var(--ad-text-3);
+}
+
+/* Panels that open from the tools: notifications and profile */
+body[data-resihub-surface="admin"] .admin-portal-header .notification-dropdown,
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu {
     display: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: var(--ad-glass);
-    border: 1px solid var(--ad-line-soft);
-    color: #fff;
+    position: absolute;
+    top: calc(100% + .6rem);
+    right: 0;
+    z-index: 960;
+    border-radius: var(--ad-radius);
+    background: var(--ad-glass-strong);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .notification-dropdown.active,
+body[data-resihub-surface="admin"] .admin-portal-header .notification-dropdown.open,
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu.active {
+    display: block;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .notification-dropdown {
+    width: min(320px, calc(100vw - 2rem));
+    padding: 1rem;
+    color: var(--ad-text);
+    font-size: .9rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .notification-dropdown p {
+    margin: 0;
+    color: var(--ad-text-2);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu {
+    min-width: 230px;
+    padding: .5rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem .7rem;
+    border-radius: var(--ad-radius-sm);
+    color: var(--ad-text);
+    font-size: .9rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu a i {
+    width: 16px;
+    text-align: center;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu a:hover {
+    background: rgba(91, 160, 255, .14);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .dropdown-menu hr {
+    margin: .35rem 0;
+    border: 0;
+    border-top: 1px solid var(--ad-line-soft);
+}
+
+/* Menu button */
+body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    height: 42px;
+    padding: 0 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-size: .92rem;
+    font-weight: 600;
     cursor: pointer;
 }
 
-/* Responsive: collapse the nav and search below 1200px */
-@media (max-width: 1200px) {
-    body[data-resihub-surface="admin"] .admin-portal-header .portal-search {
-        width: 180px;
-    }
+body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle i {
+    color: var(--ad-accent);
 }
 
-@media (max-width: 992px) {
-    body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle {
-        display: grid;
-        place-items: center;
+body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle[aria-expanded="true"] {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-chevron {
+    font-size: .75rem;
+    transition: transform .2s ease;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle[aria-expanded="true"] .menu-chevron {
+    transform: rotate(180deg);
+}
+
+/* Menu panel: hidden until opened */
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + .7rem);
+    right: 0;
+    width: min(880px, calc(100vw - 2rem));
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding: 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass-strong);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    z-index: 950;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav.active {
+    display: block;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    margin: 0 0 .9rem;
+    padding: 0 .2rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-heading-kicker {
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading strong {
+    font-family: var(--ad-font-head);
+    font-size: 1.05rem;
+    color: var(--ad-text);
+}
+
+/* Cards: one per group */
+body[data-resihub-surface="admin"] .admin-portal-header .menu-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: .8rem;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group {
+    padding: .85rem;
+    border-radius: var(--ad-radius);
+    background: rgba(6, 26, 79, .55);
+    border: 1px solid var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group-head {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    margin-bottom: .6rem;
+    padding-bottom: .6rem;
+    border-bottom: 1px solid var(--ad-line-soft);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    flex-shrink: 0;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group-head strong {
+    display: block;
+    font-family: var(--ad-font-head);
+    font-size: .95rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group-head span {
+    display: block;
+    font-size: .76rem;
+    color: var(--ad-text-3);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul {
+    display: flex;
+    flex-direction: column;
+    gap: .15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group li {
+    display: block;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group li.hidden {
+    display: none;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .5rem .55rem;
+    border-radius: var(--ad-radius-sm);
+    color: var(--ad-text-2);
+    font-size: .88rem;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a i {
+    width: 16px;
+    text-align: center;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a:hover {
+    background: rgba(91, 160, 255, .12);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a.active,
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a[aria-current="page"] {
+    background: linear-gradient(135deg, var(--ad-primary), #1B56D6);
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a.active i,
+body[data-resihub-surface="admin"] .admin-portal-header .menu-group ul a[aria-current="page"] i {
+    color: #fff;
+}
+
+/* Small screens: the menu covers the width and the cards stack */
+@media (max-width: 900px) {
+    body[data-resihub-surface="admin"] .admin-portal-header .main-nav {
+        position: fixed;
+        top: 76px;
+        left: 1rem;
+        right: 1rem;
+        width: auto;
+        max-height: calc(100vh - 96px);
     }
 
-    body[data-resihub-surface="admin"] .admin-portal-header .portal-search {
+    body[data-resihub-surface="admin"] .admin-portal-header .menu-groups {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-resihub-surface="admin"] .admin-portal-header .menu-toggle-label {
         display: none;
     }
 
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav {
-        position: fixed;
-        inset: 0 0 0 auto;
-        width: min(320px, 88vw);
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: flex-start;
-        gap: 1rem;
-        padding: 1.25rem;
-        background: rgba(6, 22, 66, .97);
-        border-left: 1px solid var(--ad-line);
-        box-shadow: -20px 0 50px rgba(0, 0, 0, .45);
-        transform: translateX(105%);
-        transition: transform .3s ease;
-        overflow-y: auto;
-        z-index: 950;
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav.active {
-        transform: translateX(0);
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading {
-        display: block;
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading strong {
-        display: block;
-        color: #fff;
-        font-family: var(--ad-font-head);
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav .menu-heading-kicker {
-        display: block;
-        font-size: .72rem;
-        color: var(--ad-accent);
-        text-transform: uppercase;
-        letter-spacing: .08em;
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul {
-        flex-direction: column;
-        align-items: stretch;
-        border-radius: var(--ad-radius);
-        overflow: visible;
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .main-nav ul a {
-        padding: .7rem .9rem;
-        border-radius: var(--ad-radius-sm);
-        font-size: .9rem;
-    }
-
-    body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions {
-        margin-left: auto;
+    body[data-resihub-surface="admin"] .admin-portal-header .profile-btn span {
+        display: none;
     }
 }
 
-/* Mobile: tighter topbar */
 @media (max-width: 576px) {
-    body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar {
+    body[data-resihub-surface="admin"] .admin-portal-header .admin-header-tools {
         gap: .4rem;
     }
 
-    body[data-resihub-surface="admin"] .admin-portal-header .portal-topbar-actions a {
-        width: 34px;
-        height: 34px;
+    body[data-resihub-surface="admin"] .admin-portal-header .quick-link {
+        width: 36px;
+        height: 36px;
     }
+}
+
+/* ------------------------------------------
+    SCROLL BAR (admin pages only)
+    Chrome, Edge and other Chromium browsers use the ::-webkit rules.
+    Firefox uses scrollbar-color.
+------------------------------------------ */
+
+/* Firefox */
+html:has(> body[data-resihub-surface="admin"]),
+body[data-resihub-surface="admin"] {
+    scrollbar-width: thin;
+    scrollbar-color: #2F7BFF #061A4F;
+}
+
+/* Chromium: the page's own scroll bar (the viewport) */
+html:has(> body[data-resihub-surface="admin"])::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+html:has(> body[data-resihub-surface="admin"])::-webkit-scrollbar-track {
+    background: #061A4F;
+    border-left: 1px solid rgba(110, 165, 255, .14);
+}
+
+html:has(> body[data-resihub-surface="admin"])::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5BA0FF, #2F7BFF);
+    border-radius: 999px;
+    border: 3px solid #061A4F;
+    box-shadow: 0 0 10px rgba(47, 123, 255, .45);
+}
+
+html:has(> body[data-resihub-surface="admin"])::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #3FD0FF, #5BA0FF);
+    box-shadow: 0 0 14px rgba(63, 208, 255, .6);
+}
+
+html:has(> body[data-resihub-surface="admin"])::-webkit-scrollbar-corner {
+    background: #061A4F;
+}
+
+/* Chromium: scrollable areas inside the admin pages (tables, panels) */
+body[data-resihub-surface="admin"] *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body[data-resihub-surface="admin"] *::-webkit-scrollbar-track {
+    background: #061A4F;
+}
+
+body[data-resihub-surface="admin"] *::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5BA0FF, #2F7BFF);
+    border-radius: 999px;
+    border: 2px solid #061A4F;
+}
+
+body[data-resihub-surface="admin"] *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #3FD0FF, #5BA0FF);
 }

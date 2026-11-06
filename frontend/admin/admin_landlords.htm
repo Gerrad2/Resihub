@@ -98,342 +98,143 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
         <section id="adminLandlordsContent" class="page-section">
 
-            <div class="container page-container">
+            <div class="page-container">
 
-                <!-- ==========================================
-                     Page Header
-                =========================================== -->
+                <!-- Heading -->
 
-                <header class="section-header">
+                <header class="dashboard-heading">
+                    <div>
+                        <h1>Landlords</h1>
+                        <p>Manage landlord accounts and properties.</p>
+                    </div>
+                </header>
 
-                    <div class="container">
+                <!-- Key figures -->
 
-                        <header class="auth-hero reveal fade-up">
+                <section class="statistics-section" aria-label="Landlord figures">
+                    <div class="statistics-grid">
 
-                            <div id="hero-text">
-
-
-
-                                <i class="fa-solid fa-building-user"></i>
-
-                                Landlord Management
-
-                                </span>
-
-                                <h1>Manage Registered Landlords</h1>
-
-                                <p>
-
-                                    Review, verify, suspend and manage landlords together
-                                    with their property listings.
-
-                                </p>
-
-                        </header>
-
-                        <!-- ==========================================
-                     Dashboard Statistics
-                =========================================== -->
-
-                        <section class="dashboard-section statistics-section glass-reveal">
-
-                            <div class="dashboard-grid statistics-grid">
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-building"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="totalLandlords" class="count-up">0</h3>
-
-                                        <p>Total Landlords</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-circle-check"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="verifiedLandlords" class="count-up">0</h3>
-
-                                        <p>Verified</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-clock"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="pendingLandlords" class="count-up">0</h3>
-
-                                        <p>Pending Verification</p>
-
-                                    </div>
-
-                                </article>
-
-                                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                    <div class="card-icon">
-
-                                        <i class="fa-solid fa-house"></i>
-
-                                    </div>
-
-                                    <div class="card-content">
-
-                                        <h3 id="totalProperties" class="count-up">0</h3>
-
-                                        <p>Active Listings</p>
-
-                                    </div>
-
-                                </article>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-cyan"><i class="fa-solid fa-building"
+                                    aria-hidden="true"></i></div>
+                            <div class="card-content">
+                                <p class="card-label">Total Landlords</p>
+                                <h2 id="totalLandlords"></h2>
                             </div>
+                        </article>
 
-                        </section>
-
-                        <!-- ==========================================
-                     Filters
-                =========================================== -->
-
-                        <section class="filter-section glass-card">
-
-                            <form id="landlordFilterForm" class="filter-form liquid-form" role="search"
-                                aria-label="Filter Landlords">
-
-                                <div class="liquid-group">
-
-                                    <input type="search" id="landlordSearch" class="liquid-input"
-                                        placeholder="Search by name, email or phone..." autocomplete="off">
-
-                                </div>
-
-                                <div class="liquid-group">
-
-                                    <select id="verificationStatus" class="liquid-input">
-
-                                        <option value="">All Status</option>
-
-                                        <option value="Verified">Verified</option>
-
-                                        <option value="Pending">Pending</option>
-
-                                        <option value="Suspended">Suspended</option>
-
-                                    </select>
-
-                                </div>
-
-                                <button type="reset" id="resetLandlordFilters" class="btn btn-outline">
-
-                                    <i class="fa-solid fa-rotate-left"></i>
-
-                                    <span>Reset</span>
-
-                                </button>
-
-                            </form>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Loading State
-                =========================================== -->
-
-                        <div id="landlordLoading" class="loading-state hidden">
-
-                            <div class="loader"></div>
-
-                            <p>Loading landlords...</p>
-
-                        </div>
-
-                        <!-- ==========================================
-                     Landlords Table
-                =========================================== -->
-
-                        <section class="table-section glass-reveal">
-
-                            <div class="table-responsive">
-
-                                <table class="admin-table data-table">
-
-                                    <thead>
-
-                                        <tr>
-
-                                            <th>Landlord</th>
-
-                                            <th>Email</th>
-
-                                            <th>Phone</th>
-
-                                            <th>Listings</th>
-
-                                            <th>Status</th>
-
-                                            <th>Joined</th>
-
-                                            <th>Actions</th>
-
-                                        </tr>
-
-                                    </thead>
-
-                                    <tbody id="landlordTableBody">
-
-                                        <!-- Loaded dynamically -->
-
-                                    </tbody>
-
-                                </table>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-teal"><i class="fa-solid fa-circle-check"
+                                    aria-hidden="true"></i></div>
+                            <div class="card-content">
+                                <p class="card-label">Active</p>
+                                <h2 id="verifiedLandlords"></h2>
                             </div>
+                        </article>
 
-                        </section>
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-indigo"><i class="fa-solid fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <p class="card-label">Pending</p>
+                                <h2 id="pendingLandlords"></h2>
+                            </div>
+                        </article>
 
-                        <!-- ==========================================
-                     Pagination
-                =========================================== -->
-
-                        <section class="pagination-section">
-
-                            <div id="landlordPagination" class="pagination"></div>
-
-                        </section>
-
-                        <!-- ==========================================
-                     Empty State
-                =========================================== -->
-
-                        <section id="noLandlordsFound" class="empty-state hidden">
-
-                            <i class="fa-solid fa-building-circle-xmark"></i>
-
-                            <h3>No Landlords Found</h3>
-
-                            <p>
-
-                                No landlord matches your current search
-                                or filter.
-
-                            </p>
-
-                        </section>
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-blue"><i class="fa-solid fa-house" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <p class="card-label">Properties</p>
+                                <h2 id="totalProperties"></h2>
+                            </div>
+                        </article>
 
                     </div>
+                </section>
+
+                <!-- Filters -->
+
+                <form id="landlordFilterForm" class="filter-form liquid-form" role="search">
+
+                    <div class="liquid-group">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="landlordSearch" name="landlordSearch" class="liquid-input"
+                            placeholder="Search landlords..." aria-label="Search landlords">
+                    </div>
+
+                    <select id="verificationStatus" name="verificationStatus" class="liquid-input"
+                        aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="Verified">Active</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Suspended">Suspended</option>
+                    </select>
+
+                    <select id="propertyFilter" name="propertyFilter" class="liquid-input"
+                        aria-label="Filter by properties">
+                        <option value="">All Properties</option>
+                        <option value="with">With properties</option>
+                        <option value="without">No properties yet</option>
+                    </select>
+
+                    <button type="button" id="resetLandlordFilters" class="btn btn-outline btn-sm">Reset</button>
+
+                </form>
+
+                <!-- Table -->
+
+                <div class="table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Properties</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="landlordTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+                <div id="landlordPagination" class="pagination"></div>
+
+                <!-- Empty State -->
+
+                <div id="noLandlordsFound" class="empty-state hidden">
+
+                    <i class="fa-solid fa-building-circle-xmark" aria-hidden="true"></i>
+
+                    <h3>No Landlords Found</h3>
+
+                    <p>No landlord matches your current search or filter.</p>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
 
-    <!-- ==========================================
-         Action Modal
-    =========================================== -->
-
-    <div id="landlordActionModal" class="modal hidden">
-
-        <div class="modal-content glass-card">
-
-            <button id="closeLandlordModal" class="modal-close" aria-label="Close">
-
-                <i class="fa-solid fa-xmark"></i>
-
-            </button>
-
-            <h2 id="landlordModalTitle">
-
-                Confirm Action
-
-            </h2>
-
-            <p id="landlordModalMessage">
-
-                Are you sure you want to continue?
-
-            </p>
-
-            <div class="modal-actions">
-
-                <button id="confirmLandlordAction" class="btn btn-primary azure-sweep ripple">
-
-                    Confirm
-
-                </button>
-
-                <button id="cancelLandlordAction" class="btn btn-outline">
-
-                    Cancel
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         Toast Notification
-    =========================================== -->
-
-    <div id="landlordToast" class="toast hidden">
-
-        <div class="toast-content">
-
-            <i id="toastIcon" class="fa-solid fa-circle-check"></i>
-
-            <span id="toastMessage">
-
-                Action completed successfully.
-
-            </span>
-
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         Dynamic Footer
-    =========================================== -->
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

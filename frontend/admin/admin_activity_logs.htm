@@ -131,274 +131,91 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
         <section id="activityLogsContent" class="page-section">
 
-            <div class="container page-container">
+            <div class="page-container">
 
-                <!-- ==========================================
-                     Page Header
-                =========================================== -->
+                <!-- Heading -->
 
-                <section class="section-header">
-
-                    <div class="container">
-
-                        <header class="auth-hero reveal fade-up">
-
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge">
-
-                                    <i class="fa-solid fa-clock-rotate-left"></i>
-
-                                    Administrator Logs
-
-                                </span>
-
-                                <h1>Activity Logs</h1>
-
-                                <p>
-
-                                    Monitor every administrator action performed across the
-                                    ResiHub platform.
-
-                                </p>
-
-                        </header>
-
+                <header class="dashboard-heading" id="hero-text">
+                    <div>
+                        <h1>Activity Logs</h1>
+                        <p>Track all platform activities and user actions.</p>
                     </div>
+                </header>
 
-                </section>
+                <!-- Filters -->
 
-                <!-- ==========================================
-                     Activity Filters
-                =========================================== -->
+                <div class="activity-filters glass-card">
 
-                <form id="activityFilterForm" class="activity-filter-form">
+                    <input type="date" id="activityDate" name="activityDate" class="liquid-input"
+                        aria-label="Filter by date">
 
-                    <div class="liquid-group">
+                    <select id="activityType" name="activityType" class="liquid-input" aria-label="Filter by action">
+                        <option value="">All Actions</option>
+                        <option value="login">Logged in</option>
+                        <option value="logout">Logged out</option>
+                        <option value="create">Created</option>
+                        <option value="update">Updated</option>
+                        <option value="delete">Deleted</option>
+                        <option value="approve">Approved</option>
+                        <option value="reject">Rejected</option>
+                        <option value="suspend">Suspended</option>
+                        <option value="restore">Restored</option>
+                        <option value="export">Exported</option>
+                        <option value="listing">Listings</option>
+                        <option value="student">Students</option>
+                        <option value="landlord">Landlords</option>
+                        <option value="settings">Settings</option>
+                    </select>
 
-                        <input type="search" id="activitySearch" class="liquid-input"
-                            placeholder="Search administrator, action or module..." autocomplete="off">
+                    <select id="activityAdmin" name="activityAdmin" class="liquid-input" aria-label="Filter by user">
+                        <option value="">All Users</option>
+                    </select>
 
-                    </div>
+                </div>
 
-                    <div class="liquid-group">
+                <!-- Loading -->
 
-                        <select id="activityAdmin" class="liquid-input">
+                <p id="activityLoading" class="activity-loading hidden">Loading activity...</p>
 
-                            <option value="">All Administrators</option>
+                <!-- Table -->
 
-                        </select>
+                <div class="table-wrapper">
 
-                    </div>
+                    <table class="admin-table activity-table">
 
-                    <div class="liquid-group">
+                        <thead>
+                            <tr>
+                                <th>Date &amp; Time</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
 
-                        <select id="activityType" class="liquid-input">
+                        <tbody id="activityLogsTable"></tbody>
 
-                            <option value="">All Activities</option>
+                    </table>
 
-                            <option value="login">Login</option>
+                </div>
 
-                            <option value="logout">Logout</option>
+                <div id="activityPagination" class="pagination"></div>
 
-                            <option value="listing">Listings</option>
+                <!-- Empty State -->
 
-                            <option value="student">Students</option>
+                <div id="noActivityLogs" class="empty-state hidden">
 
-                            <option value="landlord">Landlords</option>
+                    <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
 
-                            <option value="settings">Settings</option>
+                    <h3>No Activity Found</h3>
 
-                            <option value="security">Security</option>
+                    <p>No activity matches your current filter.</p>
 
-                        </select>
-
-                    </div>
-
-                    <div class="liquid-group">
-
-                        <input type="date" id="activityDate" class="liquid-input">
-
-                    </div>
-
-                    <button type="button" id="exportLogsBtn" class="btn btn-primary ripple">
-
-                        <i class="fa-solid fa-file-export"></i>
-
-                        <span>Export</span>
-
-                    </button>
-
-                </form>
-
-                <!-- ==========================================
-                     Statistics
-                =========================================== -->
-
-                <section class="dashboard-section statistics-section">
-
-                    <div class="dashboard-grid statistics-grid">
-
-                        <article class="dashboard-card statistics-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-list-check"></i>
-
-                            </div>
-
-                            <div class="card-content">
-
-                                <h3 id="totalActivities">0</h3>
-
-                                <p>Total Activities</p>
-
-                            </div>
-
-                        </article>
-
-                        <article class="dashboard-card statistics-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-user-shield"></i>
-
-                            </div>
-
-                            <div class="card-content">
-
-                                <h3 id="activeAdmins">0</h3>
-
-                                <p>Active Administrators</p>
-
-                            </div>
-
-                        </article>
-
-                        <article class="dashboard-card statistics-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-
-                            </div>
-
-                            <div class="card-content">
-
-                                <h3 id="securityEvents">0</h3>
-
-                                <p>Security Events</p>
-
-                            </div>
-
-                        </article>
-
-                        <article class="dashboard-card statistics-card">
-
-                            <div class="card-icon">
-
-                                <i class="fa-solid fa-download"></i>
-
-                            </div>
-
-                            <div class="card-content">
-
-                                <h3 id="exportsToday">0</h3>
-
-                                <p>Exports Today</p>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Loading State
-                =========================================== -->
-
-                <section id="activityLoading" class="loading-state hidden">
-
-                    <div class="loader"></div>
-
-                    <p>Loading activity logs...</p>
-
-                </section>
-                <!-- ==========================================
-                     Activity Logs Table
-                =========================================== -->
-
-                <section class="table-section">
-
-                    <div class="table-responsive">
-
-                        <table class="admin-table data-table">
-
-                            <thead>
-
-                                <tr>
-
-                                    <th>Time</th>
-
-                                    <th>Administrator</th>
-
-                                    <th>Activity</th>
-
-                                    <th>Module</th>
-
-                                    <th>IP Address</th>
-
-                                    <th>Status</th>
-
-                                    <th>Details</th>
-
-                                </tr>
-
-                            </thead>
-
-                            <tbody id="activityLogsTable">
-
-                                <!-- Loaded dynamically -->
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </section>
-
-                <!-- ==========================================
-                     Empty State
-                =========================================== -->
-
-                <section id="noActivityLogs" class="empty-state hidden">
-
-                    <i class="fa-solid fa-folder-open"></i>
-
-                    <h3>No Activity Logs Found</h3>
-
-                    <p>
-
-                        No administrator activity matches your current filters.
-
-                    </p>
-
-                </section>
-
-                <!-- ==========================================
-                     Pagination
-                =========================================== -->
-
-                <nav id="activityPagination" class="pagination">
-
-                </nav>
+                </div>
 
             </div>
 
@@ -406,74 +223,32 @@
 
     </main>
 
-    <!-- ==========================================
-         Activity Details Modal
-    =========================================== -->
+    <!-- Activity details -->
 
-    <div id="activityDetailsModal" class="modal hidden">
+    <div id="activityDetailsModal" class="modal hidden" aria-hidden="true">
 
-        <div class="modal-content">
+        <div class="modal-content activity-details-content">
 
-            <button id="closeActivityModal" class="modal-close" aria-label="Close">
-
-                <i class="fa-solid fa-xmark"></i>
-
-            </button>
-
-            <h2>Activity Details</h2>
-
-            <div id="activityDetailsContent">
-
-                <!-- JavaScript -->
-
+            <div class="modal-header">
+                <h2 class="modal-title">Activity details</h2>
+                <button type="button" id="closeActivityModal" class="modal-close" aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
             </div>
 
-        </div>
-
-    </div>
-
-    <!-- ==========================================
-         Toast Notification
-    =========================================== -->
-
-    <div id="activityToast" class="toast hidden">
-
-        <div class="toast-content">
-
-            <i id="activityToastIcon" class="fa-solid fa-circle-check">
-
-            </i>
-
-            <span id="activityToastMessage"></span>
+            <div id="activityDetailsContent" class="modal-body"></div>
 
         </div>
 
     </div>
 
-    <!-- ==========================================
-         Back To Top
-    =========================================== -->
-
-    <button id="backToTop" class="back-to-top" aria-label="Back To Top">
-
-        <i class="fa-solid fa-arrow-up"></i>
-
-    </button>
-
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

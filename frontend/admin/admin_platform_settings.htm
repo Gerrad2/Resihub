@@ -105,230 +105,138 @@
          Main Content
     =========================================== -->
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
-        <!-- ==========================================
-             Breadcrumb
-        =========================================== -->
+        <section id="platformSettingsContent" class="page-section">
 
-        <section class="breadcrumb">
+            <div class="container">
 
-            <a href="admin_dashboard.htm">
+                <!-- Heading -->
 
-                Dashboard
+                <header class="section-header">
+                    <h1>Platform Settings</h1>
+                    <p>Configure global platform settings.</p>
+                </header>
 
-            </a>
+                <div class="settings-layout">
 
-            <span>/</span>
+                    <!-- Menu -->
 
-            <span>
+                    <nav class="settings-nav glass-card" aria-label="Settings sections" role="tablist">
+                        <button type="button" class="settings-nav-item active" data-section="general" role="tab">
+                            <i class="fa-solid fa-sliders" aria-hidden="true"></i> General
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="email" role="tab">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Email
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="sms" role="tab">
+                            <i class="fa-solid fa-message" aria-hidden="true"></i> SMS
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="payments" role="tab">
+                            <i class="fa-solid fa-credit-card" aria-hidden="true"></i> Payments
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="security" role="tab">
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Security
+                        </button>
+                        <button type="button" class="settings-nav-item" data-section="appearance" role="tab">
+                            <i class="fa-solid fa-palette" aria-hidden="true"></i> Appearance
+                        </button>
+                    </nav>
 
-                Platform Settings
+                    <!-- Panels -->
 
-            </span>
+                    <div class="settings-panels glass-card">
 
-        </section>
+                        <!-- General -->
+                        <div class="settings-panel" data-panel="general">
+                            <h2>General Settings</h2>
 
-        <!-- ==========================================
-             Page Header
-        =========================================== -->
+                            <div class="form-group">
+                                <label for="platformName">Platform name</label>
+                                <input type="text" id="platformName" name="platformName" maxlength="60">
+                            </div>
 
-        <section class="page-header glass-reveal">
+                            <div class="form-group">
+                                <label for="supportEmail">Support email</label>
+                                <input type="email" id="supportEmail" name="supportEmail" maxlength="120">
+                            </div>
 
-            <div class="page-header-content">
+                            <div class="form-group">
+                                <label for="supportPhone">Support phone</label>
+                                <input type="tel" id="supportPhone" name="supportPhone" maxlength="30">
+                            </div>
 
-                <span class="page-badge floating-badge glass-card">
+                            <div class="form-group">
+                                <label for="timezone">Timezone</label>
+                                <select id="timezone" name="timezone">
+                                    <option value="Africa/Lagos">West Africa Time (GMT+1)</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <i class="fa-solid fa-sliders"></i>
+                        <!-- Email -->
+                        <div class="settings-panel hidden" data-panel="email">
+                            <h2>Email Settings</h2>
 
-                    Platform Settings
+                            <div class="form-group">
+                                <label for="emailSenderName">Sender name</label>
+                                <input type="text" id="emailSenderName" name="emailSenderName" maxlength="60">
+                            </div>
 
-                </span>
+                            <div class="form-group">
+                                <label for="emailSenderAddress">Sender email address</label>
+                                <input type="email" id="emailSenderAddress" name="emailSenderAddress" maxlength="120">
+                            </div>
+                        </div>
 
-                <h1>
+                        <!-- Sections not yet connected -->
+                        <div class="settings-panel hidden" data-panel="sms">
+                            <h2>SMS Settings</h2>
+                            <p class="settings-soon">SMS settings are coming soon.</p>
+                        </div>
 
-                    Platform Configuration
+                        <div class="settings-panel hidden" data-panel="payments">
+                            <h2>Payment Settings</h2>
+                            <p class="settings-soon">Payment settings are coming soon.</p>
+                        </div>
 
-                </h1>
+                        <div class="settings-panel hidden" data-panel="security">
+                            <h2>Security Settings</h2>
+                            <p class="settings-soon">Security settings are coming soon.</p>
+                        </div>
 
-                <p>
+                        <div class="settings-panel hidden" data-panel="appearance">
+                            <h2>Appearance Settings</h2>
+                            <p class="settings-soon">Appearance settings are coming soon.</p>
+                        </div>
 
-                    Configure branding, communication,
-                    integrations, security and platform
-                    preferences from one centralized location.
-
-                </p>
-
-            </div>
-
-            <div class="page-header-actions">
-
-                <button class="btn btn-outline">
-
-                    <i class="fa-solid fa-rotate-left"></i>
-
-                    Reset
-
-                </button>
-
-                <button class="btn btn-primary azure-sweep ripple">
-
-                    <i class="fa-solid fa-floppy-disk"></i>
-
-                    Save Changes
-
-                </button>
-
-            </div>
-
-        </section>
-
-        <!-- ==========================================
-             Platform Overview
-        =========================================== -->
-
-        <section class="dashboard-section statistics-section glass-reveal">
-
-            <div class="dashboard-grid statistics-grid">
-
-                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-circle-check"></i>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>
-
-                            Online
-
-                        </h3>
-
-                        <p>
-
-                            Platform Status
-
-                        </p>
-
-                    </div>
-
-                </article>
-
-                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-code-branch"></i>
+                        <!-- Save bar: shown for sections that save -->
+                        <div id="settingsSaveBar" class="settings-save-bar">
+                            <button type="button" id="resetSettingsBtn" class="btn-outline">
+                                <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset
+                            </button>
+                            <button type="button" id="saveSettingsBtn" class="btn-primary">
+                                <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save changes
+                            </button>
+                        </div>
 
                     </div>
 
-                    <div class="card-content">
-
-                        <h3>
-
-                            v1.0.0
-
-                        </h3>
-
-                        <p>
-
-                            Current Version
-
-                        </p>
-
-                    </div>
-
-                </article>
-
-                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-clock"></i>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>
-
-                            Today
-
-                        </h3>
-
-                        <p>
-
-                            Last Backup
-
-                        </p>
-
-                    </div>
-
-                </article>
-
-                <article class="dashboard-card statistics-card floating-card glass-card">
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-user-shield"></i>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>
-
-                            Administrator
-
-                        </h3>
-
-                        <p>
-
-                            Last Updated By
-
-                        </p>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-        <!-- ==========================================
-             Settings Content Placeholder
-        =========================================== -->
-
-        <section id="platformSettingsContent" class="page-section glass-reveal floating-section">
-
-            <div class="container page-container">
-
-                <!-- Platform settings modules
-                     will be added here -->
+                </div>
 
             </div>
 
         </section>
 
     </main>
-    <!-- ==========================
-     Footer
-========================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================
-     JavaScript Modules
-========================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

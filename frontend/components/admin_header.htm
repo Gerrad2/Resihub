@@ -9,53 +9,42 @@
             </div>
         </a>
 
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
-            aria-controls="mainNavigation">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="admin-header-tools">
 
-        <nav class="main-nav" id="mainNavigation" aria-label="Administrator menu">
-            <div class="menu-heading">
-                <span class="menu-heading-kicker">Control center</span>
-                <strong>Platform management</strong>
-            </div>
+            <!-- Essential links, next to the menu button -->
 
-            <ul>
-                <li><a href="../admin/admin_dashboard.htm"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
-                <li><a href="../admin/admin_students.htm"><i class="fa-solid fa-user-graduate"></i> Users</a></li>
-                <li><a href="../admin/admin_bookings.htm"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
-                <li><a href="../admin/admin_listings.htm"><i class="fa-solid fa-building"></i> Listings</a></li>
-                <li><a href="../admin/admin_broadcast_messages.htm"><i class="fa-solid fa-comments"></i> Messages</a>
-                </li>
-                <li><a href="../admin/admin_reports.htm"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
-                <li><a href="../admin/admin_analytics.htm"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
-                <li><a href="../admin/admin_landlords.htm"><i class="fa-solid fa-house-user"></i> Landlords</a></li>
-                <li><a href="../admin/admin_notifications.htm"><i class="fa-solid fa-bell"></i> Notifications</a></li>
-                <li><a href="../admin/admin_support_tickets.htm"><i class="fa-solid fa-headset"></i> Support</a></li>
-                <li><a href="../admin/admin_platform_settings.htm"><i class="fa-solid fa-gear"></i> Settings</a></li>
-                <li id="superAdminMenu" class="hidden"><a href="../admin/super_admin.htm"><i
-                            class="fa-solid fa-crown"></i> Super admin</a></li>
-            </ul>
+            <nav class="admin-quick-links" aria-label="Quick links">
 
-            <div class="header-actions">
-                <button class="icon-btn" id="notificationButton" type="button" aria-label="Notifications"
+                <a href="../admin/admin_activity_logs.htm" class="quick-link" aria-label="Activity logs"
+                    title="Activity logs">
+                    <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+                </a>
+
+                <a href="../admin/admin_support_tickets.htm" class="quick-link" aria-label="Support tickets"
+                    title="Support tickets">
+                    <i class="fa-solid fa-headset" aria-hidden="true"></i>
+                </a>
+
+                <button class="quick-link" id="notificationButton" type="button" aria-label="Notifications"
                     aria-expanded="false" aria-controls="notificationMenu">
-                    <i class="fa-solid fa-bell"></i>
-                    <span class="notification-badge" id="notificationCount">0</span>
+                    <i class="fa-solid fa-bell" aria-hidden="true"></i>
+                    <span class="notification-badge" id="notificationBadge"></span>
                 </button>
+
                 <div class="notification-dropdown" id="notificationMenu">
                     <p>No new notifications.</p>
                 </div>
+
                 <div class="profile-dropdown" id="profileDropdown">
                     <button class="profile-btn" id="profileButton" type="button" aria-label="Administrator account menu"
                         aria-expanded="false" aria-controls="profileMenu">
-                        <img src="../assets/images/default-avatar.png" alt="Administrator" loading="lazy">
+                        <img src="../assets/images/default-avatar.png" alt="" loading="lazy">
                         <span>Admin</span>
-                        <i class="fa-solid fa-chevron-down"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-menu" id="profileMenu">
                         <a href="../admin/admin_profile.htm"><i class="fa-solid fa-user"></i> Profile</a>
-                        <a href="../admin/admin_system_configuration.htm"><i class="fa-solid fa-gear"></i> System
+                        <a href="../admin/admin_platform_settings.htm"><i class="fa-solid fa-gear"></i> Platform
                             settings</a>
                         <a href="../admin/admin_activity_logs.htm"><i class="fa-solid fa-clock-rotate-left"></i>
                             Activity logs</a>
@@ -64,20 +53,126 @@
                                 class="fa-solid fa-right-from-bracket"></i> Logout</a>
                     </div>
                 </div>
-            </div>
-        </nav>
 
-        <div class="portal-topbar" aria-label="Administrator workspace tools">
-            <div class="portal-search">
-                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                <span>Search anything...</span>
-            </div>
-            <div class="portal-topbar-actions">
-                <a href="../admin/admin_notifications.htm" aria-label="Notifications"><i
-                        class="fa-solid fa-bell"></i></a>
-                <a href="../admin/admin_profile.htm" aria-label="Administrator profile"><img
-                        src="../assets/images/default-avatar.png" alt="" loading="lazy"></a>
-            </div>
+            </nav>
+
+            <!-- Dropdown menu button -->
+
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false"
+                aria-controls="mainNavigation">
+                <i class="fa-solid fa-grip" aria-hidden="true"></i>
+                <span class="menu-toggle-label">Menu</span>
+                <i class="fa-solid fa-chevron-down menu-chevron" aria-hidden="true"></i>
+            </button>
+
+            <!-- Dropdown panel: one card per group -->
+
+            <nav class="main-nav" id="mainNavigation" aria-label="Administrator menu">
+
+                <div class="menu-heading">
+                    <span class="menu-heading-kicker">Control center</span>
+                    <strong>Platform management</strong>
+                </div>
+
+                <div class="menu-groups">
+
+                    <section class="menu-group">
+                        <header class="menu-group-head">
+                            <span class="menu-group-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span>
+                            <div>
+                                <strong>People</strong>
+                                <span>Accounts and support</span>
+                            </div>
+                        </header>
+                        <ul>
+                            <li><a href="../admin/admin_students.htm"><i class="fa-solid fa-user-graduate"></i>
+                                    Students</a></li>
+                            <li><a href="../admin/admin_landlords.htm"><i class="fa-solid fa-house-user"></i>
+                                    Landlords</a></li>
+                            <li><a href="../admin/admin_support_tickets.htm"><i class="fa-solid fa-headset"></i> Support
+                                    tickets</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="menu-group">
+                        <header class="menu-group-head">
+                            <span class="menu-group-icon"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+                            <div>
+                                <strong>Properties</strong>
+                                <span>Listings and bookings</span>
+                            </div>
+                        </header>
+                        <ul>
+                            <li><a href="../admin/admin_listings.htm"><i class="fa-solid fa-building"></i> Listings</a>
+                            </li>
+                            <li><a href="../admin/admin_bookings.htm"><i class="fa-solid fa-calendar-check"></i>
+                                    Bookings</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="menu-group">
+                        <header class="menu-group-head">
+                            <span class="menu-group-icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+                            <div>
+                                <strong>Communication</strong>
+                                <span>Messages and alerts</span>
+                            </div>
+                        </header>
+                        <ul>
+                            <li><a href="../admin/admin_broadcast_messages.htm"><i class="fa-solid fa-comments"></i>
+                                    Broadcasts</a></li>
+                            <li><a href="../admin/admin_notifications.htm"><i class="fa-solid fa-bell"></i>
+                                    Notifications</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="menu-group">
+                        <header class="menu-group-head">
+                            <span class="menu-group-icon"><i class="fa-solid fa-chart-line"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <strong>Insights</strong>
+                                <span>Reports and history</span>
+                            </div>
+                        </header>
+                        <ul>
+                            <li><a href="../admin/admin_analytics.htm"><i class="fa-solid fa-chart-line"></i>
+                                    Analytics</a></li>
+                            <li><a href="../admin/admin_reports.htm"><i class="fa-solid fa-chart-column"></i>
+                                    Reports</a></li>
+                            <li><a href="../admin/admin_activity_logs.htm"><i class="fa-solid fa-clipboard-list"></i>
+                                    Activity logs</a></li>
+                            <li><a href="../admin/admin_audit_trail.htm"><i class="fa-solid fa-shield-halved"></i> Audit
+                                    trail</a></li>
+                        </ul>
+                    </section>
+
+                    <section class="menu-group">
+                        <header class="menu-group-head">
+                            <span class="menu-group-icon"><i class="fa-solid fa-gear" aria-hidden="true"></i></span>
+                            <div>
+                                <strong>Platform</strong>
+                                <span>Settings and system</span>
+                            </div>
+                        </header>
+                        <ul>
+                            <li><a href="../admin/admin_platform_settings.htm"><i class="fa-solid fa-gear"></i> Platform
+                                    settings</a></li>
+                            <li><a href="../admin/admin_system_configuration.htm"><i class="fa-solid fa-sliders"></i>
+                                    System configuration</a></li>
+                            <li><a href="../admin/admin_system_health.htm"><i class="fa-solid fa-heart-pulse"></i>
+                                    System health</a></li>
+                            <li><a href="../admin/admin_backup_restore.htm"><i class="fa-solid fa-database"></i> Backup
+                                    and restore</a></li>
+                            <li id="superAdminMenu" class="hidden"><a href="../admin/super_admin.htm"><i
+                                        class="fa-solid fa-crown"></i> Super admin</a></li>
+                        </ul>
+                    </section>
+
+                </div>
+
+            </nav>
+
         </div>
 
     </div>

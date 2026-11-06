@@ -45,6 +45,22 @@ export function initNavigation() {
             toggle.focus();
         }
     });
+    const notificationButton = header.querySelector("#notificationButton");
+    const notificationMenu = document.getElementById("notificationMenu");
+    const setNotificationOpen = (open) => {
+        if (!notificationMenu || !notificationButton) return;
+        notificationMenu.classList.toggle("active", open);
+        notificationButton.setAttribute("aria-expanded", String(open));
+    };
+    notificationButton?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        setNotificationOpen(!notificationMenu.classList.contains("active"));
+    });
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest("#notificationButton, #notificationMenu")) {
+            setNotificationOpen(false);
+        }
+    });
     const current = location.pathname.split("/").pop()?.toLowerCase();
     menu.querySelectorAll("a[href]").forEach((link) => {
         const page = link.getAttribute("href").split("/").pop()?.toLowerCase();

@@ -78,188 +78,110 @@
 
     <div id="header"></div>
 
-    <main id="mainContent" class="page-transition">
+    <main id="mainContent">
 
-        <!-- ==========================================
-             System Health Dashboard
-        =========================================== -->
+        <section id="systemHealthContent" class="page-section">
 
-        <section id="systemHealthContent" class="auth-section reveal fade-up">
+            <div class="page-container">
 
-            <!-- Page Header -->
+                <!-- Heading -->
 
-            <div class="section-header">
-
-                <div class="container">
-
-                    <header class="auth-hero reveal fade-up">
-
-                        <div id="hero-text">
-
-                            <span class="page-badge floating-badge">
-
-                                <i class="fa-solid fa-heart-pulse"></i>
-
-                                Platform Monitoring
-
-                            </span>
-
-                            <h1>System Health</h1>
-
-                            <p>
-
-                                Monitor the overall performance, uptime and health of the ResiHub platform.
-
-                            </p>
-
-                        </div>
-                </div>
+                <header class="dashboard-heading" id="hero-text">
+                    <div>
+                        <h1>System Health</h1>
+                        <p>Monitor platform health and performance.</p>
+                    </div>
+                    <p id="systemUptime" class="health-updated"></p>
                 </header>
-            </div>
-            </header>
-        </section>
 
-        <!-- Health Statistics -->
+                <!-- Service status -->
 
-        <div class="dashboard-grid">
+                <section class="health-status-grid" aria-label="Service status">
 
-            <div class="dashboard-card">
+                    <article class="health-card glass-card">
+                        <p>Server</p>
+                        <span id="serverStatus" class="health-status">Checking...</span>
+                    </article>
 
-                <i class="fa-solid fa-server"></i>
+                    <article class="health-card glass-card">
+                        <p>Database</p>
+                        <span id="databaseHealth" class="health-status">Checking...</span>
+                    </article>
 
-                <h3 id="serverStatus">Online</h3>
+                    <article class="health-card glass-card">
+                        <p>API</p>
+                        <span id="apiStatus" class="health-status">Checking...</span>
+                    </article>
 
-                <p>Server Status</p>
+                    <article class="health-card glass-card">
+                        <p>Storage</p>
+                        <span id="storageStatus" class="health-status">Checking...</span>
+                    </article>
 
-            </div>
+                </section>
 
-            <div class="dashboard-card">
+                <!-- Performance -->
 
-                <i class="fa-solid fa-database"></i>
+                <section class="health-performance glass-card">
 
-                <h3 id="databaseHealth">Healthy</h3>
+                    <h2>System performance</h2>
 
-                <p>Database</p>
+                    <div class="health-gauges">
 
-            </div>
+                        <article class="health-gauge">
+                            <p>CPU</p>
+                            <strong id="cpuUsage">Not collected</strong>
+                        </article>
 
-            <div class="dashboard-card">
+                        <article class="health-gauge">
+                            <p>Memory</p>
+                            <strong id="memoryUsage">Not collected</strong>
+                        </article>
 
-                <i class="fa-solid fa-hard-drive"></i>
+                        <article class="health-gauge">
+                            <p>Storage</p>
+                            <strong id="storageUsage">Not collected</strong>
+                        </article>
 
-                <h3 id="storageUsage">0%</h3>
+                        <article class="health-gauge">
+                            <p>Network</p>
+                            <strong id="networkTraffic">Not collected</strong>
+                        </article>
 
-                <p>Storage Usage</p>
+                        <article class="health-gauge">
+                            <p>Active users (24 hours)</p>
+                            <strong id="activeUsers">—</strong>
+                        </article>
 
-            </div>
+                    </div>
 
-            <div class="dashboard-card">
+                    <div class="health-chart">
+                        <h3>Database connections (24 hours)</h3>
+                        <div id="systemHealthChart" class="health-chart-box"></div>
+                    </div>
 
-                <i class="fa-solid fa-wifi"></i>
+                </section>
 
-                <h3 id="systemUptime">99.99%</h3>
+                <!-- Alerts -->
 
-                <p>Platform Uptime</p>
-
-            </div>
-
-            <div class="dashboard-card">
-
-                <i class="fa-solid fa-memory"></i>
-
-                <h3 id="memoryUsage">0%</h3>
-
-                <p>Memory Usage</p>
-
-            </div>
-
-            <div class="dashboard-card">
-
-                <i class="fa-solid fa-microchip"></i>
-
-                <h3 id="cpuUsage">0%</h3>
-
-                <p>CPU Usage</p>
-
-            </div>
-
-            <div class="dashboard-card">
-
-                <i class="fa-solid fa-network-wired"></i>
-
-                <h3 id="networkTraffic">0 Mbps</h3>
-
-                <p>Network Traffic</p>
-
-            </div>
-
-            <div class="dashboard-card">
-
-                <i class="fa-solid fa-users"></i>
-
-                <h3 id="activeUsers">0</h3>
-
-                <p>Online Users</p>
+                <section class="health-alerts glass-card">
+                    <h2>Alerts</h2>
+                    <ul id="systemAlerts" class="health-alert-list"></ul>
+                </section>
 
             </div>
-
-        </div>
-
-        <!-- Live Monitoring -->
-
-        <section class="dashboard-section">
-
-            <div class="section-header">
-
-                <h2>Live Monitoring</h2>
-
-            </div>
-
-            <div id="systemHealthChart" class="analytics-chart">
-
-                <!-- Live chart rendered by JavaScript -->
-
-            </div>
-
-        </section>
-
-        <!-- Recent Alerts -->
-
-        <section class="dashboard-section">
-
-            <div class="section-header">
-
-                <h2>Recent Alerts</h2>
-
-            </div>
-
-            <div id="systemAlerts" class="notification-list">
-
-                <!-- Alerts loaded dynamically by JavaScript -->
-
-            </div>
-
-        </section>
-
-        </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-     Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-

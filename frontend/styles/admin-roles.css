@@ -1,0 +1,202 @@
+/* ==========================================
+   ADMIN ROLES AND PERMISSIONS (admin/admin_roles_permissions.htm)
+   Matches design 14. Load after admin-students.css.
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .page-container {
+    width: min(1200px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .dashboard-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .dashboard-heading h1 {
+    margin: 0 0 .3rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    height: 40px;
+    padding: 0 1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: transparent;
+    color: var(--ad-text);
+    font-family: var(--ad-font-body);
+    font-weight: 600;
+    cursor: not-allowed;
+    opacity: .5;
+}
+
+/* Figures */
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: .9rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-stat {
+    padding: 1rem 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-stat p {
+    margin: 0;
+    font-size: .8rem;
+    color: rgba(255, 255, 255, .65);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-stat h2 {
+    margin: .2rem 0 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Cards */
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-card {
+    display: flex;
+    flex-direction: column;
+    gap: .9rem;
+    padding: 1.1rem;
+    border-radius: var(--ad-radius-lg);
+    background: var(--ad-glass);
+    border: 1px solid var(--ad-line);
+    box-shadow: var(--ad-shadow);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-card h2 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-card-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .5rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-card-head p {
+    margin: 0;
+    font-size: .85rem;
+}
+
+/* Permission checklist, grouped by category */
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: .9rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-group {
+    padding: .9rem 1rem;
+    border-radius: var(--ad-radius);
+    background: rgba(6, 26, 79, .5);
+    border: 1px solid var(--ad-line-soft);
+    box-shadow: none;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-group h3 {
+    margin: 0 0 .5rem;
+    font-size: .9rem;
+    color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+    padding: .5rem 0;
+    border-top: 1px solid var(--ad-line-soft);
+    font-size: .9rem;
+    color: var(--ad-text-2);
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-row input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 40px;
+    height: 22px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, .35);
+    position: relative;
+    cursor: pointer;
+    transition: background .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-row input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform .2s ease;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-row input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-row input[type="checkbox"]:checked::after {
+    transform: translateX(18px);
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent .perm-row input[type="checkbox"]:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* Restricted list */
+body[data-resihub-surface="admin"] #rolesPermissionsContent .role-restricted p {
+    margin: 0;
+    font-size: .9rem;
+}
+
+body[data-resihub-surface="admin"] #rolesPermissionsContent #restrictedActions {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--ad-text-2);
+    font-size: .9rem;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+@media (max-width: 700px) {
+    body[data-resihub-surface="admin"] #rolesPermissionsContent .dashboard-heading {
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,178 @@
+/* ==========================================
+   ADMIN NOTIFICATIONS (admin/admin_notifications.htm)
+   Load after admin-students.css (filter, table, badge,
+   pagination, icon and modal styles).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .dashboard-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .dashboard-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent #totalNotifications {
+    margin: .25rem 0 0;
+    font-size: .85rem;
+    color: rgba(255, 255, 255, .6);
+}
+
+/* Tabs: All, Unread, Booking, Message, Review, Account */
+body[data-resihub-surface="admin"] #adminNotificationsContent .notif-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .notif-tab {
+    height: 36px;
+    padding: 0 .95rem;
+    border-radius: 999px;
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: rgba(255, 255, 255, .85);
+    font-family: var(--ad-font-body);
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .notif-tab:hover {
+    border-color: var(--ad-accent);
+}
+
+body[data-resihub-surface="admin"] #adminNotificationsContent .notif-tab.active {
+    background: var(--ad-primary);
+    border-color: var(--ad-primary-hi);
+    color: #fff;
+    box-shadow: var(--ad-glow-line);
+}
+
+/* Unread rows stand out */
+body[data-resihub-surface="admin"] #notificationHistory tr.notif-unread td {
+    background: rgba(91, 160, 255, .06);
+}
+
+body[data-resihub-surface="admin"] #notificationHistory tr.notif-unread td:first-child strong {
+    color: #fff;
+}
+
+body[data-resihub-surface="admin"] .admin-notif-body {
+    display: block;
+    margin-top: .2rem;
+    font-size: .82rem;
+    color: rgba(255, 255, 255, .6);
+    max-width: 520px;
+}
+
+/* Type badges */
+body[data-resihub-surface="admin"] .notif-type-booking {
+    color: #93c5fd;
+    background: rgba(47, 123, 255, .16);
+    border-color: rgba(91, 160, 255, .4);
+}
+
+body[data-resihub-surface="admin"] .notif-type-message {
+    color: #c4b5fd;
+    background: rgba(139, 92, 246, .16);
+    border-color: rgba(139, 92, 246, .4);
+}
+
+body[data-resihub-surface="admin"] .notif-type-review {
+    color: #fcd34d;
+    background: rgba(245, 158, 11, .16);
+    border-color: rgba(245, 158, 11, .4);
+}
+
+body[data-resihub-surface="admin"] .notif-type-account {
+    color: rgba(255, 255, 255, .8);
+    background: rgba(148, 163, 184, .16);
+    border-color: rgba(148, 163, 184, .4);
+}
+
+/* Action buttons */
+body[data-resihub-surface="admin"] #notificationHistory .icon-btn {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid var(--ad-line);
+    background: var(--ad-glass-strong);
+    color: var(--ad-text);
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+body[data-resihub-surface="admin"] #notificationHistory .icon-btn:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #markAllReadBtn {
+    height: 40px;
+    padding: 0 1.1rem;
+    border-radius: var(--ad-radius-sm);
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--ad-primary-hi), var(--ad-primary));
+    color: #fff;
+    font-family: var(--ad-font-body);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #markAllReadBtn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Empty state */
+body[data-resihub-surface="admin"] #noNotificationsFound {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noNotificationsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noNotificationsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noNotificationsFound p {
+    margin: 0;
+}

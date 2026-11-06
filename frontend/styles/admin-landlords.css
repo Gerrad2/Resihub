@@ -1,0 +1,95 @@
+/* ==========================================
+   ADMIN LANDLORDS (admin/admin_landlords.htm)
+   Load after admin-students.css (filter, table, badge,
+   pagination and icon styles).
+   Scoped to body[data-resihub-surface="admin"].
+========================================== */
+
+body[data-resihub-surface="admin"] #adminLandlordsContent .page-container {
+    width: min(1280px, 100% - 2rem);
+    margin-inline: auto;
+    padding: 1.75rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+body[data-resihub-surface="admin"] #adminLandlordsContent .dashboard-heading h1 {
+    margin: 0 0 .35rem;
+    font-family: var(--ad-font-head);
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #adminLandlordsContent .dashboard-heading p {
+    margin: 0;
+    color: rgba(255, 255, 255, .72);
+}
+
+body[data-resihub-surface="admin"] #adminLandlordsContent .liquid-group {
+    position: relative;
+    flex: 2 1 260px;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+body[data-resihub-surface="admin"] #adminLandlordsContent .liquid-group>i {
+    position: absolute;
+    left: .85rem;
+    color: var(--ad-accent);
+    pointer-events: none;
+}
+
+body[data-resihub-surface="admin"] #adminLandlordsContent .liquid-group .liquid-input {
+    width: 100%;
+    padding-left: 2.4rem;
+}
+
+body[data-resihub-surface="admin"] #landlordTableBody .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    padding: 0 .9rem;
+    border-radius: var(--ad-radius-sm);
+    font-family: var(--ad-font-body);
+    font-size: .85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+body[data-resihub-surface="admin"] #landlordTableBody .btn-outline {
+    background: transparent;
+    border: 1px solid var(--ad-line);
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #landlordTableBody .btn-outline:hover {
+    border-color: var(--ad-accent);
+    box-shadow: var(--ad-glow-line);
+}
+
+body[data-resihub-surface="admin"] #noLandlordsFound {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, .78);
+}
+
+body[data-resihub-surface="admin"] #noLandlordsFound i {
+    display: block;
+    margin-bottom: .75rem;
+    font-size: 2.5rem;
+    color: var(--ad-primary-hi);
+}
+
+body[data-resihub-surface="admin"] #noLandlordsFound h3 {
+    margin: 0 0 .35rem;
+    color: var(--ad-text);
+}
+
+body[data-resihub-surface="admin"] #noLandlordsFound p {
+    margin: 0;
+}

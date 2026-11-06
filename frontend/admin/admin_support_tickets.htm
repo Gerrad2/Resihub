@@ -92,240 +92,156 @@
 
     <div id="header"></div>
 
-    <main>
+    <main id="mainContent">
 
-        <!-- ==========================================
-             Support Tickets Section
-        =========================================== -->
+        <section id="supportTicketsContent" class="page-section">
 
-        <section id="supportTicketsContent" class="page-section glass-reveal floating-section">
+            <div class="page-container">
 
-            <div class="container page-container">
+                <!-- Heading -->
 
-                <!-- Page Header -->
+                <header class="dashboard-heading">
+                    <div>
+                        <h1>Support Tickets</h1>
+                        <p>Track and resolve user support requests.</p>
+                    </div>
+                </header>
 
-                <div class="section-header">
+                <!-- Key figures -->
 
-                    <div class="container">
+                <section class="statistics-section" aria-label="Ticket figures">
+                    <div class="statistics-grid">
 
-                        <header class="auth-hero reveal fade-up">
-
-                            <div id="hero-text">
-
-                                <span class="page-badge floating-badge">
-
-                                    <i class="fa-solid fa-headset"></i>
-
-                                    Support Center
-
-                                </span>
-
-                                <h1>Support Tickets</h1>
-
-                                <p>
-
-                                    Review, assign and resolve support requests from students and landlords.
-
-                                </p>
-
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-cyan"><i class="fa-solid fa-ticket" aria-hidden="true"></i>
                             </div>
-
-                            <!-- ==========================================
-                     Ticket Filters
-                =========================================== -->
-
-                            <form id="ticketFilterForm">
-
-                                <input type="search" id="ticketSearch" placeholder="Search tickets...">
-
-                                <select id="ticketStatus">
-
-                                    <option value="">All Status</option>
-
-                                    <option>Open</option>
-
-                                    <option>Pending</option>
-
-                                    <option>Resolved</option>
-
-                                    <option>Closed</option>
-
-                                </select>
-
-                                <select id="ticketPriority">
-
-                                    <option value="">All Priority</option>
-
-                                    <option>Critical</option>
-
-                                    <option>High</option>
-
-                                    <option>Medium</option>
-
-                                    <option>Low</option>
-
-                                </select>
-
-                                <select id="ticketCategory">
-
-                                    <option value="">All Categories</option>
-
-                                    <option>Account</option>
-
-                                    <option>Payments</option>
-
-                                    <option>Listings</option>
-
-                                    <option>Technical</option>
-
-                                    <option>Reports</option>
-
-                                </select>
-
-                            </form>
-
-                            <!-- ==========================================
-                     Statistics
-                =========================================== -->
-
-                            <section class="dashboard-section statistics-section glass-reveal">
-
-                                <div class="dashboard-grid statistics-grid">
-
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                        <div class="card-icon">
-
-                                            <i class="fa-solid fa-ticket"></i>
-
-                                        </div>
-
-                                        <div class="card-content">
-
-                                            <h3 id="totalTickets" class="count-up">0</h3>
-
-                                            <p>Total Tickets</p>
-
-                                        </div>
-
-                                    </article>
-
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                        <div class="card-icon">
-
-                                            <i class="fa-solid fa-folder-open"></i>
-
-                                        </div>
-
-                                        <div class="card-content">
-
-                                            <h3 id="openTickets" class="count-up">0</h3>
-
-                                            <p>Open Tickets</p>
-
-                                        </div>
-
-                                    </article>
-
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                        <div class="card-icon">
-
-                                            <i class="fa-solid fa-spinner"></i>
-
-                                        </div>
-
-                                        <div class="card-content">
-
-                                            <h3 id="pendingTickets" class="count-up">0</h3>
-
-                                            <p>Pending</p>
-
-                                        </div>
-
-                                    </article>
-
-                                    <article class="dashboard-card statistics-card floating-card glass-card">
-
-                                        <div class="card-icon">
-
-                                            <i class="fa-solid fa-circle-check"></i>
-
-                                        </div>
-
-                                        <div class="card-content">
-
-                                            <h3 id="resolvedTickets" class="count-up">0</h3>
-
-                                            <p>Resolved</p>
-
-                                        </div>
-
-                                    </article>
-
-                                </div>
-
-                                <!-- ==========================================
-                     Support Tickets Table
-                =========================================== -->
-
-                                <section class="table-section glass-reveal">
-
-                                    <div class="table-responsive">
-                                        <table class="admin-table">
-
-                                            <thead>
-
-                                                <tr>
-
-                                                    <th>ID</th>
-
-                                                    <th>User</th>
-
-                                                    <th>Category</th>
-
-                                                    <th>Priority</th>
-
-                                                    <th>Status</th>
-
-                                                    <th>Date</th>
-
-                                                    <th>Actions</th>
-
-                                                </tr>
-
-                                            </thead>
-
-                                            <tbody id="supportTicketsTable">
-
-                                                <!-- Loaded dynamically by JavaScript -->
-
-                                            </tbody>
-
-                                        </table>
-
-                                    </div>
+                            <div class="card-content">
+                                <p class="card-label">Total Tickets</p>
+                                <h2 id="totalTickets"></h2>
+                            </div>
+                        </article>
+
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-blue"><i class="fa-solid fa-envelope-open"
+                                    aria-hidden="true"></i></div>
+                            <div class="card-content">
+                                <p class="card-label">Open</p>
+                                <h2 id="openTickets"></h2>
+                            </div>
+                        </article>
+
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-indigo"><i class="fa-solid fa-clock" aria-hidden="true"></i>
+                            </div>
+                            <div class="card-content">
+                                <p class="card-label">Pending</p>
+                                <h2 id="pendingTickets"></h2>
+                            </div>
+                        </article>
+
+                        <article class="statistics-card glass-card">
+                            <div class="card-icon card-icon-teal"><i class="fa-solid fa-circle-check"
+                                    aria-hidden="true"></i></div>
+                            <div class="card-content">
+                                <p class="card-label">Resolved</p>
+                                <h2 id="resolvedTickets"></h2>
+                            </div>
+                        </article>
 
                     </div>
+                </section>
+
+                <!-- Filters -->
+
+                <form id="ticketFilterForm" class="filter-form liquid-form" role="search">
+
+                    <div class="liquid-group">
+                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                        <input type="search" id="ticketSearch" name="ticketSearch" class="liquid-input"
+                            placeholder="Search tickets..." aria-label="Search tickets">
+                    </div>
+
+                    <select id="ticketPriority" name="ticketPriority" class="liquid-input"
+                        aria-label="Filter by priority">
+                        <option value="">All Priority</option>
+                        <option value="urgent">Urgent</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+
+                    <select id="ticketStatus" name="ticketStatus" class="liquid-input" aria-label="Filter by status">
+                        <option value="">All Status</option>
+                        <option value="open">Open</option>
+                        <option value="in_progress">In progress</option>
+                        <option value="awaiting_user">Awaiting reply</option>
+                        <option value="resolved">Resolved</option>
+                        <option value="closed">Closed</option>
+                    </select>
+
+                    <select id="ticketCategory" name="ticketCategory" class="liquid-input"
+                        aria-label="Filter by category">
+                        <option value="">All Categories</option>
+                        <option value="account">Account</option>
+                        <option value="payments">Payments</option>
+                        <option value="listings">Listings</option>
+                        <option value="technical">Technical</option>
+                        <option value="reports">Reports</option>
+                    </select>
+
+                </form>
+
+                <!-- Table -->
+
+                <div class="table-wrapper">
+
+                    <table class="admin-table">
+
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Subject</th>
+                                <th>User</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="supportTicketsTable"></tbody>
+
+                    </table>
+
+                </div>
+
+                <div id="ticketPagination" class="pagination"></div>
+
+                <!-- Empty State -->
+
+                <div id="noTicketsFound" class="empty-state hidden">
+
+                    <i class="fa-solid fa-inbox" aria-hidden="true"></i>
+
+                    <h3>No Tickets Found</h3>
+
+                    <p>No support ticket matches your current search or filter.</p>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
-    <!-- ==========================================
-         Footer
-    =========================================== -->
+
+    <!-- FOOTER -->
 
     <div id="footer"></div>
 
-    <!-- ==========================================
-         JavaScript Modules
-    =========================================== -->
+    <!-- JavaScript -->
 
     <script type="module" src="../js/core/app.js"></script>
 </body>
 
 </html>
-
-
-
