@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Map | ResiHub</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="page-map" data-resihub-surface="student" data-map-mode="student">
+    <div id="scrollProgress"></div>
+
+    <div id="header"></div>
+
+    <main>
+        <section class="map-hero container">
+            <h1>Rooms on the map</h1>
+            <p>Exact pins show for rooms you have an approved booking for. Other rooms show the general area.</p>
+        </section>
+
+        <div class="map-toolbar container">
+            <label for="mapAvailability">Availability</label>
+            <select id="mapAvailability">
+                <option value="">All rooms</option>
+                <option value="available">Available</option>
+                <option value="booked">Booked</option>
+            </select>
+            <p id="mapStatus" class="map-status">Loading rooms...</p>
+        </div>
+
+        <div class="map-wrap container">
+            <div id="mapCanvas" class="map-canvas"></div>
+
+            <aside id="mapDetail" class="map-detail hidden">
+                <button type="button" id="mapClose" class="map-close" aria-label="Close">×</button>
+                <h2 id="mapDetailTitle"></h2>
+                <p id="mapDetailPrice" class="map-price"></p>
+                <p id="mapDetailMeta" class="map-meta"></p>
+                <p id="mapDetailLocation" class="map-meta"></p>
+                <a id="mapDetailLink" class="btn-primary" href="#">View room</a>
+            </aside>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="../js/core/app.js"></script>
+    <script type="module">
+        import { init } from "../js/map_page.js";
+        init();
+    </script>
+</body>
+
+</html>

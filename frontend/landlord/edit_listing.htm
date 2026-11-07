@@ -18,6 +18,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 
 <body class="page-edit-listing" data-resihub-surface="student">
@@ -37,6 +38,17 @@
 
         <section class="el-section">
             <div class="container">
+                <section class="el-section" id="locationSection">
+                    <h2 class="el-section-title"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Location
+                    </h2>
+                    <p class="el-hint">Click the map to drop a pin on the property. Students see the exact spot once a
+                        booking is approved. Everyone else sees the general area.</p>
+                    <div id="locationMap" class="el-map"></div>
+                    <div class="el-map-actions">
+                        <p id="locationStatus" class="el-message info">No pin yet. Click the map to place one.</p>
+                        <button type="button" id="clearPin" class="el-btn-ghost">Clear pin</button>
+                    </div>
+                </section>
                 <form id="editListingForm" class="el-form" novalidate>
                     <input type="hidden" id="listingId">
 
@@ -180,7 +192,7 @@
         import { init } from "../js/editing_listing.js";
         init();
     </script>
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 
 </html>

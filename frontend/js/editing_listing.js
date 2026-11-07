@@ -24,6 +24,12 @@ const AMENITIES = {
 let me = null;
 let listingId = null;
 let listing = null;
+let pin = null;
+let map = null;
+let marker = null;
+
+const LAGOS = { lat: 6.5244, lng: 3.3792 };
+const roundCoord = (value) => Math.round(value * 1e6) / 1e6;
 let photos = [];
 
 /* ---------- Entry point ---------- */
@@ -49,6 +55,7 @@ export async function init() {
 
     await loadUniversities();
     await loadListing();
+    initLocationMap();
 }
 
 function bindEvents() {
@@ -56,6 +63,7 @@ function bindEvents() {
     $("publishListingBtn")?.addEventListener("click", publishListing);
     $("deleteListingBtn")?.addEventListener("click", deleteListing);
     $("propertyImages")?.addEventListener("change", (event) => uploadPhotos(event.target.files));
+    $("clearPin")?.addEventListener("click", clearPin);
 }
 
 /* ---------- Loading ---------- */
@@ -148,6 +156,8 @@ function readForm() {
             available_rooms: rooms === "" ? null : Number(rooms),
             availability_status: $("listingAvailability").value,
             description: $("propertyDescription").value.trim() || null,
+            latitude: pin?.lat ?? null,
+            longitude: pin?.lng ?? null,
             amenities,
         },
     };
@@ -192,6 +202,10 @@ async function publishListing() {
             `Add at least ${MIN_PHOTOS_TO_PUBLISH} photos before publishing. You have ${photos.length}.`,
             "error"
         );
+        return;
+    }
+    if (!pin) {
+        setMessage("Drop a pin on the map before publishing.", "error");
         return;
     }
 
@@ -378,6 +392,64 @@ function renderPhotos() {
 
 function sortPhotos(list) {
     return [...list].sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0));
+}
+
+/* ---------- Location pin ---------- */
+
+function initLocationMap() {
+    const host = $("locationMap");
+    if (!host) return;
+
+    if (typeof L === "undefined") {
+        setLocationStatus("The map could not be loaded. Check your connection and refresh the page.", "error");
+        return;
+    }
+
+    const start = listing?.latitude != null && listing?.longitude != null
+        ? { lat: Number(listing.latitude), lng: Number(listing.longitude) }
+        : LAGOS;
+
+    map = L.map(host).setView([start.lat, start.lng], listing?.latitude != null ? 16 : 13);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "&copy; OpenStreetMap contributors",
+    }).addTo(map);
+
+    map.on("click", (event) => setPin(event.latlng));
+
+    if (listing?.latitude != null && listing?.longitude != null) {
+        setPin({ lat: Number(listing.latitude), lng: Number(listing.longitude) });
+    }
+}
+
+function setPin(latlng) {
+    pin = { lat: roundCoord(latlng.lat), lng: roundCoord(latlng.lng) };
+
+    if (!marker) {
+        marker = L.marker([pin.lat, pin.lng], { draggable: true }).addTo(map);
+        marker.on("dragend", () => setPin(marker.getLatLng()));
+    } else {
+        marker.setLatLng([pin.lat, pin.lng]);
+    }
+
+    setLocationStatus(`Pin set at ${pin.lat}, ${pin.lng}. Drag it to adjust.`, "success");
+}
+
+function clearPin() {
+    if (marker) {
+        marker.remove();
+        marker = null;
+    }
+    pin = null;
+    setLocationStatus("No pin yet. Click the map to place one.", "info");
+}
+
+function setLocationStatus(text, type = "info") {
+    const node = $("locationStatus");
+    if (!node) return;
+    node.textContent = text;
+    node.className = `el-message ${type}`;
 }
 
 /* ---------- Helpers ---------- */
