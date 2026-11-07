@@ -73,6 +73,14 @@ function startLiveUpdates() {
     );
 }
 
+async function safely(name, task) {
+    try {
+        await task();
+    } catch (error) {
+        console.error(`[dashboard] ${name} failed:`, error);
+    }
+}
+
 /* ---------- Greeting ---------- */
 
 function setToday() {
