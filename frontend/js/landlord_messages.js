@@ -1,7 +1,8 @@
 import { getCurrentUser, getPublicProfile, supabase } from "./api.js";
 import { showError } from "./student_utils.js";
 import { showToast } from "./ui/toast.js";
-import { ticksFor, startMessageStatus } from "./core/message-status.js";
+import { ticksFor, startMessageStatus, markDelivered } from "./core/message-status.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 const DEFAULT_AVATAR = "../assets/images/default-avatar.png";
@@ -33,6 +34,7 @@ export async function init() {
 
     // Delivered and read ticks, refreshed every few seconds
     startMessageStatus(me.id, refreshActiveThread);
+    startLiveMessages();
 }
 
 function bindEvents() {
@@ -207,6 +209,7 @@ async function openConversation(id) {
     }
 
     const messages = data ?? [];
+    await clearMessageNotifications(id);
     renderThread(messages);
 
     const unreadIds = messages
@@ -356,6 +359,53 @@ function resetChat() {
     $("chatAvatar").src = DEFAULT_AVATAR;
     setText("chatName", "Select a conversation");
     setText("chatStatus", "");
+}
+/* ---------- Live updates ---------- */
+
+function startLiveMessages() {
+    watchTables(
+        `messages-${me.id}`,
+        [
+            { table: "messages" },
+            { table: "conversations", filter: `landlord_id=eq.${me.id}` },
+        ],
+        async () => {
+            await markDelivered(me.id);
+            if (activeId) await markActiveThreadRead();
+            await refreshActiveThread();
+            await loadConversations();
+        }
+    );
+}
+
+// A new message in the open conversation is marked as read straight away
+// Marks the open conversation's messages and its message notifications as read
+async function markActiveThreadRead() {
+    if (!activeId) return;
+
+    await supabase
+        .from("messages")
+        .update({ is_read: true, read_at: new Date().toISOString() })
+        .eq("conversation_id", activeId)
+        .eq("is_read", false)
+        .neq("sender_id", me.id);
+
+    await clearMessageNotifications(activeId);
+}
+
+// Marks this person's message notifications for one conversation as read
+async function clearMessageNotifications(conversationId) {
+    const { error } = await supabase
+        .from("notifications")
+        .update({ is_read: true, read_at: new Date().toISOString() })
+        .eq("user_id", me.id)
+        .eq("type", "message")
+        .eq("is_read", false)
+        .like("link_url", `%${conversationId}%`);
+
+    if (error) {
+        console.error("[messages] could not clear message notifications:", error);
+    }
 }
 
 /* ---------- Helpers ---------- */

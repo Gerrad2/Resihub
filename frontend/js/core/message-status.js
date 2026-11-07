@@ -1,14 +1,12 @@
 import { supabase } from "../api.js";
 
-const POLL_MS = 5000;
-
 /* Ticks for a message I sent: sent, delivered, or read */
 export function ticksFor(message) {
     const state = message.is_read ? "read" : message.delivered_at ? "delivered" : "sent";
 
     const span = document.createElement("span");
     span.className = `msg-ticks ${state}`;
-    span.textContent = state === "read" ? "✓✓✓" : state === "delivered" ? "✓✓" : "✓";
+    span.textContent = state === "read" ? "✓✓" : state === "delivered" ? "✓✓" : "✓";
     span.setAttribute("aria-label", state.charAt(0).toUpperCase() + state.slice(1));
     span.title = span.getAttribute("aria-label");
 
@@ -27,12 +25,8 @@ export async function markDelivered(myId) {
 }
 
 /* Keeps ticks up to date. refresh() should reload and redraw the open chat. */
-export function startMessageStatus(myId, refresh) {
-    const tick = async () => {
-        await markDelivered(myId);
-        await refresh();
-    };
-
-    tick();
-    return setInterval(tick, POLL_MS);
+/* Runs once when the chat page opens. Live message events keep ticks up to date after that. */
+export async function startMessageStatus(myId, refresh) {
+    await markDelivered(myId);
+    await refresh();
 }

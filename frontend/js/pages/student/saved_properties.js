@@ -1,6 +1,8 @@
 ﻿import { getCurrentUser, getFavorites, removeFavorite } from "../../api.js";
+import { watchTables } from "../../core/realtime.js";
 import { showError } from "../../student_utils.js";
 import { showToast } from "../../ui/toast.js";
+
 
 const $ = (id) => document.getElementById(id);
 const DEFAULT_ROOM = "../assets/images/placeholder-room.jpg";
@@ -26,6 +28,11 @@ export async function init() {
         return;
     }
 
+    await loadSaved();
+    startLiveSaved();
+}
+
+async function loadSaved() {
     const result = await getFavorites(me.id);
 
     if (!result.success) {
@@ -37,6 +44,17 @@ export async function init() {
 
     updateCounts();
     render();
+}
+
+function startLiveSaved() {
+    watchTables(
+        `saved-${me.id}`,
+        [
+            { table: "favorites", filter: `student_id=eq.${me.id}` },
+            { table: "listings" },
+        ],
+        () => loadSaved()
+    );
 }
 
 function bindEvents() {

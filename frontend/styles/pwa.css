@@ -1,0 +1,41 @@
+.pwa-install {
+    position: fixed;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    padding: .9rem 1rem;
+    border-radius: 14px;
+    background: #0b1d4d;
+    border: 1px solid rgba(96, 165, 250, .35);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.pwa-install p {
+    margin: 0;
+    flex: 1 1 200px;
+    font-size: .9rem;
+}
+
+.pwa-install button {
+    padding: .5rem .9rem;
+    border-radius: 999px;
+    border: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pwa-install-btn {
+    background: #3b82f6;
+    color: #fff;
+}
+
+.pwa-install-later {
+    background: transparent;
+    color: #cbd5e1;
+}

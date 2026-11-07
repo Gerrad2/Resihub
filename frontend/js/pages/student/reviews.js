@@ -1,6 +1,7 @@
 ﻿import { getCurrentUser, getUniversities, supabase } from "../../api.js";
 import { showError } from "../../student_utils.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 const DEFAULT_AVATAR = "../assets/images/default-avatar.png";
@@ -33,6 +34,48 @@ export async function init() {
 
     await loadMine();
     render();
+    startLiveReviews();
+}
+
+/* ---------- Live updates ---------- */
+
+function startLiveReviews() {
+    watchTables("student-reviews", [{ table: "reviews" }], refreshReviews);
+}
+
+// Reloads "My reviews", and the part of "All reviews" that is already on screen
+async function refreshReviews() {
+    await loadMine();
+
+    if (all.length) {
+        await reloadAll();
+    }
+
+    render();
+}
+
+// Reloads as many "All reviews" as were already shown, so the list keeps its length
+async function reloadAll() {
+    const wanted = Math.max(PAGE_SIZE, all.length);
+
+    const { data, error } = await supabase
+        .from("reviews")
+        .select("id, rating, comment, created_at, student_id, listing_id, listings(title, university_id), profiles(full_name, avatar_url)")
+        .order("created_at", { ascending: false })
+        .range(0, wanted - 1);
+
+    if (error) {
+        console.error("[reviews] live reload failed:", error);
+        return;
+    }
+
+    all = (data ?? []).map((review) => ({
+        ...review,
+        mine: review.student_id === me.id,
+        reviewer: review.profiles,
+    }));
+    allOffset = all.length;
+    allHasMore = all.length === wanted;
 }
 
 function bindEvents() {

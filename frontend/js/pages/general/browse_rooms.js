@@ -2,6 +2,7 @@
 import { getListings, getUniversities } from "../../api.js";
 import { renderListingCards } from "../../listings.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 const PAGE_SIZE = 12;
 
@@ -11,6 +12,7 @@ const state = {
     page: 1,
     hasMore: false,
     loading: false,
+    loadedOnce: false,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -19,6 +21,7 @@ export function init() {
     initPageModule({ area: "general", page: "browse_rooms" });
     bindEvents();
     loadPage();
+    startLiveListings();
 }
 
 async function loadPage() {
@@ -41,6 +44,40 @@ function bindEvents() {
         fetchListings();
     });
 }
+
+/* ---------- Live updates ---------- */
+
+function startLiveListings() {
+    watchTables("browse-rooms", [{ table: "listings" }], () => refreshLoaded());
+}
+
+// Reloads every page already shown, with the current filters, so booked rooms drop out
+// and new rooms appear. The visitor's place in the list is kept.
+async function refreshLoaded() {
+    if (!state.loadedOnce || state.loading) return;
+    state.loading = true;
+
+    const { amenities, ...filters } = readFilters();
+    const pageCount = state.page;
+
+    const results = await Promise.all(
+        Array.from({ length: pageCount }, (_, index) =>
+            getListings({ ...filters, page: index + 1, pageSize: PAGE_SIZE })
+        )
+    );
+
+    state.loading = false;
+
+    if (results.some((result) => !result.success)) return;
+
+    state.listings = results.flatMap((result) => result.data?.listings ?? []);
+    const lastBatch = results[results.length - 1].data?.listings ?? [];
+    state.hasMore = lastBatch.length === PAGE_SIZE;
+
+    render();
+}
+
+/* ---------- Universities and filters ---------- */
 
 async function loadUniversities() {
     const result = await getUniversities();
@@ -82,6 +119,8 @@ function readFilters() {
     };
 }
 
+/* ---------- Loading and rendering ---------- */
+
 async function fetchListings({ append = false } = {}) {
     if (state.loading) return;
     state.loading = true;
@@ -102,6 +141,7 @@ async function fetchListings({ append = false } = {}) {
     state.listings = append ? [...state.listings, ...batch] : batch;
     state.page = pageToLoad;
     state.hasMore = batch.length === PAGE_SIZE;
+    state.loadedOnce = true;
 
     render();
 }

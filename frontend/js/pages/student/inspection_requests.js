@@ -1,5 +1,6 @@
 ﻿import { getCurrentUser, getStudentBookings } from "../../api.js";
 import { formatDateTime, showError } from "../../student_utils.js";
+import { watchTables } from "../../core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -23,7 +24,12 @@ export async function init() {
     const user = userResult.success ? userResult.data : null;
     if (!user) return;
 
-    const result = await getStudentBookings(user.id);
+    await loadInspections(user.id);
+    startLiveInspections(user.id);
+}
+
+async function loadInspections(userId) {
+    const result = await getStudentBookings(userId);
 
     if (!result.success) {
         showError("Your inspections could not be loaded.");
@@ -36,6 +42,14 @@ export async function init() {
     render();
     renderCalendar();
     renderNext();
+}
+
+function startLiveInspections(userId) {
+    watchTables(
+        `student-inspections-${userId}`,
+        [{ table: "booking_requests", filter: `student_id=eq.${userId}` }],
+        () => loadInspections(userId)
+    );
 }
 
 function bindEvents() {

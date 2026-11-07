@@ -1,5 +1,6 @@
 ﻿import { getCurrentUser, getStudentBookings } from "../../api.js";
 import { formatDateTime, showError } from "../../student_utils.js";
+import { watchTables } from "../../core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -21,7 +22,12 @@ export async function init() {
     const user = userResult.success ? userResult.data : null;
     if (!user) return;
 
-    const result = await getStudentBookings(user.id);
+    await loadBookings(user.id);
+    startLiveBookings(user.id);
+}
+
+async function loadBookings(userId) {
+    const result = await getStudentBookings(userId);
 
     if (!result.success) {
         showError("Your booking requests could not be loaded.");
@@ -31,6 +37,14 @@ export async function init() {
     bookings = result.data ?? [];
     updateCounts();
     render();
+}
+
+function startLiveBookings(userId) {
+    watchTables(
+        `student-bookings-${userId}`,
+        [{ table: "booking_requests", filter: `student_id=eq.${userId}` }],
+        () => loadBookings(userId)
+    );
 }
 
 function bindEvents() {

@@ -1,6 +1,7 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 /* =========================================
    ADMIN SUPPORT TICKETS
@@ -487,7 +488,36 @@ function bindEvents() {
         renderTable();
     });
 }
+/* ---------- Live updates ---------- */
 
+function startLiveTickets() {
+    watchTables(
+        "admin-support-tickets",
+        [
+            { table: "support_tickets" },
+            { table: "ticket_replies" },
+        ],
+        async () => {
+            await refresh();
+            await refreshOpenThread();
+        }
+    );
+}
+
+// Re-reads the open conversation, and redraws only when it has changed
+async function refreshOpenThread() {
+    const openId = state.open;
+    if (!openId) return;
+
+    const { data, error } = await supabase.rpc("admin_ticket_thread", { p_ticket_id: openId });
+    if (error || state.open !== openId) return;
+
+    const next = data ?? [];
+    if (JSON.stringify(next) === JSON.stringify(state.thread)) return;
+
+    state.thread = next;
+    renderPanel();
+}
 /* ---------- Entry point ---------- */
 
 export function init() {
@@ -498,4 +528,5 @@ export function init() {
         console.error("[admin_support_tickets] could not load tickets:", error);
         showToast("Support tickets could not be loaded.", { type: "error" });
     });
+    startLiveTickets();
 }

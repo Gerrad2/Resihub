@@ -1,10 +1,10 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 /* =========================================
    ADMIN LISTINGS
-   Matches the design (screen 9).
    Admins see every listing, view it, and approve or reject
    listings waiting for review. Approve and reject call
    approve_listing / reject_listing in the database.
@@ -310,6 +310,16 @@ async function refresh() {
     renderTable();
 }
 
+/* ---------- Live updates ---------- */
+
+let stopLiveListings = null;
+
+function startLiveListings() {
+    if (stopLiveListings) return;
+
+    stopLiveListings = watchTables("admin-listings", [{ table: "listings" }], () => refresh());
+}
+
 /* ---------- Events ---------- */
 
 function bindEvents() {
@@ -375,4 +385,5 @@ export function init() {
         console.error("[admin_listings] could not load listings:", error);
         showToast("Listings could not be loaded.", { type: "error" });
     });
+    startLiveListings();
 }

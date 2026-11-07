@@ -1,6 +1,8 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
+
 
 /* =========================================
    ADMIN NOTIFICATIONS
@@ -304,6 +306,18 @@ function bindEvents() {
     });
 }
 
+/* ---------- Live updates ---------- */
+
+function startLiveNotifications() {
+    watchTables("admin-notifications", [{ table: "notifications" }], refreshNotifications);
+}
+
+async function refreshNotifications() {
+    await loadNotifications();
+    renderHeader();
+    renderTable();
+}
+
 /* ---------- Entry point ---------- */
 
 export function init() {
@@ -319,4 +333,5 @@ export function init() {
             console.error("[admin_notifications] could not load notifications:", error);
             showToast("Notifications could not be loaded.", { type: "error" });
         });
+    startLiveNotifications();
 }

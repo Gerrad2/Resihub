@@ -1,6 +1,7 @@
 import { getCurrentUser, getProfile, supabase } from "./api.js";
 import { showError } from "./student_utils.js";
 import { trustBadge } from "./core/verification.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 const DEFAULT_AVATAR = "../assets/images/default-avatar.png";
@@ -34,6 +35,42 @@ export async function init() {
     const masked = details?.nin ? `***********${details.nin.slice(-3)}` : "Not added";
     const ninNode = document.getElementById("ninDisplay");
     if (ninNode) ninNode.textContent = masked;
+    renderStats(stats);
+    startLiveProfile(user);
+}
+
+/* ---------- Live updates ---------- */
+
+function startLiveProfile(user) {
+    watchTables(
+        `landlord-profile-${user.id}`,
+        [
+            { table: "profiles", filter: `id=eq.${user.id}` },
+            { table: "verification_details", filter: `landlord_id=eq.${user.id}` },
+            { table: "listings", filter: `landlord_id=eq.${user.id}` },
+            { table: "booking_requests", filter: `landlord_id=eq.${user.id}` },
+        ],
+        () => refreshProfile(user)
+    );
+}
+
+// Reloads the profile, the NIN display and the stats, then redraws them
+async function refreshProfile(user) {
+    const [profileResult, stats, detailsResult] = await Promise.all([
+        getProfile(user.id),
+        loadStats(user.id),
+        supabase.from("verification_details").select("nin").eq("landlord_id", user.id).maybeSingle(),
+    ]);
+
+    if (!profileResult.success || !profileResult.data) return;
+
+    renderProfile(profileResult.data, user);
+
+    const details = detailsResult.data;
+    const masked = details?.nin ? `***********${details.nin.slice(-3)}` : "Not added";
+    const ninNode = document.getElementById("ninDisplay");
+    if (ninNode) ninNode.textContent = masked;
+
     renderStats(stats);
 }
 

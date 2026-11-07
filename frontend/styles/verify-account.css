@@ -123,6 +123,10 @@ body.page-verify .vf-card {
     display: grid;
     gap: 1rem;
     min-width: 0;
+
+    [hidden] {
+        display: none !important;
+    }
 }
 
 body.page-verify .vf-card-title {

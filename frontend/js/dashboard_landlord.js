@@ -1,11 +1,12 @@
 import { getCurrentUser, getProfile, supabase } from "./api.js";
 import { showError } from "./student_utils.js";
-import { renderLandlordBanner } from "./core/verification.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
 const DEFAULT_AVATAR = "../assets/images/default-avatar.png";
 const DEFAULT_ROOM = "../assets/images/placeholder-room.jpg";
+const TIER_BANNER_KEY = "resihub:tier-banner-day";
 
 const BOOKING_LABEL = {
     pending: "Pending",
@@ -40,19 +41,36 @@ export async function init() {
 
     // Each section loads on its own, so one failure does not stop the others
     await Promise.all([
+        safely("banner", loadTierBanner),
         safely("stats", loadStats),
         safely("bookings", loadBookings),
         safely("messages", loadMessages),
         safely("listings", loadListings),
     ]);
+
+    startLiveUpdates();
 }
 
-async function safely(name, task) {
-    try {
-        await task();
-    } catch (error) {
-        console.error(`[dashboard] ${name} failed:`, error);
-    }
+function startLiveUpdates() {
+    watchTables(
+        `dashboard-${me.id}`,
+        [
+            { table: "profiles", filter: `id=eq.${me.id}` },
+            { table: "verification_documents", filter: `user_id=eq.${me.id}` },
+            { table: "listings", filter: `landlord_id=eq.${me.id}` },
+            { table: "booking_requests", filter: `landlord_id=eq.${me.id}` },
+            { table: "messages" },
+            { table: "reviews" },
+        ],
+        () =>
+            Promise.all([
+                safely("banner", loadTierBanner),
+                safely("stats", loadStats),
+                safely("bookings", loadBookings),
+                safely("messages", loadMessages),
+                safely("listings", loadListings),
+            ])
+    );
 }
 
 /* ---------- Greeting ---------- */
@@ -75,7 +93,128 @@ async function loadProfile() {
 
     setText("landlordName", profile?.business_name || profile?.full_name || "Landlord");
     setImage("landlordAvatar", profile?.avatar_url || DEFAULT_AVATAR);
-    renderLandlordBanner($("verifyBanner"), profile?.verification_status ?? "unverified");
+}
+
+/* ---------- Verification banner ---------- */
+
+async function loadTierBanner() {
+    const container = $("verifyBanner");
+    if (!container) return;
+
+    const [tierResult, countResult, docResult] = await Promise.all([
+        supabase.rpc("resihub_landlord_tier", { p_user: me.id }),
+        supabase.from("listings")
+            .select("id", { count: "exact", head: true })
+            .eq("landlord_id", me.id)
+            .neq("publication_status", "archived"),
+        supabase.from("verification_documents")
+            .select("status, rejection_reason")
+            .eq("user_id", me.id)
+            .eq("document_type", "address")
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+    ]);
+
+    if (tierResult.error) throw tierResult.error;
+    if (countResult.error) throw countResult.error;
+    if (docResult.error) throw docResult.error;
+
+    const tier = tierResult.data;
+    const active = countResult.count ?? 0;
+    const doc = docResult.data ?? null;
+
+    if (tier === "tier_2") {
+        container.replaceChildren();
+        return;
+    }
+
+    // Proof of address is with the admin team: show status, no upload prompt, cannot be dismissed
+    if (tier === "tier_1" && doc?.status === "pending") {
+        renderNoticeBanner(
+            container,
+            "Your proof of address is under review. We'll notify you once it has been checked.",
+            "View progress"
+        );
+        return;
+    }
+
+    if (tier === "tier_1" && doc?.status === "rejected") {
+        renderNoticeBanner(
+            container,
+            `Your proof of address needs attention${doc.rejection_reason ? `: ${doc.rejection_reason}` : ""}. Please upload it again.`,
+            "Upload again"
+        );
+        return;
+    }
+
+    if (tier === "none") {
+        renderTierBanner(container, { tier, active, max: 0 });
+        return;
+    }
+
+    // Tier 1 without a document: dismissible for the rest of the day
+    if (localStorage.getItem(TIER_BANNER_KEY) === new Date().toDateString()) {
+        container.replaceChildren();
+        return;
+    }
+
+    const { data: info, error } = await supabase
+        .from("landlord_tiers")
+        .select("max_listings")
+        .eq("code", tier)
+        .maybeSingle();
+
+    if (error) throw error;
+
+    renderTierBanner(container, { tier, active, max: info?.max_listings ?? 2 });
+}
+
+function renderNoticeBanner(container, message, linkText) {
+    const box = element("div", "verify-banner");
+    const text = element("p", "", message);
+    const link = element("a", "", linkText);
+    link.href = "verify_account.htm";
+
+    box.append(text, link);
+    container.replaceChildren(box);
+}
+
+function renderTierBanner(container, { tier, active, max }) {
+    const box = element("div", "verify-banner");
+    const text = element("p");
+    const link = element("a");
+    link.href = "verify_account.htm";
+
+    if (tier === "none") {
+        text.textContent = active > 0
+            ? `You can't add new listings until you verify your business. Your ${active} live ${pluralise(active, "listing")} will stay up.`
+            : "Verify your business to start listing. Add your NIN and next of kin details to list up to 2 properties.";
+        link.textContent = "Verify now";
+    } else if (active > max) {
+        text.textContent = `You have ${active} active listings, and Tier 1 includes ${max}. Your listings stay live, but new ones are blocked until you upload a proof of address or archive some.`;
+        link.textContent = "Upload proof of address";
+    } else if (active === max) {
+        text.textContent = `You're using all ${max} listings included with Tier 1. Upload a proof of address to list without a limit.`;
+        link.textContent = "Upload proof of address";
+    } else {
+        text.textContent = `You're on Tier 1, with up to ${max} listings. Upload a proof of address to list without a limit.`;
+        link.textContent = "Upload proof of address";
+    }
+
+    box.append(text, link);
+
+    if (tier !== "none") {
+        const later = element("button", "", "Remind me tomorrow");
+        later.type = "button";
+        later.addEventListener("click", () => {
+            localStorage.setItem(TIER_BANNER_KEY, new Date().toDateString());
+            box.remove();
+        });
+        box.append(later);
+    }
+
+    container.replaceChildren(box);
 }
 
 /* ---------- Stat tiles ---------- */
@@ -255,6 +394,10 @@ function element(tag, className = "", text = "") {
     if (className) node.className = className;
     if (text) node.textContent = text;
     return node;
+}
+
+function pluralise(count, word) {
+    return count === 1 ? word : `${word}s`;
 }
 
 function formatTime(value) {

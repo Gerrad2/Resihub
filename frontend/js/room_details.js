@@ -19,7 +19,7 @@ import { saveRecentlyViewed } from "./core/storage.js";
 import { createListingCard, getListingImageUrl, formatPrice } from "./listings.js";
 import { initBookingForm } from "./ui/booking-form.js";
 import { trustBadge, unverifiedNotice } from "./core/verification.js";
-
+import { watchTables } from "./core/realtime.js";
 
 const DEFAULT_AVATAR = "../assets/images/default-user.png";
 const PLACEHOLDER_IMAGE = "../assets/images/placeholder-room.jpg";
@@ -880,6 +880,32 @@ function wireActions() {
 
 let initialised = false;
 
+/* ---------- Live updates ---------- */
+
+function startLiveListing(listingId) {
+    watchTables(
+        `room-${listingId}`,
+        [{ table: "listings", filter: `id=eq.${listingId}` }],
+        refreshListing
+    );
+}
+
+// Reloads the listing and redraws the sidebar (price, availability, bookable state)
+async function refreshListing() {
+    const listingId = currentListing?.id;
+    if (!listingId) return;
+
+    const result = await getListing(listingId);
+
+    if (!result.success || !result.data) {
+        showErrorState("This listing is no longer available.");
+        return;
+    }
+
+    currentListing = result.data;
+    renderSidebar(currentListing);
+}
+
 export async function init() {
     if (initialised) return;
     initialised = true;
@@ -931,6 +957,7 @@ export async function init() {
     ]);
 
     renderReviews(reviewsResult.success ? reviewsResult.data : []);
+    startLiveListing(currentListing.id);
 }
 
 if (document.readyState === "loading") {

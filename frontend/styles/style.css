@@ -38,6 +38,7 @@
 @import url("admin-header-menu.css");
 @import url("admin-dashboard.css");
 @import url("admin-students.css");
+@import url("admin-landlords.css");
 @import url("admin-bookings.css");
 @import url("admin-footer.css");
 @import url("admin-listing.css");
@@ -55,6 +56,11 @@
 @import url("admin-system-configuration.css");
 @import url("admin-backup-restore.css");
 @import url("admin-super-admin.css");
+@import url("pwa.css");
+
+[hidden] {
+    display: none !important;
+}
 
 /* ---------- Verification badges and notices ---------- */
 .trust-badge {

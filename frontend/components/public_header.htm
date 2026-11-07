@@ -34,9 +34,19 @@
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                 </button>
 
-                <a href="../auth/student_login.htm" class="profile-btn account-entry"
+                <a href="../auth/student_login.htm" class="profile-btn account-entry" data-auth="guest"
                     aria-label="Sign in to your ResiHub account">
                     <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i><span>Sign in</span>
+                </a>
+
+                <a href="../auth/student_signup.htm" class="profile-btn account-entry" data-auth="guest"
+                    aria-label="Create a ResiHub account">
+                    <i class="fa-solid fa-user-plus" aria-hidden="true"></i><span>Sign up</span>
+                </a>
+
+                <a href="../student/dashboard_student.htm" class="profile-btn account-entry" data-auth="member"
+                    aria-label="Go to your dashboard" hidden>
+                    <i class="fa-solid fa-gauge" aria-hidden="true"></i><span>Dashboard</span>
                 </a>
 
                 <button class="icon-btn theme-toggle" type="button" aria-label="Theme settings" hidden>

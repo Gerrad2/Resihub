@@ -1,15 +1,15 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 /* =========================================
    ADMIN LANDLORDS
    Landlord table for admin/admin_landlords.htm, plus a
-   document review panel for each landlord.
-   Approve and reject call review_verification_document
-   in the database, which checks the admin role, matches
-   the NIN address to the profile address, and notifies
-   the landlord.
+   document review panel for each landlord. Approve and reject
+   call review_verification_document in the database, which
+   checks the admin role, matches the NIN address to the profile
+   address, and notifies the landlord. Changes arrive live.
 ========================================= */
 
 const SIGNED_URL_SECONDS = 300;
@@ -71,9 +71,6 @@ async function loadLandlords() {
         .select("id, full_name, phone, address, verification_status, created_at")
         .eq("role", "landlord")
         .order("created_at", { ascending: false });
-
-    if (error) throw error;
-    state.landlords = data ?? [];
 
     if (error) throw error;
     state.landlords = data ?? [];
@@ -224,6 +221,16 @@ function renderPagination(pages) {
 
 /* ---------- Review panel ---------- */
 
+const REVIEW_DOC_LABEL = { address: "Proof of address" };
+const REVIEW_STATUS_TEXT = { pending: "Pending", verified: "Approved", rejected: "Rejected" };
+
+function makeNode(tag, className = "", text = "") {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+}
+
 function buildPanel() {
     if ($("documentReviewModal")) return;
 
@@ -232,32 +239,41 @@ function buildPanel() {
     modal.className = "modal hidden";
     modal.setAttribute("aria-hidden", "true");
     modal.innerHTML = `
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content rv-panel" role="dialog" aria-modal="true" aria-labelledby="reviewPanelTitle">
+            <button type="button" class="modal-close" id="reviewPanelClose" aria-label="Close">×</button>
+
+            <header class="rv-header">
+                <p class="rv-eyebrow">Verification review</p>
                 <h2 class="modal-title" id="reviewPanelTitle">Review documents</h2>
-                <button type="button" class="modal-close" id="reviewPanelClose" aria-label="Close">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>NIN</label>
-                    <p id="reviewNin">Loading...</p>
+            </header>
+
+            <section class="rv-section">
+                <h3 class="rv-heading">Identity</h3>
+                <div class="rv-row">
+                    <span class="rv-label">NIN</span>
+                    <span id="reviewNin" class="rv-value rv-mono">Loading...</span>
                 </div>
-                <div class="form-group">
-                    <label>Address on profile</label>
-                    <p id="reviewProfileAddress">—</p>
+            </section>
+
+            <section class="rv-section">
+                <h3 class="rv-heading">Address check</h3>
+                <div class="rv-addresses">
+                    <div class="rv-card">
+                        <span class="rv-label">Profile</span>
+                        <p id="reviewProfileAddress" class="rv-value">—</p>
+                    </div>
+                    <div class="rv-card">
+                        <span class="rv-label">NIN record</span>
+                        <p id="reviewNinAddress" class="rv-value">—</p>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Address on NIN record</label>
-                    <p id="reviewNinAddress">—</p>
-                </div>
-                <p class="validation-message" id="reviewAddressHint" hidden></p>
-                <div class="form-group">
-                    <label>Documents</label>
-                    <div id="reviewDocuments"></div>
-                </div>
-            </div>
+                <p id="reviewAddressStatus" class="rv-status" hidden></p>
+            </section>
+
+            <section class="rv-section">
+                <h3 class="rv-heading">Documents</h3>
+                <div id="reviewDocuments" class="rv-docs"></div>
+            </section>
         </div>
     `;
     document.body.append(modal);
@@ -272,12 +288,26 @@ function buildPanel() {
 }
 
 function closePanel() {
-    $("documentReviewModal")?.classList.add("hidden");
+    const modal = $("documentReviewModal");
+    if (modal) {
+        modal.classList.add("hidden");
+        modal.setAttribute("aria-hidden", "true");
+    }
     state.open = null;
 }
 
 function normaliseAddress(value) {
     return (value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+// True only when the NIN is saved, both addresses are present, and they match
+function addressReady(landlord, details) {
+    return Boolean(
+        details?.nin &&
+        landlord.address &&
+        details.address &&
+        normaliseAddress(details.address) === normaliseAddress(landlord.address)
+    );
 }
 
 async function fetchPanelData(landlordId) {
@@ -297,80 +327,90 @@ async function fetchPanelData(landlordId) {
 }
 
 function renderPanelAddresses(landlord, details) {
-    setText("reviewNin", details?.nin || "Not saved yet. The landlord must save their NIN before the address can be approved.");
-    setText("reviewProfileAddress", landlord.address || "—");
-    setText("reviewNinAddress", details?.address || "—");
+    setText("reviewNin", details?.nin || "Not saved yet");
+    setText("reviewProfileAddress", landlord.address || "Not added");
+    setText("reviewNinAddress", details?.address || "Not saved");
 
-    const hint = $("reviewAddressHint");
-    if (!hint) return;
+    const status = $("reviewAddressStatus");
+    if (!status) return;
 
-    if (!details?.address || !landlord.address) {
-        hint.hidden = true;
-        return;
+    let kind;
+    let text;
+
+    if (!details?.nin) {
+        kind = "missing";
+        text = "The landlord hasn't saved their NIN yet, so the address can't be approved.";
+    } else if (!landlord.address || !details.address) {
+        kind = "missing";
+        text = "One of the addresses is missing. The landlord needs to save their profile again.";
+    } else if (addressReady(landlord, details)) {
+        kind = "match";
+        text = "The addresses match. The proof of address can be approved.";
+    } else {
+        kind = "mismatch";
+        text = "The addresses differ. Approval is blocked until the landlord saves their profile again.";
     }
-    const match = normaliseAddress(details.address) === normaliseAddress(landlord.address);
-    hint.textContent = match
-        ? "The two addresses look the same."
-        : "The two addresses look different. Approval will be refused until they match.";
-    hint.hidden = false;
+
+    status.className = `rv-status ${kind}`;
+    status.textContent = text;
+    status.hidden = false;
 }
 
-function documentRow(doc, landlordId) {
-    const item = document.createElement("div");
-    item.className = "review-document";
+function documentRow(doc, landlordId, ready) {
+    const card = makeNode("article", "rv-doc");
 
-    const info = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = doc.document_type === "address" ? "Proof of address" : doc.document_type;
-    const meta = document.createElement("span");
-    meta.textContent = `${doc.created_at ? shortDate.format(new Date(doc.created_at)) : ""} · ${doc.status}`;
-    info.append(title, meta);
+    const title = makeNode("div", "rv-doc-title");
+    title.append(
+        makeNode("strong", "", REVIEW_DOC_LABEL[doc.document_type] ?? doc.document_type),
+        makeNode("span", "rv-doc-date", doc.created_at ? shortDate.format(new Date(doc.created_at)) : "")
+    );
+
+    const head = makeNode("div", "rv-doc-head");
+    head.append(
+        title,
+        makeNode("span", `rv-pill ${doc.status}`, REVIEW_STATUS_TEXT[doc.status] ?? doc.status)
+    );
+    card.append(head);
 
     if (doc.status === "rejected" && doc.rejection_reason) {
-        const reason = document.createElement("p");
-        reason.textContent = `Reason: ${doc.rejection_reason}`;
-        info.append(reason);
+        card.append(makeNode("p", "rv-reason", `Reason: ${doc.rejection_reason}`));
     }
 
-    const actions = document.createElement("div");
-    actions.className = "admin-actions";
+    const actions = makeNode("div", "rv-actions");
 
-    const view = document.createElement("button");
+    const view = makeNode("button", "btn btn-outline btn-sm", "View");
     view.type = "button";
-    view.className = "btn btn-outline btn-sm";
-    view.textContent = "View";
     view.addEventListener("click", () => viewDocument(doc));
 
-    const approve = document.createElement("button");
+    const approve = makeNode("button", "btn btn-approve btn-sm", "Approve");
     approve.type = "button";
-    approve.className = "btn btn-primary btn-sm";
-    approve.textContent = "Approve";
-    approve.disabled = doc.status !== "pending";
+    const blockedByAddress = doc.document_type === "address" && !ready;
+    approve.disabled = doc.status !== "pending" || blockedByAddress;
+    if (blockedByAddress && doc.status === "pending") {
+        approve.title = "The addresses must match before this can be approved.";
+    }
     approve.addEventListener("click", () => decide(landlordId, doc, true, approve));
 
-    const reject = document.createElement("button");
+    const reject = makeNode("button", "btn btn-reject btn-sm", "Reject");
     reject.type = "button";
-    reject.className = "btn btn-outline btn-sm";
-    reject.textContent = "Reject";
     reject.disabled = doc.status !== "pending";
     reject.addEventListener("click", () => decide(landlordId, doc, false, reject));
 
     actions.append(view, approve, reject);
-    item.append(info, actions);
-    return item;
+    card.append(actions);
+    return card;
 }
 
-function renderDocuments(documents, landlordId) {
+function renderDocuments(documents, landlordId, ready) {
     const list = $("reviewDocuments");
     if (!list) return;
 
     if (documents.length === 0) {
-        const empty = document.createElement("p");
-        empty.textContent = "No documents uploaded yet.";
-        list.replaceChildren(empty);
+        list.replaceChildren(makeNode("p", "rv-empty", "No documents uploaded yet."));
         return;
     }
-    list.replaceChildren(...documents.map((doc) => documentRow(doc, landlordId)));
+
+    list.replaceChildren(...documents.map((doc) => documentRow(doc, landlordId, ready)));
 }
 
 async function viewDocument(doc) {
@@ -389,21 +429,29 @@ async function viewDocument(doc) {
 async function openPanel(landlord) {
     buildPanel();
     state.open = landlord.id;
+
     setText("reviewPanelTitle", `Review documents: ${landlord.full_name || "Landlord"}`);
-    $("documentReviewModal").classList.remove("hidden");
-    $("reviewDocuments").replaceChildren();
+
+    const modal = $("documentReviewModal");
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+
     setText("reviewNin", "Loading...");
+    $("reviewDocuments").replaceChildren(makeNode("p", "rv-empty", "Loading documents..."));
 
     try {
         const { details, documents } = await fetchPanelData(landlord.id);
         if (state.open !== landlord.id) return;
+
         renderPanelAddresses(landlord, details);
-        renderDocuments(documents, landlord.id);
+        renderDocuments(documents, landlord.id, addressReady(landlord, details));
     } catch (error) {
         console.error("[admin_landlords] could not load documents:", error);
         showToast("Documents for this landlord could not be loaded.", { type: "error" });
     }
 }
+
+/* ---------- Decisions ---------- */
 
 async function decide(landlordId, doc, approve, button) {
     let reason = null;
@@ -423,7 +471,7 @@ async function decide(landlordId, doc, approve, button) {
     }
 
     button.disabled = true;
-    const { data, error } = await supabase.rpc("review_verification_document", {
+    const { error } = await supabase.rpc("review_verification_document", {
         doc_id: doc.id,
         approve,
         reason,
@@ -436,21 +484,52 @@ async function decide(landlordId, doc, approve, button) {
         return;
     }
 
-    showToast(approve ? "Document approved." : "Document rejected. The landlord has been notified.", { type: "success" });
-    await refreshAfterDecision(landlordId);
+    showToast(
+        approve ? "Document approved." : "Document rejected. The landlord has been notified.",
+        { type: "success" }
+    );
+    await refreshAfterDecision();
 }
 
-async function refreshAfterDecision(landlordId) {
-    await loadLandlords();
+/* ---------- Refresh (after a decision, and on live changes) ---------- */
+
+async function refreshEverything() {
+    await Promise.all([loadLandlords(), loadListingCounts()]);
     renderStats();
     renderTable();
 
-    const landlord = state.landlords.find((item) => item.id === landlordId);
-    if (landlord && state.open === landlordId) {
-        const { details, documents } = await fetchPanelData(landlordId);
-        renderPanelAddresses(landlord, details);
-        renderDocuments(documents, landlordId);
-    }
+    const open = state.open;
+    if (!open) return;
+
+    const landlord = state.landlords.find((item) => item.id === open);
+    if (!landlord) return;
+
+    const { details, documents } = await fetchPanelData(open);
+    if (state.open !== open) return;
+
+    renderPanelAddresses(landlord, details);
+    renderDocuments(documents, open, addressReady(landlord, details));
+}
+
+async function refreshAfterDecision() {
+    await refreshEverything();
+}
+
+let stopLiveUpdates = null;
+
+function startLiveUpdates() {
+    if (stopLiveUpdates) return;
+
+    stopLiveUpdates = watchTables(
+        "admin-landlords",
+        [
+            { table: "profiles", filter: "role=eq.landlord" },
+            { table: "listings" },
+            { table: "verification_documents" },
+            { table: "verification_details" },
+        ],
+        () => refreshEverything()
+    );
 }
 
 /* ---------- Events ---------- */
@@ -479,6 +558,7 @@ function bindEvents() {
         state.statusFilter = event.target.value;
         renderTable();
     });
+
     $("propertyFilter")?.addEventListener("change", (event) => {
         state.propertyFilter = event.target.value;
         state.page = 1;
@@ -522,4 +602,6 @@ export function init() {
             renderTable();
         })
         .catch((error) => console.error("[admin_landlords] could not load listing counts:", error));
+
+    startLiveUpdates();
 }

@@ -1,6 +1,7 @@
 import { getCurrentUser, getUniversities, supabase } from "./api.js";
 import { showError } from "./student_utils.js";
 import { showToast } from "./ui/toast.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -9,6 +10,9 @@ const MAX_PHOTOS = 10;
 const MIN_PHOTOS_TO_PUBLISH = 3;
 const MAX_BYTES = 10 * 1024 * 1024;
 const PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const DEFAULT_TIER_1_LIMIT = 2;
+// Matches the database messages for verification and listing-limit errors
+const LIMIT_ERROR = /verification|plan allows/i;
 
 const AMENITIES = {
     wifi: "wifiAmenity",
@@ -23,6 +27,9 @@ const AMENITIES = {
 
 let me = null;
 let photos = []; // { file, previewUrl }
+let tier = null; // "none" | "tier_1" | "tier_2", or null if the check failed
+let activeCount = 0; // non-archived listings, drafts included
+let tier1Max = DEFAULT_TIER_1_LIMIT;
 
 /* ---------- Entry point ---------- */
 
@@ -39,7 +46,9 @@ export async function init() {
     }
 
     await loadUniversities();
+    await loadTierState();
     renderPhotos();
+    startLiveTier();
 }
 
 function bindEvents() {
@@ -61,6 +70,103 @@ async function loadUniversities() {
     result.data.forEach((university) => {
         select.append(new Option(university.name, university.id));
     });
+}
+
+/* ---------- Tier and listing limit ---------- */
+
+async function loadTierState() {
+    const [tierResult, countResult] = await Promise.all([
+        supabase.rpc("resihub_landlord_tier", { p_user: me.id }),
+        supabase.from("listings")
+            .select("id", { count: "exact", head: true })
+            .eq("landlord_id", me.id)
+            .neq("publication_status", "archived"),
+    ]);
+
+    if (tierResult.error || countResult.error) {
+        console.error("[create_listing] tier check failed:", tierResult.error ?? countResult.error);
+        tier = null;
+        renderTierState();
+        return;
+    }
+
+    tier = tierResult.data;
+    activeCount = countResult.count ?? 0;
+
+    if (tier === "tier_1") {
+        const { data, error } = await supabase
+            .from("landlord_tiers")
+            .select("max_listings")
+            .eq("code", "tier_1")
+            .maybeSingle();
+
+        if (error) console.error("[create_listing] tier limit lookup failed:", error);
+        tier1Max = data?.max_listings ?? DEFAULT_TIER_1_LIMIT;
+    }
+
+    renderTierState();
+}
+
+// The number of listings allowed: 0 when unverified, a number on Tier 1, null when unlimited
+function listingLimit() {
+    if (tier === "none") return 0;
+    if (tier === "tier_1") return tier1Max;
+    return null;
+}
+
+// A message explaining why the landlord can't add a listing right now, or null if they can
+function blockReason() {
+    if (tier === "none") {
+        return "Verify your business before adding listings. Add your NIN and next of kin first.";
+    }
+
+    const limit = listingLimit();
+    if (limit !== null && activeCount >= limit) {
+        return `You've reached the ${limit}-listing limit for Tier 1. Archive a listing or upload proof of address to list without a limit.`;
+    }
+
+    return null;
+}
+
+function renderTierState() {
+    const notice = $("listingTierNotice");
+    const text = $("listingTierText");
+    const link = $("listingTierLink");
+    if (!notice || !text || !link) return;
+
+    // The check failed: leave the form usable, and the database still enforces the limit on save
+    if (tier === null) {
+        notice.hidden = false;
+        link.hidden = true;
+        text.textContent = "We couldn't check your listing limit. Please refresh the page.";
+        return;
+    }
+
+    if (tier === "tier_2") {
+        notice.hidden = true;
+        setFormDisabled(false);
+        return;
+    }
+
+    const blocked = blockReason();
+    const limit = listingLimit();
+
+    notice.hidden = false;
+    link.hidden = false;
+    link.href = "verify_account.htm";
+    link.textContent = tier === "none" ? "Verify now" : "Upload proof of address";
+
+    if (tier === "none") {
+        text.textContent = activeCount > 0
+            ? `You need to verify your business before adding listings. Your ${activeCount} live ${pluralise(activeCount, "listing")} will stay up.`
+            : "You need to verify your business before adding listings. Add your NIN and next of kin to list up to 2 properties.";
+    } else if (blocked) {
+        text.textContent = `You've used all ${limit} listings included with Tier 1. Archive one to make room, or upload proof of address to list without a limit.`;
+    } else {
+        text.textContent = `Tier 1: ${activeCount} of ${limit} listings used. Drafts count toward this limit. Upload proof of address to list without a limit.`;
+    }
+
+    setFormDisabled(Boolean(blocked));
 }
 
 /* ---------- Form ---------- */
@@ -109,6 +215,12 @@ function readForm() {
 /* ---------- Saving ---------- */
 
 async function submitListing(status) {
+    const reason = blockReason();
+    if (reason) {
+        setMessage(reason, "error");
+        return;
+    }
+
     const { error: validationError, payload } = readForm();
     if (validationError) {
         setMessage(validationError, "error");
@@ -136,7 +248,14 @@ async function submitListing(status) {
     if (createError || !created) {
         console.error("[create_listing] insert failed:", createError);
         setBusy(false);
-        setMessage("The listing could not be saved. Please try again.", "error");
+
+        // Show the database's own limit or verification message when it is one of those
+        const message = LIMIT_ERROR.test(createError?.message ?? "")
+            ? createError.message
+            : "The listing could not be saved. Please try again.";
+
+        setMessage(message, "error");
+        await loadTierState();
         return;
     }
 
@@ -296,16 +415,41 @@ function renderPhotos() {
     }));
 }
 
+/* ---------- Live updates ---------- */
+
+function startLiveTier() {
+    watchTables(
+        `create-listing-${me.id}`,
+        [
+            { table: "profiles", filter: `id=eq.${me.id}` },
+            { table: "verification_details", filter: `landlord_id=eq.${me.id}` },
+            { table: "verification_documents", filter: `user_id=eq.${me.id}` },
+            { table: "listings", filter: `landlord_id=eq.${me.id}` },
+        ],
+        () => loadTierState()
+    );
+}
+
 /* ---------- Helpers ---------- */
 
+// True while a listing is being saved, so a live refresh can't re-enable the form mid-save
+let busy = false;
+
 function setBusy(on) {
+    busy = on;
+
     ["saveDraftBtn", "publishListingBtn"].forEach((id) => {
         const button = $(id);
         if (button) button.disabled = on;
     });
+
+    // When the save ends, show the current tier state again
+    if (!on) renderTierState();
 }
 
 function setFormDisabled(on) {
+    if (busy) return;
+
     const form = $("createListingForm");
     if (!form) return;
     form.querySelectorAll("input, select, textarea, button").forEach((node) => {
@@ -318,6 +462,10 @@ function setMessage(text, type = "info") {
     if (!box) return;
     box.textContent = text;
     box.className = `el-message ${type}`;
+}
+
+function pluralise(count, word) {
+    return count === 1 ? word : `${word}s`;
 }
 
 function element(tag, className = "", text = "") {

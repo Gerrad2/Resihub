@@ -1,5 +1,6 @@
 import { getCurrentUser, getProfile, supabase } from "./api.js";
 import { showError } from "./student_utils.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 

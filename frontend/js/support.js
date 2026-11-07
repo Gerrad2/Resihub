@@ -1,5 +1,6 @@
 import { getCurrentUser, supabase } from "./api.js";
 import { showToast } from "./ui/toast.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -31,6 +32,7 @@ export async function initSupport({ role }) {
     $("supportForm")?.addEventListener("submit", (event) => submit(event, user, role));
 
     await loadTickets(user);
+    startLiveTickets(user);
 }
 
 async function submit(event, user, role) {
@@ -71,6 +73,16 @@ async function submit(event, user, role) {
     showToast("Thank you. Your message has been sent to the ResiHub team.", { type: "success" });
 
     await loadTickets(user);
+}
+
+/* ---------- Live updates ---------- */
+
+function startLiveTickets(user) {
+    watchTables(
+        `support-${user.id}`,
+        [{ table: "support_tickets", filter: `user_id=eq.${user.id}` }],
+        () => loadTickets(user)
+    );
 }
 
 async function loadTickets(user) {

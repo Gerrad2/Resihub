@@ -6,6 +6,7 @@ import { initTheme } from "../ui/theme.js";
 import { initPage } from "./page.js";
 import { guardPage } from "./access-guard.js";
 import { startNotificationAlerts } from "./alerts.js";
+import { initPwa } from "./pwa.js";
 
 const loaders = {
     admin: "./loadAdmin.js",
@@ -191,9 +192,7 @@ function optimizePageDelivery() {
             timer = setTimeout(() => input.dispatchEvent(new CustomEvent("resihub:debounced-input", { bubbles: true })), 250);
         });
     });
-    if ("serviceWorker" in navigator && location.protocol === "https:") {
-        navigator.serviceWorker.register("../sw.js").catch(() => { });
-    }
+    initPwa();
 }
 
 /* A super admin can use every admin page, so admin pages accept either admin role */

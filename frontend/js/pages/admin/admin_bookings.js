@@ -1,7 +1,8 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
 import { showToast } from "../../ui/toast.js";
-
+import { watchTables } from "../../core/realtime.js";
+``
 /* =========================================
    ADMIN BOOKINGS
    Read-only booking list for admin/admin_bookings.htm,
@@ -297,6 +298,16 @@ function bindEvents() {
     });
 }
 
+/* ---------- Live updates ---------- */
+
+function startLiveBookings() {
+    watchTables("admin-bookings", [{ table: "booking_requests" }], () =>
+        loadBookings()
+            .then(() => renderTable())
+            .catch((error) => console.error("[admin_bookings] live reload failed:", error))
+    );
+}
+
 /* ---------- Entry point ---------- */
 
 export function init() {
@@ -314,4 +325,5 @@ export function init() {
             console.error("[admin_bookings] could not load bookings:", error);
             showToast("Bookings could not be loaded.", { type: "error" });
         });
+    startLiveBookings();
 }

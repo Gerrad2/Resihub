@@ -1,6 +1,7 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 /* =========================================
    ADMIN STUDENTS
@@ -343,6 +344,33 @@ function bindEvents() {
     });
 }
 
+/* ---------- Live updates ---------- */
+
+function startLiveStudents() {
+    watchTables(
+        "admin-students",
+        [{ table: "profiles", filter: "role=eq.student" }],
+        () => refreshStudents()
+    );
+}
+
+// Reloads the list, and the open student's details if that panel is showing
+async function refreshStudents() {
+    await loadStudents();
+    renderCourseOptions();
+    renderTable();
+
+    const openId = state.open;
+    if (!openId) return;
+
+    const student = state.students.find((item) => item.id === openId);
+    if (student) {
+        openPanel(student);
+    } else {
+        closePanel();
+    }
+}
+
 /* ---------- Entry point ---------- */
 
 export function init() {
@@ -364,4 +392,5 @@ export function init() {
         .catch((error) => {
             console.error("[admin_students] could not load emails:", error);
         });
+    startLiveStudents();
 }

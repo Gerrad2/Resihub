@@ -1,6 +1,7 @@
 import { getCurrentUser, supabase } from "./api.js";
 import { showError } from "./student_utils.js";
 import { showToast } from "./ui/toast.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -45,6 +46,20 @@ export async function init() {
 
     await Promise.all([loadCounts(), loadPage(true)]);
     render();
+    startLiveListings();
+}
+
+/* ---------- Live updates ---------- */
+
+function startLiveListings() {
+    watchTables(
+        `my-listings-${me.id}`,
+        [{ table: "listings", filter: `landlord_id=eq.${me.id}` }],
+        async () => {
+            await loadCounts();
+            await reload();
+        }
+    );
 }
 
 function bindEvents() {

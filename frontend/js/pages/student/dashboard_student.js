@@ -8,6 +8,7 @@
     supabase,
 } from "../../api.js";
 import { renderListingCards } from "../../listings.js";
+import { watchTables } from "../../core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -28,19 +29,33 @@ export async function init() {
     const user = userResult.success ? userResult.data : null;
     if (!user) return;
 
-    const [profileResult, favoritesResult, bookingsResult, notificationsResult, unreadMessages, listingsResult] =
-        await Promise.all([
-            getProfile(user.id),
-            getFavorites(user.id),
-            getStudentBookings(user.id),
-            getUnreadNotificationCount(user.id),
-            countUnreadMessages(user.id),
-            getListings({ pageSize: 3 }),
-        ]);
+    const [profileResult, listingsResult] = await Promise.all([
+        getProfile(user.id),
+        getListings({ pageSize: 3 }),
+    ]);
 
     if (profileResult.success && profileResult.data) {
         renderProfile(profileResult.data);
     }
+
+    if (listingsResult.success) {
+        const listings = listingsResult.data?.listings ?? [];
+        renderListingCards($("recommendedListings"), listings);
+        $("noRecommendations")?.classList.toggle("hidden", listings.length > 0);
+    }
+
+    await refreshActivity(user.id);
+    startLiveUpdates(user.id);
+}
+
+/* Counts, bookings and badges. Runs on load and again whenever something changes. */
+async function refreshActivity(userId) {
+    const [favoritesResult, bookingsResult, notificationsResult, unreadMessages] = await Promise.all([
+        getFavorites(userId),
+        getStudentBookings(userId),
+        getUnreadNotificationCount(userId),
+        countUnreadMessages(userId),
+    ]);
 
     if (favoritesResult.success) {
         setText("savedCount", favoritesResult.data.length);
@@ -52,12 +67,19 @@ export async function init() {
 
     setText("messageCount", unreadMessages);
     setBadge("notificationBadge", notificationsResult.success ? notificationsResult.data : 0);
+}
 
-    if (listingsResult.success) {
-        const listings = listingsResult.data?.listings ?? [];
-        renderListingCards($("recommendedListings"), listings);
-        $("noRecommendations")?.classList.toggle("hidden", listings.length > 0);
-    }
+function startLiveUpdates(userId) {
+    watchTables(
+        `student-dashboard-${userId}`,
+        [
+            { table: "booking_requests", filter: `student_id=eq.${userId}` },
+            { table: "favorites", filter: `student_id=eq.${userId}` },
+            { table: "messages" },
+            { table: "notifications", filter: `user_id=eq.${userId}` },
+        ],
+        () => refreshActivity(userId)
+    );
 }
 
 function setTodayAndGreeting() {
@@ -72,14 +94,20 @@ function setTodayAndGreeting() {
     );
 }
 
+// Unread messages in this student's conversations, sent by the other person
 async function countUnreadMessages(userId) {
     const { count, error } = await supabase
         .from("messages")
-        .select("id", { count: "exact", head: true })
-        .eq("receiver_id", userId)
-        .eq("is_read", false);
+        .select("id, conversations!inner(student_id)", { count: "exact", head: true })
+        .eq("conversations.student_id", userId)
+        .eq("is_read", false)
+        .neq("sender_id", userId);
 
-    return error ? 0 : count ?? 0;
+    if (error) {
+        console.error("[dashboard_student] unread count failed:", error);
+        return 0;
+    }
+    return count ?? 0;
 }
 
 function renderProfile(profile) {

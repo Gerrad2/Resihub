@@ -10,6 +10,7 @@ const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
 
 let me = null;
 let originalCac = "";
+let originalAddress = "";
 
 export async function init() {
     bindEvents();
@@ -38,11 +39,13 @@ async function loadProfile() {
         .maybeSingle();
 
     if (error || !data) {
-        showError("Your profile could not be loaded.");
+        console.error("[landlord_profile_edit] load failed:", error);
+        showError("Your profile could not be loaded. Please refresh the page.");
         return;
     }
 
     originalCac = data.cac_number ?? "";
+    originalAddress = data.address ?? "";
 
     setValue("fullName", data.full_name);
     setValue("email", me.email);
@@ -58,11 +61,17 @@ async function loadProfile() {
     setValue("emergencyPhone", data.emergency_phone);
 
     $("profilePreview")?.setAttribute("src", data.avatar_url || DEFAULT_AVATAR);
-    const { data: details } = await supabase
+
+    const { data: details, error: detailsError } = await supabase
         .from("verification_details")
         .select("nin")
         .eq("landlord_id", me.id)
         .maybeSingle();
+
+    if (detailsError) {
+        console.error("[landlord_profile_edit] NIN lookup failed:", detailsError);
+        return;
+    }
 
     if (details?.nin) {
         setValue("nin", "");
@@ -73,6 +82,8 @@ async function loadProfile() {
 async function saveProfile(event) {
     event.preventDefault();
 
+    /* Check everything first, so a mistake never leaves a half-saved profile */
+
     const fullName = $("fullName").value.trim();
     if (!fullName) {
         setMessage("Please enter your full name.", "error");
@@ -80,14 +91,24 @@ async function saveProfile(event) {
         return;
     }
 
+    const nin = valueOrNull("nin");
+    if (nin && !/^\d{11}$/.test(nin)) {
+        setMessage("Your NIN must be exactly 11 digits.", "error");
+        $("nin").focus();
+        return;
+    }
+
+    const address = valueOrNull("address");
     const cac = valueOrNull("cacNumber");
     const cacChanged = (cac ?? "") !== originalCac;
+    const addressChanged = (address ?? "") !== originalAddress;
 
     const button = $("saveProfileBtn");
     button.disabled = true;
     setMessage("Saving...", "info");
 
-    const { error } = await supabase
+    // 1. Profile
+    const { error: profileError } = await supabase
         .from("profiles")
         .update({
             full_name: fullName,
@@ -95,6 +116,7 @@ async function saveProfile(event) {
             gender: valueOrNull("gender"),
             date_of_birth: valueOrNull("dob"),
             business_name: valueOrNull("businessName"),
+            address,
             cac_number: cac,
             business_description: valueOrNull("businessDescription"),
             emergency_name: valueOrNull("emergencyName"),
@@ -103,44 +125,48 @@ async function saveProfile(event) {
         })
         .eq("id", me.id);
 
-    button.disabled = false;
-
-    if (error) {
-        console.error("[landlord_profile_edit] save failed:", error);
-        setMessage("Your profile could not be saved. Please try again.", "error");
+    if (profileError) {
+        console.error("[landlord_profile_edit] profile save failed:", profileError);
+        finish(`Your profile could not be saved: ${profileError.message}`, "error");
         return;
     }
 
-    const nin = valueOrNull("nin");
+    // 2. Identity record: a new NIN, or an address change that must be copied across
     if (nin) {
-        if (!/^\d{11}$/.test(nin)) {
-            setMessage("Your NIN must be exactly 11 digits.", "error");
-            button.disabled = false;
-            return;
-        }
-
         const { error: ninError } = await supabase
             .from("verification_details")
             .upsert(
-                { landlord_id: me.id, nin, address: valueOrNull("address") ?? "", updated_at: new Date().toISOString() },
+                { landlord_id: me.id, nin, address: address ?? "", updated_at: new Date().toISOString() },
                 { onConflict: "landlord_id" }
             );
 
         if (ninError) {
             console.error("[landlord_profile_edit] NIN save failed:", ninError);
-            setMessage("Your NIN could not be saved. Please try again.", "error");
-            button.disabled = false;
+            finish(`Your profile was saved, but your NIN could not be saved: ${ninError.message}`, "error");
+            return;
+        }
+    } else if (address) {
+        const { error: addressError } = await supabase
+            .from("verification_details")
+            .update({ address, updated_at: new Date().toISOString() })
+            .eq("landlord_id", me.id);
+
+        if (addressError) {
+            console.error("[landlord_profile_edit] identity address sync failed:", addressError);
+            finish(`Your profile was saved, but your identity address could not be updated: ${addressError.message}`, "error");
             return;
         }
     }
 
     originalCac = cac ?? "";
+    originalAddress = address ?? "";
 
-    const message = cacChanged && cac
-        ? "Saved. Your CAC number has been sent for verification."
-        : "Profile saved.";
+    let message = "Profile saved.";
+    if (cacChanged && cac) {
+        message = "Saved. Your CAC number has been sent for verification.";
+    }
 
-    setMessage(message, "success");
+    finish(message, "success");
     showToast(message, { type: "success" });
 
     setTimeout(() => {
@@ -170,7 +196,7 @@ async function uploadAvatar(file) {
 
     if (uploadError) {
         console.error("[landlord_profile_edit] avatar upload failed:", uploadError);
-        showToast("Your photo could not be uploaded. Please try again.", { type: "error" });
+        showToast(`Your photo could not be uploaded: ${uploadError.message}`, { type: "error" });
         return;
     }
 
@@ -183,12 +209,18 @@ async function uploadAvatar(file) {
 
     if (updateError) {
         console.error("[landlord_profile_edit] avatar save failed:", updateError);
-        showToast("Your photo was uploaded, but could not be saved to your profile.", { type: "error" });
+        showToast(`Your photo was uploaded, but could not be saved: ${updateError.message}`, { type: "error" });
         return;
     }
 
     $("profilePreview")?.setAttribute("src", data.publicUrl);
     showToast("Profile photo updated.", { type: "success" });
+}
+
+function finish(text, type) {
+    const button = $("saveProfileBtn");
+    if (button) button.disabled = false;
+    setMessage(text, type);
 }
 
 function setValue(id, value) {

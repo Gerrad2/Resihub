@@ -1,5 +1,7 @@
 ﻿import { supabase } from "../../api.js";
 import { initPageModule } from "../page-module.js";
+import { watchTables } from "../../core/realtime.js";
+
 
 /* =========================================
    ADMIN DASHBOARD
@@ -278,10 +280,29 @@ async function loadActivity() {
     }
 }
 
+/* ---------- Live updates ---------- */
+
+function refreshDashboard() {
+    return Promise.allSettled([loadStats(), loadUsage(), loadActivity()]);
+}
+
+function startLiveDashboard() {
+    watchTables(
+        "admin-dashboard",
+        [
+            { table: "profiles" },
+            { table: "listings" },
+            { table: "booking_requests" },
+        ],
+        () => refreshDashboard()
+    );
+}
+
 /* ---------- Entry point ---------- */
 
 export function init() {
     initPageModule({ area: "admin", page: "admin_dashboard" });
 
     Promise.allSettled([loadAdminName(), loadStats(), loadUsage(), loadActivity()]);
+    startLiveDashboard();
 }

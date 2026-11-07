@@ -1,6 +1,8 @@
 import { getCurrentUser, supabase } from "../api.js";
+import { watchTables } from "./realtime.js";
 
-const POLL_MS = 30000;
+// Safety check only. New notifications arrive live; this catches anything missed if the connection drops.
+const POLL_MS = 300000;
 const SEEN_KEY = "resihub:seen-notification-ids";
 
 let audioContext = null;
@@ -8,8 +10,25 @@ let unlocked = false;
 let timer = null;
 
 /* Starts checking for new notifications. Call once per portal page. */
-export function startNotificationAlerts() {
+/* Starts live notification alerts. Call once per portal page. */
+export async function startNotificationAlerts() {
     unlockAudioOnFirstInteraction();
+
+    const userResult = await getCurrentUser();
+    const userId = userResult.success ? userResult.data?.id : null;
+
+    if (userId) {
+        await markSeenOnThisPage(userId);
+
+        watchTables(
+            `alerts-${userId}`,
+            [{ table: "notifications", filter: `user_id=eq.${userId}` }],
+            async () => {
+                await markSeenOnThisPage(userId);
+                await check();
+            }
+        );
+    }
 
     check();
     timer = setInterval(check, POLL_MS);
@@ -18,6 +37,23 @@ export function startNotificationAlerts() {
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") check();
     });
+}
+
+/* A notification whose link points at the page the person is on has been seen */
+async function markSeenOnThisPage(userId) {
+    const file = location.pathname.split("/").pop() ?? "";
+    if (!file) return;
+
+    const ending = `${file}${location.search}`;
+
+    const { error } = await supabase
+        .from("notifications")
+        .update({ is_read: true, read_at: new Date().toISOString() })
+        .eq("user_id", userId)
+        .eq("is_read", false)
+        .like("link_url", `%${ending}`);
+
+    if (error) console.error("[alerts] could not mark notifications seen:", error);
 }
 
 async function check() {

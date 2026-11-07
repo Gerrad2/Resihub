@@ -1,5 +1,6 @@
 import { getCurrentUser, supabase } from "./api.js";
 import { showToast } from "./ui/toast.js";
+import { watchTables } from "./core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -45,6 +46,7 @@ export async function init() {
   render();
 
   $("markAllReadBtn")?.addEventListener("click", markAllRead);
+  startLiveNotifications(user.id);
 }
 
 function render() {
@@ -60,6 +62,33 @@ function render() {
   );
 
   updateBadge();
+}
+
+/* ---------- Live updates ---------- */
+
+function startLiveNotifications(userId) {
+  watchTables(
+    `notifications-${userId}`,
+    [{ table: "notifications", filter: `user_id=eq.${userId}` }],
+    () => reloadNotifications(userId)
+  );
+}
+
+async function reloadNotifications(userId) {
+  const { data, error } = await supabase
+    .from("notifications")
+    .select("id, title, body, type, link_url, is_read, created_at")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    console.error("[notifications] live reload failed:", error);
+    return;
+  }
+
+  notifications = data ?? [];
+  render();
 }
 
 function createItem(notification) {

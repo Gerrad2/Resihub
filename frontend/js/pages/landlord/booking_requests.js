@@ -1,6 +1,7 @@
 import { getCurrentUser, updateBookingStatus, supabase } from "../../api.js";
 import { showError } from "../../student_utils.js";
 import { showToast } from "../../ui/toast.js";
+import { watchTables } from "../../core/realtime.js";
 
 const $ = (id) => document.getElementById(id);
 
@@ -35,6 +36,16 @@ export async function init() {
     }
 
     await loadBookings();
+    startLiveBookings();
+}
+/* ---------- Live updates ---------- */
+
+function startLiveBookings() {
+    watchTables(
+        `landlord-bookings-${me.id}`,
+        [{ table: "booking_requests", filter: `landlord_id=eq.${me.id}` }],
+        () => loadBookings()
+    );
 }
 
 function bindEvents() {
@@ -73,9 +84,12 @@ async function loadBookings() {
 }
 
 /* One entry per room that has bookings */
+
 function populatePropertyFilter() {
     const select = $("bookingProperty");
     if (!select) return;
+
+    const previous = select.value;
 
     const rooms = new Map();
     for (const booking of bookings) {
@@ -88,6 +102,11 @@ function populatePropertyFilter() {
         new Option("All properties", ""),
         ...[...rooms.entries()].map(([id, title]) => new Option(title, id))
     );
+
+    // Keep the chosen property if it still has bookings
+    if ([...select.options].some((option) => option.value === previous)) {
+        select.value = previous;
+    }
 }
 
 function visibleBookings() {
